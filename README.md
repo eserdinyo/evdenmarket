@@ -1,4 +1,4 @@
-# evdenmarketNUXT
+# evdenmarket
 
 > My astounding Nuxt.js project
 
