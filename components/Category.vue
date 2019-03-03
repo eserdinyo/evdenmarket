@@ -7,9 +7,9 @@
           li.Category__list--item
             nuxt-link.Category__list--link(:to="{name: 'listele-id', params:{id:2}}") Peynir
           li.Category__list--item
-            a.Category__list--link Yogurt
+            nuxt-link.Category__list--link(:to="{name: 'listele-id', params:{id:3}}") Yogurt
           li.Category__list--item
-            a.Category__list--link Zeytin
+            nuxt-link.Category__list--link(:to="{name: 'listele-id', params:{id:4}}") Zeytin
           li.Category__list--item
             a.Category__list--link Yumurta
           li.Category__list--item

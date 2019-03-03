@@ -10,8 +10,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "node server/server.js",
-    "server": "nodemon server/server.js",
+    "start": "npm run dev",
     "generate": "nuxt generate"
   },
   "dependencies": {

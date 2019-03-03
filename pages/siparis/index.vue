@@ -116,8 +116,10 @@ export default {
   methods: {
     makeActive(address) {
       this.selectedAddressId = address.id;
-      this.order.address = JSON.stringify(address);
+      this.order.address = address.id;
       this.addressWarning = false;
+      console.log(address);
+      
     },
     makeTimeActive(id, hour) {
       this.selectedTime = id;

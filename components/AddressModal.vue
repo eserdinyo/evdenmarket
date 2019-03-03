@@ -8,80 +8,80 @@
             .Address__modal-body
                 p.Address__modal-body--title Teslimat Adresi
                 form.Address__form(@submit.prevent="addAddress")
-                .Address__form--item
-                    label.Address__form--item-label Adres İsim *
-                    input.Address__form--item-input(
-                    v-validate.disable="'required|email'",
-                    name="E-Posta",
-                    placeholder='Ev, Yurt, İş Yeri',
-                    v-model="address.address_name")
-                .Address__form--item
-                    label.Address__form--item-label İsim *
-                    input.Address__form--item-input(
-                    v-validate.disable="'required|email'",
-                    name="E-Posta",
-                    placeholder='İsim',
-                    v-model="address.firstname")
-                .Address__form--item
-                    label.Address__form--item-label Soyad *
-                    input.Address__form--item-input(
-                    v-validate.disable="'required|email'",
-                    name="E-Posta",
-                    placeholder='Soyad',
-                    v-model="address.lastname")
-                .Address__form--item
-                    label.Address__form--item-label Cep Telefonu *
-                    input.Address__form--item-input(
-                    v-validate.disable="'required|email'",
-                    name="E-Posta",
-                    type="number",
-                    placeholder='555 444 33 22',
-                    v-model="address.phone")
-                .Address__form--item
-                    label.Address__form--item-label İl *
-                    select.Address__form--item-input(v-model="address.city")
-                        option(disabled, selected, value='Şehir Seçin') Şehir Seçin
-                        //option(v-for="city in cities", 
-                        //:key="city.id", 
-                        //:value="city") {{city.name}}
-                .Address__form--item
-                    label.Address__form--item-label İlçe *
-                    select.Address__form--item-input(v-model="address.district")
-                        option(disabled, selected, value='Şehir Seçin') İlçe Seçin
-                        //option(v-for="city in cities", 
-                        //:key="city.id", 
-                        //:value="city") {{city.name}}
-                .Address__form--item
-                    label.Address__form--item-label Mahalle *
-                    select.Address__form--item-input(v-model="address.neighborhood")
-                        option(disabled, selected, value='Şehir Seçin') Mahalle Seçin
-                        //option(v-for="city in cities", 
-                        //:key="city.id", 
-                        //:value="city") {{city.name}}
-                .Address__form--item
-                    label.Address__form--item-label Cadde/Sokak *
-                    select.Address__form--item-input(v-model="address.street")
-                        option(disabled, selected, value='Şehir Seçin') Cadde/Sokak Seçin
-                        //option(v-for="city in cities", 
-                        //:key="city.id", 
-                        //:value="city") {{city.name}}
-                .Address__form--item
-                    label.Address__form--item-label Bina ve Daire No *
-                    input.Address__form--item-input(
-                    v-validate.disable="'required|email'",
-                    name="E-Posta",
-                    max="10",
-                    placeholder='Bina ve Daire No',
-                    v-model="address.apt_name_no")
-                .Address__form--item
-                    label.Address__form--item-label Adres Tarifi
-                    textarea.Address__form--item-input(
-                    v-validate.disable="'required|email'",
-                    name="E-Posta",
-                    rows='5',
-                    max="10",
-                    v-model="address.address_desc")
-                button.login-button(type='submit') Kaydet 
+                  .Address__form--item
+                      label.Address__form--item-label Adres İsim *
+                      input.Address__form--item-input(
+                      v-validate.disable="'required|email'",
+                      name="E-Posta",
+                      placeholder='Ev, Yurt, İş Yeri',
+                      v-model="address.address_name")
+                  .Address__form--item
+                      label.Address__form--item-label İsim *
+                      input.Address__form--item-input(
+                      v-validate.disable="'required|email'",
+                      name="E-Posta",
+                      placeholder='İsim',
+                      v-model="address.firstname")
+                  .Address__form--item
+                      label.Address__form--item-label Soyad *
+                      input.Address__form--item-input(
+                      v-validate.disable="'required|email'",
+                      name="E-Posta",
+                      placeholder='Soyad',
+                      v-model="address.lastname")
+                  .Address__form--item
+                      label.Address__form--item-label Cep Telefonu *
+                      input.Address__form--item-input(
+                      v-validate.disable="'required|email'",
+                      name="E-Posta",
+                      type="number",
+                      placeholder='555 444 33 22',
+                      v-model="address.phone")
+                  .Address__form--item
+                      label.Address__form--item-label İl *
+                      select.Address__form--item-input(v-model="address.city")
+                          option(disabled, selected, value='Şehir Seçin') Şehir Seçin
+                          //option(v-for="city in cities", 
+                          //:key="city.id", 
+                          //:value="city") {{city.name}}
+                  .Address__form--item
+                      label.Address__form--item-label İlçe *
+                      select.Address__form--item-input(v-model="address.district")
+                          option(disabled, selected, value='Şehir Seçin') İlçe Seçin
+                          //option(v-for="city in cities", 
+                          //:key="city.id", 
+                          //:value="city") {{city.name}}
+                  .Address__form--item
+                      label.Address__form--item-label Mahalle *
+                      select.Address__form--item-input(v-model="address.neighborhood")
+                          option(disabled, selected, value='Şehir Seçin') Mahalle Seçin
+                          //option(v-for="city in cities", 
+                          //:key="city.id", 
+                          //:value="city") {{city.name}}
+                  .Address__form--item
+                      label.Address__form--item-label Cadde/Sokak *
+                      select.Address__form--item-input(v-model="address.street")
+                          option(disabled, selected, value='Şehir Seçin') Cadde/Sokak Seçin
+                          //option(v-for="city in cities", 
+                          //:key="city.id", 
+                          //:value="city") {{city.name}}
+                  .Address__form--item
+                      label.Address__form--item-label Bina ve Daire No *
+                      input.Address__form--item-input(
+                      v-validate.disable="'required|email'",
+                      name="E-Posta",
+                      max="10",
+                      placeholder='Bina ve Daire No',
+                      v-model="address.apt_name_no")
+                  .Address__form--item
+                      label.Address__form--item-label Adres Tarifi
+                      textarea.Address__form--item-input(
+                      v-validate.disable="'required|email'",
+                      name="E-Posta",
+                      rows='5',
+                      max="10",
+                      v-model="address.address_desc")
+                  button.login-button(type='submit') Kaydet 
 </template>
 
 <script>
@@ -113,6 +113,8 @@ export default {
   },
   methods: {
     addAddress() {
+      console.log("....");
+      
       this.$store
         .dispatch("addAddress", {
           address: this.address,

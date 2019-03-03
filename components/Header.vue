@@ -308,7 +308,7 @@ export default {
     height: 100%;
     color: #fff;
     background-color: $nav-color;
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 0%;
     transition: all 0.2s;
@@ -472,6 +472,7 @@ export default {
   width: 60%;
   padding-left: 2rem;
   padding-right: 2rem;
+  display: flex;
 
   @include res(tab-land) {
     width: auto;
