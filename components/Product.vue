@@ -1,10 +1,9 @@
 <template lang="pug">
-  .Discount__item
-    nuxt-link(:to="{ name: 'u-id', params: { id:productUrl(product)}, query: { p: product.id }}")
-      img.Discount__item--img(:src="product.image", alt='')
+  nuxt-link.Discount__item(ref="product",:to="{ name: 'u-id', params: { id:productUrl(product)}, query: { p: product.id }}")
+    img.Discount__item--img(:src="product.image", alt='')
     .Discount__item--name {{product.name}}
     .Discount__item--price {{product.price.toFixed(2)}} TL
-    a.btn(@click="addCart(product)") Sepete Ekle
+    a.btn(@click.prevent="addCart(product)") Sepete Ekle
 </template>
 <script>
 import { mapGetters } from "vuex";
