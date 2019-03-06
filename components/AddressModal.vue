@@ -31,48 +31,40 @@
                       v-model="address.lastname")
                   .Address__form--item
                       label.Address__form--item-label Cep Telefonu *
-                      input.Address__form--item-input(
-                      v-validate.disable="'required|email'",
-                      name="E-Posta",
-                      type="number",
+                      cleave.Address__form--item-input(
+                      :options="options",
+                      required,
+                      type="text"
                       placeholder='555 444 33 22',
                       v-model="address.phone")
                   .Address__form--item
                       label.Address__form--item-label İl *
-                      select.Address__form--item-input(v-model="address.city")
+                      select.Address__form--item-input(v-model="address.city",@change="getTowns")
                           option(disabled, selected, value='Şehir Seçin') Şehir Seçin
-                          //option(v-for="city in cities", 
-                          //:key="city.id", 
-                          //:value="city") {{city.name}}
+                          option(v-for="city in cities", 
+                          :key="city.id", 
+                          :value="city") {{city.CityName}}
                   .Address__form--item
                       label.Address__form--item-label İlçe *
-                      select.Address__form--item-input(v-model="address.district")
+                      select.Address__form--item-input(v-model="address.town",@change="getNeighborhood")
                           option(disabled, selected, value='Şehir Seçin') İlçe Seçin
-                          //option(v-for="city in cities", 
-                          //:key="city.id", 
-                          //:value="city") {{city.name}}
+                          option(v-for="town in towns", 
+                          :key="town.id", 
+                          :value="town") {{town.TownName}}
                   .Address__form--item
                       label.Address__form--item-label Mahalle *
-                      select.Address__form--item-input(v-model="address.neighborhood")
+                      select.Address__form--item-input(v-model="address.neigh")
                           option(disabled, selected, value='Şehir Seçin') Mahalle Seçin
-                          //option(v-for="city in cities", 
-                          //:key="city.id", 
-                          //:value="city") {{city.name}}
+                          option(v-for="dr in districts", 
+                          :key="dr.id", 
+                          :value="dr") {{dr.NeighborhoodName}}
                   .Address__form--item
-                      label.Address__form--item-label Cadde/Sokak *
-                      select.Address__form--item-input(v-model="address.street")
-                          option(disabled, selected, value='Şehir Seçin') Cadde/Sokak Seçin
-                          //option(v-for="city in cities", 
-                          //:key="city.id", 
-                          //:value="city") {{city.name}}
-                  .Address__form--item
-                      label.Address__form--item-label Bina ve Daire No *
-                      input.Address__form--item-input(
-                      v-validate.disable="'required|email'",
-                      name="E-Posta",
+                      label.Address__form--item-label Adres
+                      textarea.Address__form--item-input(
+                      rows='5',
                       max="10",
-                      placeholder='Bina ve Daire No',
-                      v-model="address.apt_name_no")
+                      v-model="address.open_address")
+                  
                   .Address__form--item
                       label.Address__form--item-label Adres Tarifi
                       textarea.Address__form--item-input(
@@ -97,11 +89,14 @@ export default {
         lastname: "",
         phone: "",
         city: "",
-        district: "",
-        neighborhood: "",
-        street: "",
-        apt_name_no: "",
+        town: "",
+        neigh: "",
+        open_address: "",
         address_desc: ""
+      },
+      options: {
+        phone: true,
+        phoneRegionCode: "TR"
       }
     };
   },
@@ -109,12 +104,12 @@ export default {
     iconClose
   },
   computed: {
-    ...mapGetters(["openmodal", "loggedUser"])
+    ...mapGetters(["openmodal", "loggedUser", "cities", "towns", "districts"])
   },
   methods: {
     addAddress() {
       console.log("....");
-      
+
       this.$store
         .dispatch("addAddress", {
           address: this.address,
@@ -134,7 +129,16 @@ export default {
     closeModal() {
       this.$store.commit("openModal", false);
       document.getElementsByTagName("body")[0].style.overflow = "auto";
+    },
+    getTowns() {
+      this.$store.dispatch("getTowns", this.address.city.CityID);
+    },
+    getNeighborhood() {
+      this.$store.dispatch("getNeighborhoods", this.address.town.TownID);
     }
+  },
+  created() {
+    this.$store.dispatch("getCities");
   }
 };
 </script>
@@ -235,5 +239,4 @@ export default {
     }
   }
 }
-
 </style>

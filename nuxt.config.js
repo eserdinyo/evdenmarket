@@ -37,6 +37,7 @@ module.exports = {
   plugins: [
     "~/plugins/vee-validate",
     "~/plugins/vue-swal",
+    "~/plugins/vue-cleave",
     { src: "~/plugins/flickity", ssr: false }
   ],
 

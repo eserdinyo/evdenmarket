@@ -9,9 +9,9 @@
 <script>
 export default {
   props: ["error"],
-   head() {
+  head() {
     return {
-      title: 'Evdenmarket',
+      title: "Evdenmarket",
       meta: [
         {
           hid: "description",
@@ -20,7 +20,7 @@ export default {
         }
       ]
     };
-  },
+  }
 };
 </script>
 
@@ -49,7 +49,6 @@ export default {
 
   img {
     width: 100%;
-
     @include res("tab-land") {
       width: 50%;
     }

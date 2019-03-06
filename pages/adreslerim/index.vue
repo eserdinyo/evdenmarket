@@ -13,14 +13,18 @@
             .Address__item(v-for='address in addresses')
               .Address__item--top
                 .Address__name {{address.address_name}}
-                p.Address__detay {{address.neighborhood}} {{address.street}} {{address.apt_name_no}} 
+                p.Address__detay {{address.neighName | lowerCase }} {{address.open_address | lowerCase}}
                   br
-                  | {{address.district}}/{{address.city}}
+                  | {{address.address_desc | lowerCase}}
+                  br
+                  | {{address.townName}}/{{address.cityName}}
+                  br
+                  | {{ address.phone }}
               .Address__item--bottom
                 a.Address__delete_btn 
                   iconEdit.Address__delete_btn-icon
                   p Düzenle
-                a.Address__delete_btn
+                a.Address__delete_btn(@click="deleteAddress(address.id)")
                   iconDelete.Address__delete_btn-icon--del
                   p Sil
         addressModal
@@ -29,6 +33,7 @@
 </template>
 
 <script>
+import Cleave from "cleave.js";
 import iconDelete from "@/assets/icons/delete";
 import iconEdit from "@/assets/icons/edit";
 import addressModal from "@/components/AddressModal";
@@ -37,6 +42,7 @@ import sidebar from "@/components/Sidebar";
 import { mapGetters } from "vuex";
 
 export default {
+  middleware: "auth",
   head() {
     return {
       title: "Adreslerim | Evdenmarket",
@@ -49,13 +55,26 @@ export default {
       ]
     };
   },
+  filters: {
+    lowerCase: val => {
+      if (!val) return "";
+      return val.toLowerCase();
+    }
+  },
   computed: {
     ...mapGetters(["loggedUser", "addresses"])
   },
   methods: {
     openModal() {
-      this.$store.commit('openModal', true);
+      this.$store.commit("openModal", true);
       document.getElementsByTagName("body")[0].style.overflow = "hidden";
+    },
+    deleteAddress(id) {
+      this.$store
+        .dispatch("deleteAddress", { id, user: this.loggedUser })
+        .then(res => {
+          this.$store.dispatch("getAddresses", this.loggedUser);
+        });
     }
   },
   components: {
@@ -177,6 +196,4 @@ export default {
     color: #98a0a9;
   }
 }
-
-
 </style>

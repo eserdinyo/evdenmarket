@@ -29,11 +29,13 @@ const actions = {
           firstname: address.firstname,
           lastname: address.lastname,
           phone: address.phone,
-          city: address.city,
-          district: address.district,
-          neighborhood: address.neighborhood,
-          street: address.street,
-          apt_name_no: address.apt_name_no,
+          cityID: address.city.CityID,
+          cityName: address.city.CityName,
+          townID: address.town.TownID,
+          townName: address.town.TownName,
+          neighID: address.neigh.NeighborhoodID,
+          neighName: address.neigh.NeighborhoodName,
+          open_address: address.open_address,
           address_desc: address.address_desc
         })
         .then(res => {
@@ -47,12 +49,25 @@ const actions = {
   async getAddresses({ commit }, user) {
     const userid = user.sub || user.id;
 
-    const res = await http.get("/address", {
-      params: {
-        userid
-      }
-    });
+    const res = await http.get(`/address?userid=${userid}`);
     commit("setAddresses", res.data);
+  },
+  deleteAddress({ commit }, payload) {
+    const id = payload.id;
+    const userid = payload.user.sub || payload.user.id;
+
+    return new Promise((resolve, reject) => {
+      http
+        .delete("/address", {
+          data: { id, userid }
+        })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
   }
 };
 

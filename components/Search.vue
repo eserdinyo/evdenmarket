@@ -19,7 +19,7 @@
           option(v-for="dr in districts", 
             :value="dr", 
             :key="dr.id") {{dr.NeighborhoodName}}
-        nuxt-link.Search__btn(:to="{ name: 'marketler',  query: { mid: 38752 }}") Ara
+        nuxt-link.Search__btn(:to="{ name: 'marketler',  query: { mid: 38752 }}") Market Bul
     img.Search__img(src='@/assets/images/hero.jpg', alt='')
     
 </template>
@@ -152,7 +152,7 @@ export default {
     background-color: $primary-color;
     color: #fff;
     padding: 0.8rem 2rem;
-    width: 8rem;
+    width: 12rem;
     text-align: center;
   }
 

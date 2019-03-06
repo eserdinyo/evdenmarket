@@ -26,6 +26,7 @@
     "sequelize": "^4.41.0",
     "sweetalert": "^2.1.2",
     "vee-validate": "^2.1.7",
+    "vue-cleave-component": "^2.1.2",
     "vue-flickity": "^1.1.2",
     "vue-swal": "^1.0.0"
   },

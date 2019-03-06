@@ -17,12 +17,12 @@
               span.Address__top--plus +
               p Adres Ekle
           p.Address__warning(v-if='addressWarning') Bir adres seçin
-          .Address__item(v-for='address in addresses',@click="makeActive(address)" :class="{activeAddress:address.id == selectedAddressId}")
+          .Address__item(v-for='address in addresses',@click="makeAddresActive(address.id)" :class="{activeAddress:address.id == selectedAddressId}")
             .Address__item--top
                 .Address__name {{address.address_name}}
-                p.Address__detay {{address.neighborhood}} {{address.street}} {{address.apt_name_no}} 
+                p.Address__detay {{address.neighName | lowerCase}} {{address.open_address | lowerCase}} 
                   br
-                  | {{address.district}}/{{address.city}}
+                  | {{address.townName}}/{{address.cityName}}
           .Address__empty(v-if='addresses.length==0')
             p.Address__empty--title Kayıtlı bir adresiniz yok.
            
@@ -88,6 +88,13 @@ export default {
       ]
     };
   },
+
+  filters: {
+    lowerCase: val => {
+      if (!val) return "";
+      return val.toLowerCase();
+    }
+  },
   data() {
     return {
       selectedAddressId: "",
@@ -114,11 +121,11 @@ export default {
     ...mapGetters(["totalPrice", "shopcart", "loggedUser", "addresses"])
   },
   methods: {
-    makeActive(address) {
-      this.selectedAddressId = address.id;
-      this.order.address = address.id;
+    makeAddresActive(id) {
+      this.selectedAddressId = id;
+      this.order.address = id;
       this.addressWarning = false;
-      console.log(address);
+      console.log(id);
       
     },
     makeTimeActive(id, hour) {
@@ -408,7 +415,7 @@ export default {
       }
       &-soon {
         font-size: 1.2rem;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
       }
       &-icon {
         width: 25px;
@@ -466,8 +473,9 @@ export default {
   }
 }
 
-.activeAddress, .activeTime, .activePayment {
+.activeAddress,
+.activeTime,
+.activePayment {
   border-color: $primary-color-2;
 }
-
 </style>
