@@ -2,6 +2,7 @@
   .Marketler
     //.Slider
       Slider
+    ChangeMarket
     .container
       Market(v-for="market in markets", 
             :key="market.id", 
@@ -13,6 +14,8 @@
 <script>
 import Slider from "@/components/Slider";
 import Market from "@/components/Market";
+import ChangeMarket from "@/components/ChangeMarket";
+
 import { mapGetters } from "vuex";
 
 export default {
@@ -33,7 +36,8 @@ export default {
   },
   components: {
     Slider,
-    Market
+    Market,
+    ChangeMarket
   },
   created() {
     const mahalleID = this.$route.query.mid;

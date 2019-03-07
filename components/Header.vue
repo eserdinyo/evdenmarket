@@ -194,10 +194,9 @@ export default {
   background: $header-color;
   width: 100%;
   height: 11rem;
-  margin-bottom: 1rem;
 
   @include res(tab-land) {
-    margin-bottom: 7rem;
+    margin-bottom: 5rem;
   }
 
   &__search {

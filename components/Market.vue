@@ -4,7 +4,11 @@
         .Market__top
           img.Market__resim(:src="market.market_image")
         .Market__bottom
-          .Market__isim {{market.market_adi}}
+          .Market__isim 
+            p {{market.market_adi}}
+            a.Market__choose(@click.prevent="setDefaultMarket" :class="{ isOpenMarketBox: isChoosed }")
+              iconPlus(v-if="!isChoosed")
+              iconSuccess(v-if="isChoosed")
           .Market__min-paket Min Paket:
             span {{market.market_min_sepet}} ₺
           .Market__adres 
@@ -24,13 +28,27 @@
 import iconTime from "@/assets/icons/time";
 import iconMoto from "@/assets/icons/moto";
 import iconAdress from "@/assets/icons/address";
+import iconPlus from "@/assets/icons/plus";
+import iconSuccess from "@/assets/icons/success";
 
 export default {
   props: ["market"],
+  data() {
+    return {
+      isChoosed: false
+    };
+  },
   components: {
     iconTime,
     iconMoto,
-    iconAdress
+    iconAdress,
+    iconPlus,
+    iconSuccess
+  },
+  methods: {
+    setDefaultMarket() {
+      this.isChoosed = !this.isChoosed;
+    }
   }
 };
 </script>
@@ -97,6 +115,8 @@ export default {
     text-align: center;
     margin-bottom: 1rem;
     color: $font-color;
+    display: flex;
+    justify-content: space-between;
   }
   &__adres {
     margin-bottom: 0.5rem;
@@ -128,6 +148,15 @@ export default {
       margin-left: 5px;
     }
   }
+
+  &__choose {
+    border: 1px solid $primary-color-2;
+    padding: 0px 6px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .icon {
@@ -152,6 +181,21 @@ export default {
     width: 15px;
     height: 15px;
   }
+
+  &--plus {
+    fill: $primary-color-2;
+    width: 12px;
+    height: 12px;
+  }
+  &--success {
+    fill: #fff;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.isOpenMarketBox {
+  background-color: $primary-color-2;
 }
 </style>
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ChangeMarket  />
     <Search />
     <no-ssr v-if="false">
       <Slider/>
@@ -13,6 +14,7 @@ import Search from "@/components/Search";
 import Discount from "@/components/Discount";
 import Slider from "@/components/Slider";
 import Category from "@/components/Category";
+import ChangeMarket from "@/components/ChangeMarket";
 import { mapGetters } from "vuex";
 
 export default {
@@ -20,7 +22,8 @@ export default {
     Search,
     Discount,
     Slider,
-    Category
+    Category,
+    ChangeMarket,
   },
   head() {
     return {

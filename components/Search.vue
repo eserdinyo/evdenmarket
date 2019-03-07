@@ -3,7 +3,7 @@
     .container
       .Search__box
         select(v-model="cityID", @change="getTowns")
-          option(disabled, value='Şehir Seçin') Şehir Seçin
+          option(disabled, value='') Şehir Seçin
           option(v-for="city in cities", 
             :key="city.id", 
             :value="city.CityID") {{city.CityName}}

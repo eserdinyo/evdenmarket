@@ -1,5 +1,6 @@
 <template lang="pug">
     .List
+      ChangeMarket
       Category
       .container
         Product(v-for="product in searchedProducts",
@@ -10,6 +11,8 @@
 <script>
 import Category from "@/components/Category";
 import Product from "@/components/Product";
+import ChangeMarket from "@/components/ChangeMarket";
+
 
 import { mapGetters } from "vuex";
 export default {
@@ -32,7 +35,8 @@ export default {
   },
   components: {
     Category,
-    Product
+    Product,
+    ChangeMarket
   },
   computed: {
     ...mapGetters(["searchedProducts"])
@@ -50,7 +54,7 @@ export default {
 
 .container {
   max-width: 120rem;
-  margin: 0 auto;
+  margin: 1rem auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 1rem;
