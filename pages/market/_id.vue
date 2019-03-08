@@ -1,8 +1,7 @@
 <template lang="pug">
    .MarketDetay
+      ChangeMarket
       .MarketDetay__top
-        .Market
-          Market
         .Slider
           Slider
 
@@ -19,13 +18,14 @@ import Market from "@/components/Market";
 import Slider from "@/components/Slider";
 import Product from "@/components/Product";
 import SearchBar from "@/components/SearchBar";
+import ChangeMarket from "@/components/ChangeMarket";
 
 export default {
   name: "MarketDetay",
   data() {
-      return {
-        title: "Ulusoy Market | Evdenmarket"
-      }
+    return {
+      title: "Ulusoy Market | Evdenmarket"
+    };
   },
   head() {
     return {
@@ -43,7 +43,8 @@ export default {
     Market,
     Slider,
     Product,
-    SearchBar
+    SearchBar,
+    ChangeMarket
   },
   computed: {
     discountProducts() {
@@ -63,8 +64,9 @@ export default {
   &__title {
     text-align: center;
     text-transform: uppercase;
-    margin-top: 1rem;
+    margin-top: 3rem;
     color: #1e272e;
+
   }
   margin-top: 2rem;
   @include res(tab-land) {
@@ -72,9 +74,11 @@ export default {
   }
 
   &__top {
+    margin: 1.5rem auto;
+
     @include res(tab-land) {
       max-width: 120rem;
-      margin: 0 auto;
+      margin: 1.5rem auto;
       padding: 0 1rem;
       display: flex;
       align-items: center;
@@ -98,13 +102,12 @@ export default {
 }
 .container {
   max-width: 120rem;
-  margin: 0 auto;
+  margin: 3rem auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 1rem;
   grid-row-gap: 2rem;
   padding: 0 1rem;
-  margin-top: 3rem;
 
   @include res(tab) {
     grid-template-columns: repeat(3, 1fr);

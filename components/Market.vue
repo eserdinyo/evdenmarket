@@ -1,5 +1,5 @@
 <template lang="pug">
-    nuxt-link(:to="{ name: 'marketler-m-id', params: { id:2 }}")
+    nuxt-link(:to="{ name: 'market-id', params: { id:2 }}")
       .Market
         .Market__top
           img.Market__resim(:src="market.market_image")

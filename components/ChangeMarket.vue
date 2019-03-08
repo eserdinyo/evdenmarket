@@ -3,7 +3,7 @@
       .container
         iconMarket
         .ChangeMarket__title(@click="toggleMarketBox")
-          p Ulusoy Market
+          p Nurmar Market
           iconArrowDown(:class="{ transformArrow: isOpenMarketBox }")
       .ChangeMarket__MarketBul(v-if="isOpenMarketBox")
         select(v-model="cityID", @change="getTowns")
