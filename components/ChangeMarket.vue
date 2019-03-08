@@ -2,7 +2,7 @@
     .ChangeMarket
       .container
         iconMarket
-        .ChangeMarket__title(@click="toggleMarketBox")
+        .ChangeMarket__title(@click="toggleMarketBox", v-on-clickaway="closeChangeMarket")
           p Nurmar Market
           iconArrowDown(:class="{ transformArrow: isOpenMarketBox }")
       .ChangeMarket__MarketBul(v-if="isOpenMarketBox")
@@ -31,8 +31,10 @@ import iconMarket from "@/assets/icons/market";
 import iconArrowDown from "@/assets/icons/arrow_down";
 
 import { mapGetters } from "vuex";
+import { mixin as clickaway } from "vue-clickaway";
 
 export default {
+  mixins: [clickaway],
   data() {
     return {
       isOpenMarketBox: false,
@@ -49,6 +51,9 @@ export default {
     ...mapGetters(["cities", "towns", "districts"])
   },
   methods: {
+    closeChangeMarket() {
+      this.isOpenMarketBox = false;
+    },
     toggleMarketBox() {
       this.isOpenMarketBox = !this.isOpenMarketBox;
     },

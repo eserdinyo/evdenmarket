@@ -21,9 +21,13 @@ const getters = {
 };
 
 const mutations = {
-
-  toggleCart(state) {
-    state.isCartOpen = !state.isCartOpen;
+  toggleCart(state, payload) {
+    if (payload == false) {
+      state.isCartOpen = false;
+    }
+    else {
+      state.isCartOpen = !state.isCartOpen;
+    }
   },
   toggleCartFromProfil(state) {
     state.isCartOpen = false;

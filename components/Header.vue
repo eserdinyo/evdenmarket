@@ -13,7 +13,7 @@
         .Header__login--box(v-if="!isLoggedIn")
           nuxt-link.Header__login--desktop.Header__login--desktop-login(to='/login', :class="{active: activeLogin}")  Giriş
           nuxt-link.Header__login--desktop.Header__login--desktop-register(to='/register', :class="{active: activeRegister}") Kayıt&nbsp;Ol
-        a.Header__login--desktop.Header__login--desktop-profil(v-if="isLoggedIn", @click="toggleProfil")
+        a.Header__login--desktop.Header__login--desktop-profil(v-if="isLoggedIn", @click="toggleProfil", v-on-clickaway="closeProfil")
           iconUser.Header__login--desktop.Header__login--desktop-profil--profil--icon
           .Header__login--desktop.Header__login--desktop-profil--name {{ getName }}
           iconArrowDown.Header__login--desktop.Header__login--desktop-profil--icon(v-if="!isProfilOpen")
@@ -32,14 +32,14 @@
       .Header__cart(v-if="isLoggedIn")
         .iconMobil(@click="goCart")
           iconCart
-        .iconCart(@click="toggleCart")
+        .iconCart(@click="toggleCart", v-on-clickaway="closeCart")
           iconCart
           iconArrowUp(v-if="isCartOpen")
           iconArrowDown(v-if="!isCartOpen")
         .Header__amount(@click="goCart") {{ itemCount }}
         .Header__price(v-if='isLoggedIn && itemCount > 0')
           p {{totalPrice.toFixed(2)}} ₺
-        AppCart(v-if="isCartOpen")
+        AppCart(v-if="isCartOpen", )
       
       .Header__search
         SearchBar
@@ -90,9 +90,11 @@ import AppCart from "./Cart";
 import SearchBar from "./SearchBar";
 
 import { mapGetters } from "vuex";
+import { mixin as clickaway } from "vue-clickaway";
 
 export default {
   name: "Header",
+  mixins: [clickaway],
   components: {
     iconMenu,
     iconClose,
@@ -138,6 +140,12 @@ export default {
     } */
   },
   methods: {
+    closeCart() {
+      this.$store.commit("toggleCart", false);
+    },
+    closeProfil() {
+      this.isProfilOpen = false;
+    },
     goPath() {
       this.isLoggedIn
         ? this.$router.push("hesabim")
@@ -149,12 +157,10 @@ export default {
       this.isActive = !this.isActive;
     },
     toggleCart() {
-      this.$store.commit("toggleCart");
-      this.isProfilOpen = false;
+      this.$store.commit("toggleCart", true);
     },
     toggleProfil() {
       this.isProfilOpen = !this.isProfilOpen;
-      this.$store.commit("toggleCartFromProfil");
     },
     goCart() {
       this.$router.push({ name: "sepetim" });
@@ -211,7 +217,7 @@ export default {
     color: #333;
     position: absolute;
     z-index: 0;
-    padding: .3rem 1.2rem;
+    padding: 0.3rem 1.2rem;
     background-color: #333;
     border-radius: 3px;
     color: #fff;
