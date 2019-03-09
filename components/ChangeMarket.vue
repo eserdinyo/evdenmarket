@@ -3,7 +3,7 @@
       .container
         iconMarket
         .ChangeMarket__title(@click="toggleMarketBox", v-on-clickaway="closeChangeMarket")
-          p Nurmar Market
+          p {{defaultMarket.market_adi}}
           iconArrowDown(:class="{ transformArrow: isOpenMarketBox }")
       .ChangeMarket__MarketBul(v-if="isOpenMarketBox")
         select(v-model="cityID", @change="getTowns")
@@ -48,7 +48,7 @@ export default {
     iconArrowDown
   },
   computed: {
-    ...mapGetters(["cities", "towns", "districts"])
+    ...mapGetters(["cities", "towns", "districts", "defaultMarket"])
   },
   methods: {
     closeChangeMarket() {

@@ -177,6 +177,7 @@ export default {
     }
     if (this.isLoggedIn) {
       this.$store.dispatch("getShopcart", this.loggedUser);
+      this.$store.dispatch("getDefaultMarket", this.loggedUser);
     }
   }
 };

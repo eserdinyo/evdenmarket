@@ -6,9 +6,9 @@
         .Market__bottom
           .Market__isim 
             p {{market.market_adi}}
-            a.Market__choose(@click.prevent="setDefaultMarket" :class="{ isOpenMarketBox: isChoosed }")
-              iconPlus(v-if="!isChoosed")
-              iconSuccess(v-if="isChoosed")
+            a.Market__choose(@click.prevent="setDefaultMarket(market.market_id)" :class="{ isOpenMarketBox: market.market_id == defaultMarket.market_id }")
+              iconSuccess(v-if="market.market_id == defaultMarket.market_id")
+              iconPlus(v-else)
           .Market__min-paket Min Paket:
             span {{market.market_min_sepet}} ₺
           .Market__adres 
@@ -30,6 +30,7 @@ import iconMoto from "@/assets/icons/moto";
 import iconAdress from "@/assets/icons/address";
 import iconPlus from "@/assets/icons/plus";
 import iconSuccess from "@/assets/icons/success";
+import { mapGetters } from "vuex";
 
 export default {
   props: ["market"],
@@ -45,9 +46,19 @@ export default {
     iconPlus,
     iconSuccess
   },
+  computed: {
+    ...mapGetters(["loggedUser", "defaultMarket"])
+  },
   methods: {
-    setDefaultMarket() {
-      this.isChoosed = !this.isChoosed;
+    setDefaultMarket(marketid) {
+      this.$store
+        .dispatch("setDefaultMarket", {
+          marketid,
+          user: this.loggedUser
+        })
+        .then(res => {
+          this.$store.dispatch("getDefaultMarket", this.loggedUser);
+        });
     }
   }
 };
