@@ -1,15 +1,21 @@
 <template lang="pug">
-   .MarketDetay
-      ChangeMarket
+   .wrapper
+    DesktopCategory
+    .MarketDetay
+      .Market
+        Market(:market="market")
+        SearchBar
       .MarketDetay__top
         .Slider
           Slider
-
-      h2.MarketDetay__title Marketteki En Cok Satanlar 
-      .container
-        Product(v-for="product in discountProducts",
-        :product="product",
-        :key="product.id")
+        h2.MarketDetay__title Marketteki En Cok Satanlar 
+        .container
+          Product(v-for="product in discountProducts",
+            :product="product",
+            :key="product.id")
+          
+        
+      
 
 </template>
 
@@ -19,6 +25,10 @@ import Slider from "@/components/Slider";
 import Product from "@/components/Product";
 import SearchBar from "@/components/SearchBar";
 import ChangeMarket from "@/components/ChangeMarket";
+import DesktopCategory from "@/components/DesktopCategory";
+import axios from "axios";
+
+import { mapGetters } from "vuex";
 
 export default {
   name: "MarketDetay",
@@ -29,7 +39,7 @@ export default {
   },
   head() {
     return {
-      title: this.title,
+      title: this.market.market_adi + " - Evdenmarket",
       meta: [
         {
           hid: "description",
@@ -44,14 +54,19 @@ export default {
     Slider,
     Product,
     SearchBar,
-    ChangeMarket
+    ChangeMarket,
+    DesktopCategory
   },
   computed: {
     discountProducts() {
       return this.$store.getters.discountProducts;
-    }
+    },
+    ...mapGetters(["market"])
   },
   created() {
+    const market_id = this.$route.params.id;
+    this.$store.dispatch("getMarket", market_id);
+
     this.$store.dispatch("getDiscountProduct");
   }
 };
@@ -60,36 +75,39 @@ export default {
 <style lang="scss" scoped>
 @import "assets/style/main.scss";
 
+.Market {
+  margin-left: 5px;
+  margin-right: 5px;
+
+  @include res(tab-land) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .MarketDetay {
+  @include res(tab-land) {
+    display: grid;
+    grid-template-columns: 30% 70%;
+  }
   &__title {
     text-align: center;
     text-transform: uppercase;
-    margin-top: 3rem;
+    margin-top: 0rem;
     color: #1e272e;
-
+    margin-top: 4rem;
   }
   margin-top: 2rem;
-  @include res(tab-land) {
-    margin-top: 0;
-  }
 
   &__top {
-    margin: 1.5rem auto;
-
+    margin-top: 3rem;
     @include res(tab-land) {
       max-width: 120rem;
       margin: 1.5rem auto;
       padding: 0 1rem;
-      display: flex;
-      align-items: center;
       margin-bottom: 2rem;
     }
-  }
-}
-
-.Market {
-  @include res(tab-land) {
-    margin: 0 auto;
   }
 }
 
@@ -115,9 +133,12 @@ export default {
     padding: 0 2rem;
   }
   @include res(tab-land) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 1rem;
     padding: 0 2rem;
+  }
+  @include res(big) {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 </style>

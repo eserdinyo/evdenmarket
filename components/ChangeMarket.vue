@@ -12,13 +12,13 @@
               :key="city.id", 
               :value="city.CityID") {{city.CityName}}
 
-          select(v-model="townID", @change="getNeighborhood")
+          select(v-model="townID", @change="getNeighborhood", :disabled="towns.length == 0")
             option(disabled, selected, value='') İlçe Seçin
             option(v-for="town in towns", 
               :key="town.id", 
               :value="town.TownID") {{town.TownName}}
 
-          select(v-model="neighID")
+          select(v-model="neighID", :disabled="districts.length == 0")
             option(disabled,selected, value='') Mahalle Seçin
             option(v-for="dr in districts", 
               :value="dr", 
@@ -48,7 +48,7 @@ export default {
     iconArrowDown
   },
   computed: {
-    ...mapGetters(["cities", "towns", "districts", "defaultMarket"])
+    ...mapGetters(["cities", "towns", "districts"])
   },
   methods: {
     closeChangeMarket() {

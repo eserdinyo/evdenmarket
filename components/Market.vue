@@ -1,5 +1,5 @@
 <template lang="pug">
-    nuxt-link(:to="{ name: 'marketler-m-id', params: { id:2 }}")
+    nuxt-link(:to="{ name: 'market-id', params: { id:market.market_id }}")
       .Market
         .Market__top
           img.Market__resim(:src="market.market_image")
@@ -7,7 +7,7 @@
           .Market__isim {{market.market_adi}}
           .Market__min-paket 
             iconMoney
-            span Min Paket: {{market.market_min_sepet}} ₺
+            span Min Sepet Tutarı: {{market.market_min_sepet}} ₺
           .Market__adres 
             iconAdress
             span Şişli, Merkez Mahallesi
@@ -54,7 +54,6 @@ export default {
     display: flex;
     flex-direction: column;
     width: 28rem;
-    margin-top: 2rem;
     &__top {
       height: 20rem;
       width: 100%;

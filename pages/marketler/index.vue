@@ -1,7 +1,5 @@
 <template lang="pug">
   .Marketler
-    //.Slider
-      Slider
     .container
       Market(v-for="market in markets", 
             :key="market.id", 

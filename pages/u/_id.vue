@@ -111,6 +111,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2rem;
 
     @include res(tab) {
       flex-direction: row;
@@ -158,6 +159,7 @@ export default {
       width: 100%;
       margin-top: 2rem;
       box-shadow: 0 3px 6px #e5e5e570;
+     
 
       @include res(tab) {
         &-box {
@@ -227,7 +229,7 @@ export default {
     &--name {
       font-weight: 700;
       color: #3f4a58;
-      font-size: 28px;
+      font-size: 1.8rem;
     }
 
     &--price {

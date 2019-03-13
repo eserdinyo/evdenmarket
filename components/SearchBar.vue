@@ -6,7 +6,7 @@
         v-model='searchWord',
         name='firstname',
         @blur="closeResult",
-        placeholder="Aradığını ürünü yazınız...", 
+        placeholder="Markette Ara...", 
         autocomplete="off")
       button.Searchbar__search--form-btn(type='submit') Ara
     .Searchbar__result(:class='{activeResult:activeResult}', v-if='searchbarProducts')
@@ -80,7 +80,6 @@ export default {
 .Searchbar {
   position: relative;
   &__search {
-    margin-top: 1rem;
 
     @include res(tab) {
       margin-left: 1rem;
@@ -92,14 +91,14 @@ export default {
       justify-content: center;
 
       &-input {
-        padding: 0.5rem 2rem;
+        padding: 1rem 2rem;
         border: 1px solid #ddd;
         border-right: none;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
         font-size: 1.4rem;
         outline: none;
-        width: 25rem;
+        width: 100%;
         color: $font-color;
         transition: 0.2s;
 
@@ -112,12 +111,12 @@ export default {
         }
 
         @include res(tab) {
-          width: 30rem;
+          width: 20rem;
           padding: 0.8rem 2rem;
           font-size: 1.2rem;
         }
         @include res(tab-land) {
-          width: 38rem;
+          width: 25rem;
         }
       }
 
