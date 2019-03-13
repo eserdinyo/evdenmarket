@@ -56,6 +56,7 @@ export default {
 
 .container {
   margin-top: 0rem;
+  margin-bottom: 1rem;
   padding: 0 15px;
 
   @include res("tab-land") {

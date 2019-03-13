@@ -2,7 +2,6 @@
   .Marketler
     //.Slider
       Slider
-    ChangeMarket
     .container
       Market(v-for="market in markets", 
             :key="market.id", 

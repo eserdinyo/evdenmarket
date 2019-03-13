@@ -1,16 +1,13 @@
 <template lang="pug">
-    nuxt-link(:to="{ name: 'market-id', params: { id:2 }}")
+    nuxt-link(:to="{ name: 'marketler-m-id', params: { id:2 }}")
       .Market
         .Market__top
           img.Market__resim(:src="market.market_image")
         .Market__bottom
-          .Market__isim 
-            p {{market.market_adi}}
-            a.Market__choose(@click.prevent="setDefaultMarket(market.market_id)" :class="{ isOpenMarketBox: market.market_id == defaultMarket.market_id }")
-              iconSuccess(v-if="market.market_id == defaultMarket.market_id")
-              iconPlus(v-else)
-          .Market__min-paket Min Paket:
-            span {{market.market_min_sepet}} ₺
+          .Market__isim {{market.market_adi}}
+          .Market__min-paket 
+            iconMoney
+            span Min Paket: {{market.market_min_sepet}} ₺
           .Market__adres 
             iconAdress
             span Şişli, Merkez Mahallesi
@@ -28,106 +25,77 @@
 import iconTime from "@/assets/icons/time";
 import iconMoto from "@/assets/icons/moto";
 import iconAdress from "@/assets/icons/address";
-import iconPlus from "@/assets/icons/plus";
-import iconSuccess from "@/assets/icons/success";
-import { mapGetters } from "vuex";
-
+import iconMoney from "@/assets/icons/money";
 export default {
   props: ["market"],
-  data() {
-    return {
-      isChoosed: false
-    };
-  },
   components: {
     iconTime,
     iconMoto,
     iconAdress,
-    iconPlus,
-    iconSuccess
-  },
-  computed: {
-    ...mapGetters(["loggedUser", "defaultMarket"])
-  },
-  methods: {
-    setDefaultMarket(marketid) {
-      this.$store
-        .dispatch("setDefaultMarket", {
-          marketid,
-          user: this.loggedUser
-        })
-        .then(res => {
-          this.$store.dispatch("getDefaultMarket", this.loggedUser);
-        });
-    }
+    iconMoney
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "assets/style/main.scss";
-
 .Market {
   border-radius: 3px;
   box-shadow: 0 5px 10px rgba(#000, 0.1);
   position: relative;
   border: 1px solid #19191934;
   margin-bottom: 3rem;
-  display: grid;
-  grid-template-columns: 40% 60%;
-
+  display: flex;
+  &__top {
+    width: 40%;
+    height: 13rem;
+  }
   @include res(tab-land) {
     display: flex;
     flex-direction: column;
     width: 28rem;
     margin-top: 2rem;
-
     &__top {
       height: 20rem;
+      width: 100%;
     }
   }
-
   &__resim {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-
   &__bottom {
     padding: 0.5rem 1rem;
     @include res(tab-land) {
-      height: 15rem;
       padding-top: 1rem;
     }
   }
-
   &__mesai__ort {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
   }
-
   &__ort {
     display: flex;
     align-items: center;
-
     &--sure {
       font-size: 1.3rem;
       font-weight: 500;
       margin-left: 5px;
     }
   }
-
   &__isim {
     text-transform: uppercase;
     font-size: 2rem;
     font-weight: 500;
-    text-align: center;
     margin-bottom: 1rem;
     color: $font-color;
-    display: flex;
-    justify-content: space-between;
+
+    @include res(tab-land) {
+      text-align: center;
+    }
   }
   &__adres {
     margin-bottom: 0.5rem;
@@ -135,7 +103,6 @@ export default {
     font-size: 1.4rem;
     display: flex;
     align-items: center;
-
     span {
       margin-left: 0.5rem;
     }
@@ -150,26 +117,17 @@ export default {
       font-size: 1.3rem;
     }
   }
-
   &__min-paket {
     margin-bottom: 0.5rem;
     font-size: 1.4rem;
+    display: flex;
+    align-items: center;
     span {
       font-weight: 500;
       margin-left: 5px;
     }
   }
-
-  &__choose {
-    border: 1px solid $primary-color-2;
-    padding: 0px 6px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
-
 .icon {
   &--time {
     fill: $primary-color-dark;
@@ -180,33 +138,21 @@ export default {
       display: unset;
     }
   }
-
   &--moto {
     fill: $primary-color-dark;
     width: 28px;
     height: 18px;
   }
-
   &--address {
     fill: $primary-color-dark;
     width: 15px;
     height: 15px;
   }
 
-  &--plus {
-    fill: $primary-color-2;
-    width: 12px;
-    height: 12px;
-  }
-  &--success {
-    fill: #fff;
+  &--money {
+    fill: $primary-color-dark;
     width: 15px;
     height: 15px;
   }
 }
-
-.isOpenMarketBox {
-  background-color: $primary-color-2;
-}
 </style>
-

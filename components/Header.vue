@@ -13,13 +13,13 @@
         .Header__login--box(v-if="!isLoggedIn")
           nuxt-link.Header__login--desktop.Header__login--desktop-login(to='/login', :class="{active: activeLogin}")  Giriş
           nuxt-link.Header__login--desktop.Header__login--desktop-register(to='/register', :class="{active: activeRegister}") Kayıt&nbsp;Ol
-        a.Header__login--desktop.Header__login--desktop-profil(v-if="isLoggedIn", @click="toggleProfil", v-on-clickaway="closeProfil")
+        a.Header__login--desktop.Header__login--desktop-profil(v-if="isLoggedIn", @click="toggleProfil")
           iconUser.Header__login--desktop.Header__login--desktop-profil--profil--icon
           .Header__login--desktop.Header__login--desktop-profil--name {{ getName }}
           iconArrowDown.Header__login--desktop.Header__login--desktop-profil--icon(v-if="!isProfilOpen")
           iconArrowUp.Header__login--desktop.Header__login--desktop-profil--icon(v-if="isProfilOpen")
 
-          .Profil-card(v-if="isProfilOpen")
+          .Profil-card(v-if="isProfilOpen", v-on-clickaway="closeProfil")
             nuxt-link.Profil-card--link(to='/siparislerim') Siparişlerim
             nuxt-link.Profil-card--link(to='/') Üyelik Bilgilerim
             nuxt-link.Profil-card--link(to='/') Kampanyalarım
@@ -32,17 +32,17 @@
       .Header__cart(v-if="isLoggedIn")
         .iconMobil(@click="goCart")
           iconCart
-        .iconCart(@click="toggleCart", v-on-clickaway="closeCart")
+        .iconCart(@click="toggleCart")
           iconCart
           iconArrowUp(v-if="isCartOpen")
           iconArrowDown(v-if="!isCartOpen")
         .Header__amount(@click="goCart") {{ itemCount }}
         .Header__price(v-if='isLoggedIn && itemCount > 0')
           p {{totalPrice.toFixed(2)}} ₺
-        AppCart(v-if="isCartOpen", )
+        AppCart(v-if="isCartOpen", v-on-clickaway="closeCart")
       
       .Header__search
-        SearchBar
+        ChangeMarket
     nav.Header__navigation(:class='{ activeNav: isActive }')
         .Header__navigation--wrapper
           nuxt-link.Header__navigation--link(@click.native='toggleNav',:to="{ name: 'listele-id', params: { id: 2 }}" :class='{ activeLink: isActive }') Sut, Kahvaltilik
@@ -88,6 +88,7 @@ import iconArrowDown from "@/assets/icons/arrow_down";
 
 import AppCart from "./Cart";
 import SearchBar from "./SearchBar";
+import ChangeMarket from "./ChangeMarket";
 
 import { mapGetters } from "vuex";
 import { mixin as clickaway } from "vue-clickaway";
@@ -103,7 +104,8 @@ export default {
     iconArrowUp,
     iconArrowDown,
     AppCart,
-    SearchBar
+    SearchBar,
+    ChangeMarket
   },
   data() {
     return {
@@ -200,17 +202,20 @@ export default {
 .Header {
   background: $header-color;
   width: 100%;
-  height: 11rem;
+  height: 14rem;
+  margin-bottom: 2rem;
 
   @include res(tab-land) {
     margin-bottom: 5rem;
   }
 
   &__search {
-    margin-top: 2rem;
+    margin-top: 3rem;
+    width: 100%;
     @include res(tab) {
       margin-right: auto;
       margin-top: 0;
+      width: auto;
     }
   }
 

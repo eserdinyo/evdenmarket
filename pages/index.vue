@@ -1,8 +1,6 @@
 <template>
   <div>
-    <ChangeMarket  />
-    <Search />
-    <no-ssr v-if="false">
+    <no-ssr >
       <Slider/>
     </no-ssr>
     <Discount/>
