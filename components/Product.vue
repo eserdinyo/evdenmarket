@@ -37,7 +37,7 @@ export default {
             });
           });
       } else {
-        this.$router.push("/login");
+         this.$router.push({ name: 'giris' });
       }
     },
     turkishtoEnglish(str) {
