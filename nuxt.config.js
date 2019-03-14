@@ -70,7 +70,7 @@ module.exports = {
       },
       google: {
         client_id:
-          "975561318251-ooft7a8fkgmohtn7jo447erra279a8g9.apps.googleusercontent.com"
+          "975561318251-bqgrbpnav8gq21arlhvb40u3s2p1egi1.apps.googleusercontent.com",
       }
     },
     redirect: {
@@ -89,7 +89,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {},
+    extend(config, ctx) { },
     vendor: ["vue-swal"]
   },
   extendRoutes(routes, resolve) {
