@@ -5,12 +5,14 @@
   "author": "Muhammet ESER",
   "private": true,
   "engines": {
-    "node": "10.15.2"
+    "node": "10.15.2",
+    "npm": "6.4.1"
   },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "npm run dev",
+    "heroku-postbuild": "npm run build",
     "generate": "nuxt generate"
   },
   "dependencies": {
