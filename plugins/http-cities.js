@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const httpCities = axios.create({
-  baseURL: "http://localhost:8081/"
+  baseURL: "https://hidden-falls-66444.herokuapp.com/"
 
 })
 
