@@ -37,6 +37,18 @@ import iconLogout from "@/assets/icons/logout";
 
 export default {
   middleware: "auth",
+  head() {
+    return {
+      title: "Hesabım | Evdenmarket",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "My custom description"
+        }
+      ]
+    };
+  },
   name: "Hesabim",
   components: {
     iconLogout
