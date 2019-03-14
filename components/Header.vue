@@ -11,8 +11,8 @@
         .Header__login--mobil(@click="goPath")
           iconUser
         .Header__login--box(v-if="!isLoggedIn")
-          nuxt-link.Header__login--desktop.Header__login--desktop-login(to='/login', :class="{active: activeLogin}")  Giriş
-          nuxt-link.Header__login--desktop.Header__login--desktop-register(to='/register', :class="{active: activeRegister}") Kayıt&nbsp;Ol
+          nuxt-link.Header__login--desktop.Header__login--desktop-login(:to='{name:"giris"}', :class="{active: activeLogin}")  Giriş
+          nuxt-link.Header__login--desktop.Header__login--desktop-register(:to='{name:"kayit"}', :class="{active: activeRegister}") Kayıt&nbsp;Ol
         a.Header__login--desktop.Header__login--desktop-profil(v-if="isLoggedIn", @click="toggleProfil")
           iconUser.Header__login--desktop.Header__login--desktop-profil--profil--icon
           .Header__login--desktop.Header__login--desktop-profil--name {{ getName }}
