@@ -108,7 +108,7 @@ export default {
     };
   },
   created() {
-    if (this.$route.name == "Login") {
+    if (this.$route.name == "giris") {
       this.$store.commit("setLogin");
     }
   },

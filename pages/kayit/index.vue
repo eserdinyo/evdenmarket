@@ -95,7 +95,7 @@ export default {
     ...mapGetters(["loggedUser"])
   },
   created() {
-    if (this.$route.name == "Register") {
+    if (this.$route.name == "kayit") {
       this.$store.commit("setRegister");
     }
   },
