@@ -1,18 +1,17 @@
 <template lang="pug">
     .List
-      ChangeMarket
-      Category
-      .container
-        Product(v-for="product in searchedProducts",
-       :product="product",
-       :key="product.id")
+      v-wait(for="urunler")
+        template(slot="waiting")
+          Loader
+        .container
+          Product(v-for="product in searchedProducts",
+          :product="product",
+          :key="product.id")
 </template>
 
 <script>
-import Category from "@/components/Category";
 import Product from "@/components/Product";
-import ChangeMarket from "@/components/ChangeMarket";
-
+import Loader from "@/components/Loader";
 
 import { mapGetters } from "vuex";
 export default {
@@ -34,17 +33,24 @@ export default {
     };
   },
   components: {
-    Category,
     Product,
-    ChangeMarket
+    Loader
   },
   computed: {
     ...mapGetters(["searchedProducts"])
   },
+  methods: {
+    async getProducts() {
+      const searchWord = this.$route.query.q;
+      this.title = `${searchWord} - Evdenmarket`;
+
+      this.$wait.start("urunler");
+      await this.$store.dispatch("getProductsWithSearch", searchWord);
+      this.$wait.end("urunler");
+    }
+  },
   created() {
-    const searchWord = this.$route.query.q;
-    this.title = `${searchWord} - Evdenmarket`
-    this.$store.dispatch("getProductsWithSearch", searchWord);
+    this.getProducts();
   }
 };
 </script>

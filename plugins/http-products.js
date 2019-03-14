@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const httpProduct = axios.create({
-  baseURL: 'https://hidden-falls-66444.herokuapp.com/'
+  baseURL: 'http://localhost:8081/'
 })
 
 export default httpProduct

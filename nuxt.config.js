@@ -44,7 +44,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth","vue-wait/nuxt"],
   /*
    ** Axios module configuration
    */
