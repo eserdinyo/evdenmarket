@@ -144,6 +144,8 @@ export default {
       location.reload();
     }
     if (this.isLoggedIn) {
+      console.log("logged true")
+      
       this.$store.dispatch("getShopcart", this.loggedUser);
     }
   }

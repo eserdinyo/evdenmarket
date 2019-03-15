@@ -16,6 +16,10 @@
   &__close {
     margin-left: -2rem;
   }
+
+  &:disabled {
+background: $primary-color-hover;
+  }
 }
 
 .login-button {

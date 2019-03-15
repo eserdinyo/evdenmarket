@@ -3,12 +3,25 @@
     img.Discount__item--img(:src="product.image", alt='')
     .Discount__item--name {{product.name}}
     .Discount__item--price {{product.price.toFixed(2)}} TL
-    a.btn(@click.prevent="addCart(product)") Sepete Ekle
+    button.btn(@click.prevent="addCart(product)", :disabled ="isBtnDisabled") 
+      v-wait(for="btn") 
+        template(slot="waiting")
+          BtnLoader(v-if="product.id == id")
+          p(v-else) Sepete Ekle
+        p Sepete Ekle
 </template>
 <script>
+import BtnLoader from "./BtnLoader";
+
 import { mapGetters } from "vuex";
 export default {
   props: ["product"],
+  data() {
+    return {
+      id: "",
+      isBtnDisabled: false
+    };
+  },
   computed: {
     ...mapGetters(["isLoggedIn", "loggedUser"]),
     productUrl() {
@@ -18,16 +31,25 @@ export default {
         )}`;
     }
   },
+  components: {
+    BtnLoader
+  },
   methods: {
     addCart(product, changeType) {
+      this.id = product.id;
+
       product.changeType = "inc";
       if (this.isLoggedIn) {
+        this.$wait.start("btn");
+        this.isBtnDisabled = true;
+
         this.$store
           .dispatch("addToCart", {
             product,
             user: this.loggedUser
           })
           .then(res => {
+            this.$wait.end("btn");
             this.$store.dispatch("getShopcart", this.loggedUser).then(res => {
               this.$swal({
                 title: "Sepete Eklendi",
@@ -35,9 +57,11 @@ export default {
                 button: "Tamam"
               });
             });
+            this.id = 0;
+            this.isBtnDisabled = false;
           });
       } else {
-         this.$router.push({ name: 'giris' });
+        this.$router.push({ name: "giris" });
       }
     },
     turkishtoEnglish(str) {
@@ -49,7 +73,8 @@ export default {
         .replace(/\ö+/g, "o")
         .replace(/\ç+/g, "c");
     }
-  }
+  },
+  created() {}
 };
 </script>
 

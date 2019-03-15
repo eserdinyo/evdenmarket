@@ -13,7 +13,14 @@ import Market from './modules/market';
 const createStore = () => {
   return new Vuex.Store({
     getters: {
-      isLoggedIn: state => state.auth.loggedIn,
+      isLoggedIn(state) {
+        // state => state.auth.loggedIn
+        if(state.auth.loggedIn && (state.auth.user.given_name || state.auth.user.name)) {
+          return true;
+        }else {
+          return false;
+        }
+      },
       loggedUser: state => state.auth.user
     },
 
