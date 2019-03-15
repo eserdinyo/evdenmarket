@@ -62,7 +62,11 @@
                 .Payment__types--item-title Kredi/Banka Kartı 
                 iconCreditCard.Payment__types--item-icon
         .Order
-          a.Order__btn.btn(@click='makeOrder') Siparişi Onayla
+          button.Order__btn.btn(@click='makeOrder', :disabled ="isBtnDisabled") 
+            v-wait(for="btn")
+              template(slot="waiting")
+                BtnLoader
+              p Siparişi Onayla
         addressModal
         
                   
@@ -74,6 +78,7 @@ import { mapGetters } from "vuex";
 import iconWallet from "@/assets/icons/wallet";
 import iconCreditCard from "@/assets/icons/credit-card";
 import addressModal from "@/components/AddressModal";
+import BtnLoader from "@/components/BtnLoader";
 
 export default {
   head() {
@@ -88,7 +93,6 @@ export default {
       ]
     };
   },
-
   filters: {
     lowerCase: val => {
       if (!val) return "";
@@ -97,6 +101,7 @@ export default {
   },
   data() {
     return {
+      isBtnDisabled: false,
       selectedAddressId: "",
       selectedTime: "",
       selectedPayment: "",
@@ -115,7 +120,8 @@ export default {
   components: {
     iconWallet,
     iconCreditCard,
-    addressModal
+    addressModal,
+    BtnLoader
   },
   computed: {
     ...mapGetters(["totalPrice", "shopcart", "loggedUser", "addresses"])
@@ -126,7 +132,6 @@ export default {
       this.order.address = id;
       this.addressWarning = false;
       console.log(id);
-      
     },
     makeTimeActive(id, hour) {
       this.selectedTime = id;
@@ -149,6 +154,8 @@ export default {
       if (!this.order.payment) this.paymentWarning = true;
       if (!this.order.service) this.serviceWarning = true;
       if (this.order.address && this.order.payment && this.order.service) {
+        this.$wait.start("btn");
+        this.isBtnDisabled = true;
         this.$store
           .dispatch("addOrder", {
             order: this.order,
@@ -162,6 +169,7 @@ export default {
                 user: this.loggedUser
               });
             });
+            this.isBtnDisabled = false;
             this.$router.push("/onay");
           });
       }
@@ -442,7 +450,6 @@ export default {
     text-align: center;
     width: 100%;
     font-size: 2rem;
-    background-color: $primary-color-hover;
     @include res(tab-land) {
       width: auto;
       margin-left: auto;
