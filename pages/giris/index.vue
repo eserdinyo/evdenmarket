@@ -36,7 +36,7 @@
 
       img.Login__img(src='@/assets/images/banana.png', alt='')
       .Login__register
-        nuxt-link(to="/register") Uye Ol
+        nuxt-link(to="/kayit") Uye Ol
         nuxt-link(to="/forget") Sifremi Unuttum
 </template>
 
