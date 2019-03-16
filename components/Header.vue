@@ -116,8 +116,8 @@ export default {
     },
     goPath() {
       this.isLoggedIn
-        ? this.$router.push({ name: 'hesabim' })
-        : this.$router.push({ name: 'giris' });
+        ? this.$router.push({ name: "hesabim" })
+        : this.$router.push({ name: "giris" });
     },
     toggleNav() {
       this.isOpen = !this.isOpen;
@@ -141,11 +141,11 @@ export default {
   },
   created() {
     if (this.$route.hash) {
-      location.reload();
+      this.$router.go(0);
     }
     if (this.isLoggedIn) {
-      console.log("logged true")
-      
+      console.log("logged true");
+
       this.$store.dispatch("getShopcart", this.loggedUser);
     }
   }
@@ -171,9 +171,8 @@ export default {
   width: 100%;
   height: 14rem;
   @include res(tab) {
-        height: 10rem;
-
-    }
+    height: 10rem;
+  }
 
   &__search {
     margin-top: 3rem;
