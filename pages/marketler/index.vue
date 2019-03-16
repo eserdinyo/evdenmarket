@@ -61,8 +61,8 @@ export default {
 @import "assets/style/main.scss";
 
 .container {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
   margin-top: 3rem;
   @include res(tab-land) {
     display: grid;
