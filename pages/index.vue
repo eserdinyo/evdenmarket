@@ -25,7 +25,7 @@ export default {
   },
   head() {
     return {
-      title: "Evdenmarket - Market Sana Gelsin",
+      title: "Evdenmarket - Market Sana Gelsin ",
       meta: [
         {
           hid: "description",
