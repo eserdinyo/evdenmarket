@@ -19,23 +19,35 @@ const mutations = {
   }
 };
 const actions = {
-  async getMarkets({ commit }, mid) {
-    const res = await http.get("/markets", {
-      params: {
-        mid
-      }
+  getMarkets({ commit }, mid) {
+    return new Promise((resolve, reject) => {
+      http.get("/markets", {
+        params: {
+          mid
+        }
+      }).then(res => {
+        commit("setMarkets", res.data);
+        resolve(res);
+
+      }).catch(err => {
+        reject(401);
+      })
     });
-    commit("setMarkets", res.data);
+
   },
-  async getMarket({ commit }, market_id) {
-    const res = await http.get("/market", {
-      params: {
-        market_id
-      }
-    })
-
-    commit("setMarket", res.data);
-
+  getMarket({ commit }, market_id) {
+    return new Promise((resolve, reject) => {
+      http.get("/market", {
+        params: {
+          market_id
+        }
+      }).then(res => {
+        commit("setMarket", res.data);
+        resolve(res);
+      }).catch(err => {
+        reject(401);
+      })
+    });
   }
 };
 

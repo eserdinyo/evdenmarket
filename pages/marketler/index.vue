@@ -1,9 +1,12 @@
 <template lang="pug">
   .Marketler
-    .container
-      Market(v-for="market in markets", 
-            :key="market.id", 
-            :market='market')
+    v-wait(for="marketler")
+      template(slot="waiting")
+          Loader
+      .container
+        Market(v-for="market in markets", 
+              :key="market.id", 
+              :market='market')
    
 
 </template>
@@ -12,6 +15,7 @@
 import Slider from "@/components/Slider";
 import Market from "@/components/Market";
 import ChangeMarket from "@/components/ChangeMarket";
+import Loader from "@/components/Loader";
 
 import { mapGetters } from "vuex";
 
@@ -34,12 +38,20 @@ export default {
   components: {
     Slider,
     Market,
-    ChangeMarket
+    ChangeMarket,
+    Loader
+  },
+  methods: {
+    getMarkets() {
+      const mahalleID = this.$route.query.mid;
+      this.$wait.start("marketler");
+      this.$store.dispatch("getMarkets", mahalleID).then(res => {
+        this.$wait.end("marketler");
+      });
+    }
   },
   created() {
-    const mahalleID = this.$route.query.mid;
-
-    this.$store.dispatch("getMarkets", mahalleID);
+    this.getMarkets();
   }
 };
 </script>

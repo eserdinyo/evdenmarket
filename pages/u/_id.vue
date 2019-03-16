@@ -1,39 +1,43 @@
 <template lang="pug">
   .Urun
-    .container
-      .Urun__detay
-        .Urun__detay--img-box
-          img.Urun__detay--img(src='https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/10019072/altinkilic-ezine-3-dilim-klasik-peynir-450-g-3926e2.jpg', alt='')
-        .Urun__detay--right
-          h1.Urun__detay--name {{product.name}}
-          .Urun__detay--price {{makeGood(product.price)}} ₺
-          .Urun__detay--bottom
-            .Urun__detay--quantity
-                button(@click="decQuantity") -
-                input.Urun__detay--quantity-title(
-                    v-model="quantity", 
-                    maxlength="3",
-                    type="text", 
-                    pattern="\d*",
-                    value="quantity")
-                button(@click="quantity++") +
-            a.btn.btn__detay(@click="addCart(product)") Sepete Ekle
+    v-wait(for="detay")
+      template(slot="waiting")
+        Loader
+      .container
+        .Urun__detay
+          .Urun__detay--img-box
+            img.Urun__detay--img(src='https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/10019072/altinkilic-ezine-3-dilim-klasik-peynir-450-g-3926e2.jpg', alt='')
+          .Urun__detay--right
+            h1.Urun__detay--name {{product.name}}
+            .Urun__detay--price {{makeGood(product.price)}} ₺
+            .Urun__detay--bottom
+              .Urun__detay--quantity
+                  button(@click="decQuantity") -
+                  input.Urun__detay--quantity-title(
+                      v-model="quantity", 
+                      maxlength="3",
+                      type="text", 
+                      pattern="\d*",
+                      value="quantity")
+                  button(@click="quantity++") +
+              a.btn.btn__detay(@click="addCart(product)") Sepete Ekle
 </template>
 
 <script>
-import _ from "lodash";
+import Loader from "@/components/Loader";
 import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
       product: "",
-      quantity: 1
+      quantity: 1,
+      title: "Evdenmarket - Market Sana Gelsin"
     };
   },
   head() {
     return {
-      title: this.product.name + " | Evden Market",
+      title: this.title,
       meta: [
         {
           hid: "description",
@@ -42,6 +46,9 @@ export default {
         }
       ]
     };
+  },
+  components: {
+    Loader
   },
   computed: {
     ...mapGetters(["isLoggedIn", "loggedUser"])
@@ -57,8 +64,12 @@ export default {
     },
     getProduct() {
       let id = parseInt(this.$route.query.p);
+      this.$wait.start("detay");
+
       this.$store.dispatch("getProductWithId", id).then(res => {
         this.product = res;
+        this.title = this.product.name + " | Evden Market";
+        this.$wait.end("detay");
       });
     },
     addCart(product) {
@@ -80,13 +91,12 @@ export default {
             });
           });
       } else {
-        this.$router.push("/login");
+        this.$router.push("/giris");
       }
     }
   },
   created() {
     this.getProduct();
-    console.log(this.product);
   }
 };
 </script>
@@ -159,7 +169,6 @@ export default {
       width: 100%;
       margin-top: 2rem;
       box-shadow: 0 3px 6px #e5e5e570;
-     
 
       @include res(tab) {
         &-box {

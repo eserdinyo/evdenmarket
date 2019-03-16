@@ -1,18 +1,21 @@
 <template lang="pug">
    .wrapper
-    DesktopCategory
-    .MarketDetay
-      .Market
-        Market(:market="market")
-        SearchBar
-      .MarketDetay__top
-        .Slider
-          Slider
-        h2.MarketDetay__title Marketteki En Cok Satanlar 
-        .container
-          Product(v-for="product in discountProducts",
-            :product="product",
-            :key="product.id")
+      v-wait(for="market")
+        template(slot="waiting")
+            Loader
+        DesktopCategory
+        .MarketDetay
+          .Market
+            Market(:market="market")
+            SearchBar
+          .MarketDetay__top
+            .Slider
+              Slider
+            h2.MarketDetay__title Marketteki En Cok Satanlar 
+            .container
+              Product(v-for="product in discountProducts",
+                :product="product",
+                :key="product.id")
           
         
       
@@ -26,6 +29,8 @@ import Product from "@/components/Product";
 import SearchBar from "@/components/SearchBar";
 import ChangeMarket from "@/components/ChangeMarket";
 import DesktopCategory from "@/components/DesktopCategory";
+import Loader from "@/components/Loader";
+
 import axios from "axios";
 
 import { mapGetters } from "vuex";
@@ -34,12 +39,12 @@ export default {
   name: "MarketDetay",
   data() {
     return {
-      title: "Ulusoy Market | Evdenmarket"
+      title: "Marketler - Evdenmarket"
     };
   },
   head() {
     return {
-      title: this.market.market_adi + " - Evdenmarket",
+      title: this.title,
       meta: [
         {
           hid: "description",
@@ -55,7 +60,8 @@ export default {
     Product,
     SearchBar,
     ChangeMarket,
-    DesktopCategory
+    DesktopCategory,
+    Loader
   },
   computed: {
     discountProducts() {
@@ -63,10 +69,19 @@ export default {
     },
     ...mapGetters(["market"])
   },
-  created() {
-    const market_id = this.$route.params.id;
-    this.$store.dispatch("getMarket", market_id);
+  methods: {
+    getMarket() {
+      const market_id = this.$route.params.id;
+      this.$wait.start("market");
 
+      this.$store.dispatch("getMarket", market_id).then(res => {
+        (this.title = this.market.market_adi + " - Evdenmarket"),
+          this.$wait.end("market");
+      });
+    }
+  },
+  created() {
+    this.getMarket();
     this.$store.dispatch("getDiscountProduct");
   }
 };

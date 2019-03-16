@@ -60,7 +60,7 @@ export default {
   },
   head() {
     return {
-      title: "Kayit | Evdenmarket",
+      title: "Kayıt - Evdenmarket",
       meta: [
         {
           hid: "description",

@@ -97,7 +97,7 @@ export default {
   },
   head() {
     return {
-      title: "Giris | Evdenmarket",
+      title: "Giriş - Evdenmarket",
       meta: [
         {
           hid: "description",
