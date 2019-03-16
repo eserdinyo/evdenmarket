@@ -40,9 +40,9 @@ export default {
   },
   created() {
     if (this.$route.hash) {
-      this.$router.push("/?login=true");
+      this.$router.push("/?register=true");
     }
-    if (this.$route.query.login) {
+    if (this.$route.query.register) {
       this.$store.dispatch("register", {
         user: this.$auth.user,
         provider: this.$auth.strategy.name
