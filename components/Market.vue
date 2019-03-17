@@ -7,15 +7,11 @@
           .Market__isim {{market.market_adi}}
           .Market__min-paket 
             iconMoney
-            span Min Sepet Tutarı: {{market.market_min_sepet}} ₺
+            span Min Sipariş Tutarı: ₺{{market.market_min_sepet}}
           .Market__adres 
             iconAdress
             span Şişli, Merkez Mahallesi
           .Market__mesai__ort
-            .Market__ort 
-              iconMoto
-              .Market__ort--sure 
-                span 40 DK
             .Market__mesai
               iconTime
               .Market__mesai--time 09:00 - 23:00
@@ -48,7 +44,7 @@ export default {
   display: flex;
   &__top {
     width: 40%;
-    height: 13rem;
+    height: auto;
   }
   @include res(tab-land) {
     display: flex;
@@ -61,8 +57,12 @@ export default {
   }
   &__resim {
     width: 100%;
-    height: 100%;
+    height: 12rem;
     object-fit: cover;
+
+    @include res(tab-land) {
+      height: 100%;
+    }
   }
   &__bottom {
     padding: 0.5rem 1rem;
@@ -80,14 +80,14 @@ export default {
     display: flex;
     align-items: center;
     &--sure {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 500;
       margin-left: 5px;
     }
   }
   &__isim {
     text-transform: uppercase;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 500;
     margin-bottom: 1rem;
     color: $font-color;
@@ -99,7 +99,7 @@ export default {
   &__adres {
     margin-bottom: 0.5rem;
     color: $font-color;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     span {
@@ -113,12 +113,12 @@ export default {
     align-items: center;
     &--time {
       margin-left: 5px;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
   }
   &__min-paket {
     margin-bottom: 0.5rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     span {
@@ -132,10 +132,7 @@ export default {
     fill: $primary-color-dark;
     width: 15px;
     height: 15px;
-    display: none;
-    @include res(tab) {
-      display: unset;
-    }
+    margin-top: -1px;
   }
   &--moto {
     fill: $primary-color-dark;
