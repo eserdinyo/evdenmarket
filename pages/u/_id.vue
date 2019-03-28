@@ -6,10 +6,11 @@
       .container
         .Urun__detay
           .Urun__detay--img-box
-            img.Urun__detay--img(src='https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/10019072/altinkilic-ezine-3-dilim-klasik-peynir-450-g-3926e2.jpg', alt='')
+            img.Urun__detay--img(src='https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/03111650/dogus-filiz-cayi-1000-gr-77d088.jpg', alt='')
           .Urun__detay--right
             h1.Urun__detay--name {{product.name}}
             .Urun__detay--price {{makeGood(product.price)}} ₺
+            .Urun__detay--barkod Barkod: 4654185441132
             .Urun__detay--bottom
               .Urun__detay--quantity
                   button(@click="decQuantity") -
@@ -246,6 +247,11 @@ export default {
       font-weight: 700;
       color: $price-color;
       font-size: 2.4rem;
+    }
+
+    &--barkod {
+      color: #3f4a58;
+      font-size: 1.4rem;
     }
   }
 }
