@@ -1,6 +1,6 @@
 <template lang="pug">
   .Cart(:class="{emptyCart: itemCount == 0}")
-    .Cart__header()
+    .Cart__header
       p.Cart__header--info(v-if="itemCount > 0") Sepetinizede ({{itemCount}}) ürün bulunmaktadır.
       a.btn_sepet(v-if="itemCount > 0", @click="toggleCart") Sepete Git
     .Cart__bottom(:class="{emptyCartBottom: itemCount == 0}")

@@ -100,12 +100,6 @@ export default {
         }
       }
     }
-    /*   getUsername() {
-      if (this.loggedIn) {
-        let email = JSON.parse(localStorage.getItem("user")).email;
-        return email.substr(0, email.indexOf("@"));
-      }
-    } */
   },
   methods: {
     closeCart() {
@@ -140,12 +134,7 @@ export default {
     }
   },
   created() {
-    if (this.$route.hash) {
-      this.$router.go(0);
-    }
     if (this.isLoggedIn) {
-      console.log("logged true");
-
       this.$store.dispatch("getShopcart", this.loggedUser);
     }
   }

@@ -108,8 +108,6 @@ export default {
   },
   methods: {
     addAddress() {
-      console.log("....");
-
       this.$store
         .dispatch("addAddress", {
           address: this.address,

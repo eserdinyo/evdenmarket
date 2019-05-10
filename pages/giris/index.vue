@@ -43,6 +43,18 @@
 <script>
 export default {
   middleware: "guest",
+  head() {
+    return {
+      title: "Giriş - Evdenmarket",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "My custom description"
+        }
+      ]
+    };
+  },
   data() {
     return {
       email: "",
@@ -92,20 +104,9 @@ export default {
     },
     async facebook() {
       await this.$auth.loginWith("facebook").catch(e => {
+        console.log(e);
       });
     }
-  },
-  head() {
-    return {
-      title: "Giriş - Evdenmarket",
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: "My custom description"
-        }
-      ]
-    };
   },
   created() {
     if (this.$route.name == "giris") {

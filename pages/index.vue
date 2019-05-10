@@ -39,16 +39,13 @@ export default {
     ...mapGetters(["isLoggedIn", "loggedUser"])
   },
   created() {
-    if (this.$route.hash) {
-      this.$router.push("/?register=true");
-    }
-    if (this.$route.query.register) {
+   /*  if (this.$route.query.register) {
       this.$store.dispatch("register", {
         user: this.$auth.user,
         provider: this.$auth.strategy.name
       });
       this.$router.push("/");
-    }
+    } */
   }
 };
 </script>
