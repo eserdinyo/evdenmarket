@@ -23,7 +23,7 @@
             option(v-for="dr in districts", 
               :value="dr", 
               :key="dr.id") {{dr.NeighborhoodName}}
-          nuxt-link.ChangeMarket__MarketBul--btn(:to="{ name: 'marketler',  query: { mid: 38752 }}") Market Bul
+          nuxt-link.ChangeMarket__MarketBul--btn(:to='{ name: "marketler", query: { mid } }') Market Bul
 </template>
 
 <script>
@@ -40,7 +40,9 @@ export default {
       isOpenMarketBox: false,
       cityID: "",
       townID: "",
-      neighID: ""
+      neighID: "",
+      mid: 38752
+      //     neighID.NeighborhoodID
     };
   },
   components: {

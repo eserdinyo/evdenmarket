@@ -1,14 +1,13 @@
 <template>
   <div>
-    <no-ssr >
-      <Slider class="Slider"/>
+    <no-ssr>
+      <Slider class="Slider" />
     </no-ssr>
-    <Discount/>
+    <Discount />
   </div>
 </template>
 
 <script>
-import Search from "@/components/Search";
 import Discount from "@/components/Discount";
 import Slider from "@/components/Slider";
 import Category from "@/components/Category";
@@ -17,11 +16,10 @@ import { mapGetters } from "vuex";
 
 export default {
   components: {
-    Search,
     Discount,
     Slider,
     Category,
-    ChangeMarket,
+    ChangeMarket
   },
   head() {
     return {
@@ -39,7 +37,8 @@ export default {
     ...mapGetters(["isLoggedIn", "loggedUser"])
   },
   created() {
-   /*  if (this.$route.query.register) {
+
+    /*  if (this.$route.query.register) {
       this.$store.dispatch("register", {
         user: this.$auth.user,
         provider: this.$auth.strategy.name

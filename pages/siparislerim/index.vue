@@ -31,6 +31,7 @@ import iconCheck from "@/assets/icons/success";
 import { mapGetters } from "vuex";
 
 export default {
+  middleware: "auth",
   head() {
     return {
       title: "Siparislerim | Evdenmarket",
@@ -148,7 +149,7 @@ export default {
         font-size: 1rem;
         text-transform: uppercase;
         color: $font-color-gray;
-        margin-top: .5rem;
+        margin-top: 0.5rem;
       }
 
       &-detay {
@@ -184,7 +185,7 @@ export default {
 
     &--body {
       display: flex;
-        margin-top: 1rem;
+      margin-top: 1rem;
 
       &-status {
         font-weight: 600;

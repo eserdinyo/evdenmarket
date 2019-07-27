@@ -44,7 +44,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth","vue-wait/nuxt"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth", "vue-wait/nuxt"],
   /*
    ** Axios module configuration
    */
@@ -74,11 +74,8 @@ module.exports = {
       }
     },
     redirect: {
-      login: "/?login=1",
+      login: "/giris",
       logout: "/",
-      user: "/profile",
-      callback: "/",
-      home: "/?login=true"
     }
   },
 
@@ -90,7 +87,6 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) { },
-    vendor: ["vue-swal"]
   },
   extendRoutes(routes, resolve) {
     routes.push({

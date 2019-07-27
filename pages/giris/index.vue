@@ -102,10 +102,8 @@ export default {
         console.log(e);
       });
     },
-    async facebook() {
-      await this.$auth.loginWith("facebook").catch(e => {
-        console.log(e);
-      });
+    facebook() {
+      this.$auth.loginWith("facebook");
     }
   },
   created() {

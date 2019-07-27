@@ -1,23 +1,10 @@
-<template lang="pug">
-  .Marketler
-    v-wait(for="marketler")
-      template(slot="waiting")
-          Loader
-      .container
-        Market(v-for="market in markets", 
-              :key="market.id", 
-              :market='market')
-   
-
-</template>
-
 <script>
+import { mapGetters } from "vuex";
+
 import Slider from "@/components/Slider";
 import Market from "@/components/Market";
 import ChangeMarket from "@/components/ChangeMarket";
 import Loader from "@/components/Loader";
-
-import { mapGetters } from "vuex";
 
 export default {
   head() {
@@ -50,12 +37,27 @@ export default {
       });
     }
   },
+  watch: {
+    $route() {
+      this.getMarkets();
+    }
+  },
   created() {
     this.getMarkets();
   }
 };
 </script>
 
+<template lang="pug">
+  .Marketler
+    v-wait(for="marketler")
+      template(slot="waiting")
+          Loader
+      .container
+        Market(v-for="market in markets", 
+              :key="market.id", 
+              :market='market')
+</template>
 
 <style lang="scss" scoped>
 @import "assets/style/main.scss";
