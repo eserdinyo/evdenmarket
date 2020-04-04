@@ -14,7 +14,10 @@
           <iconUser />
         </div>
         <div v-if="!isLoggedIn" class="Header__login--box">
-          <button class="Header__login--desktop Header__login--desktop-login">
+          <button
+            class="Header__login--desktop Header__login--desktop-login"
+            @click="openAuthModal"
+          >
             Giriş
           </button>
         </div>
@@ -151,6 +154,9 @@ export default {
     }
   },
   methods: {
+    openAuthModal () {
+      this.$modal.show('auth-modal')
+    },
     closeCart () {
       this.$store.commit('toggleCart', false)
     },

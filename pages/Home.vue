@@ -15,7 +15,8 @@ export default {
   computed: {
     ...mapGetters(['isLoggedIn', 'loggedUser'])
   },
-  created () {
+  mounted () {
+    this.$modal.show('auth-modal')
 
     /*  if (this.$route.query.register) {
       this.$store.dispatch("register", {

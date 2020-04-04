@@ -1,21 +1,24 @@
 <template>
   <div>
     <app-header />
-    <nuxt/>
+    <nuxt />
+    <auth-modal />
   </div>
 </template>
 <script>
-import AppHeader from "@/components/Header";
+import AuthModal from '../components/AuthModal'
+import AppHeader from '@/components/Header'
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    AuthModal
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "~/assets/style/main.scss";
+@import '~/assets/style/main.scss';
 *,
 *:before,
 *:after {

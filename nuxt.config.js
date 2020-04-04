@@ -39,6 +39,7 @@ module.exports = {
    */
   plugins: [
     '~/plugins/vee-validate',
+    '~/plugins/vmodal',
     { src: '~/plugins/swiper.js', ssr: false }
   ],
 
