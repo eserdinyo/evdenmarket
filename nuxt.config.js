@@ -1,25 +1,25 @@
-const pkg = require("./package");
+const pkg = require('./package')
 
 module.exports = {
-   generate: {
+  generate: {
     fallback: true
   },
-  mode: "universal",
+  mode: 'universal',
   /*
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: 'Evdenmarket - Market Sana Gelsin',
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: pkg.description }
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Open+Sans:400,600,700"
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700'
       }
     ]
   },
@@ -27,61 +27,31 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "red" },
+  loading: { color: 'red' },
 
   /*
    ** Global CSS
    */
-  css: ["~/assets/style/main.scss"],
+  css: ['~/assets/style/main.scss'],
 
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    "~/plugins/vee-validate",
-    "~/plugins/vue-swal",
-    "~/plugins/vue-cleave",
-    { src: "~/plugins/flickity", ssr: false }
+    '~/plugins/vee-validate',
+    { src: '~/plugins/swiper.js', ssr: false }
   ],
 
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth", "vue-wait/nuxt"],
+  modules: ['@nuxtjs/axios', 'vue-wait/nuxt'],
   /*
    ** Axios module configuration
    */
   axios: {
-    baseURL: "http://localhost:8081"
+    baseURL: 'http://localhost:8081'
   },
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: "login", method: "post", propertyName: "token" },
-          user: false,
-          logout: false
-        },
-        tokenRequired: true,
-        tokenType: "Bearer"
-      },
-      facebook: {
-        client_id: "603974156699711",
-        userinfo_endpoint:
-          "https://graph.facebook.com/v2.12/me?fields=about,name,picture{url},email",
-        scope: ["public_profile", "email"]
-      },
-      google: {
-        client_id:
-          "975561318251-bqgrbpnav8gq21arlhvb40u3s2p1egi1.apps.googleusercontent.com",
-      }
-    },
-    redirect: {
-      login: "/giris",
-      logout: "/",
-    }
-  },
-
   /*
    ** Build configuration
    */
@@ -89,13 +59,16 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) { },
+    extend (config, ctx) { }
   },
-  extendRoutes(routes, resolve) {
+  buildModules: [
+    '@nuxtjs/router'
+  ],
+  extendRoutes (routes, resolve) {
     routes.push({
-      name: "custom",
-      path: "*",
-      component: resolve(__dirname, "pages/404.vue")
-    });
+      name: 'custom',
+      path: '*',
+      component: resolve(__dirname, 'pages/404.vue')
+    })
   }
-};
+}

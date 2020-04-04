@@ -1,13 +1,12 @@
 import _ from "lodash";
-import http from "@/plugins/http-cart";
 
-const state = () => ({
+export const state = () => ({
   totalPrice: 0,
   isCartOpen: false,
   shopcart: []
 });
 
-const getters = {
+export const getters = {
   itemCount: state =>
     state.shopcart
       .map(product => product.quantity)
@@ -20,7 +19,7 @@ const getters = {
       .reduce((sum, current) => sum + current, 0)
 };
 
-const mutations = {
+export const mutations = {
   toggleCart(state, payload) {
     if (payload == false) {
       state.isCartOpen = false;
@@ -37,7 +36,7 @@ const mutations = {
   }
 };
 
-const actions = {
+export const actions = {
   addToCart({ commit }, payload) {
     const product = payload.product;
     const userid = payload.user.sub || payload.user.id;
@@ -97,11 +96,4 @@ const actions = {
         });
     });
   }
-};
-
-export default {
-  state,
-  getters,
-  mutations,
-  actions
 };

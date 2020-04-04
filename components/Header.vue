@@ -1,68 +1,111 @@
-<template lang="pug">
-  header.Header
-    .container
-      button.btn.btn__close(type='button', @click='toggleNav')
-        iconMenu(v-if='isOpen')
-        iconClose(v-if='isClose')
-      nuxt-link.Header__link(to='/')
-        //img.Header__logo(src='@/assets/images/logov2.png', alt='')
-        p evdenmarket
-      .Header__login
-        .Header__login--mobil(@click="goPath")
-          iconUser
-        .Header__login--box(v-if="!isLoggedIn")
-          nuxt-link.Header__login--desktop.Header__login--desktop-login(:to='{name:"giris"}', :class="{active: activeLogin}")  Giriş
-          nuxt-link.Header__login--desktop.Header__login--desktop-register(:to='{name:"kayit"}', :class="{active: activeRegister}") Kayıt&nbsp;Ol
-        a.Header__login--desktop.Header__login--desktop-profil(v-if="isLoggedIn", @click="toggleProfil")
-          iconUser.Header__login--desktop.Header__login--desktop-profil--profil--icon
-          .Header__login--desktop.Header__login--desktop-profil--name {{ getName }}
-          iconArrowDown.Header__login--desktop.Header__login--desktop-profil--icon(v-if="!isProfilOpen")
-          iconArrowUp.Header__login--desktop.Header__login--desktop-profil--icon(v-if="isProfilOpen")
-
-          .Profil-card(v-if="isProfilOpen", v-on-clickaway="closeProfil")
-            nuxt-link.Profil-card--link(to='/siparislerim') Siparişlerim
-            nuxt-link.Profil-card--link(to='/') Üyelik Bilgilerim
-            nuxt-link.Profil-card--link(to='/') Kampanyalarım
-            nuxt-link.Profil-card--link(to='/adreslerim') Adreslerim
-            nuxt-link.Profil-card--link(to='/') Çeklerim
-            nuxt-link.Profil-card--link(to='/') Puanlarım
-            a.Profil-card--link(@click="logout") Çıkış Yap
-
-        
-      .Header__cart(v-if="isLoggedIn")
-        .iconMobil(@click="goCart")
-          iconCart
-        .iconCart(@click="toggleCart")
-          iconCart
-          iconArrowUp(v-if="isCartOpen")
-          iconArrowDown(v-if="!isCartOpen")
-        .Header__amount(@click="goCart") {{ itemCount }}
-        .Header__price(v-if='isLoggedIn && itemCount > 0')
-          p {{totalPrice.toFixed(2)}} ₺
-        AppCart(v-if="isCartOpen", v-on-clickaway="closeCart")
-      
-      .Header__search
-        ChangeMarket  
+<template>
+  <div class="Header">
+    <div class="container">
+      <button class="btn btn__close" type="button" @click="toggleNav">
+        <iconMenu v-if="isOpen" />
+        <iconClose v-if="isClose" />
+      </button>
+      <nuxt-link class="Header__link" to="/">
+        <!--img.Header__logo(src='@/assets/images/logov2.png', alt='')-->
+        <p>evdenmarket</p>
+      </nuxt-link>
+      <div class="Header__login">
+        <div class="Header__login--mobil" @click="goPath">
+          <iconUser />
+        </div>
+        <div v-if="!isLoggedIn" class="Header__login--box">
+          <button class="Header__login--desktop Header__login--desktop-login">
+            Giriş
+          </button>
+        </div>
+        <a
+          v-if="isLoggedIn"
+          class="Header__login--desktop Header__login--desktop-profil"
+          @click="toggleProfil"
+        >
+          <iconUser
+            class="Header__login--desktop Header__login--desktop-profil--profil--icon"
+          />
+          <div
+            class="Header__login--desktop Header__login--desktop-profil--name"
+          >
+            {{ getName }}
+          </div>
+          <iconArrowDown
+            v-if="!isProfilOpen"
+            class="Header__login--desktop Header__login--desktop-profil--icon"
+          />
+          <iconArrowUp
+            v-if="isProfilOpen"
+            class="Header__login--desktop Header__login--desktop-profil--icon"
+          />
+          <div
+            v-if="isProfilOpen"
+            v-on-clickaway="closeProfil"
+            class="Profil-card"
+          >
+            <nuxt-link
+              class="Profil-card--link"
+              to="/siparislerim"
+            >Siparişlerim</nuxt-link>
+            <nuxt-link
+              class="Profil-card--link"
+              to="/"
+            >Üyelik Bilgilerim</nuxt-link>
+            <nuxt-link
+              class="Profil-card--link"
+              to="/"
+            >Kampanyalarım</nuxt-link>
+            <nuxt-link
+              class="Profil-card--link"
+              to="/adreslerim"
+            >Adreslerim</nuxt-link>
+            <nuxt-link class="Profil-card--link" to="/">Çeklerim</nuxt-link>
+            <nuxt-link class="Profil-card--link" to="/">Puanlarım</nuxt-link>
+            <a class="Profil-card--link" @click="logout">Çıkış Yap</a>
+          </div>
+        </a>
+      </div>
+      <div v-if="isLoggedIn" class="Header__cart">
+        <div class="iconMobil" @click="goCart">
+          <iconCart />
+        </div>
+        <div class="iconCart" @click="toggleCart">
+          <iconCart />
+          <iconArrowUp v-if="isCartOpen" />
+          <iconArrowDown v-if="!isCartOpen" />
+        </div>
+        <div class="Header__amount" @click="goCart">{{ itemCount }}</div>
+        <div
+          v-if="isLoggedIn &amp;&amp; itemCount &gt; 0"
+          class="Header__price"
+        >
+          <p>{{ totalPrice.toFixed(2) }} ₺</p>
+        </div>
+        <AppCart v-if="isCartOpen" v-on-clickaway="closeCart" />
+      </div>
+      <div class="Header__search">
+        <ChangeMarket />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import iconMenu from "@/assets/icons/menu";
-import iconClose from "@/assets/icons/close";
-import iconCart from "@/assets/icons/cart";
-import iconUser from "@/assets/icons/user";
-import iconArrowUp from "@/assets/icons/arrow_up";
-import iconArrowDown from "@/assets/icons/arrow_down";
-
-import AppCart from "./Cart";
-import SearchBar from "./SearchBar";
-import ChangeMarket from "./ChangeMarket";
-
-import { mapGetters } from "vuex";
-import { mixin as clickaway } from "vue-clickaway";
+import { mapGetters } from 'vuex'
+import { mixin as clickaway } from 'vue-clickaway'
+import AppCart from './Cart'
+import SearchBar from './SearchBar'
+import ChangeMarket from './ChangeMarket'
+import iconMenu from '@/assets/icons/menu'
+import iconClose from '@/assets/icons/close'
+import iconCart from '@/assets/icons/cart'
+import iconUser from '@/assets/icons/user'
+import iconArrowUp from '@/assets/icons/arrow_up'
+import iconArrowDown from '@/assets/icons/arrow_down'
 
 export default {
-  name: "Header",
-  mixins: [clickaway],
+  name: 'Header',
   components: {
     iconMenu,
     iconClose,
@@ -74,76 +117,76 @@ export default {
     SearchBar,
     ChangeMarket
   },
-  data() {
+  mixins: [clickaway],
+  data () {
     return {
       isOpen: true,
       isClose: false,
       isProfilOpen: false
-    };
+    }
   },
   computed: {
     ...mapGetters([
-      "itemCount",
-      "totalPrice",
-      "isCartOpen",
-      "isLoggedIn",
-      "loggedUser",
-      "activeLogin",
-      "activeRegister"
+      'itemCount',
+      'totalPrice',
+      'isCartOpen',
+      'isLoggedIn',
+      'loggedUser',
+      'activeLogin',
+      'activeRegister'
     ]),
-    getName() {
+    getName () {
       if (this.loggedUser.given_name || this.loggedUser.name) {
         if (this.loggedUser.given_name) {
-          return this.loggedUser.given_name;
+          return this.loggedUser.given_name
         } else {
-          return this.loggedUser.name.split(" ")[0];
+          return this.loggedUser.name.split(' ')[0]
         }
       }
     }
   },
-  methods: {
-    closeCart() {
-      this.$store.commit("toggleCart", false);
-    },
-    closeProfil() {
-      this.isProfilOpen = false;
-    },
-    goPath() {
-      this.isLoggedIn
-        ? this.$router.push({ name: "hesabim" })
-        : this.$router.push({ name: "giris" });
-    },
-    toggleNav() {
-      this.isOpen = !this.isOpen;
-      this.isClose = !this.isClose;
-      this.isActive = !this.isActive;
-    },
-    toggleCart() {
-      this.$store.commit("toggleCart", true);
-    },
-    toggleProfil() {
-      this.isProfilOpen = !this.isProfilOpen;
-    },
-    goCart() {
-      this.$router.push({ name: "sepetim" });
-    },
-    logout() {
-      this.$auth.logout().then(res => {
-        this.$router.push("/");
-      });
+  created () {
+    if (this.isLoggedIn) {
+      this.$store.dispatch('getShopcart', this.loggedUser)
     }
   },
-  created() {
-    if (this.isLoggedIn) {
-      this.$store.dispatch("getShopcart", this.loggedUser);
+  methods: {
+    closeCart () {
+      this.$store.commit('toggleCart', false)
+    },
+    closeProfil () {
+      this.isProfilOpen = false
+    },
+    goPath () {
+      this.isLoggedIn
+        ? this.$router.push({ name: 'hesabim' })
+        : this.$router.push({ name: 'giris' })
+    },
+    toggleNav () {
+      this.isOpen = !this.isOpen
+      this.isClose = !this.isClose
+      this.isActive = !this.isActive
+    },
+    toggleCart () {
+      this.$store.commit('toggleCart', true)
+    },
+    toggleProfil () {
+      this.isProfilOpen = !this.isProfilOpen
+    },
+    goCart () {
+      this.$router.push({ name: 'sepetim' })
+    },
+    logout () {
+      this.$auth.logout().then((res) => {
+        this.$router.push('/')
+      })
     }
   }
-};
+}
 </script>
 
-
 <style lang="scss" scoped>
-@import "@/assets/style/main.scss";
+@import '@/assets/style/main.scss';
 .container {
   max-width: 120rem;
   margin: 0 auto;
@@ -247,12 +290,11 @@ export default {
     user-select: none;
   }
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   &__link {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 2.4rem;
     color: $primary-color;
 
@@ -417,7 +459,7 @@ export default {
 .active {
   color: $primary-color-dark;
   &::after {
-    content: "";
+    content: '';
     height: 2px;
     width: 12px;
     background: $primary-color;
@@ -428,4 +470,3 @@ export default {
   }
 }
 </style>
-

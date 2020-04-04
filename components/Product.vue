@@ -12,6 +12,7 @@
 </template>
 <script>
 import BtnLoader from "./BtnLoader";
+import Swal from 'sweetalert2'
 
 import { mapGetters } from "vuex";
 export default {
@@ -51,7 +52,7 @@ export default {
           .then(res => {
             this.$wait.end("btn");
             this.$store.dispatch("getShopcart", this.loggedUser).then(res => {
-              this.$swal({
+              Swal({
                 title: "Sepete Eklendi",
                 icon: "success",
                 button: "Tamam"

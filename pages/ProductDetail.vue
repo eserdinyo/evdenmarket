@@ -27,6 +27,7 @@
 <script>
 import Loader from "@/components/Loader";
 import { mapGetters } from "vuex";
+import Swal from 'sweetalert2'
 
 export default {
   data() {
@@ -84,7 +85,7 @@ export default {
           })
           .then(res => {
             this.$store.dispatch("getShopcart", this.loggedUser).then(res => {
-              this.$swal({
+              Swal({
                 title: "Sepete Eklendi",
                 icon: "success",
                 button: "Tamam"
@@ -256,4 +257,3 @@ export default {
   }
 }
 </style>
-

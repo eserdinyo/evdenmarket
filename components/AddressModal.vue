@@ -79,6 +79,7 @@
 <script>
 import iconClose from "@/assets/icons/close";
 import { mapGetters } from "vuex";
+import Swal from 'sweetalert2'
 
 export default {
   data() {
@@ -116,7 +117,7 @@ export default {
         .then(res => {
           this.$store.dispatch("getAddresses", this.loggedUser);
 
-          this.$swal({
+          Swal({
             title: "Adres Kaydedildi",
             icon: "success",
             button: "Tamam"

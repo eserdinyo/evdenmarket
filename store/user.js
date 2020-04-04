@@ -1,12 +1,10 @@
-import http from "@/plugins/http-auth.js";
-
-const state = {
+export const state = {
 };
 
-const getters = {
+export const getters = {
 };
 
-const mutations = {
+export const mutations = {
   retriveToken(state, payload) {
     state.loggedIn = true;
   },
@@ -16,7 +14,7 @@ const mutations = {
   },
 };
 
-const actions = {
+export const actions = {
   /* logout({ state, commit }) {
     if (state.token) {
       return new Promise((resolve, reject) => {
@@ -90,11 +88,4 @@ const actions = {
       commit("retriveToken", payload);
     }
   },
-};
-
-export default {
-  state,
-  getters,
-  mutations,
-  actions
 };
