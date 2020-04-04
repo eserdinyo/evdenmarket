@@ -1,4 +1,5 @@
 {
+  "window.title": "Evdenmarket Frontend${separator}${activeEditorShort}",
   "workbench.colorCustomizations": {
     "activityBar.background": "#009399",
     "activityBar.activeBackground": "#009399",
