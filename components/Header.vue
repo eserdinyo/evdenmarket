@@ -13,7 +13,7 @@
         <p>evdenmarket</p>
       </nuxt-link>
       <div class="Header__login">
-        <div class="mobil-login-btn" @click="goPath">
+        <div class="mobil-login-btn" @click="openAuthModal">
           <i class="icon fa fa-sign-in" />
         </div>
         <button class="btn btn-green desktop-login" @click="openAuthModal">

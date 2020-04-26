@@ -1,7 +1,7 @@
 <template>
   <modal
     height="auto"
-    width="700"
+    :width="width"
     name="auth-modal"
     transition="pop-out"
     @before-open="beforeOpen"
@@ -10,12 +10,7 @@
       class="auth-modal"
       :style="isRegister ? 'height: 500px;' : 'height: 420px;'"
     >
-      <div class="auth-modal-wrapper">
-        <img :src="loginBg" class="auth-modal-img" alt="">
-        <div v-if="false" class="auth-modal-slogan">
-          <p>YIL OLMUŞ <br>2020</p>
-        </div>
-      </div>
+      <img :src="loginBg" class="auth-modal-img" alt="">
       <div class="auth-modal-form">
         <div v-if="isRegister" class="form-title">
           KAYIT OL
@@ -71,10 +66,10 @@
             >
           </div>
         </div>
-        <div v-if="isRegister" class="form-group">
+        <div v-if="isRegister" class="form-group mt-5">
           <button class="btn btn-green" @click="register">KAYIT OL</button>
         </div>
-        <div v-if="isLogin" class="form-group">
+        <div v-if="isLogin" class="form-group mt-5">
           <button class="btn btn-green" @click="login">GİRİŞ YAP</button>
         </div>
 
@@ -112,7 +107,13 @@ export default {
       repassword: null,
       isRegister: false,
       isLogin: true,
+      width: 700,
       loginBg: require('../assets/images/login/1.jpg')
+    }
+  },
+  created () {
+    if (process.browser) {
+      this.width = Math.min(window.innerWidth - 30, 700)
     }
   },
   methods: {
@@ -129,27 +130,33 @@ export default {
       this.isRegister = false
     },
     login () {
-      this.$store.dispatch('user/login', {
-        phone: this.phone,
-        password: this.password
-      }).then((res) => {
-        console.log(res)
-      }).catch((err) => {
-        console.log(err)
-      })
+      this.$store
+        .dispatch('user/login', {
+          phone: this.phone,
+          password: this.password
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     register () {
-      this.$store.dispatch('user/register', {
-        phone: this.phone,
-        password: this.phone,
-        repassword: this.password,
-        first_name: this.first_name,
-        last_name: this.last_name
-      }).then((res) => {
-        console.log(res)
-      }).catch((err) => {
-        console.log(err)
-      })
+      this.$store
+        .dispatch('user/register', {
+          phone: this.phone,
+          password: this.phone,
+          repassword: this.password,
+          first_name: this.first_name,
+          last_name: this.last_name
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }
@@ -158,39 +165,17 @@ export default {
 <style lang="scss">
 .auth-modal {
   display: flex;
-  transition: all .2s;
-  &-wrapper {
-    width: 50%;
-    overflow: hidden;
-    position: relative;
-    &:after {
-      content: '';
-      // background-color: rgba(0, 0, 0, 0.5);
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 9;
-    }
-  }
-  &-slogan {
-    z-index: 99;
-    font-size: 30px;
-    position: absolute;
-    bottom: 20px;
-    left: 30px;
-    color: #fff;
-    font-family: serif;
-    font-weight: bold;
-  }
   &-img {
     object-fit: cover;
     height: 100%;
     width: 100%;
+    display: none;
+    width: 50%;
+    overflow: hidden;
+    position: relative;
   }
   &-form {
-    width: 50%;
+    width: 100%;
     padding: 2rem;
   }
 
@@ -241,6 +226,17 @@ export default {
         cursor: pointer;
         user-select: none;
       }
+    }
+  }
+}
+
+@include res(desktop) {
+  .auth-modal {
+    &-img {
+      display: block !important;
+    }
+    &-form {
+      width: 50%;
     }
   }
 }

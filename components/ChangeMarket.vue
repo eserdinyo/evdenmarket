@@ -37,6 +37,7 @@
             :hide-selected="true"
             :preserve-search="true"
             selected-label
+            disabled="true"
             deselect-label
             select-label
             placeholder="İlçe Seçin"
@@ -50,6 +51,7 @@
             :multiple="false"
             :close-on-select="true"
             :hide-selected="true"
+            disabled="true"
             :preserve-search="true"
             selected-label
             deselect-label
