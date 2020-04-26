@@ -1,84 +1,105 @@
-<template lang="pug">
-    .ChangeMarket
-      .container
-        iconMarket
-        .ChangeMarket__title(@click="toggleMarketBox")
-          p Market Ara
-          iconArrowDown(:class="{ transformArrow: isOpenMarketBox }")
-      .ChangeMarket__MarketBul(v-if="isOpenMarketBox", v-on-clickaway="closeChangeMarket")
-          select(v-model="cityID", @change="getTowns")
-            option(disabled, value='') Şehir Seçin
-            option(v-for="city in cities", 
-              :key="city.id", 
-              :value="city.CityID") {{city.CityName}}
-
-          select(v-model="townID", @change="getNeighborhood", :disabled="towns.length == 0")
-            option(disabled, selected, value='') İlçe Seçin
-            option(v-for="town in towns", 
-              :key="town.id", 
-              :value="town.TownID") {{town.TownName}}
-
-          select(v-model="neighID", :disabled="districts.length == 0")
-            option(disabled,selected, value='') Mahalle Seçin
-            option(v-for="dr in districts", 
-              :value="dr", 
-              :key="dr.id") {{dr.NeighborhoodName}}
-          nuxt-link.ChangeMarket__MarketBul--btn(:to='{ name: "marketler", query: { mid } }') Market Bul
+<template>
+  <div class="Header__search">
+    <div class="ChangeMarket">
+      <div class="container">
+        <iconMarket />
+        <div class="ChangeMarket__title" @click="toggleMarketBox">
+          <p>Market Ara</p>
+          <iconArrowDown :class="{ transformArrow: isOpenMarketBox }" />
+        </div>
+      </div>
+      <div
+        v-if="isOpenMarketBox"
+        v-on-clickaway="closeChangeMarket"
+        class="ChangeMarket__MarketBul"
+      >
+        <select v-model="cityID" @change="getTowns">
+          <option>Şehir Seçin</option>
+          <option>
+            İstanbul
+          </option>
+        </select>
+        <select>
+          <option>
+            İlçe Seçin
+          </option>
+          <option>
+            Sultanbeyli
+          </option>
+        </select>
+        <select>
+          <option>
+            Mahalle Seçin
+          </option>
+          <option>
+            Turgutreis
+          </option>
+        </select>
+        <nuxt-link
+          class="ChangeMarket__MarketBul--btn"
+          :to="{ name: 'marketler', query: { mid } }"
+        >
+          Market Bul
+        </nuxt-link>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import iconMarket from "@/assets/icons/market";
-import iconArrowDown from "@/assets/icons/arrow_down";
-
-import { mapGetters } from "vuex";
-import { mixin as clickaway } from "vue-clickaway";
+import { mapGetters } from 'vuex'
+import { mixin as clickaway } from 'vue-clickaway'
+import iconMarket from '@/assets/icons/market'
+import iconArrowDown from '@/assets/icons/arrow_down'
 
 export default {
-  mixins: [clickaway],
-  data() {
-    return {
-      isOpenMarketBox: false,
-      cityID: "",
-      townID: "",
-      neighID: "",
-      mid: 38752
-      //     neighID.NeighborhoodID
-    };
-  },
   components: {
     iconMarket,
     iconArrowDown
   },
-  computed: {
-    ...mapGetters(["cities", "towns", "districts"])
-  },
-  methods: {
-    closeChangeMarket() {
-      this.isOpenMarketBox = false;
-    },
-    toggleMarketBox() {
-      this.isOpenMarketBox = !this.isOpenMarketBox;
-    },
-    getTowns() {
-      this.$store.dispatch("getTowns", this.cityID);
-    },
-    getNeighborhood() {
-      this.$store.dispatch("getNeighborhoods", this.townID);
+  mixins: [clickaway],
+  data() {
+    return {
+      isOpenMarketBox: false,
+      cityID: '',
+      townID: '',
+      neighID: '',
+      mid: 38752
+      //     neighID.NeighborhoodID
     }
-  },
-  mounted() {
-    this.$store.dispatch("getCities");
   },
   watch: {
     $route() {
-      this.isOpenMarketBox = false;
+      this.isOpenMarketBox = false
+    }
+  },
+  methods: {
+    closeChangeMarket() {
+      this.isOpenMarketBox = false
+    },
+    toggleMarketBox() {
+      this.isOpenMarketBox = !this.isOpenMarketBox
+    },
+    getTowns() {
+      this.$store.dispatch('getTowns', this.cityID)
+    },
+    getNeighborhood() {
+      this.$store.dispatch('getNeighborhoods', this.townID)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/style/main.scss";
+.Header__search {
+  margin-top: 2rem;
+  width: 100%;
+  @include res(tab) {
+    margin-right: auto;
+    margin-top: 0;
+    width: auto;
+  }
+}
 
 .ChangeMarket {
   border: 1px solid $primary-color-2;
@@ -127,6 +148,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     margin-top: 1.1rem;
+    width: 100%;
 
     & > * {
       margin-bottom: 1rem;
@@ -152,7 +174,7 @@ export default {
     }
 
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       top: -4%;
       left: 50%;

@@ -1,26 +1,25 @@
 <template>
   <div class="Header">
     <div class="container">
-      <button class="btn btn__close" type="button" @click="toggleNav">
-        <iconMenu v-if="isOpen" />
-        <iconClose v-if="isClose" />
-      </button>
+      <div
+        :class="{ active_ham: isNavbarOpen }"
+        class="ham-wrapper"
+        @click="toggleNav"
+      >
+        <div class="ham" />
+      </div>
       <nuxt-link class="Header__link" to="/">
         <!--img.Header__logo(src='@/assets/images/logov2.png', alt='')-->
         <p>evdenmarket</p>
       </nuxt-link>
       <div class="Header__login">
-        <div class="Header__login--mobil" @click="goPath">
-          <iconUser />
+        <div class="mobil-login-btn" @click="goPath">
+          <i class="icon fa fa-sign-in" />
         </div>
-        <div v-if="!isLoggedIn" class="Header__login--box">
-          <button
-            class="Header__login--desktop Header__login--desktop-login"
-            @click="openAuthModal"
-          >
-            Giriş
-          </button>
-        </div>
+        <button class="btn btn-green desktop-login" @click="openAuthModal">
+          <span>Giriş</span>
+          <i class="ml-3 fa fa-sign-in" />
+        </button>
         <a
           v-if="isLoggedIn"
           class="Header__login--desktop Header__login--desktop-profil"
@@ -47,22 +46,18 @@
             v-on-clickaway="closeProfil"
             class="Profil-card"
           >
-            <nuxt-link
-              class="Profil-card--link"
-              to="/siparislerim"
-            >Siparişlerim</nuxt-link>
-            <nuxt-link
-              class="Profil-card--link"
-              to="/"
-            >Üyelik Bilgilerim</nuxt-link>
-            <nuxt-link
-              class="Profil-card--link"
-              to="/"
-            >Kampanyalarım</nuxt-link>
-            <nuxt-link
-              class="Profil-card--link"
-              to="/adreslerim"
-            >Adreslerim</nuxt-link>
+            <nuxt-link class="Profil-card--link" to="/siparislerim"
+              >Siparişlerim</nuxt-link
+            >
+            <nuxt-link class="Profil-card--link" to="/"
+              >Üyelik Bilgilerim</nuxt-link
+            >
+            <nuxt-link class="Profil-card--link" to="/"
+              >Kampanyalarım</nuxt-link
+            >
+            <nuxt-link class="Profil-card--link" to="/adreslerim"
+              >Adreslerim</nuxt-link
+            >
             <nuxt-link class="Profil-card--link" to="/">Çeklerim</nuxt-link>
             <nuxt-link class="Profil-card--link" to="/">Puanlarım</nuxt-link>
             <a class="Profil-card--link" @click="logout">Çıkış Yap</a>
@@ -87,9 +82,7 @@
         </div>
         <AppCart v-if="isCartOpen" v-on-clickaway="closeCart" />
       </div>
-      <div class="Header__search">
-        <ChangeMarket />
-      </div>
+      <ChangeMarket />
     </div>
   </div>
 </template>
@@ -121,11 +114,12 @@ export default {
     ChangeMarket
   },
   mixins: [clickaway],
-  data () {
+  data() {
     return {
       isOpen: true,
       isClose: false,
-      isProfilOpen: false
+      isProfilOpen: false,
+      isNavbarOpen: false
     }
   },
   computed: {
@@ -138,7 +132,7 @@ export default {
       'activeLogin',
       'activeRegister'
     ]),
-    getName () {
+    getName() {
       if (this.loggedUser.given_name || this.loggedUser.name) {
         if (this.loggedUser.given_name) {
           return this.loggedUser.given_name
@@ -148,41 +142,40 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     if (this.isLoggedIn) {
       this.$store.dispatch('getShopcart', this.loggedUser)
     }
   },
   methods: {
-    openAuthModal () {
+    toggleNav() {
+      console.log('dsds')
+      this.isNavbarOpen = !this.isNavbarOpen
+    },
+    openAuthModal() {
       this.$modal.show('auth-modal')
     },
-    closeCart () {
+    closeCart() {
       this.$store.commit('toggleCart', false)
     },
-    closeProfil () {
+    closeProfil() {
       this.isProfilOpen = false
     },
-    goPath () {
+    goPath() {
       this.isLoggedIn
         ? this.$router.push({ name: 'hesabim' })
         : this.$router.push({ name: 'giris' })
     },
-    toggleNav () {
-      this.isOpen = !this.isOpen
-      this.isClose = !this.isClose
-      this.isActive = !this.isActive
-    },
-    toggleCart () {
+    toggleCart() {
       this.$store.commit('toggleCart', true)
     },
-    toggleProfil () {
+    toggleProfil() {
       this.isProfilOpen = !this.isProfilOpen
     },
-    goCart () {
+    goCart() {
       this.$router.push({ name: 'sepetim' })
     },
-    logout () {
+    logout() {
       this.$auth.logout().then((res) => {
         this.$router.push('/')
       })
@@ -205,23 +198,87 @@ export default {
 }
 
 .Header {
-  background: $header-color;
   width: 100%;
   height: 14rem;
-  @include res(tab) {
-    height: 10rem;
+  border-bottom: $border;
+
+  .desktop-login {
+    display: none;
   }
 
-  &__search {
-    margin-top: 3rem;
-    width: 100%;
-    @include res(tab) {
-      margin-right: auto;
-      margin-top: 0;
-      width: auto;
+  .mobil-login-btn {
+    .icon {
+      color: $primary-color;
+      font-size: 3rem;
+      margin-right: 10px;
     }
   }
 
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #2980b9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .ham-wrapper {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .ham {
+    width: 20px;
+    height: 4px;
+    background-color: $primary-color;
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.2s;
+  }
+
+  .ham:after,
+  .ham:before {
+    content: '';
+    height: 4px;
+    width: 30px;
+    border-radius: 2px;
+    background-color: $primary-color;
+    position: absolute;
+    left: 0;
+    transition: all 0.2s;
+  }
+
+  .ham:after {
+    top: -10px;
+  }
+
+  .ham:before {
+    top: 10px;
+  }
+
+  .active_ham {
+    .ham {
+      background: transparent;
+    }
+  }
+  .active_ham {
+    .ham:after {
+      transform: rotate(135deg);
+      top: 0;
+    }
+  }
+
+  .active_ham {
+    .ham:before {
+      transform: rotate(45deg);
+      top: 0;
+    }
+  }
   &__price {
     color: #333;
     position: absolute;
@@ -327,6 +384,8 @@ export default {
     margin-right: 1rem;
     user-select: none;
     width: 1.5rem;
+    padding: 1rem;
+    padding-top: 1.5rem;
 
     &--box {
       @include res(tab-land) {
@@ -420,15 +479,10 @@ export default {
 }
 
 .btn {
-  background: none;
   position: relative;
   z-index: 11;
   cursor: pointer;
   outline: none;
-
-  @include res(tab-land) {
-    display: none;
-  }
 
   &__icon {
     height: 2.3rem;
@@ -473,6 +527,13 @@ export default {
     bottom: -20%;
     left: 50%;
     transform: translateX(-50%);
+  }
+}
+
+@include res(desktop) {
+  .desktop-login {
+    display: flex !important;
+    min-width: 8rem;
   }
 }
 </style>
