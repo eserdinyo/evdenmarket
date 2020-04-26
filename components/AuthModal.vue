@@ -158,6 +158,7 @@ export default {
 <style lang="scss">
 .auth-modal {
   display: flex;
+  transition: all .2s;
   &-wrapper {
     width: 50%;
     overflow: hidden;
