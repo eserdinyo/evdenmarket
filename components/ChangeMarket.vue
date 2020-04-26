@@ -13,34 +13,60 @@
         v-on-clickaway="closeChangeMarket"
         class="ChangeMarket__MarketBul"
       >
-        <select v-model="cityID" @change="getTowns">
-          <option>Şehir Seçin</option>
-          <option>
-            İstanbul
-          </option>
-        </select>
-        <select>
-          <option>
-            İlçe Seçin
-          </option>
-          <option>
-            Sultanbeyli
-          </option>
-        </select>
-        <select>
-          <option>
-            Mahalle Seçin
-          </option>
-          <option>
-            Turgutreis
-          </option>
-        </select>
-        <nuxt-link
-          class="ChangeMarket__MarketBul--btn"
-          :to="{ name: 'marketler', query: { mid } }"
-        >
-          Market Bul
-        </nuxt-link>
+        <div class="selectbox">
+          <multiselect
+            v-model="city"
+            :options="cities"
+            :multiple="false"
+            :close-on-select="true"
+            :hide-selected="true"
+            :preserve-search="true"
+            selected-label
+            deselect-label
+            select-label
+            placeholder="Şehir Seçin"
+            label="label"
+          />
+        </div>
+        <div class="selectbox">
+          <multiselect
+            v-model="city"
+            :options="cities"
+            :multiple="false"
+            :close-on-select="true"
+            :hide-selected="true"
+            :preserve-search="true"
+            selected-label
+            deselect-label
+            select-label
+            placeholder="İlçe Seçin"
+            label="label"
+          />
+        </div>
+        <div class="selectbox">
+          <multiselect
+            v-model="city"
+            :options="cities"
+            :multiple="false"
+            :close-on-select="true"
+            :hide-selected="true"
+            :preserve-search="true"
+            selected-label
+            deselect-label
+            select-label
+            placeholder="Mahalle Seçin"
+            label="label"
+          />
+        </div>
+
+        <div class="ChangeMarket__MarketBul__footer">
+          <nuxt-link
+            class="btn btn-green"
+            :to="{ name: 'marketler', query: { mid } }"
+          >
+            MARKET ARA
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
@@ -49,17 +75,82 @@
 <script>
 import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
+import Multiselect from 'vue-multiselect'
 import iconMarket from '@/assets/icons/market'
 import iconArrowDown from '@/assets/icons/arrow_down'
 
 export default {
   components: {
     iconMarket,
-    iconArrowDown
+    iconArrowDown,
+    Multiselect
   },
   mixins: [clickaway],
   data() {
     return {
+      cities: [
+        {
+          id: 1,
+          label: 'İstanbul',
+          name: 'İstanbul'
+        },
+        {
+          id: 2,
+          label: 'İzmir',
+          name: 'İzmir'
+        },
+        {
+          id: 3,
+          label: 'Ankara',
+          name: 'Ankara'
+        },
+        {
+          id: 1,
+          label: 'İstanbul',
+          name: 'İstanbul'
+        },
+        {
+          id: 2,
+          label: 'İzmir',
+          name: 'İzmir'
+        },
+        {
+          id: 3,
+          label: 'Ankara',
+          name: 'Ankara'
+        },
+        {
+          id: 1,
+          label: 'İstanbul',
+          name: 'İstanbul'
+        },
+        {
+          id: 2,
+          label: 'İzmir',
+          name: 'İzmir'
+        },
+        {
+          id: 3,
+          label: 'Ankara',
+          name: 'Ankara'
+        },
+        {
+          id: 1,
+          label: 'İstanbul',
+          name: 'İstanbul'
+        },
+        {
+          id: 2,
+          label: 'İzmir',
+          name: 'İzmir'
+        },
+        {
+          id: 3,
+          label: 'Ankara',
+          name: 'Ankara'
+        }
+      ],
+      city: '',
       isOpenMarketBox: false,
       cityID: '',
       townID: '',
@@ -107,6 +198,12 @@ export default {
   border-radius: 5px;
   position: relative;
 
+  .selectbox {
+    margin-bottom: 1rem;
+    padding: 0 2rem;
+    width: 100%;
+  }
+
   .container {
     display: flex;
     align-items: center;
@@ -140,55 +237,41 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 5rem;
-    background-color: #ddd;
+    padding: 2rem 0rem;
+    padding-bottom: 0rem;
+    background-color: #fff;
     z-index: 999999;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.562);
+    box-shadow: 0px 0px 127px -11px rgba(0, 0, 0, 0.22);
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 1.1rem;
     width: 100%;
+    border-radius: $radius;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 
-    & > * {
-      margin-bottom: 1rem;
-      width: 20rem;
-      padding: 0.8rem 1rem;
-      font-size: 1.4rem;
-      font-family: inherit;
-      color: #333;
-      outline: none;
-      cursor: pointer;
-      border-radius: 3px;
-      border: 1px solid rgba(51, 51, 51, 0.4);
-      background: #fff;
-    }
-
-    &--btn {
-      background-color: $primary-color-2;
-      color: #fff;
-      padding: 0.8rem 2rem;
-      border: none;
-      text-align: center;
-      user-select: none;
-    }
-
-    &:after {
-      content: '';
-      position: absolute;
-      top: -4%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid #ddd;
+    &__footer {
+      width: 100%;
+      margin-top: 1rem;
+      border-top: $border;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 2rem;
     }
   }
 }
 
 .transformArrow {
   transform: rotate(180deg);
+}
+
+@include res(desktop) {
+  .Header__search {
+    width: 30rem;
+    margin-top: 0;
+  }
 }
 </style>

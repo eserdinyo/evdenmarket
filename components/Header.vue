@@ -184,6 +184,8 @@ export default {
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
 <style lang="scss" scoped>
 @import '@/assets/style/main.scss';
 .container {
@@ -531,9 +533,27 @@ export default {
 }
 
 @include res(desktop) {
+  .container {
+    justify-content: space-between;
+    padding: 0;
+  }
   .desktop-login {
     display: flex !important;
     min-width: 8rem;
+  }
+  .ham-wrapper, .mobil-login-btn {
+    display: none !important;
+  }
+  .Header__login {
+    padding: 0;
+    margin: 0;
+    order: 1;
+    width: auto;
+  }
+  .Header__link {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 </style>

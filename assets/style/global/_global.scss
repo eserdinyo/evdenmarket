@@ -27,6 +27,10 @@ body {
   margin: 0 auto;
 }
 
+.multiselect__input:focus {
+  border: none !important;
+}
+
 .page-enter-active {
   animation: slide-in 0.2s ease-out forwards;
 }
