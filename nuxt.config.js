@@ -24,19 +24,14 @@ module.exports = {
     ]
   },
 
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: 'red' },
-
-  /*
-   ** Global CSS
-   */
   css: ['~/assets/style/main.scss'],
-
-  /*
-   ** Plugins to load before mounting the App
-   */
+  styleResources: {
+    scss: [
+      './assets/style/config/_variables.scss',
+      './assets/style/config/_mixins.scss'
+    ]
+  },
   plugins: [
     '~/plugins/vee-validate',
     '~/plugins/vmodal',
@@ -46,7 +41,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', 'vue-wait/nuxt'],
+  modules: ['@nuxtjs/axios', 'vue-wait/nuxt', '@nuxtjs/style-resources'],
   /*
    ** Axios module configuration
    */

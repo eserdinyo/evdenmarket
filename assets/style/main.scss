@@ -1,3 +1,7 @@
+@import "helper/normalize";
+@import "helper/formalize";
+@import "helper/animations";
+@import "helper/bootstrap-utilities.min";
 //
 @import "config/mixins";
 @import "config/variables";
@@ -6,7 +10,4 @@
 //
 @import "components/button";
 @import "components/profil-card";
-//
-@import "helper/normalize";
-@import "helper/formalize";
-@import "helper/animations";
+@import "components/input";

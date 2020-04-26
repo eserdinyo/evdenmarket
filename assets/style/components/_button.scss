@@ -1,8 +1,6 @@
 .btn {
-  background: $primary-color;
-  color: #fff;
-  padding: 0.5rem 2rem;
-  border-radius: 3px;
+  padding: 1.5rem 2rem;
+  border-radius: $sm-radius;
   font-size: 1.4rem;
   cursor: pointer;
   user-select: none;
@@ -18,7 +16,17 @@
   }
 
   &:disabled {
-background: $primary-color-hover;
+    background: $primary-color-hover;
+  }
+
+  &-green {
+    background-color: $primary-color;
+    color: #fff;
+    width: 100%;
+
+    &:hover {
+      background-color: darken($primary-color, .5);
+    }
   }
 }
 
