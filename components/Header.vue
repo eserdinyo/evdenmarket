@@ -13,13 +13,33 @@
         <p>evdenmarket</p>
       </nuxt-link>
       <div class="Header__login">
-        <div class="mobil-login-btn" @click="openAuthModal">
+        <div v-if="false" class="mobil-login-btn" @click="openAuthModal">
           <i class="icon fa fa-sign-in" />
         </div>
-        <button class="btn btn-green desktop-login" @click="openAuthModal">
-          <span>Giriş</span>
-          <i class="ml-3 fa fa-sign-in" />
+        <button class="desktop-login" @click="openAuthModal">
+          <span>GİRİŞ YAP</span>
         </button>
+        <div class="btn btn-green desktop-cart-btn">
+          <span>2</span>
+          SEPET
+        </div>
+        <div class="Header__cart">
+          <div class="iconMobil" @click="goCart">
+            <i class="icon fa fa-shopping-cart" />
+          </div>
+          <div class="iconCart" @click="toggleCart">
+            <iconArrowUp v-if="isCartOpen" />
+            <iconArrowDown v-if="!isCartOpen" />
+          </div>
+          <div class="Header__amount" @click="goCart">2</div>
+          <div
+            v-if="isLoggedIn &amp;&amp; itemCount &gt; 0"
+            class="Header__price"
+          >
+            <p>{{ totalPrice.toFixed(2) }} ₺</p>
+          </div>
+          <AppCart v-if="isCartOpen" v-on-clickaway="closeCart" />
+        </div>
         <a
           v-if="isLoggedIn"
           class="Header__login--desktop Header__login--desktop-profil"
@@ -63,24 +83,6 @@
             <a class="Profil-card--link" @click="logout">Çıkış Yap</a>
           </div>
         </a>
-      </div>
-      <div v-if="isLoggedIn" class="Header__cart">
-        <div class="iconMobil" @click="goCart">
-          <iconCart />
-        </div>
-        <div class="iconCart" @click="toggleCart">
-          <iconCart />
-          <iconArrowUp v-if="isCartOpen" />
-          <iconArrowDown v-if="!isCartOpen" />
-        </div>
-        <div class="Header__amount" @click="goCart">{{ itemCount }}</div>
-        <div
-          v-if="isLoggedIn &amp;&amp; itemCount &gt; 0"
-          class="Header__price"
-        >
-          <p>{{ totalPrice.toFixed(2) }} ₺</p>
-        </div>
-        <AppCart v-if="isCartOpen" v-on-clickaway="closeCart" />
       </div>
       <ChangeMarket />
     </div>
@@ -203,6 +205,7 @@ export default {
   width: 100%;
   height: 14rem;
   border-bottom: $border;
+  padding-top: 1rem;
 
   .desktop-login {
     display: none;
@@ -312,38 +315,17 @@ export default {
     margin-left: 0.5rem;
     z-index: 1;
     cursor: pointer;
-    @include res(tab) {
-      order: 3;
-    }
 
-    @include res(tab-land) {
-      background-color: #333;
-      border-radius: 5rem;
-      padding: 0.3rem 2rem 0.4rem 2rem;
-      margin-left: 15rem;
-      &--item_count {
-        border-radius: 50%;
-        display: block;
-        background-color: $primary-color;
-        height: 2rem;
-        width: 2rem;
-        display: flex;
-        justify-content: center;
-        z-index: 2;
-        align-items: center;
-        color: #fff;
-        font-size: 1.2rem;
-        position: absolute;
-        top: -1rem;
-        right: -1rem;
-      }
+    .icon {
+      color: $primary-color;
+      font-size: 2.8rem;
     }
   }
   &__amount {
     position: absolute;
     right: -1rem;
     top: -1rem;
-    background: $primary-color;
+    background: $font-color;
     height: 2.2rem;
     width: 2.2rem;
     color: #fff;
@@ -362,51 +344,16 @@ export default {
     font-family: 'Open Sans', sans-serif;
     font-size: 2.4rem;
     color: $primary-color;
-
-    @include res(tab) {
-      margin-right: auto;
-      margin-left: 0;
-    }
-    @include res(tab-land) {
-      margin-left: 0;
-      text-align: left;
-    }
+    font-weight: 600;
   }
 
   &__logo {
     user-select: none;
     width: 100%;
-    @include res(tab) {
-      width: 30%;
-    }
   }
 
   &__login {
-    margin-left: 2rem;
-    margin-right: 1rem;
     user-select: none;
-    width: 1.5rem;
-    padding: 1rem;
-    padding-top: 1.5rem;
-
-    &--box {
-      @include res(tab-land) {
-        color: $primary-color;
-        display: flex;
-      }
-    }
-
-    @include res(tab) {
-      order: 3;
-    }
-
-    @include res(tab-land) {
-      width: 12rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 2rem;
-    }
 
     &--desktop {
       display: none;
@@ -450,33 +397,7 @@ export default {
           color: $primary-color-dark;
         }
       }
-      @include res(tab-land) {
-        display: flex;
-        align-items: center;
-      }
     }
-
-    &--mobil {
-      @include res(tab-land) {
-        display: none;
-      }
-    }
-  }
-}
-
-.iconMobil {
-  @include res(tab-land) {
-    display: none;
-  }
-}
-
-.iconCart {
-  display: none;
-  padding: 1px;
-  @include res(tab-land) {
-    display: unset;
-    display: flex;
-    align-items: center;
   }
 }
 
@@ -511,9 +432,6 @@ export default {
       fill: #fff;
       margin-left: 1rem;
       display: none;
-      @include res(tab-land) {
-        display: unset;
-      }
     }
   }
 }
@@ -532,6 +450,10 @@ export default {
   }
 }
 
+.desktop-cart-btn {
+  display: none;
+}
+
 @include res(desktop) {
   .container {
     justify-content: space-between;
@@ -540,20 +462,59 @@ export default {
   .desktop-login {
     display: flex !important;
     min-width: 8rem;
+    color: $primary-color;
+    cursor: pointer;
+    outline: 0;
+    font-weight: 600;
+    font-size: 14px;
   }
-  .ham-wrapper, .mobil-login-btn {
+  .ham-wrapper,
+  .mobil-login-btn {
     display: none !important;
   }
-  .Header__login {
-    padding: 0;
-    margin: 0;
-    order: 1;
-    width: auto;
+  .Header {
+    &__login {
+      padding: 0;
+      margin: 0;
+      order: 1;
+      width: auto;
+      display: flex;
+    }
+
+    &__cart {
+      display: none;
+    }
+
+    &__link {
+      text-align: left;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &__amount {
+    }
   }
-  .Header__link {
-    text-align: left;
-    margin-left: 0;
-    margin-right: 0;
+
+  .desktop-cart-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-left: 2rem;
+
+    span {
+      background: #fff;
+      margin-right: 1rem;
+      padding: 5px;
+      border-radius: $sm-radius;
+      color: $font-color;
+      height: 24px;
+      width: 24px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 </style>

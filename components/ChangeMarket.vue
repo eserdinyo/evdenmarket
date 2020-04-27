@@ -195,8 +195,8 @@ export default {
 }
 
 .ChangeMarket {
-  border: 1px solid $primary-color-2;
-  color: $primary-color-2;
+  border: 1px solid $primary-color;
+  color: $primary-color;
   border-radius: 5px;
   position: relative;
 
@@ -226,12 +226,12 @@ export default {
 
   .icon--market {
     width: 20px;
-    fill: $primary-color-2;
+    fill: $primary-color;
     margin-right: 1rem;
   }
 
   .btn__icon--arrow {
-    fill: $primary-color-2;
+    fill: $primary-color;
     margin-left: 1rem;
   }
 
