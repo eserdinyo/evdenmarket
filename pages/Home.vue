@@ -1,16 +1,19 @@
 <template>
   <div>
     <home-slider />
+    <home-tutorial />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import HomeSlider from '@/components/HomeSlider'
+import HomeTutorial from '@/components/HomeTutorial'
 
 export default {
   components: {
-    HomeSlider
+    HomeSlider,
+    HomeTutorial
   },
   computed: {
     ...mapGetters(['isLoggedIn', 'loggedUser'])

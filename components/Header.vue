@@ -9,7 +9,6 @@
         <div class="ham" />
       </div>
       <nuxt-link class="Header__link" to="/">
-        <!--img.Header__logo(src='@/assets/images/logov2.png', alt='')-->
         <p>evdenmarket</p>
       </nuxt-link>
       <div class="Header__login">
@@ -19,10 +18,6 @@
         <button class="desktop-login" @click="openAuthModal">
           <span>GİRİŞ YAP</span>
         </button>
-        <div class="btn btn-green desktop-cart-btn">
-          <span>2</span>
-          SEPET
-        </div>
         <div class="Header__cart">
           <div class="iconMobil" @click="goCart">
             <i class="icon fa fa-shopping-cart" />
@@ -203,7 +198,7 @@ export default {
 
 .Header {
   width: 100%;
-  height: 14rem;
+  height: 13rem;
   border-bottom: $border;
   padding-top: 1rem;
 
@@ -317,7 +312,7 @@ export default {
     cursor: pointer;
 
     .icon {
-      color: $primary-color;
+      color: $font-color;
       font-size: 2.8rem;
     }
   }
@@ -325,7 +320,7 @@ export default {
     position: absolute;
     right: -1rem;
     top: -1rem;
-    background: $font-color;
+    background: $primary-color;
     height: 2.2rem;
     width: 2.2rem;
     color: #fff;
@@ -450,9 +445,6 @@ export default {
   }
 }
 
-.desktop-cart-btn {
-  display: none;
-}
 
 @include res(desktop) {
   .container {
@@ -473,16 +465,13 @@ export default {
     display: none !important;
   }
   .Header {
+    height: 10rem;
     &__login {
       padding: 0;
       margin: 0;
       order: 1;
       width: auto;
       display: flex;
-    }
-
-    &__cart {
-      display: none;
     }
 
     &__link {
@@ -492,28 +481,7 @@ export default {
     }
 
     &__amount {
-    }
-  }
 
-  .desktop-cart-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    margin-left: 2rem;
-
-    span {
-      background: #fff;
-      margin-right: 1rem;
-      padding: 5px;
-      border-radius: $sm-radius;
-      color: $font-color;
-      height: 24px;
-      width: 24px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
   }
 }
