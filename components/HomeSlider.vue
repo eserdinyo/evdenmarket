@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import 'swiper/css/swiper.min.css'
 
 export default {
   data() {
@@ -48,7 +47,6 @@ export default {
 .swiper-container {
   margin-top: 2rem;
   height: 24rem;
-  background: red;
 }
 
 .swiper_img {

@@ -45,7 +45,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', 'vue-wait/nuxt', '@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/axios', 'vue-wait/nuxt', '@nuxtjs/style-resources', '@nuxtjs/device'],
   /*
    ** Axios module configuration
    */

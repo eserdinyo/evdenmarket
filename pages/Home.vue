@@ -2,6 +2,7 @@
   <div>
     <home-slider />
     <home-tutorial />
+    <home-markets />
   </div>
 </template>
 
@@ -9,11 +10,13 @@
 import { mapGetters } from 'vuex'
 import HomeSlider from '@/components/HomeSlider'
 import HomeTutorial from '@/components/HomeTutorial'
+import HomeMarkets from '@/components/HomeMarkets'
 
 export default {
   components: {
     HomeSlider,
-    HomeTutorial
+    HomeTutorial,
+    HomeMarkets
   },
   computed: {
     ...mapGetters(['isLoggedIn', 'loggedUser'])

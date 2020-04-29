@@ -65,9 +65,16 @@ export default {}
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem 1.3rem;
+    padding: 1rem 1.2rem;
     text-align: center;
     margin-bottom: 2rem;
+      border: $border;
+      border-color: transparent;
+
+    &:hover {
+      border-color: #c3c2b538;
+      border-radius: $sm-radius;
+    }
   }
 
   &_icon {

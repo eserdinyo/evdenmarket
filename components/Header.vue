@@ -96,6 +96,7 @@ import iconCart from '@/assets/icons/cart'
 import iconUser from '@/assets/icons/user'
 import iconArrowUp from '@/assets/icons/arrow_up'
 import iconArrowDown from '@/assets/icons/arrow_down'
+import 'swiper/css/swiper.min.css'
 
 export default {
   name: 'Header',
