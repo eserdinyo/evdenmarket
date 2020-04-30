@@ -5,7 +5,7 @@
         <p>
           Şimdi online alışveriş vakti. Siz de sanal marketinizi açmak
           için
-          <nuxt-link to="/satis">tıklayın.</nuxt-link>
+          <nuxt-link to="/bilgilendirme">tıklayın.</nuxt-link>
         </p>
       </div>
     </div>
@@ -211,10 +211,11 @@ export default {
   padding-top: 1rem;
 
   &-banner {
-    background-color: $grey-color;
+    background-color: $primary-color;
     height: 60px;
     color: #fff;
     font-weight: 500;
+    font-size: 14px;
 
     a {
       text-decoration: underline;
@@ -502,6 +503,10 @@ export default {
   }
   .Header {
     height: 10rem;
+
+    &-banner {
+      font-size: 16px;
+    }
     &__login {
       padding: 0;
       margin: 0;

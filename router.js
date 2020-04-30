@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 // pages
 import Home from './pages/Home'
-import Login from './pages/giris/index.vue'
+import MarketInformation from './pages/MarketInformation.vue'
 
 Vue.use(Router)
 
@@ -16,8 +16,9 @@ export function createRouter () {
         component: Home
       },
       {
-        path: '/giris',
-        component: Login
+        path: '/bilgilendirme',
+        name: 'Market Information',
+        component: MarketInformation
       }
     ]
   })

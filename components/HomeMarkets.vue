@@ -1,9 +1,9 @@
 <template>
   <div class="LastMarkets">
+    <div class="title">
+      YENİ MARKETLER
+    </div>
     <div class="container">
-      <div class="title">
-        YENİ MARKETLER
-      </div>
       <div class="LastMarkets_wrapper">
         <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
           <swiper-slide v-for="n in 4">
@@ -18,7 +18,10 @@
 <script>
 import Market from './Market'
 export default {
-  data() {
+  components: {
+    Market
+  },
+  data () {
     return {
       swiperOptions: {
         loop: true,
@@ -47,9 +50,6 @@ export default {
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Migros_t%C3%BCrk.jpg/1200px-Migros_t%C3%BCrk.jpg'
       }
     }
-  },
-  components: {
-    Market
   }
 }
 </script>
@@ -58,9 +58,9 @@ export default {
 .LastMarkets {
   margin-bottom: 40rem;
   .title {
-    height: 10rem;
+    height: 16rem;
     font-size: 3rem;
-    color: $primary-color;
+    color: #fff;
     font-weight: 700;
     text-align: center;
     display: flex;
@@ -68,16 +68,19 @@ export default {
     align-items: center;
     margin-bottom: 2rem;
     border-bottom: $border;
+    background-size: cover;
+    background-position: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('../assets/images/home-banner-bg.png')
   }
 }
 
 @include res(desktop) {
   .LastMarkets {
     .title {
-      height: 10rem;
+      height: 24rem;
       font-size: 4rem;
       margin-bottom: 5rem;
-      margin-top: 5rem;
+     margin-top: 8rem;
     }
   }
 }
