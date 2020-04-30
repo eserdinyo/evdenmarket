@@ -20,12 +20,141 @@
         </div>
       </div>
     </div>
+    <div class="container">
+      <div class="section">
+        <div class="section-bottom">
+          <div class="section-left">
+            <div class="icon">
+              <icon-market-info-shopping />
+            </div>
+          </div>
+          <div class="list-wrapper">
+            <div class="title">Neden Evdenmarket</div>
+
+            <div class="list">
+              <div class="item">
+                <div class="item-icon">
+                  <icon-truck />
+                </div>
+                <div class="desc">
+                  <div class="desc-title">
+                    Sürekli Gelişim
+                  </div>
+                  <div class="desc-detail">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Culpa, ipsa. Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Culpa, ipsa.
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-icon">
+                  <icon-truck />
+                </div>
+                <div class="desc">
+                  <div class="desc-title">
+                    Sürekli Gelişim
+                  </div>
+                  <div class="desc-detail">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Culpa, ipsa. Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Culpa, ipsa.
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-icon">
+                  <icon-truck />
+                </div>
+                <div class="desc">
+                  <div class="desc-title">
+                    Sürekli Gelişim
+                  </div>
+                  <div class="desc-detail">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Culpa, ipsa. Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Culpa, ipsa.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-bottom">
+          <div class="list-wrapper">
+            <div class="title">Neden Evdenmarket</div>
+
+            <div class="list">
+              <div class="item">
+                <div class="item-icon">
+                  <icon-truck />
+                </div>
+                <div class="desc">
+                  <div class="desc-title">
+                    Sürekli Gelişim
+                  </div>
+                  <div class="desc-detail">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Culpa, ipsa. Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Culpa, ipsa.
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-icon">
+                  <icon-truck />
+                </div>
+                <div class="desc">
+                  <div class="desc-title">
+                    Sürekli Gelişim
+                  </div>
+                  <div class="desc-detail">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Culpa, ipsa. Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Culpa, ipsa.
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-icon">
+                  <icon-truck />
+                </div>
+                <div class="desc">
+                  <div class="desc-title">
+                    Sürekli Gelişim
+                  </div>
+                  <div class="desc-detail">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Culpa, ipsa. Lorem ipsum dolor, sit amet consectetur
+                    adipisicing elit. Culpa, ipsa.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section-left section-right">
+            <div class="icon">
+              <icon-market-info-modern />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { iconMarketInfoShopping, iconTruck, iconMarketInfoModern } from '../components/icons'
+
 export default {
-  layout: 'information'
+  layout: 'information',
+  components: {
+    iconMarketInfoShopping,
+    iconMarketInfoModern,
+    iconTruck
+  }
 }
 </script>
 
@@ -76,6 +205,64 @@ export default {
       h2 {
         font-size: 2rem;
         margin-top: 1rem;
+      }
+    }
+  }
+
+  .section {
+    margin: 14rem 0;
+    .title {
+      font-size: 3rem;
+      margin-bottom: 4rem;
+      color: $grey-color;
+    }
+
+    &-left {
+      .icon {
+        .icon {
+          width: 40rem;
+          height: 40rem;
+        }
+      }
+    }
+
+    &-right {
+      .icon {
+        text-align: right;
+      }
+    }
+
+    &-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .list {
+      &-wrapper {
+        margin-top: 1rem;
+        padding: 0 3rem;
+      }
+      .item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        .desc {
+          &-title {
+            margin-bottom: 10px;
+            color: $grey-color;
+          }
+          &-detail {
+            color: lighten($font-color, 50%);
+            font-size: 14px;
+          }
+        }
+        &-icon {
+          margin-right: 2rem;
+          .icon {
+            height: 40px;
+            fill: $primary-color;
+          }
+        }
       }
     }
   }
