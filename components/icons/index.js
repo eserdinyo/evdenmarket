@@ -1,0 +1,5 @@
+export { default as iconStore } from './iconStore'
+export { default as iconLocation } from './iconLocation'
+export { default as iconOnlineShop } from './iconOnlineShop'
+export { default as iconTruck } from './iconTruck'
+export { default as iconShopCart } from './iconShopCart'

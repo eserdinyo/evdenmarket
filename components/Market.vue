@@ -45,6 +45,11 @@ export default {
   margin-bottom: 3rem;
   border-radius: $sm-radius;
   overflow: hidden;
+  transition: all .2s;
+
+  &:hover {
+    border-color: $primary-color;
+  }
   &__resim {
     width: 100%;
     height: 25rem;

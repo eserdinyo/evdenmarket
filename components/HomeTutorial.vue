@@ -3,7 +3,7 @@
     <div class="tutorial">
       <div class="tutorial_item">
         <div class="tutorial_icon">
-          <i class="fa fa-map-marker" aria-hidden="true" />
+          <icon-location />
         </div>
         <div class="tutorial_title">
           Adresini Seç
@@ -14,7 +14,7 @@
       </div>
       <div class="tutorial_item">
         <div class="tutorial_icon">
-          <i class="fa fa-shopping-basket" aria-hidden="true" />
+          <icon-store />
         </div>
         <div class="tutorial_title">
           Marketini Seç
@@ -25,7 +25,7 @@
       </div>
       <div class="tutorial_item">
         <div class="tutorial_icon">
-          <i class="fa fa-laptop" aria-hidden="true" />
+          <icon-online-shop />
         </div>
         <div class="tutorial_title">
           Alışverişini Yap
@@ -36,7 +36,7 @@
       </div>
       <div class="tutorial_item">
         <div class="tutorial_icon">
-          <i class="fa fa-truck" aria-hidden="true" />
+          <icon-truck />
         </div>
         <div class="tutorial_title">
           Kapına Gelsin
@@ -50,7 +50,21 @@
 </template>
 
 <script>
-export default {}
+import {
+  iconStore,
+  iconLocation,
+  iconTruck,
+  iconOnlineShop
+} from '../components/icons'
+
+export default {
+  components: {
+    iconTruck,
+    iconOnlineShop,
+    iconStore,
+    iconLocation
+  }
+}
 </script>
 
 <style lang="scss">
@@ -65,21 +79,26 @@ export default {}
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem 1.2rem;
+    padding: 1rem 1.1rem;
     text-align: center;
     margin-bottom: 2rem;
-      border: $border;
-      border-color: transparent;
+    border: $border;
+    border-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
 
     &:hover {
-      border-color: #c3c2b538;
+      border-color: $primary-color;
       border-radius: $sm-radius;
     }
   }
 
   &_icon {
     color: $primary-color;
-    font-size: 3rem;
+    .icon {
+      width: 50px;
+      fill: $primary-color;
+    }
   }
 
   &_title {
@@ -96,10 +115,6 @@ export default {}
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10rem;
     margin-top: 10rem;
-
-    &_icon {
-      font-size: 3.4rem;
-    }
   }
 }
 </style>

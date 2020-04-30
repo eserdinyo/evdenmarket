@@ -1,85 +1,96 @@
 <template>
-  <div class="Header">
-    <div class="container">
-      <div
-        :class="{ active_ham: isNavbarOpen }"
-        class="ham-wrapper"
-        @click="toggleNav"
-      >
-        <div class="ham" />
+  <div>
+    <div class="Header-banner">
+      <div class="container">
+        <p>
+          Şimdi online alışveriş vakti. Siz de sanal marketinizi açmak
+          için
+          <nuxt-link to="/satis">tıklayın.</nuxt-link>
+        </p>
       </div>
-      <nuxt-link class="Header__link" to="/">
-        <p>evdenmarket</p>
-      </nuxt-link>
-      <div class="Header__login">
-        <div v-if="false" class="mobil-login-btn" @click="openAuthModal">
-          <i class="icon fa fa-sign-in" />
-        </div>
-        <button class="desktop-login" @click="openAuthModal">
-          <span>GİRİŞ YAP</span>
-        </button>
-        <div class="Header__cart">
-          <div class="iconMobil" @click="goCart">
-            <i class="icon fa fa-shopping-cart" />
-          </div>
-          <div class="iconCart" @click="toggleCart">
-            <iconArrowUp v-if="isCartOpen" />
-            <iconArrowDown v-if="!isCartOpen" />
-          </div>
-          <div class="Header__amount" @click="goCart">2</div>
-          <div
-            v-if="isLoggedIn &amp;&amp; itemCount &gt; 0"
-            class="Header__price"
-          >
-            <p>{{ totalPrice.toFixed(2) }} ₺</p>
-          </div>
-          <AppCart v-if="isCartOpen" v-on-clickaway="closeCart" />
-        </div>
-        <a
-          v-if="isLoggedIn"
-          class="Header__login--desktop Header__login--desktop-profil"
-          @click="toggleProfil"
+    </div>
+    <div class="Header">
+      <div class="container">
+        <div
+          :class="{ active_ham: isNavbarOpen }"
+          class="ham-wrapper"
+          @click="toggleNav"
         >
-          <iconUser
-            class="Header__login--desktop Header__login--desktop-profil--profil--icon"
-          />
-          <div
-            class="Header__login--desktop Header__login--desktop-profil--name"
-          >
-            {{ getName }}
+          <div class="ham" />
+        </div>
+        <nuxt-link class="Header__link" to="/">
+          <p>evdenmarket</p>
+        </nuxt-link>
+        <div class="Header__login">
+          <div v-if="false" class="mobil-login-btn" @click="openAuthModal">
+            <i class="icon fa fa-sign-in" />
           </div>
-          <iconArrowDown
-            v-if="!isProfilOpen"
-            class="Header__login--desktop Header__login--desktop-profil--icon"
-          />
-          <iconArrowUp
-            v-if="isProfilOpen"
-            class="Header__login--desktop Header__login--desktop-profil--icon"
-          />
-          <div
-            v-if="isProfilOpen"
-            v-on-clickaway="closeProfil"
-            class="Profil-card"
-          >
-            <nuxt-link class="Profil-card--link" to="/siparislerim"
-              >Siparişlerim</nuxt-link
+          <button class="desktop-login" @click="openAuthModal">
+            <span>GİRİŞ YAP</span>
+          </button>
+          <div class="Header__cart">
+            <div class="iconMobil" @click="goCart">
+              <icon-shop-cart />
+            </div>
+            <div class="iconCart" @click="toggleCart">
+              <iconArrowUp v-if="isCartOpen" />
+              <iconArrowDown v-if="!isCartOpen" />
+            </div>
+            <div class="Header__amount" @click="goCart">2</div>
+            <div
+              v-if="isLoggedIn &amp;&amp; itemCount &gt; 0"
+              class="Header__price"
             >
-            <nuxt-link class="Profil-card--link" to="/"
-              >Üyelik Bilgilerim</nuxt-link
-            >
-            <nuxt-link class="Profil-card--link" to="/"
-              >Kampanyalarım</nuxt-link
-            >
-            <nuxt-link class="Profil-card--link" to="/adreslerim"
-              >Adreslerim</nuxt-link
-            >
-            <nuxt-link class="Profil-card--link" to="/">Çeklerim</nuxt-link>
-            <nuxt-link class="Profil-card--link" to="/">Puanlarım</nuxt-link>
-            <a class="Profil-card--link" @click="logout">Çıkış Yap</a>
+              <p>{{ totalPrice.toFixed(2) }} ₺</p>
+            </div>
+            <AppCart v-if="isCartOpen" v-on-clickaway="closeCart" />
           </div>
-        </a>
+          <a
+            v-if="isLoggedIn"
+            class="Header__login--desktop Header__login--desktop-profil"
+            @click="toggleProfil"
+          >
+            <iconUser
+              class="Header__login--desktop Header__login--desktop-profil--profil--icon"
+            />
+            <div
+              class="Header__login--desktop Header__login--desktop-profil--name"
+            >
+              {{ getName }}
+            </div>
+            <iconArrowDown
+              v-if="!isProfilOpen"
+              class="Header__login--desktop Header__login--desktop-profil--icon"
+            />
+            <iconArrowUp
+              v-if="isProfilOpen"
+              class="Header__login--desktop Header__login--desktop-profil--icon"
+            />
+            <div
+              v-if="isProfilOpen"
+              v-on-clickaway="closeProfil"
+              class="Profil-card"
+            >
+              <nuxt-link class="Profil-card--link" to="/siparislerim"
+                >Siparişlerim</nuxt-link
+              >
+              <nuxt-link class="Profil-card--link" to="/"
+                >Üyelik Bilgilerim</nuxt-link
+              >
+              <nuxt-link class="Profil-card--link" to="/"
+                >Kampanyalarım</nuxt-link
+              >
+              <nuxt-link class="Profil-card--link" to="/adreslerim"
+                >Adreslerim</nuxt-link
+              >
+              <nuxt-link class="Profil-card--link" to="/">Çeklerim</nuxt-link>
+              <nuxt-link class="Profil-card--link" to="/">Puanlarım</nuxt-link>
+              <a class="Profil-card--link" @click="logout">Çıkış Yap</a>
+            </div>
+          </a>
+        </div>
+        <ChangeMarket />
       </div>
-      <ChangeMarket />
     </div>
   </div>
 </template>
@@ -90,26 +101,22 @@ import { mixin as clickaway } from 'vue-clickaway'
 import AppCart from './Cart'
 import SearchBar from './SearchBar'
 import ChangeMarket from './ChangeMarket'
-import iconMenu from '@/assets/icons/menu'
-import iconClose from '@/assets/icons/close'
-import iconCart from '@/assets/icons/cart'
 import iconUser from '@/assets/icons/user'
 import iconArrowUp from '@/assets/icons/arrow_up'
 import iconArrowDown from '@/assets/icons/arrow_down'
 import 'swiper/css/swiper.min.css'
+import { iconShopCart } from '../components/icons'
 
 export default {
   name: 'Header',
   components: {
-    iconMenu,
-    iconClose,
-    iconCart,
     iconUser,
     iconArrowUp,
     iconArrowDown,
     AppCart,
     SearchBar,
-    ChangeMarket
+    ChangeMarket,
+    iconShopCart
   },
   mixins: [clickaway],
   data() {
@@ -202,6 +209,17 @@ export default {
   height: 13rem;
   border-bottom: $border;
   padding-top: 1rem;
+
+  &-banner {
+    background-color: $grey-color;
+    height: 60px;
+    color: #fff;
+    font-weight: 500;
+
+    a {
+      text-decoration: underline;
+    }
+  }
 
   .desktop-login {
     display: none;
@@ -313,8 +331,9 @@ export default {
     cursor: pointer;
 
     .icon {
-      color: $font-color;
-      font-size: 2.8rem;
+      fill: $font-color;
+      height: auto;
+      width: 25px;
     }
   }
   &__amount {
@@ -446,20 +465,36 @@ export default {
   }
 }
 
-
 @include res(desktop) {
   .container {
     justify-content: space-between;
     padding: 0;
   }
   .desktop-login {
-    display: flex !important;
+    display: block !important;
     min-width: 8rem;
     color: $primary-color;
     cursor: pointer;
     outline: 0;
     font-weight: 600;
     font-size: 14px;
+    transition: all 0.2s;
+    margin-right: 1rem;
+    padding-top: 3px;
+
+    &::after {
+      display: block;
+      content: '';
+      border-bottom: solid 2px $primary-color;
+      transform: scaleX(0);
+      transition: transform 0.2s ease-in-out;
+      transform-origin: 0% 50%;
+      margin-top: 3px;
+    }
+
+    &:hover:after {
+      transform: scaleX(1);
+    }
   }
   .ham-wrapper,
   .mobil-login-btn {
@@ -482,7 +517,6 @@ export default {
     }
 
     &__amount {
-
     }
   }
 }
