@@ -7,14 +7,14 @@
           <div class="nav">
             <a href="">Nedir</a>
             <a href="">Avantajlar</a>
-            <a href="">İletişim</a>
             <a href="">Fiyatlar</a>
+            <a href="">İletişim</a>
           </div>
         </div>
         <div class="slogan">
           <h1>Şimdi Sanal Market Vakti</h1>
           <h2>
-            Online Satışa Geçerek Binlerce Müşteri Kazanabilir <br />
+            Online Satışa Geçerek Binlerce Müşteri Kazanabilir <br>
             Cironuzu Artılabilirsiniz.
           </h2>
         </div>
@@ -142,18 +142,170 @@
         </div>
       </div>
     </div>
+    <div class="section">
+      <div class="form-header">
+        <icon-call-center />
+        <p>Aklınıza bir şey mi takıldı?</p>
+        <span>
+          Aşağıdaki formu doldurarak bizimle iletişime geçebilirsiniz.</span>
+      </div>
+      <div class="form">
+        <div class="body">
+          <div class="form-item ml-2">
+            <div class="form-label">İsim Soyisim</div>
+            <input class="form-input" placeholder="Adınızı Soyadınızı Girin">
+          </div>
+          <div class="form-item">
+            <div class="form-label">Telefon Numarası</div>
+            <input
+              class="form-input"
+              type="number"
+              placeholder="Telefon Numaranızı Girin"
+            >
+          </div>
+          <div class="form-item">
+            <div class="form-label">İl Seçin</div>
+            <multiselect
+              v-model="city"
+              :options="cities"
+              :multiple="false"
+              :close-on-select="true"
+              :hide-selected="true"
+              :preserve-search="true"
+              selected-label
+              deselect-label
+              select-label
+              placeholder="Şehir Seçin"
+              label="label"
+            />
+          </div>
+          <div class="form-item">
+            <div class="form-label">İlçe Seçin</div>
+            <multiselect
+              v-model="city"
+              :options="cities"
+              :multiple="false"
+              :close-on-select="true"
+              :hide-selected="true"
+              :preserve-search="true"
+              selected-label
+              deselect-label
+              select-label
+              placeholder="Şehir Seçin"
+              label="label"
+            />
+          </div>
+
+          <div class="form-item">
+            <div class="form-label">Market İsmi</div>
+            <input class="form-input" placeholder="Market İsmini Girin">
+          </div>
+
+          <div class="form-item">
+            <div class="form-label">Mesajınız</div>
+            <textarea
+              id=""
+              class="form-input"
+              placeholder="Mesajınızı Girin"
+              name=""
+              cols="30"
+              rows="4"
+            />
+          </div>
+
+          <div class="form-item">
+            <button class="btn btn-green">GÖNDER</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { iconMarketInfoShopping, iconTruck, iconMarketInfoModern } from '../components/icons'
+import Multiselect from 'vue-multiselect'
+import {
+  iconMarketInfoShopping,
+  iconTruck,
+  iconMarketInfoModern,
+  iconCallCenter
+} from '../components/icons'
 
 export default {
   layout: 'information',
   components: {
     iconMarketInfoShopping,
     iconMarketInfoModern,
-    iconTruck
+    iconTruck,
+    iconCallCenter,
+    Multiselect
+  },
+  data () {
+    return {
+      cities: [
+        {
+          id: 1,
+          label: 'İstanbul',
+          name: 'İstanbul'
+        },
+        {
+          id: 2,
+          label: 'İzmir',
+          name: 'İzmir'
+        },
+        {
+          id: 3,
+          label: 'Ankara',
+          name: 'Ankara'
+        },
+        {
+          id: 1,
+          label: 'İstanbul',
+          name: 'İstanbul'
+        },
+        {
+          id: 2,
+          label: 'İzmir',
+          name: 'İzmir'
+        },
+        {
+          id: 3,
+          label: 'Ankara',
+          name: 'Ankara'
+        },
+        {
+          id: 1,
+          label: 'İstanbul',
+          name: 'İstanbul'
+        },
+        {
+          id: 2,
+          label: 'İzmir',
+          name: 'İzmir'
+        },
+        {
+          id: 3,
+          label: 'Ankara',
+          name: 'Ankara'
+        },
+        {
+          id: 1,
+          label: 'İstanbul',
+          name: 'İstanbul'
+        },
+        {
+          id: 2,
+          label: 'İzmir',
+          name: 'İzmir'
+        },
+        {
+          id: 3,
+          label: 'Ankara',
+          name: 'Ankara'
+        }
+      ],
+      city: ''
+    }
   }
 }
 </script>
@@ -265,6 +417,46 @@ export default {
           }
         }
       }
+    }
+  }
+
+  .form {
+    max-width: 730px;
+    padding: 7rem;
+    margin: 0 auto;
+    box-shadow: $shadow;
+    margin-top: -6rem;
+    z-index: 9;
+    position: relative;
+    background-color: #fff;
+
+    &-header {
+      height: 34rem;
+      color: #fff;
+      text-align: center;
+      padding: 4rem 0;
+      font-size: 3.6rem;
+      span {
+        font-size: 24px;
+      }
+      background: linear-gradient(rgba(0, 0, 0, 0.694), rgba(0, 0, 0, 0.653)),
+        url('../assets/images/market-info-hero-bg.jpeg');
+      .icon {
+        height: 10rem;
+        fill: #fff;
+      }
+    }
+
+    &-item {
+      margin: 2rem 0;
+      .btn {
+        width: 14rem;
+      }
+    }
+
+    &-label {
+      font-size: 14px;
+      margin-bottom:5px;
     }
   }
 }
