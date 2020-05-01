@@ -179,8 +179,9 @@ export default {
 
       .logo {
         color: #fff;
-        font-size: 2.4rem;
+        font-size: 2.8rem;
         font-weight: bold;
+        font-family: 'Righteous', cursive;
       }
 
       .nav {

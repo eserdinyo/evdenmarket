@@ -357,10 +357,10 @@ export default {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 2.4rem;
+    font-size: 2.8rem;
     color: $primary-color;
-    font-weight: 600;
+    font-family: 'Righteous', cursive;
+    user-select: none;
   }
 
   &__logo {
