@@ -144,6 +144,81 @@
     </div>
     <div class="container">
       <div class="section">
+        <div class="faq">
+          <div class="faq-title">
+            SIK SORULAN SORULAR
+          </div>
+          <div class="faq-body">
+            <div class="faq-item">
+              <div class="faq-item-title">
+                Evdenmarket Nedir ?
+              </div>
+              <div class="faq-item-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quas maiores atque deleniti nulla velit illum, nesciunt nobis inventore!
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-item-title">
+                Evdenmarket Nedir ?
+              </div>
+              <div class="faq-item-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quas maiores atque deleniti nulla velit illum, nesciunt nobis inventore!
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-item-title">
+                Evdenmarket Nedir ?
+              </div>
+              <div class="faq-item-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quas maiores atque deleniti nulla velit illum, nesciunt nobis inventore!
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-item-title">
+                Evdenmarket Nedir ?
+              </div>
+              <div class="faq-item-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quas maiores atque deleniti nulla velit illum, nesciunt nobis inventore!
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-item-title">
+                Evdenmarket Nedir ?
+              </div>
+              <div class="faq-item-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quas maiores atque deleniti nulla velit illum, nesciunt nobis inventore!
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-item-title">
+                Evdenmarket Nedir ?
+              </div>
+              <div class="faq-item-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quas maiores atque deleniti nulla velit illum, nesciunt nobis inventore!
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-item-title">
+                Evdenmarket Nedir ?
+              </div>
+              <div class="faq-item-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quas maiores atque deleniti nulla velit illum, nesciunt nobis inventore!
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-item-title">
+                Evdenmarket Nedir ?
+              </div>
+              <div class="faq-item-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quos quas maiores atque deleniti nulla velit illum, nesciunt nobis inventore!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="section">
         <div id="pricing" class="title pricing-hero-title">FİYATLAR</div>
         <div class="pricing">
           <div class="pricing-item">
@@ -263,6 +338,11 @@
             <button class="btn btn-green">GÖNDER</button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-bottom-center">
+        <span>evdenmarket</span> &#169; 2020 Tüm Hakları Saklıdır
       </div>
     </div>
   </div>
@@ -584,6 +664,42 @@ export default {
         height: 20rem;
         fill: $primary-color;
       }
+    }
+  }
+
+  .faq {
+    &-title {
+      text-align: center;
+      font-size: 4rem !important;
+      height: 16rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .faq-body {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1rem;
+    }
+    .faq-item {
+      padding: 5rem 8rem;
+
+      &-title {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+  .footer {
+    padding: 2rem 0;
+    text-align: center;
+    background-color:$grey-color;
+    color: #fff;
+
+    span {
+      font-size: 2rem;
+      margin-right: 5px;
+      font-family: 'Righteous', cursive;
     }
   }
 }
