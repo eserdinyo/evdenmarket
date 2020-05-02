@@ -14,7 +14,7 @@
         <div class="slogan">
           <h1>Şimdi Sanal Market Vakti</h1>
           <h2>
-            Online Satışa Geçerek Binlerce Müşteri Kazanabilir <br>
+            Online Satışa Geçerek Binlerce Müşteri Kazanabilir <br />
             Cironuzu Artılabilirsiniz.
           </h2>
         </div>
@@ -24,7 +24,7 @@
       <div class="section">
         <div class="section-bottom">
           <div class="section-left">
-            <div class="icon">
+            <div class="icon" data-aos="slide-right">
               <icon-market-info-shopping />
             </div>
           </div>
@@ -135,7 +135,7 @@
             </div>
           </div>
           <div class="section-left section-right">
-            <div class="icon">
+            <div class="icon" data-aos="slide-left">
               <icon-market-info-modern />
             </div>
           </div>
@@ -147,13 +147,14 @@
         <icon-call-center />
         <p>Aklınıza bir şey mi takıldı?</p>
         <span>
-          Aşağıdaki formu doldurarak bizimle iletişime geçebilirsiniz.</span>
+          Aşağıdaki formu doldurarak bizimle iletişime geçebilirsiniz.</span
+        >
       </div>
       <div class="form">
         <div class="body">
           <div class="form-item ml-2">
             <div class="form-label">İsim Soyisim</div>
-            <input class="form-input" placeholder="Adınızı Soyadınızı Girin">
+            <input class="form-input" placeholder="Adınızı Soyadınızı Girin" />
           </div>
           <div class="form-item">
             <div class="form-label">Telefon Numarası</div>
@@ -161,7 +162,7 @@
               class="form-input"
               type="number"
               placeholder="Telefon Numaranızı Girin"
-            >
+            />
           </div>
           <div class="form-item">
             <div class="form-label">İl Seçin</div>
@@ -198,7 +199,7 @@
 
           <div class="form-item">
             <div class="form-label">Market İsmi</div>
-            <input class="form-input" placeholder="Market İsmini Girin">
+            <input class="form-input" placeholder="Market İsmini Girin" />
           </div>
 
           <div class="form-item">
@@ -224,6 +225,8 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import {
   iconMarketInfoShopping,
   iconTruck,
@@ -240,7 +243,7 @@ export default {
     iconCallCenter,
     Multiselect
   },
-  data () {
+  data() {
     return {
       cities: [
         {
@@ -305,6 +308,15 @@ export default {
         }
       ],
       city: ''
+    }
+  },
+  mounted() {
+    if (process.browser) {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-out',
+        delay: 100
+      })
     }
   }
 }
@@ -456,7 +468,7 @@ export default {
 
     &-label {
       font-size: 14px;
-      margin-bottom:5px;
+      margin-bottom: 5px;
     }
   }
 }

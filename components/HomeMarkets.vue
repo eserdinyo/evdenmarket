@@ -6,7 +6,7 @@
     <div class="container">
       <div class="LastMarkets_wrapper">
         <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
-          <swiper-slide v-for="n in 4">
+          <swiper-slide v-for="(n, idx) in 4" :key="idx">
             <market :market="market" />
           </swiper-slide>
         </swiper>
