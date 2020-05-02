@@ -7,14 +7,14 @@
           <div class="nav">
             <a href="">Nedir</a>
             <a href="">Avantajlar</a>
-            <a href="">Fiyatlar</a>
-            <a href="">İletişim</a>
+            <a href="#pricing">Fiyatlar</a>
+            <a href="#contact">İletişim</a>
           </div>
         </div>
         <div class="slogan">
           <h1>Şimdi Sanal Market Vakti</h1>
           <h2>
-            Online Satışa Geçerek Binlerce Müşteri Kazanabilir <br />
+            Online Satışa Geçerek Binlerce Müşteri Kazanabilir <br>
             Cironuzu Artılabilirsiniz.
           </h2>
         </div>
@@ -142,19 +142,64 @@
         </div>
       </div>
     </div>
+    <div class="container">
+      <div class="section">
+        <div id="pricing" class="title pricing-hero-title">FİYATLAR</div>
+        <div class="pricing">
+          <div class="pricing-item">
+            <div class="pricing-icon">
+              <icon-bike />
+            </div>
+            <div class="pricing-title">
+              Küçük
+            </div>
+            <div class="pricing-desc">
+              Ayda <span>20</span> siparişe kadar ücretiz.
+              Lorem ipsum dolor sit amet.
+            </div>
+            <div class="pricing-price">Ücretsiz</span></div>
+          </div>
+          <div class="pricing-item">
+            <div class="pricing-icon">
+              <icon-moto />
+            </div>
+            <div class="pricing-title">
+              Orta
+            </div>
+            <div class="pricing-desc">
+              Ayda <span>200</span> sipariş hakkı vardır.
+              Lorem ipsum dolor sit amet.
+            </div>
+            <div class="pricing-price">120₺ <span>ay</span></div>
+          </div>
+          <div class="pricing-item">
+            <div class="pricing-icon">
+              <icon-car />
+            </div>
+            <div class="pricing-title">
+              Büyük
+            </div>
+            <div class="pricing-desc">
+              <span>Sınırsız</span> sipariş hakkı vardır.
+              Lorem ipsum dolor sit amet.
+            </div>
+            <div class="pricing-price">200₺ <span>ay</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="section">
-      <div class="form-header">
+      <div id="contact" class="form-header">
         <icon-call-center />
         <p>Aklınıza bir şey mi takıldı?</p>
         <span>
-          Aşağıdaki formu doldurarak bizimle iletişime geçebilirsiniz.</span
-        >
+          Aşağıdaki formu doldurarak bizimle iletişime geçebilirsiniz.</span>
       </div>
       <div class="form">
         <div class="body">
           <div class="form-item ml-2">
             <div class="form-label">İsim Soyisim</div>
-            <input class="form-input" placeholder="Adınızı Soyadınızı Girin" />
+            <input class="form-input" placeholder="Adınızı Soyadınızı Girin">
           </div>
           <div class="form-item">
             <div class="form-label">Telefon Numarası</div>
@@ -162,7 +207,7 @@
               class="form-input"
               type="number"
               placeholder="Telefon Numaranızı Girin"
-            />
+            >
           </div>
           <div class="form-item">
             <div class="form-label">İl Seçin</div>
@@ -199,7 +244,7 @@
 
           <div class="form-item">
             <div class="form-label">Market İsmi</div>
-            <input class="form-input" placeholder="Market İsmini Girin" />
+            <input class="form-input" placeholder="Market İsmini Girin">
           </div>
 
           <div class="form-item">
@@ -231,7 +276,10 @@ import {
   iconMarketInfoShopping,
   iconTruck,
   iconMarketInfoModern,
-  iconCallCenter
+  iconCallCenter,
+  iconBike,
+  iconMoto,
+  iconCar
 } from '../components/icons'
 
 export default {
@@ -241,9 +289,12 @@ export default {
     iconMarketInfoModern,
     iconTruck,
     iconCallCenter,
-    Multiselect
+    iconBike,
+    Multiselect,
+    iconMoto,
+    iconCar
   },
-  data() {
+  data () {
     return {
       cities: [
         {
@@ -469,6 +520,70 @@ export default {
     &-label {
       font-size: 14px;
       margin-bottom: 5px;
+    }
+  }
+
+  .pricing {
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5rem;
+
+    &-title {
+      font-weight: bold;
+      color: $grey-color;
+      font-size: 3rem;
+      margin-top: 5rem;
+      margin-bottom: 2rem;
+    }
+
+      &-hero-title {
+      text-align: center;
+      font-size: 4rem !important;
+      height: 16rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-item {
+      display:flex;
+      justify-content:center;
+      flex-direction:column;
+      align-items:center;
+      box-shadow: $shadow;
+      padding: 4rem 2rem;
+      border-radius: 2rem;
+    }
+
+    &-desc {
+      color:#BBBBBB;
+      font-weight: bold;
+      margin-bottom: 4rem;
+      text-align: center;
+      padding: 0 1rem;
+
+      span {
+        color:$font-color;
+      }
+    }
+
+    &-price {
+      font-size: 3rem;
+      color:$primary-color;
+      font-weight: bold;
+
+      span {
+        font-size: 16px;
+        color:#bbb;
+        font-weight: 700;
+      }
+    }
+
+    &-icon {
+      .icon {
+        height: 20rem;
+        fill: $primary-color;
+      }
     }
   }
 }
