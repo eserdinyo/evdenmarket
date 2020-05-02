@@ -24,7 +24,7 @@
       <div class="section">
         <div class="section-bottom">
           <div class="section-left">
-            <div class="icon" data-aos="slide-right">
+            <div class="icon" data-aos="slide-right" data-aos-once="true">
               <icon-market-info-shopping />
             </div>
           </div>
@@ -135,7 +135,7 @@
             </div>
           </div>
           <div class="section-left section-right">
-            <div class="icon" data-aos="slide-left">
+            <div class="icon" data-aos="slide-left" data-aos-once="true">
               <icon-market-info-modern />
             </div>
           </div>
@@ -310,10 +310,10 @@ export default {
       city: ''
     }
   },
-  mounted() {
+  mounted () {
     if (process.browser) {
       AOS.init({
-        duration: 800,
+        duration: 900,
         easing: 'ease-out',
         delay: 100
       })
