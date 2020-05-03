@@ -1,20 +1,32 @@
-image: node:latest
+stages:
+  - build
+  - deploy
 
-cache:
-  paths:
-  - node_modules
+# build stage
+build_app:
+   image: node:alpine
+   stage: build
+   only:
+      - master
+   script:
+      - npm install
+      - npm run build
+   cache:
+     paths:
+       - node_modules/
+   artifacts:
+      paths:
+         # build folder
+         - dist/
+      expire_in: 1 hour
 
-before_script:
-  - app-get update -qq && apt-get install -y -qq sshpass
-
-deploy:
-  only: 
-  - master
-  script:
-  - npm install
-  - npm run build
-  - rm -rf .git
-  - rm -rf node_modules
-  - sshpass -V
-  - export SSHPASS=$
-  - sshpass -e scp -o stricthostkeychecking=no -r . root@95.179.250.141:/var/www/html 
+# production stage
+production:
+   stage: deploy
+   before_script:
+      - mkdir -p ~/.ssh
+      - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/id_rsa
+      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+   script:
+      - scp -r . root@95.179.250.141:/var/www/html/
