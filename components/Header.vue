@@ -3,7 +3,7 @@
     <div class="Header-banner">
       <div class="container">
         <p>
-          Şimdi online alışveriş vakti. Siz de sanal marketinizi açmak
+          Şimdi online alışveriş vakti. Siz de sanal marketinizi açmakkk
           için
           <nuxt-link to="/bilgilendirme">tıklayın</nuxt-link>
         </p>
