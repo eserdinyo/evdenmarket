@@ -17,7 +17,7 @@ export function createRouter () {
       },
       {
         path: '/bilgilendirme',
-        name: 'Market Information',
+        name: 'Market Bilgilendirme',
         component: MarketInformation
       }
     ]
