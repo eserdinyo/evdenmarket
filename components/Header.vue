@@ -4,7 +4,7 @@
       <div class="container">
         <p>
           Şimdi online alışveriş vakti. Siz de sanal marketinizi açmak
-          içinn
+          için
           <nuxt-link to="/bilgilendirme">tıklayın</nuxt-link>
         </p>
       </div>
