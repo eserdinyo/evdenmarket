@@ -468,18 +468,22 @@ export default {
     }
     .header {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
+      flex-direction: column;
       color: #fff;
-      padding: 3rem 0;
+      padding: 2rem 0;
 
       .logo {
         color: #fff;
         font-size: 2.8rem;
         font-weight: bold;
         font-family: 'Righteous', cursive;
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
       }
 
       .nav {
+        text-align: center;
         a {
           margin: 0 1rem;
           padding-bottom: 3px;
@@ -493,13 +497,14 @@ export default {
     }
     .slogan {
       color: #fff;
-      font-size: 3rem;
+      font-size: 2.4rem;
       position: absolute;
-      top: 50%;
+      top: 40%;
       left: 0;
+      padding: 0 2rem;
 
       h2 {
-        font-size: 2rem;
+        font-size: 1.6rem;
         margin-top: 1rem;
       }
     }
@@ -515,22 +520,19 @@ export default {
 
     &-left {
       .icon {
-        .icon {
-          width: 40rem;
-          height: 40rem;
-        }
+        display: none;
       }
     }
 
     &-right {
       .icon {
-        text-align: right;
+       display: none;
       }
     }
 
     &-bottom {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
 
     .list {
@@ -565,27 +567,28 @@ export default {
 
   .form {
     max-width: 730px;
-    padding: 7rem;
     margin: 0 auto;
     box-shadow: $shadow;
-    margin-top: -6rem;
     z-index: 9;
     position: relative;
     background-color: #fff;
+    margin: 0 2rem;
+    margin-top: -6rem;
+    padding: 4rem;
 
     &-header {
       height: 34rem;
       color: #fff;
       text-align: center;
       padding: 4rem 0;
-      font-size: 3.6rem;
+      font-size: 3rem;
       span {
-        font-size: 24px;
+        font-size: 16px;
       }
       background: linear-gradient(rgba(0, 0, 0, 0.694), rgba(0, 0, 0, 0.653)),
         url('../assets/images/market-info-hero-bg.jpeg');
       .icon {
-        height: 10rem;
+        height: 8rem;
         fill: #fff;
       }
     }
@@ -605,8 +608,9 @@ export default {
 
   .pricing {
     display:grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     grid-gap: 5rem;
+    padding: 0 2rem;
 
     &-title {
       font-weight: bold;
@@ -678,11 +682,11 @@ export default {
     }
     .faq-body {
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       grid-gap: 1rem;
     }
     .faq-item {
-      padding: 5rem 8rem;
+      padding: 3rem;
 
       &-title {
         font-size: 2.8rem;
@@ -700,6 +704,86 @@ export default {
       font-size: 2rem;
       margin-right: 5px;
       font-family: 'Righteous', cursive;
+    }
+  }
+}
+
+@include res(desktop) {
+  .MarketInformation {
+    .hero {
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+
+        .slogan {
+          font-size: 3rem;
+          top: 50%;
+          padding: 0;
+
+          h2 {
+            font-size: 2rem;
+          }
+        }
+
+        .header {
+          justify-content: space-between;
+          flex-direction: row;
+          padding: 3rem 0;
+
+          .logo {
+            margin-left: 0;
+          }
+        }
+    }
+
+    .section {
+      &-left {
+      .icon {
+        display: block;
+        .icon {
+          width: 40rem;
+          height: 40rem;
+          }
+        }
+      }
+
+      &-right {
+        .icon {
+          text-align: right;
+        }
+      }
+        &-bottom {
+          grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .faq {
+      .faq-body {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .faq-item {
+        padding: 5rem 8rem;
+      }
+    }
+
+    .pricing {
+     grid-template-columns: repeat(3, 1fr);
+     padding: 0;
+    }
+
+    .form {
+      padding: 7rem;
+      margin: 0 auto;
+      margin-top: -6rem;
+      &-header {
+        font-size: 3.4rem;
+        span {
+          font-size: 2.4rem;
+        }
+
+        .icon {
+          height: 10rem;
+        }
+      }
     }
   }
 }
