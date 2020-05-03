@@ -37,7 +37,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'My custom description'
+          content: 'Çevrendeki bütün marketleri görüp istediğin marketten online alışveriş yapabilirsin'
         }
       ]
     }
