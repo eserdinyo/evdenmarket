@@ -1,0 +1,20 @@
+image: node:latest
+
+cache:
+  paths:
+  - node_modules
+
+before_script:
+  - app-get update -qq && apt-get install -y -qq sshpass
+
+deploy:
+  only: 
+  - master
+  script:
+  - npm install
+  - npm run build
+  - rm -rf .git
+  - rm -rf node_modules
+  - sshpass -V
+  - export SSHPASS=$
+  - sshpass -e scp -o stricthostkeychecking=no -r . root@95.179.250.141:/var/www/html 
