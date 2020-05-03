@@ -5,7 +5,7 @@
         <p>
           Şimdi online alışveriş vakti. Siz de sanal marketinizi açmak
           için
-          <nuxt-link to="/bilgilendirme">tıklayın.</nuxt-link>
+          <nuxt-link to="/bilgilendirme">tıklayın</nuxt-link>
         </p>
       </div>
     </div>
