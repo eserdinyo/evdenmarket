@@ -20,7 +20,10 @@ export const mutations = {
 
 export const actions = {
   login ({ commit }, payload) {
-    const promise = this.$axios.post('login', {
+    // only test purpose
+    commit('loggedIn', { user: 'eserdonyo', token: '123456' })
+
+    /* const promise = this.$axios.post('login', {
       phone: payload.phone,
       password: payload.password
     })
@@ -29,7 +32,7 @@ export const actions = {
       commit('loggedIn', res.user)
     })
 
-    return promise
+    return promise */
   },
   register ({ commit }, payload) {
     const promise = this.$axios.post('register', {

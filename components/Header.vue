@@ -25,8 +25,11 @@
           <div v-if="false" class="mobil-login-btn" @click="openAuthModal">
             <i class="icon fa fa-sign-in" />
           </div>
-          <button class="desktop-login" @click="openAuthModal">
+          <button v-if="!isLoggedIn" class="desktop-login" @click="openAuthModal">
             <span>GİRİŞ YAP</span>
+          </button>
+          <button v-else class="desktop-login" @click="openAuthModal">
+            <span>Muhammet ESER</span>
           </button>
           <div class="Header__cart">
             <div class="iconMobil" @click="goCart">
@@ -37,12 +40,6 @@
               <iconArrowDown v-if="!isCartOpen" />
             </div>
             <div class="Header__amount" @click="goCart">2</div>
-            <div
-              v-if="isLoggedIn &amp;&amp; itemCount &gt; 0"
-              class="Header__price"
-            >
-              <p>{{ totalPrice.toFixed(2) }} ₺</p>
-            </div>
             <AppCart v-if="isCartOpen" v-on-clickaway="closeCart" />
           </div>
           <a
@@ -56,7 +53,7 @@
             <div
               class="Header__login--desktop Header__login--desktop-profil--name"
             >
-              {{ getName }}
+              Muhammet ESER
             </div>
             <iconArrowDown
               v-if="!isProfilOpen"
@@ -132,7 +129,6 @@ export default {
       'itemCount',
       'totalPrice',
       'isCartOpen',
-      'isLoggedIn',
       'loggedUser',
       'activeLogin',
       'activeRegister'

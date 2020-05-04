@@ -45,6 +45,7 @@ module.exports = {
     ]
   },
   plugins: [
+    '~/plugins/mixins',
     '~/plugins/vee-validate',
     '~/plugins/vmodal',
     { src: '~/plugins/swiper.js', ssr: false }
@@ -70,6 +71,7 @@ module.exports = {
     extend (config, ctx) { }
   },
   buildModules: [
+    '@nuxtjs/global-components',
     '@nuxtjs/router'
   ],
   extendRoutes (routes, resolve) {

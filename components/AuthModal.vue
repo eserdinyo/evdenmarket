@@ -5,6 +5,7 @@
     name="auth-modal"
     transition="pop-out"
     @before-open="beforeOpen"
+    @before-close="beforeClose"
   >
     <div
       class="auth-modal"
@@ -70,7 +71,10 @@
           <button class="btn btn-green" @click="register">KAYIT OL</button>
         </div>
         <div v-if="isLogin" class="form-group mt-5">
-          <button class="btn btn-green" @click="login">GİRİŞ YAP</button>
+          <button class="btn btn-green" :disabled="isLoading" @click="login">
+            <span v-if="!isLoading">GİRİŞ YAP</span>
+            <loading :is-loading="isLoading" />
+          </button>
         </div>
 
         <div class="form-group">
@@ -108,7 +112,8 @@ export default {
       isRegister: false,
       isLogin: true,
       width: 700,
-      loginBg: require('../assets/images/login/1.jpg')
+      loginBg: require('../assets/images/login/1.jpg'),
+      isLoading: false
     }
   },
   created () {
@@ -118,8 +123,12 @@ export default {
   },
   methods: {
     beforeOpen () {
+      console.log(this.isLoggedIn)
       const randomNumber = Math.floor(Math.random() * 9) + 1
       this.loginBg = require(`../assets/images/login/${randomNumber}.jpg`)
+    },
+    beforeClose () {
+      this.clear()
     },
     openRegister () {
       this.isRegister = true
@@ -130,24 +139,28 @@ export default {
       this.isRegister = false
     },
     login () {
-      this.$store
-        .dispatch('user/login', {
-          phone: this.phone,
-          password: this.password
-        })
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      this.isLoading = true
+      setTimeout(() => {
+        this.$store
+          .dispatch('user/login', {
+            phone: this.phone,
+            password: this.password
+          })
+          .then((res) => {
+            this.isLoading = false
+            this.$modal.hide('auth-modal')
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }, 1000)
     },
     register () {
       this.$store
         .dispatch('user/register', {
           phone: this.phone,
-          password: this.phone,
-          repassword: this.password,
+          password: this.password,
+          repassword: this.repassword,
           first_name: this.first_name,
           last_name: this.last_name
         })
@@ -157,6 +170,13 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    clear () {
+      this.phone = ''
+      this.password = ''
+      this.repassword = ''
+      this.first_name = ''
+      this.last_name = ''
     }
   }
 }
