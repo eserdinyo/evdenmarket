@@ -56,7 +56,7 @@ export default {
 
 <style lang="scss">
 .LastMarkets {
-  margin-bottom: 40rem;
+  margin-bottom: 15rem;
   .title {
     height: 16rem;
     font-size: 3rem;
