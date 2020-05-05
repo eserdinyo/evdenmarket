@@ -24,7 +24,7 @@
       <div class="section">
         <div class="section-bottom">
           <div class="section-left">
-            <div class="icon" data-aos="slide-right" data-aos-once="true">
+            <div class="icon" data-aos="fade-right" data-aos-once="true">
               <icon-market-info-shopping />
             </div>
           </div>
@@ -135,7 +135,7 @@
             </div>
           </div>
           <div class="section-left section-right">
-            <div class="icon" data-aos="slide-left" data-aos-once="true">
+            <div class="icon" data-aos="fade-left" data-aos-once="true">
               <icon-market-info-modern />
             </div>
           </div>
@@ -444,7 +444,7 @@ export default {
   mounted () {
     if (process.browser) {
       AOS.init({
-        duration: 900,
+        duration: 800,
         easing: 'ease-out',
         delay: 100
       })
@@ -746,6 +746,8 @@ export default {
       }
 
       &-right {
+        display: flex;
+        justify-content: flex-end;
         .icon {
           text-align: right;
         }
