@@ -85,9 +85,7 @@ export default {}
     padding-bottom: 3rem;
 
     .social {
-      margin-right: 10rem;
       display: flex;
-
       .fa {
         font-size: 2.8rem;
         margin: 0 1rem;
@@ -97,6 +95,7 @@ export default {}
   }
 
   &-left {
+    margin: 0 auto;
     .apps {
       display: flex;
       flex-direction: column;
@@ -110,7 +109,7 @@ export default {}
   }
 
   &-menu {
-    display: flex;
+    display: none;
     margin-left: auto;
 
     &-title {
@@ -150,6 +149,17 @@ export default {}
       font-size: 2rem;
       margin-right: 5px;
       font-family: 'Righteous', cursive;
+    }
+  }
+}
+
+@include res(desktop) {
+  .footer {
+    &-left {
+      margin-right: 10rem;
+    }
+    &-menu {
+      display: flex;
     }
   }
 }
