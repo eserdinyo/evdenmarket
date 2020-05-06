@@ -9,6 +9,8 @@
           <swiper-slide v-for="(n, idx) in 4" :key="idx">
             <market :market="market" />
           </swiper-slide>
+          <div slot="button-prev" class="swiper-button-prev" />
+          <div slot="button-next" class="swiper-button-next" />
         </swiper>
       </div>
     </div>
@@ -70,17 +72,38 @@ export default {
     border-bottom: $border;
     background-size: cover;
     background-position: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('../assets/images/home-banner-bg.png')
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      url('../assets/images/home-banner-bg.png');
   }
+
+   .swiper-button-prev,
+    .swiper-button-next {
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      height: 40px !important;
+      width: 40px !important;
+      border-radius: 100% !important;
+
+      &::after {
+        color: $primary-color;
+        font-size: 16px !important;
+      }
+    }
 }
 
 @include res(desktop) {
   .LastMarkets {
+    .swiper-button-prev {
+      left: 20px;
+    }
+    .swiper-button-next {
+      right: 20px;
+    }
     .title {
       height: 24rem;
       font-size: 4rem;
       margin-bottom: 5rem;
-     margin-top: 8rem;
+      margin-top: 8rem;
     }
   }
 }

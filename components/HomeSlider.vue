@@ -1,32 +1,25 @@
 <template>
   <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
     <swiper-slide>
-      <img class="swiper_img" src="@/assets/images/slider/1.jpg" />
+      <img class="swiper_img" src="@/assets/images/slider/1.jpg">
     </swiper-slide>
     <swiper-slide>
-      <img class="swiper_img" src="@/assets/images/slider/2.jpg" />
+      <img class="swiper_img" src="@/assets/images/slider/2.jpg">
     </swiper-slide>
     <swiper-slide>
-      <img class="swiper_img" src="@/assets/images/slider/3.jpg" />
+      <img class="swiper_img" src="@/assets/images/slider/3.jpg">
     </swiper-slide>
-   
     <div slot="pagination" class="swiper-pagination" />
-  <!--   <div slot="button-prev" class="swiper-button-prev" />
-    <div slot="button-next" class="swiper-button-next" /> -->
   </swiper>
 </template>
 
 <script>
 
 export default {
-  data() {
+  data () {
     return {
       swiperOptions: {
         loop: true,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },
         autoplay: {
           delay: 3000,
           disableOnInteraction: false
@@ -39,7 +32,7 @@ export default {
       }
     }
   },
-  created() {}
+  created () {}
 }
 </script>
 
