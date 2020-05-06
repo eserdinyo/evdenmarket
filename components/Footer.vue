@@ -143,7 +143,7 @@ export default {}
   &-bottom {
     padding: 2rem 0;
     text-align: center;
-    background-color: $grey-color;
+    background-color: $primary-color;
     color: #fff;
 
     span {
