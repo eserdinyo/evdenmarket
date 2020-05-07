@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 module.exports = {
   generate: {
     fallback: true
@@ -45,11 +43,12 @@ module.exports = {
     ]
   },
   env: {
-    SITE_URL: process.env.SITE_URL
+    SITE_URL: process.env.SITE_URL,
+    BASE_URL: 'http://45.77.65.251/api'
   },
   proxy: {
     '/api': {
-      target: process.env.SITE_URL,
+      target: 'http://45.77.65.251/api',
       pathRewrite: {
         '^/api': '/'
       }
