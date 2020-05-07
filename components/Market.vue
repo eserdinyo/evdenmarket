@@ -46,6 +46,7 @@ export default {
   border-radius: $sm-radius;
   overflow: hidden;
   transition: all .2s;
+  box-shadow: 0 4px 8px rgba(238, 238, 238, 0.776);
 
   &:hover {
     border-color: $primary-color;

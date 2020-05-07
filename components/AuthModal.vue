@@ -22,11 +22,11 @@
         <div v-if="isRegister" class="form-group">
           <div class="form-item mr-2">
             <div class="form-label">ADINIZ</div>
-            <input class="form-input" placeholder="Adınızı Girin">
+            <input v-model="first_name" class="form-input" placeholder="Adınızı Girin">
           </div>
           <div class="form-item ml-2">
             <div class="form-label">SOYADINIZ</div>
-            <input class="form-input" placeholder="Soyadınızı Girin">
+            <input v-model="last_name" class="form-input" placeholder="Soyadınızı Girin">
           </div>
         </div>
         <div class="form-group">
@@ -106,6 +106,8 @@ export default {
   },
   data () {
     return {
+      first_name: null,
+      last_name: null,
       phone: null,
       password: null,
       repassword: null,
@@ -165,7 +167,8 @@ export default {
           last_name: this.last_name
         })
         .then((res) => {
-          console.log(res)
+          this.isLoading = false
+          this.$modal.hide('auth-modal')
         })
         .catch((err) => {
           console.log(err)

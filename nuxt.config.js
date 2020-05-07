@@ -44,6 +44,14 @@ module.exports = {
       './assets/style/config/_mixins.scss'
     ]
   },
+  proxy: {
+    '/api': {
+      target: process.env.SITE_URL,
+      pathRewrite: {
+        '^/api': '/hkjhkj'
+      }
+    }
+  },
   plugins: [
     '~/plugins/mixins',
     '~/plugins/vee-validate',
@@ -54,12 +62,12 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', 'vue-wait/nuxt', '@nuxtjs/style-resources', '@nuxtjs/device'],
+  modules: ['@nuxtjs/axios', 'vue-wait/nuxt', '@nuxtjs/style-resources', '@nuxtjs/device', '@nuxtjs/proxy'],
   /*
    ** Axios module configuration
    */
   axios: {
-    baseURL: 'http://localhost:8081'
+    baseURL: process.env.BASE_URL
   },
   /*
    ** Build configuration
