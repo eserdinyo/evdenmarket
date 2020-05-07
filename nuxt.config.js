@@ -44,6 +44,9 @@ module.exports = {
       './assets/style/config/_mixins.scss'
     ]
   },
+  env: {
+    SITE_URL: process.env.SITE_URL
+  },
   proxy: {
     '/api': {
       target: process.env.SITE_URL,
@@ -51,9 +54,6 @@ module.exports = {
         '^/api': '/'
       }
     }
-  },
-  env: {
-    SITE_URL: process.env.SITE_URL
   },
   plugins: [
     '~/plugins/mixins',
