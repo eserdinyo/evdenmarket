@@ -1,8 +1,17 @@
 <template>
-  <nuxt />
+  <div>
+    <nuxt />
+    <app-footer />
+  </div>
 </template>
 <script>
+import AppFooter from '@/components/Footer'
 
+export default {
+  components: {
+    AppFooter
+  }
+}
 </script>
 
 <style lang="scss" scoped>

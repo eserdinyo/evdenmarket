@@ -340,11 +340,6 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <div class="footer-bottom-center">
-        <span>evdenmarket</span> &#169; 2020 Tüm Hakları Saklıdır
-      </div>
-    </div>
   </div>
 </template>
 
