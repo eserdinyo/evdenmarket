@@ -48,7 +48,7 @@ module.exports = {
     '/api': {
       target: process.env.SITE_URL,
       pathRewrite: {
-        '^/api': '/hkjhkj'
+        '^/api': '/'
       }
     }
   },
