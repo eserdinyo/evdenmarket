@@ -23,7 +23,7 @@ export default {
   components: {
     MarketItem
   },
-  data () {
+  data() {
     return {
       swiperOptions: {
         loop: true,
@@ -46,28 +46,27 @@ export default {
       },
       markets: [
         {
-          market_id: 10,
+          id: 10,
           min_amount: 75,
           name: 'Ulusoy Market',
           imageUrl:
             'http://karabukunfirmalari.com/data/company/162/hMdLRP-qBz.jpg'
         },
         {
-          market_id: 10,
+          id: 12,
           min_amount: 75,
           name: 'Onur Market',
-          imageUrl:
-            'http://kurumsal.onurmarket.com/media/magaza/bagcilar-1.jpg'
+          imageUrl: 'http://kurumsal.onurmarket.com/media/magaza/bagcilar-1.jpg'
         },
         {
-          market_id: 10,
+          id: 14,
           min_amount: 75,
           name: 'İndirim Market',
           imageUrl:
             'https://www.akdeniztoros.com.tr/satisnoktalari/wp-content/uploads/Ayanc%C4%B1k-%C4%B0ndirim-Market.jpg'
         },
         {
-          market_id: 10,
+          id: 22,
           min_amount: 75,
           name: 'Migros Market',
           imageUrl:

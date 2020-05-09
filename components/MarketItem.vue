@@ -1,11 +1,13 @@
-<template lang="pug">
-  <nuxt-link :to="{ name: 'market-id', params: { id:market.market_id }}">
+<template>
+  <nuxt-link :to="`/market/${slugUrl}/${market.id}`">
     <div class="Market">
-      <div class="Market__top"><img class="Market__resim" :src="market.imageUrl" /></div>
+      <div class="Market__top">
+        <img class="Market__resim" :src="market.imageUrl">
+      </div>
       <div class="Market__bottom">
-        <div class="Market__isim">{{market.name}}</div>
+        <div class="Market__isim">{{ market.name }}</div>
         <div class="Market__min-paket">
-          <iconMoney /><span>Min Sipariş Tutarı: ₺{{market.min_amount}}</span>
+          <iconMoney /><span>Min Sipariş Tutarı: ₺{{ market.min_amount }}</span>
         </div>
         <div class="Market__adres">
           <iconAdress /><span>Şişli, Merkez Mahallesi</span>
@@ -22,30 +24,43 @@
 </template>
 
 <script>
+import slugify from 'slugify'
 import iconTime from '@/assets/icons/time'
 import iconMoto from '@/assets/icons/moto'
 import iconAdress from '@/assets/icons/address'
 import iconMoney from '@/assets/icons/money'
+
 export default {
-  props: ['market'],
   components: {
     iconTime,
     iconMoto,
     iconAdress,
     iconMoney
+  },
+  props: {
+    market: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    slugUrl () {
+      return slugify(this.market.name, {
+        lower: true
+      })
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .Market {
-  border-radius: 3px;
   position: relative;
   border: $border;
   margin-bottom: 3rem;
-  border-radius: $sm-radius;
+  border-radius: $radius;
   overflow: hidden;
-  transition: all .2s;
+  transition: all 0.2s;
   box-shadow: 0 4px 8px rgba(238, 238, 238, 0.776);
 
   &:hover {

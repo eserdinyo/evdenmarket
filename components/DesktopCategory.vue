@@ -1,37 +1,77 @@
-<template lang="pug">
-    nav.Header__navigation(:class='{ activeNav: isActive }')
-        .Header__navigation--wrapper
-          nuxt-link.Header__navigation--link(@click.native='toggleNav',:to="{ name: 'listele-id', params: { id: 2 }}" :class='{ activeLink: isActive }') Sut, Kahvaltilik
-          .Header__navigation--link(:class='{ activeLink: isActive }') Et, Balık
-            ul.Menu
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Kirmizi Et
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Kumes Hayvanlari
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Balik, Deniz Urunleri
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Et Sarkuteri
-        
-            ul.Menu
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Yumurta
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Zeytin
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Bal
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Helva
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Recel
-              li.Menu__item
-                nuxt-link.Menu--link--link(to='/foo') Cikolata
-          .Header__navigation--link(:class='{ activeLink: isActive }') Gıda, Sekerleme
-          .Header__navigation--link(:class='{ activeLink: isActive }') İçecek
-          .Header__navigation--link(:class='{ activeLink: isActive }') Deterjan, Temizlik
-          .Header__navigation--link(:class='{ activeLink: isActive }') Kağıt, Kozmetik
-          .Header__navigation--link(:class='{ activeLink: isActive }') Bebek, Oyuncak
-          .Header__navigation--link(:class='{ activeLink: isActive }') Ev, Pet
+<template>
+  <nav class="Header__navigation">
+    <div class="Header__navigation--wrapper">
+      <nuxt-link
+        class="Header__navigation--link"
+        :to="{ name: 'listele-id', params: { id: 2 } }"
+        :class="{ activeLink: isActive }"
+        @click.native="toggleNav"
+      >
+        Sut, Kahvaltilik
+      </nuxt-link>
+      <div class="Header__navigation--link" :class="{ activeLink: isActive }">
+        Et, Balık
+        <ul class="Menu">
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">Kirmizi Et</nuxt-link>
+          </li>
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">
+              Kumes Hayvanlari
+            </nuxt-link>
+          </li>
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">
+              Balik, Deniz Urunleri
+            </nuxt-link>
+          </li>
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">
+              Et Sarkuteri
+            </nuxt-link>
+          </li>
+        </ul>
+        <ul class="Menu">
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">Yumurta</nuxt-link>
+          </li>
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">Zeytin</nuxt-link>
+          </li>
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">Bal</nuxt-link>
+          </li>
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">Helva</nuxt-link>
+          </li>
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">Recel</nuxt-link>
+          </li>
+          <li class="Menu__item">
+            <nuxt-link class="Menu--link--link" to="/foo">Cikolata</nuxt-link>
+          </li>
+        </ul>
+      </div>
+      <div class="Header__navigation--link" :class="{ activeLink: isActive }">
+        Gıda, Sekerleme
+      </div>
+      <div class="Header__navigation--link" :class="{ activeLink: isActive }">
+        İçecek
+      </div>
+      <div class="Header__navigation--link" :class="{ activeLink: isActive }">
+        Deterjan, Temizlik
+      </div>
+      <div class="Header__navigation--link" :class="{ activeLink: isActive }">
+        Kağıt, Kozmetik
+      </div>
+      <div class="Header__navigation--link" :class="{ activeLink: isActive }">
+        Bebek, Oyuncak
+      </div>
+      <div class="Header__navigation--link" :class="{ activeLink: isActive }">
+        Ev, Pet
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -39,18 +79,18 @@ export default {
   data() {
     return {
       isActive: false
-    };
+    }
   },
   methods: {
     toggleNav() {
-      this.isActive = !this.isActive;
+      this.isActive = !this.isActive
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/style/main.scss";
+@import '@/assets/style/main.scss';
 
 .Header__navigation {
   z-index: 10;
@@ -67,24 +107,6 @@ export default {
   padding-top: 10rem;
   font-size: 1.5rem;
 
-  @include res(tab-land) {
-    position: static;
-    padding-top: 0;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background: $nav-color;
-    width: 100%;
-    height: 50px;
-
-    &--wrapper {
-      max-width: 80rem;
-      display: flex;
-      align-items: center;
-    }
-  }
-
   &--link {
     transform: translateY(-300px);
     opacity: 0;
@@ -97,36 +119,9 @@ export default {
     font-size: 2rem;
     cursor: pointer;
     font-weight: 600;
-    @include res(tab-land) {
-      margin-bottom: 0;
-      font-size: 1rem;
-      text-transform: uppercase;
-      padding: 1rem 0;
-    }
 
     &-icon {
       margin-right: 1rem;
-    }
-    @include res(tab-land) {
-      opacity: 1;
-      transform: translateY(0);
-      padding: 0 15px;
-      align-items: center;
-      height: 100%;
-      z-index: 99999;
-
-      &:hover {
-        background-color: #fff;
-        color: $nav-color;
-      }
-
-      &:hover .Menu {
-        display: unset;
-      }
-
-      &:not(:last-child) {
-        border-right: 1px solid rgba(255, 255, 255, 0.555);
-      }
     }
   }
 }
@@ -161,14 +156,60 @@ export default {
   padding-left: 2rem;
   padding-right: 2rem;
   display: flex;
-
-  @include res(tab-land) {
-    width: auto;
-  }
 }
 
 .activeLink {
   transform: translateY(0);
   opacity: 1;
+}
+
+@include res(desktop) {
+  .Header__navigation {
+    position: relative;
+    padding-top: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: $nav-color;
+    width: 100%;
+    height: 50px;
+
+    &--wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: $nav-color;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20rem;
+    }
+
+    &--link {
+      margin-bottom: 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      padding: 1rem 0;
+      opacity: 1;
+      transform: translateY(0);
+      align-items: center;
+      height: 100%;
+      z-index: 99999;
+
+      &:hover {
+        background-color: #fff;
+        color: $nav-color;
+      }
+
+      &:hover .Menu {
+        display: unset;
+      }
+
+      &:not(:last-child) {
+        border-right: 1px solid rgba(255, 255, 255, 0.555);
+      }
+    }
+  }
 }
 </style>

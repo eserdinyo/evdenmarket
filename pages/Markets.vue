@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       market: {
-        market_id: 10,
+        id: 10,
         min_amount: 75,
         name: 'Ulusoylar Market',
         imageUrl:

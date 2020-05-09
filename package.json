@@ -21,6 +21,7 @@
     "aos": "^2.3.4",
     "lodash": "^4.17.11",
     "nuxt": "^2.4.2",
+    "slugify": "^1.4.0",
     "sweetalert2": "^9.10.9",
     "swiper": "^5.3.6",
     "vee-validate": "^2.1.7",
