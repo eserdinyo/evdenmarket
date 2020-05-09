@@ -1,95 +1,104 @@
-<template lang="pug">
-  .Cart(:class="{emptyCart: itemCount == 0}")
-    .Cart__header
-      p.Cart__header--info(v-if="itemCount > 0") Sepetinizede ({{itemCount}}) ürün bulunmaktadır.
-      a.btn_sepet(v-if="itemCount > 0", @click="toggleCart") Sepete Git
-    .Cart__bottom(:class="{emptyCartBottom: itemCount == 0}")
-      .Cart__empty(v-if="itemCount == 0")
-        p Sepetiniz Boş
-      .Cart__item(v-for="(product,index) in shopcart")
-        img.Cart__item--image(:src="product.image")
-        p.Cart__item--name {{product.name}}
-        .Cart__item--quantity
-          button(@click="changeQuantity(product, 'dec')") -
-          .Cart__item--quantity-title {{product.quantity}} 
-          button(@click="changeQuantity(product, 'inc')") +
-        p.Cart__item--price {{(product.price * product.quantity).toFixed(2)}} TL
-        a.Cart__item--delete(@click="deleteProduct(product)")
-          iconDelete
+<template>
+  <div class="Cart" :class="{ emptyCart: itemCount == 0 }">
+    <div class="Cart__header">
+      <p v-if="true" class="Cart__header--info">
+        Sepetinizede ({{ itemCount }}) ürün bulunmaktadır.
+      </p>
+      <a
+        v-if="true"
+        class="btn_sepet"
+        @click="toggleCart"
+      >Sepete Git</a>
+    </div>
+    <div class="Cart__bottom" :class="{ emptyCartBottom: itemCount == 0 }">
+      <div v-if="false" class="Cart__empty">
+        <p>Sepetiniz Boş</p>
+      </div>
+      <div v-for="(product, idx) in shopcart" :key="idx" class="Cart__item">
+        <img class="Cart__item--image" :src="product.image">
+        <p class="Cart__item--name">{{ product.name }}</p>
+        <div class="Cart__item--quantity">
+          <button @click="changeQuantity(product, 'dec')">-</button>
+          <div class="Cart__item--quantity-title">{{ product.quantity }}</div>
+          <button @click="changeQuantity(product, 'inc')">+</button>
+        </div>
+        <p class="Cart__item--price">
+          {{ (product.price * product.quantity).toFixed(2) }} TL
+        </p>
+        <a class="Cart__item--delete" @click="deleteProduct(product)">
+          <iconDelete />
+        </a>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import iconDelete from "@/assets/icons/delete";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
+import iconDelete from '@/assets/icons/delete'
 
 export default {
   computed: {
-    ...mapGetters([
-      "items",
-      "itemCount",
-      "shopcart",
-      "loggedUser",
-      "isLoggedIn"
-    ])
+    ...mapGetters({
+      shopcart: 'cart/shopcart',
+      itemCount: 'cart/itemCount'
+    })
   },
   methods: {
-    deleteProduct(product) {
+    deleteProduct (product) {
       this.$store
-        .dispatch("deleteFromShopcart", { product, user: this.loggedUser })
-        .then(res => {
-          this.$store.dispatch("getShopcart", this.loggedUser);
-        });
+        .dispatch('deleteFromShopcart', { product, user: this.loggedUser })
+        .then((res) => {
+          this.$store.dispatch('getShopcart', this.loggedUser)
+        })
     },
-    toggleCart() {
-      this.$store.commit("toggleCart");
-      this.$router.push({ name: "sepetim" });
-    },
-    changeQuantity(product, changeType) {
-      product.id = product.productid;
-      product.changeType = changeType;
+    changeQuantity (product, changeType) {
+      product.id = product.productid
+      product.changeType = changeType
 
       if (this.isLoggedIn) {
         this.$store
-          .dispatch("addToCart", {
+          .dispatch('addToCart', {
             product,
             user: this.loggedUser
           })
-          .then(res => {
+          .then((res) => {
             this.$store
-              .dispatch("getShopcart", this.loggedUser)
-              .then(res => {});
-          });
+              .dispatch('getShopcart', this.loggedUser)
+              .then((res) => {})
+          })
       } else {
-        this.$router.push("/login");
+        this.$router.push('/login')
       }
     }
   },
   components: {
     iconDelete
   }
-};
+}
 </script>
 
-
 <style lang="scss" scoped>
-@import "assets/style/main.scss";
-
 .Cart {
   display: none;
-  @include res(tab-land) {
+}
+
+@include res(desktop) {
+  .Cart {
     user-select: none;
-    display: unset;
+    display: none;
     position: absolute;
     width: 42rem;
     background: #fff;
-    color: #333;
-    top: 150%;
-    right: 2%;
-    border-radius: 5px;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    padding-bottom: 2rem;
+    color: $font-color;
+    top: 100%;
+    right: 0;
+    border-radius: $radius;
+    border: $border;
+    box-shadow: $shadow;
     padding-top: 2rem;
+    margin-top: 2rem;
+    margin-right: -1rem;
     z-index: 99999999;
 
     &__empty {
@@ -103,14 +112,14 @@ export default {
       padding: 0 2rem;
 
       &::before {
-        content: "";
+        content: '';
         width: 0;
         height: 0;
         border-left: 12px solid transparent;
         border-right: 12px solid transparent;
         border-bottom: 12px solid $primary-color;
         position: absolute;
-        right: 0%;
+        right: 40px;
         top: 0%;
         transform: translate(-50%, -100%);
         z-index: -1;
@@ -118,25 +127,24 @@ export default {
 
       &--info {
         font-size: 1.2rem;
+        color: #6c7a89;
       }
     }
 
     &__bottom {
       overflow-y: scroll;
       margin-top: 1rem;
-      height: 20rem;
+      height: 18rem;
     }
 
     &__item {
       display: flex;
       align-items: center;
-      padding-bottom: 1rem;
-      padding-top: 1rem;
-      padding-left: 0.5rem;
-      padding-right: 1rem;
+      padding: 1.5rem 1rem;
+      margin-left: 10px;
 
       &:not(:last-child) {
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: $border;
       }
 
       &--image {
@@ -200,7 +208,7 @@ export default {
 
   &:hover {
     color: #fff;
-    background: $primary-color-hover;
+    background: $primary-color;
   }
 }
 

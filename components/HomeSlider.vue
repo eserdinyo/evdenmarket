@@ -9,7 +9,7 @@
     <swiper-slide>
       <img class="swiper_img" src="@/assets/images/slider/3.jpg">
     </swiper-slide>
-    <div slot="pagination" class="swiper-pagination" />
+    <div slot="pagination" class="swiper-pagination swiper-pagination-home" />
   </swiper>
 </template>
 
@@ -25,7 +25,7 @@ export default {
           disableOnInteraction: false
         },
         pagination: {
-          el: '.swiper-pagination',
+          el: '.swiper-pagination-home',
           dynamicBullets: false,
           clickable: true
         }
@@ -42,6 +42,9 @@ export default {
   height: 24rem;
 }
 
+.swiper-wrapper {
+  z-index: 0 !important;
+}
 .swiper_img {
   width: 100%;
   height: 24rem;

@@ -1,49 +1,71 @@
-import _ from "lodash";
+import _ from 'lodash'
 
 export const state = () => ({
   totalPrice: 0,
   isCartOpen: false,
-  shopcart: []
-});
+  shopcart: [{
+    image: 'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07150087/nutella-go-52-gr-5e1f3e.jpg',
+    name: 'Nutella Go 52 G',
+    quantity: 2,
+    price: 5.75,
+    productid: 2
+  },
+  {
+    image: 'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05090023/05090023-f4ba19.jpg',
+    name: 'Dankek Lokmalık Hindistan Cevizli 160 G',
+    quantity: 3,
+    price: 3.75,
+    productid: 3
+  },
+  {
+    image: 'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/03118004/03118004-e54fa0.jpg',
+    name: 'Doğuş Tiryaki Çay 1000 G',
+    quantity: 1,
+    price: 25.75,
+    productid: 5
+  }]
+})
 
 export const getters = {
   itemCount: state =>
     state.shopcart
       .map(product => product.quantity)
       .reduce((sum, current) => sum + current, 0),
-  shopcart: state => _.uniqBy(state.shopcart, "productid"),
+  shopcart: state => _.uniqBy(state.shopcart, 'productid'),
   isCartOpen: state => state.isCartOpen,
   totalPrice: state =>
     state.shopcart
       .map(item => item.price * item.quantity)
       .reduce((sum, current) => sum + current, 0)
-};
+}
 
 export const mutations = {
-  toggleCart(state, payload) {
+  toggleCart (state, payload) {
     if (payload == false) {
-      state.isCartOpen = false;
-    }
-    else {
-      state.isCartOpen = !state.isCartOpen;
+      state.isCartOpen = false
+    } else {
+      state.isCartOpen = !state.isCartOpen
     }
   },
-  toggleCartFromProfil(state) {
-    state.isCartOpen = false;
+  toggleCartFromProfil (state) {
+    state.isCartOpen = false
   },
-  setShopcart(state, shopcart) {
-    state.shopcart = shopcart;
+  setShopcart (state, shopcart) {
+    state.shopcart = shopcart
   }
-};
+}
 
 export const actions = {
-  addToCart({ commit }, payload) {
-    const product = payload.product;
-    const userid = payload.user.sub || payload.user.id;
+  add ({ commit }, payload) {
+
+  },
+  addToCart ({ commit }, payload) {
+    const product = payload.product
+    const userid = payload.user.sub || payload.user.id
 
     return new Promise((resolve, reject) => {
       http
-        .post("/shopcart", {
+        .post('/shopcart', {
           changeType: product.changeType, // increase or decrease product count on cart
           userid,
           productid: product.id,
@@ -52,48 +74,48 @@ export const actions = {
           name: product.name,
           image: product.image
         })
-        .then(res => {
-          resolve(res);
+        .then((res) => {
+          resolve(res)
         })
-        .catch(err => {
-          reject(401);
-        });
-    });
+        .catch((err) => {
+          reject(401)
+        })
+    })
   },
-  deleteFromShopcart({ commit }, payload) {
-    const id = payload.product.id;
-    const userid = payload.user.sub || payload.user.id;
+  deleteFromShopcart ({ commit }, payload) {
+    const id = payload.product.id
+    const userid = payload.user.sub || payload.user.id
 
     return new Promise((resolve, reject) => {
       http
-        .delete("/shopcart", {
+        .delete('/shopcart', {
           data: { id, userid }
         })
-        .then(res => {
-          resolve(res);
+        .then((res) => {
+          resolve(res)
         })
-        .catch(err => {
-          reject(err);
-        });
-    });
+        .catch((err) => {
+          reject(err)
+        })
+    })
   },
-  getShopcart({ commit }, user) {
-    const userid = user.sub || user.id;
+  getShopcart ({ commit }, user) {
+    const userid = user.sub || user.id
 
     return new Promise((resolve, reject) => {
       http
-        .get("/shopcart", {
+        .get('/shopcart', {
           params: {
             userid
           }
         })
-        .then(res => {
-          commit("setShopcart", res.data);
-          resolve(res);
+        .then((res) => {
+          commit('setShopcart', res.data)
+          resolve(res)
         })
-        .catch(err => {
-          reject(401);
-        });
-    });
+        .catch((err) => {
+          reject(401)
+        })
+    })
   }
-};
+}

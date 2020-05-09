@@ -38,45 +38,22 @@
             @mouseleave="isProfilOpen = false"
           >
             <span>Muhammet ESER</span>
-            <div v-if="isProfilOpen" class="Profil-card">
-              <nuxt-link
-                class="Profil-card--link"
-                to="/siparislerim"
-              >
-                Siparişlerim
-              </nuxt-link>
-              <nuxt-link
-                class="Profil-card--link"
-                to="/"
-              >
-                Üyelik Bilgilerim
-              </nuxt-link>
-              <nuxt-link
-                class="Profil-card--link"
-                to="/"
-              >
-                Kampanyalarım
-              </nuxt-link>
-              <nuxt-link
-                class="Profil-card--link"
-                to="/adreslerim"
-              >
-                Adreslerim
-              </nuxt-link>
-              <nuxt-link class="Profil-card--link" to="/">Çeklerim</nuxt-link>
-              <nuxt-link class="Profil-card--link" to="/">Puanlarım</nuxt-link>
-              <a class="Profil-card--link" @click="logout">Çıkış Yap</a>
-            </div>
+            <profil-menu class="profil-card-active" />
           </button>
           <div class="Header__cart">
-            <div class="iconMobil" @click="goCart">
+            <div v-if="$device.isMobile && isLoggedIn" class="iconMobil" @click="goCart">
               <icon-shop-cart />
             </div>
-            <div class="Header__amount" @click="goCart">2</div>
-            <AppCart v-if="true" v-on-clickaway="closeCart" />
+            <div v-if="$device.isMobile" class="Header__amount" @click="goCart">2</div>
+            <button v-if="isLoggedIn" class="btn btn-green btn-desktop-cart">
+              <span>SEPETİM</span>
+              <icon-shop-cart />
+              <div class="Header__amount" @click="goCart">2</div>
+            </button>
+            <app-cart class="cart-box-active" />
           </div>
         </div>
-        <ChangeMarket />
+        <change-market />
       </div>
     </div>
   </div>
@@ -86,25 +63,21 @@
 import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
 import { iconShopCart } from '../components/icons'
-import AppCart from './Cart'
+import AppCart from './CartBox'
 import ChangeMarket from './ChangeMarket'
-import iconUser from '@/assets/icons/user'
-import iconArrowUp from '@/assets/icons/arrow_up'
-import iconArrowDown from '@/assets/icons/arrow_down'
+import ProfilMenu from './ProfilMenu'
 import 'swiper/css/swiper.min.css'
 
 export default {
   name: 'Header',
   components: {
-    iconUser,
-    iconArrowUp,
-    iconArrowDown,
     AppCart,
     ChangeMarket,
-    iconShopCart
+    iconShopCart,
+    ProfilMenu
   },
   mixins: [clickaway],
-  data () {
+  data() {
     return {
       isOpen: true,
       isClose: false,
@@ -121,7 +94,7 @@ export default {
       'activeLogin',
       'activeRegister'
     ]),
-    getName () {
+    getName() {
       if (this.loggedUser.given_name || this.loggedUser.name) {
         if (this.loggedUser.given_name) {
           return this.loggedUser.given_name
@@ -131,43 +104,32 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     if (this.isLoggedIn) {
       this.$store.dispatch('getShopcart', this.loggedUser)
     }
   },
   methods: {
-    toggleNav () {
+    toggleNav() {
       console.log('dsds')
       this.isNavbarOpen = !this.isNavbarOpen
     },
-    openAuthModal () {
+    openAuthModal() {
       this.$modal.show('auth-modal')
     },
-    closeCart () {
-      this.$store.commit('toggleCart', false)
-    },
-    closeProfil () {
+    closeProfil() {
       this.isProfilOpen = false
     },
-    goPath () {
+    goPath() {
       this.isLoggedIn
         ? this.$router.push({ name: 'hesabim' })
         : this.$router.push({ name: 'giris' })
     },
-    toggleCart () {
-      this.$store.commit('toggleCart', true)
-    },
-    toggleProfil () {
+    toggleProfil() {
       this.isProfilOpen = !this.isProfilOpen
     },
-    goCart () {
+    goCart() {
       this.$router.push({ name: 'sepetim' })
-    },
-    logout () {
-      this.$auth.logout().then((res) => {
-        this.$router.push('/')
-      })
     }
   }
 }
@@ -205,7 +167,9 @@ export default {
     }
   }
 
-  .desktop-login, .desktop-profil {
+  .desktop-login,
+  .desktop-profil,
+  .btn-desktop-cart {
     display: none;
   }
 
@@ -324,6 +288,7 @@ export default {
     align-items: center;
     justify-content: center;
     user-select: none;
+    padding-top: 2px;
   }
 
   &__link {
@@ -423,7 +388,39 @@ export default {
   .container {
     justify-content: space-between;
   }
-  .desktop-login, .desktop-profil {
+  .btn-desktop-cart {
+    display: flex !important;
+    align-items: center;
+    height: 40px;
+
+    &:hover {
+      background-color: $primary-color;
+    }
+
+    span {
+      font-weight: 600;
+      margin-right: 10px;
+      padding-bottom: 2px;
+    }
+    .icon {
+      fill: #fff;
+      height: 20px;
+    }
+
+    .Header__amount {
+      background-color: #fff;
+      top: 0;
+      right: 0;
+      color: $grey-color;
+      font-weight: 600;
+      height: 2rem;
+      width: 2rem;
+      top: 2px;
+      right: 10px;
+    }
+  }
+  .desktop-login,
+  .desktop-profil {
     display: block !important;
     min-width: 8rem;
     color: $primary-color;
@@ -453,8 +450,26 @@ export default {
   }
 
   .desktop-profil {
+    position: relative;
+    padding-top: 0;
+
     &::after {
       display: none;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      height: 20px;
+      width: 100%;
+    }
+
+    &:hover {
+      .profil-card-active {
+        display: flex;
+      }
     }
   }
   .ham-wrapper,
@@ -481,7 +496,23 @@ export default {
       margin-right: 0;
     }
 
-    &__amount {
+    &__cart {
+      position: relative;
+
+      &::after {
+        content: '';
+        height: 20px;
+        width: 100%;
+        position: absolute;
+        bottom: -20px;
+        right: 0;
+      }
+
+      &:hover {
+        .cart-box-active {
+          display: block;
+        }
+      }
     }
   }
 }

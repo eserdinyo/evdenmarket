@@ -135,7 +135,6 @@ export default {
   },
   methods: {
     beforeOpen () {
-      console.log(this.isLoggedIn)
       const randomNumber = Math.floor(Math.random() * 9) + 1
       this.loginBg = require(`../assets/images/login/${randomNumber}.jpg`)
     },
@@ -186,8 +185,8 @@ export default {
           this.isLoading = false
           this.$modal.hide('auth-modal')
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
+          this.alert('Hatalı Giriş', 'Daha önce kayıtlı biligler ile giriş yapmaya çalışıyorsunuz!', 'error')
         })
     },
     clear () {
@@ -196,6 +195,7 @@ export default {
       this.repassword = ''
       this.first_name = ''
       this.last_name = ''
+      this.openLogin()
     }
   }
 }
