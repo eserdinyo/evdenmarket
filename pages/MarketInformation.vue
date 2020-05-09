@@ -242,10 +242,10 @@
               Orta
             </div>
             <div class="pricing-desc">
-              Ayda <span>200</span> sipariş hakkı vardır.
+              Ayda <span>300</span> sipariş hakkı vardır.
               Lorem ipsum dolor sit amet.
             </div>
-            <div class="pricing-price">120₺ <span>ay</span></div>
+            <div class="pricing-price">99₺ <span>ay</span></div>
           </div>
           <div class="pricing-item">
             <div class="pricing-icon">
@@ -258,7 +258,7 @@
               <span>Sınırsız</span> sipariş hakkı vardır.
               Lorem ipsum dolor sit amet.
             </div>
-            <div class="pricing-price">200₺ <span>ay</span></div>
+            <div class="pricing-price">199₺ <span>ay</span></div>
           </div>
         </div>
       </div>

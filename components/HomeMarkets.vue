@@ -6,8 +6,8 @@
     <div class="container">
       <div class="LastMarkets_wrapper">
         <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
-          <swiper-slide v-for="(n, idx) in 4" :key="idx">
-            <market :market="market" />
+          <swiper-slide v-for="(market, idx) in markets" :key="idx">
+            <market-item :market="market" />
           </swiper-slide>
           <div slot="button-prev" class="swiper-button-prev" />
           <div slot="button-next" class="swiper-button-next" />
@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import Market from './Market'
+import MarketItem from './MarketItem'
 export default {
   components: {
-    Market
+    MarketItem
   },
   data () {
     return {
@@ -44,13 +44,36 @@ export default {
           clickable: true
         }
       },
-      market: {
-        market_id: 10,
-        min_amount: 75,
-        name: 'Migros Market',
-        imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Migros_t%C3%BCrk.jpg/1200px-Migros_t%C3%BCrk.jpg'
-      }
+      markets: [
+        {
+          market_id: 10,
+          min_amount: 75,
+          name: 'Ulusoy Market',
+          imageUrl:
+            'http://karabukunfirmalari.com/data/company/162/hMdLRP-qBz.jpg'
+        },
+        {
+          market_id: 10,
+          min_amount: 75,
+          name: 'Onur Market',
+          imageUrl:
+            'http://kurumsal.onurmarket.com/media/magaza/bagcilar-1.jpg'
+        },
+        {
+          market_id: 10,
+          min_amount: 75,
+          name: 'İndirim Market',
+          imageUrl:
+            'https://www.akdeniztoros.com.tr/satisnoktalari/wp-content/uploads/Ayanc%C4%B1k-%C4%B0ndirim-Market.jpg'
+        },
+        {
+          market_id: 10,
+          min_amount: 75,
+          name: 'Migros Market',
+          imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Migros_t%C3%BCrk.jpg/1200px-Migros_t%C3%BCrk.jpg'
+        }
+      ]
     }
   }
 }
@@ -76,19 +99,19 @@ export default {
       url('../assets/images/home-banner-bg.png');
   }
 
-   .swiper-button-prev,
-    .swiper-button-next {
-      background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      height: 40px !important;
-      width: 40px !important;
-      border-radius: 100% !important;
+  .swiper-button-prev,
+  .swiper-button-next {
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 100% !important;
 
-      &::after {
-        color: $primary-color;
-        font-size: 16px !important;
-      }
+    &::after {
+      color: $primary-color;
+      font-size: 16px !important;
     }
+  }
 }
 
 @include res(desktop) {

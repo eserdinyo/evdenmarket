@@ -5,18 +5,18 @@
         Turgut Reis Mahallesi
       </div>
       <div class="markets-wrapper">
-        <Market v-for="(n, idx) in 10" :key="idx" :market="market" />
+        <market-item v-for="(n, idx) in 10" :key="idx" :market="market" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Market from '@/components/Market'
+import MarketItem from '@/components/MarketItem'
 
 export default {
   components: {
-    Market
+    MarketItem
   },
   props: {
     id: {
@@ -29,9 +29,9 @@ export default {
       market: {
         market_id: 10,
         min_amount: 75,
-        name: 'Migros Market',
+        name: 'Ulusoylar Market',
         imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Migros_t%C3%BCrk.jpg/1200px-Migros_t%C3%BCrk.jpg'
+          'http://karabukunfirmalari.com/data/company/162/hMdLRP-qBz.jpg'
       }
     }
   },
@@ -59,16 +59,28 @@ export default {
 .markets {
   &-wrapper {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 4rem;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2rem;
     margin-bottom: 4rem;
   }
   &-title {
     padding: 1rem 0;
-    font-size: 6rem;
+    font-size: 3.4rem;
     color: $grey-color;
     border-bottom: $border;
     margin: 4rem 0;
+  }
+}
+
+@include res(desktop) {
+  .markets {
+    &-wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &-title {
+      font-size: 6rem;
+    }
   }
 }
 </style>

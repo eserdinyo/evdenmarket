@@ -55,6 +55,7 @@ export default {
     width: 100%;
     height: 25rem;
     object-fit: cover;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
   }
   &__bottom {
     padding: 1.5rem;
