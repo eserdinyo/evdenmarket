@@ -25,39 +25,39 @@
             deselect-label
             select-label
             placeholder="Şehir Seçin"
-            label="label"
+            label="name"
           />
         </div>
         <div class="selectbox">
           <multiselect
-            v-model="city"
-            :options="cities"
+            v-model="district"
+            :options="districts"
             :multiple="false"
             :close-on-select="true"
             :hide-selected="true"
             :preserve-search="true"
             selected-label
-            disabled="true"
+            :disabled="!districts.length > 0"
             deselect-label
             select-label
             placeholder="İlçe Seçin"
-            label="label"
+            label="name"
           />
         </div>
         <div class="selectbox">
           <multiselect
-            v-model="city"
-            :options="cities"
+            v-model="neighborhood"
+            :options="neighborhoods"
             :multiple="false"
             :close-on-select="true"
             :hide-selected="true"
-            disabled="true"
+            :disabled="!neighborhoods.length > 0"
             :preserve-search="true"
             selected-label
             deselect-label
             select-label
             placeholder="Mahalle Seçin"
-            label="label"
+            label="name"
           />
         </div>
 
@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
 import Multiselect from 'vue-multiselect'
 import iconMarket from '@/assets/icons/market'
@@ -88,83 +87,44 @@ export default {
     Multiselect
   },
   mixins: [clickaway],
-  data() {
+  data () {
     return {
-      cities: [
-        {
-          id: 1,
-          label: 'İstanbul',
-          name: 'İstanbul'
-        },
-        {
-          id: 2,
-          label: 'İzmir',
-          name: 'İzmir'
-        },
-        {
-          id: 3,
-          label: 'Ankara',
-          name: 'Ankara'
-        },
-        {
-          id: 1,
-          label: 'İstanbul',
-          name: 'İstanbul'
-        },
-        {
-          id: 2,
-          label: 'İzmir',
-          name: 'İzmir'
-        },
-        {
-          id: 3,
-          label: 'Ankara',
-          name: 'Ankara'
-        },
-        {
-          id: 1,
-          label: 'İstanbul',
-          name: 'İstanbul'
-        },
-        {
-          id: 2,
-          label: 'İzmir',
-          name: 'İzmir'
-        },
-        {
-          id: 3,
-          label: 'Ankara',
-          name: 'Ankara'
-        },
-        {
-          id: 1,
-          label: 'İstanbul',
-          name: 'İstanbul'
-        },
-        {
-          id: 2,
-          label: 'İzmir',
-          name: 'İzmir'
-        },
-        {
-          id: 3,
-          label: 'Ankara',
-          name: 'Ankara'
-        }
-      ],
+      cities: [],
+      districts: [],
+      neighborhoods: [],
       city: '',
+      district: '',
+      neighborhood: '',
       isOpenMarketBox: false,
       cityID: '',
       townID: '',
       neighID: '',
       mid: 38752
-      //     neighID.NeighborhoodID
     }
   },
   watch: {
     $route() {
       this.isOpenMarketBox = false
+    },
+    city (val) {
+      this.$axios(`cities/${val.id}`).then((res) => {
+        this.districts = res.data.data
+      })
+      this.district = ''
+      this.neighborhood = ''
+      this.neighborhoods = []
+    },
+    district (val) {
+      this.$axios(`districts/${val.id}`).then((res) => {
+        this.neighborhoods = res.data.data
+      })
+      this.neighborhood = ''
     }
+  },
+  mounted () {
+    this.$axios('cities').then((res) => {
+      this.cities = res.data.data
+    })
   },
   methods: {
     closeChangeMarket() {
@@ -172,12 +132,6 @@ export default {
     },
     toggleMarketBox() {
       this.isOpenMarketBox = !this.isOpenMarketBox
-    },
-    getTowns() {
-      this.$store.dispatch('getTowns', this.cityID)
-    },
-    getNeighborhood() {
-      this.$store.dispatch('getNeighborhoods', this.townID)
     }
   }
 }
