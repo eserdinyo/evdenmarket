@@ -58,6 +58,8 @@ module.exports = {
     '~/plugins/mixins',
     '~/plugins/vee-validate',
     '~/plugins/vmodal',
+    { src: '~/plugins/init.js', ssr: false },
+    '~/plugins/axios.js',
     { src: '~/plugins/swiper.js', ssr: false }
   ],
 

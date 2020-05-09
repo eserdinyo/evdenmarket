@@ -4,10 +4,14 @@ export const state = () => ({
 })
 
 export const mutations = {
+  init (state) {
+    state.loggedIn = !!window.localStorage.getItem('user')
+    state.data = JSON.parse(window.localStorage.getItem('user')) || ''
+  },
   loggedIn (state, payload) {
     state.loggedIn = true
-    state.data = payload
-    window.localStorage.setItem('user', JSON.stringify(payload))
+    state.data = payload.user
+    window.localStorage.setItem('user', JSON.stringify(payload.user))
     window.localStorage.setItem('token', payload.token)
   },
   logout (state) {
@@ -26,7 +30,7 @@ export const actions = {
     })
 
     promise.then((res) => {
-      commit('loggedIn', res.user)
+      commit('loggedIn', res.data)
     })
 
     return promise
@@ -35,13 +39,13 @@ export const actions = {
     const promise = this.$axios.$post('register', {
       phone: payload.phone,
       password: payload.password,
-      repassword: payload.repassword,
+      password_confirmation: payload.repassword,
       first_name: payload.first_name,
       last_name: payload.last_name
     })
 
     promise.then((res) => {
-      commit('loggedIn', res.data.user)
+      commit('loggedIn', res.data)
     })
 
     return promise
