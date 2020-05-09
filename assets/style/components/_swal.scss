@@ -1,0 +1,59 @@
+.swal2 {
+  &-popup {
+    width: 40rem !important;
+    height: 38rem !important;
+    border-radius: $radius !important;
+    padding: 2rem !important;
+    padding-top: 3rem !important;
+  }
+
+  &-title {
+    color: $grey-color !important;
+    font-size: 18px !important;
+    border-bottom: $border !important;
+    padding-bottom: 2rem !important;
+    justify-content: center !important;
+    width: 100% !important;
+    span {
+      color: $primary-color !important;
+      margin-left: 4px !important;
+    }
+  }
+
+  &-image {
+    margin-bottom: 2rem !important;
+  }
+  &-icon {
+    margin-top: 3rem !important;
+    margin-bottom: 2rem !important;
+  }
+  &-actions {
+    margin-top: auto !important;
+  }
+  &-styled {
+    height: 55px !important;
+    margin-top: 2rem !important;
+    font-size: 16px !important;
+    border-radius: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &-confirm {
+    background-color: $primary-color !important;
+    flex: 1;
+    border-radius: $radius !important;
+  }
+  &-cancel {
+    background-color: #777 !important;
+    flex: 1;
+    border-bottom-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+  }
+  &-content {
+    font-size: 16px !important;
+    color: $grey-color !important;
+    padding-top: 4rem !important;
+    margin-bottom: 0 !important;
+  }
+}

@@ -1,70 +1,58 @@
-<template lang="pug">
-  .container
-    .box
-        img(src='@/assets/images/404.png', alt='')
-        p Aradığınız sayfayı bulamadık!
-        nuxt-link(to='/') Anasayfa Don
+<template>
+  <div class="container">
+    <div class="box">
+      <img src="@/assets/images/404.png" alt="" />
+      <p>ÜZGÜNÜZ SAYFA BULUNAMADI</p>
+      <nuxt-link class="btn btn-green" to="/">ANASAYFAYA</nuxt-link>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ["error"],
-  head() {
+  props: ['error'],
+  head () {
     return {
-      title: "Evdenmarket",
+      title: 'Evdenmarket',
       meta: [
         {
-          hid: "description",
-          name: "description",
-          content: "My custom description"
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "assets/style/main.scss";
-
 .box {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
-  @include res("tab-land") {
-    width: 50%;
-  }
+  margin: 8rem auto;
+  padding: 0 2rem;
 
   p {
-    color: #2c3e51d0;
-    margin-top: 1rem;
+    color: $grey-color;
+    margin: 2rem 0;
     font-weight: 500;
     font-size: 1.6rem;
   }
 
   img {
-    width: 100%;
-    @include res("tab-land") {
-      width: 50%;
-    }
+    width: 60%;
   }
+}
 
-  a {
-    border: 1px solid #2c3e51;
-    text-transform: uppercase;
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 5px;
-    color: #2c3e51;
-    transition: all 0.2s;
+@include res(desktop) {
+  .box {
+    margin: 12rem auto;
+    width: 70rem;
 
-    &:hover {
-      box-shadow: 0 2px 4px #2c3e5175;
+    .btn {
+      max-width: 18rem;
     }
   }
 }

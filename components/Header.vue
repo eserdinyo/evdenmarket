@@ -132,9 +132,6 @@ export default {
     }
   },
   created () {
-    this.$axios('foo').then((res) => {
-      console.log(res)
-    })
     if (this.isLoggedIn) {
       this.$store.dispatch('getShopcart', this.loggedUser)
     }
@@ -179,7 +176,6 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style lang="scss" scoped>
-@import '@/assets/style/main.scss';
 .container {
   max-width: 120rem;
   margin: 0 auto;
@@ -426,7 +422,6 @@ export default {
 @include res(desktop) {
   .container {
     justify-content: space-between;
-    padding: 0;
   }
   .desktop-login, .desktop-profil {
     display: block !important;
