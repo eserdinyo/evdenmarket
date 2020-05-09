@@ -9,10 +9,10 @@
   >
     <div
       class="auth-modal"
-      :style="isRegister ? 'height: 500px;' : 'height: 430px;'"
+      :style="isRegister ? 'height: 510px;' : 'height: 430px;'"
     >
       <img :src="loginBg" class="auth-modal-img" alt="">
-      <form class="auth-modal-form" @submit.prevent="login">
+      <form class="auth-modal-form" @submit.prevent="loginOrRegister">
         <div v-if="isRegister" class="form-title">
           KAYIT OL
         </div>
@@ -22,7 +22,8 @@
         <div v-if="isRegister" class="form-group">
           <div class="form-item mr-2">
             <div class="form-label">ADINIZ</div>
-            <input v-model="first_name" class="form-input" placeholder="Adınızı Girin">
+            <input v-model="first_name" name="first_name" v-validate.disable="'required|min:9'" class="form-input" placeholder="Adınızı Girin">
+            <span v-show="errors.has('Telefon')" class="input-error">{{ errors.first('Telefon') }}</span>
           </div>
           <div class="form-item ml-2">
             <div class="form-label">SOYADINIZ</div>
@@ -74,7 +75,10 @@
           </div>
         </div>
         <div v-if="isRegister" class="form-group mt-5">
-          <button class="btn btn-green" @click="register">KAYIT OL</button>
+          <button type="submit" class="btn btn-green">
+            <span v-if="!isLoading">KAYIT OL</span>
+            <loading :is-loading="isLoading" />
+          </button>
         </div>
         <div v-if="isLogin" class="form-group mt-5">
           <button type="submit" class="btn btn-green" :disabled="isLoading">
@@ -146,24 +150,26 @@ export default {
       this.isLogin = true
       this.isRegister = false
     },
+    loginOrRegister () {
+      this.isLogin ? this.login() : this.register()
+    },
     login () {
       this.$validator.validateAll().then((res) => {
         if (res) {
           this.isLoading = true
-          setTimeout(() => {
-            this.$store
-              .dispatch('user/login', {
-                phone: this.phone,
-                password: this.password
-              })
-              .then((res) => {
-                this.isLoading = false
-                this.$modal.hide('auth-modal')
-              })
-              .catch((err) => {
-                console.log(err)
-              })
-          }, 1000)
+          this.$store
+            .dispatch('user/login', {
+              phone: this.phone,
+              password: this.password
+            })
+            .then((res) => {
+              this.isLoading = false
+              this.$modal.hide('auth-modal')
+            })
+            .catch(() => {
+              this.isLoading = false
+              this.alert('Hatalı Giriş', 'Girdiğiniz telefon numarası veya şifre hatalı!', 'error')
+            })
         }
       })
     },

@@ -41,22 +41,22 @@
                       label.Address__form--item-label İl *
                       select.Address__form--item-input(v-model="address.city",@change="getTowns")
                           option(disabled, selected, value='Şehir Seçin') Şehir Seçin
-                          option(v-for="city in cities", 
-                          :key="city.id", 
+                          option(v-for="city in cities",
+                          :key="city.id",
                           :value="city") {{city.CityName}}
                   .Address__form--item
                       label.Address__form--item-label İlçe *
                       select.Address__form--item-input(v-model="address.town",@change="getNeighborhood")
                           option(disabled, selected, value='Şehir Seçin') İlçe Seçin
-                          option(v-for="town in towns", 
-                          :key="town.id", 
+                          option(v-for="town in towns",
+                          :key="town.id",
                           :value="town") {{town.TownName}}
                   .Address__form--item
                       label.Address__form--item-label Mahalle *
                       select.Address__form--item-input(v-model="address.neigh")
                           option(disabled, selected, value='Şehir Seçin') Mahalle Seçin
-                          option(v-for="dr in districts", 
-                          :key="dr.id", 
+                          option(v-for="dr in districts",
+                          :key="dr.id",
                           :value="dr") {{dr.NeighborhoodName}}
                   .Address__form--item
                       label.Address__form--item-label Adres
@@ -64,7 +64,7 @@
                       rows='5',
                       max="10",
                       v-model="address.open_address")
-                  
+
                   .Address__form--item
                       label.Address__form--item-label Adres Tarifi
                       textarea.Address__form--item-input(
@@ -73,73 +73,70 @@
                       rows='5',
                       max="10",
                       v-model="address.address_desc")
-                  button.login-button(type='submit') Kaydet 
+                  button.login-button(type='submit') Kaydet
 </template>
 
 <script>
-import iconClose from "@/assets/icons/close";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 import Swal from 'sweetalert2'
+import iconClose from '@/assets/icons/close'
 
 export default {
-  data() {
-    return {
-      address: {
-        address_name: "",
-        firstname: "",
-        lastname: "",
-        phone: "",
-        city: "",
-        town: "",
-        neigh: "",
-        open_address: "",
-        address_desc: ""
-      },
-      options: {
-        phone: true,
-        phoneRegionCode: "TR"
-      }
-    };
-  },
   components: {
     iconClose
   },
+  data () {
+    return {
+      address: {
+        address_name: '',
+        firstname: '',
+        lastname: '',
+        phone: '',
+        city: '',
+        town: '',
+        neigh: '',
+        open_address: '',
+        address_desc: ''
+      },
+      options: {
+        phone: true,
+        phoneRegionCode: 'TR'
+      }
+    }
+  },
   computed: {
-    ...mapGetters(["openmodal", "loggedUser", "cities", "towns", "districts"])
+    ...mapGetters(['openmodal', 'loggedUser', 'cities', 'towns', 'districts'])
   },
   methods: {
-    addAddress() {
+    addAddress () {
       this.$store
-        .dispatch("addAddress", {
+        .dispatch('addAddress', {
           address: this.address,
           user: this.loggedUser
         })
-        .then(res => {
-          this.$store.dispatch("getAddresses", this.loggedUser);
+        .then((res) => {
+          this.$store.dispatch('getAddresses', this.loggedUser)
 
           Swal({
-            title: "Adres Kaydedildi",
-            icon: "success",
-            button: "Tamam"
-          });
-          this.closeModal();
-        });
+            title: 'Adres Kaydedildi',
+            icon: 'success',
+            button: 'Tamam'
+          })
+          this.closeModal()
+        })
     },
-    closeModal() {
-      this.$store.commit("openModal", false);
-      document.getElementsByTagName("body")[0].style.overflow = "auto";
+    closeModal () {
+      this.$store.commit('openModal', false)
+      document.getElementsByTagName('body')[0].style.overflow = 'auto'
     },
-    getTowns() {
-      this.$store.dispatch("getTowns", this.address.city.CityID);
+    getTowns () {
+      this.$store.dispatch('getTowns', this.address.city.CityID)
     },
-    getNeighborhood() {
-      this.$store.dispatch("getNeighborhoods", this.address.town.TownID);
+    getNeighborhood () {
+      this.$store.dispatch('getNeighborhoods', this.address.town.TownID)
     }
-  },
-  created() {
-    this.$store.dispatch("getCities");
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,96 +1,74 @@
-<script>
-import { mapGetters } from "vuex";
+<template>
+  <div class="markets">
+    <div class="container">
+      <div class="markets-title">
+        Turgut Reis Mahallesi
+      </div>
+      <div class="markets-wrapper">
+        <Market v-for="(n, idx) in 10" :key="idx" :market="market" />
+      </div>
+    </div>
+  </div>
+</template>
 
-import Slider from "@/components/Slider";
-import Market from "@/components/Market";
-import ChangeMarket from "@/components/ChangeMarket";
-import Loader from "@/components/Loader";
+<script>
+import Market from '@/components/Market'
 
 export default {
-  head() {
-    return {
-      title: "Marketler - Evdenmarket",
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: "My custom description"
-        }
-      ]
-    };
-  },
-  computed: {
-    ...mapGetters(["markets"])
-  },
   components: {
-    Slider,
-    Market,
-    ChangeMarket,
-    Loader
+    Market
   },
-  methods: {
-    getMarkets() {
-      const mahalleID = this.$route.query.mid;
-      this.$wait.start("marketler");
-      this.$store.dispatch("getMarkets", mahalleID).then(res => {
-        this.$wait.end("marketler");
-      });
+  props: {
+    id: {
+      type: Number,
+      default: 1
+    }
+  },
+  data () {
+    return {
+      market: {
+        market_id: 10,
+        min_amount: 75,
+        name: 'Migros Market',
+        imageUrl:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Migros_t%C3%BCrk.jpg/1200px-Migros_t%C3%BCrk.jpg'
+      }
     }
   },
   watch: {
-    $route() {
-      this.getMarkets();
+    $route () {
+      this.getMarkets()
     }
   },
-  created() {
-    this.getMarkets();
+  head () {
+    return {
+      title: 'Marketler - Evdenmarket',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
+    }
   }
-};
+}
 </script>
 
-<template lang="pug">
-  .Marketler
-    v-wait(for="marketler")
-      template(slot="waiting")
-          Loader
-      .container
-        Market(v-for="market in markets", 
-              :key="market.id", 
-              :market='market')
-</template>
-
-<style lang="scss" scoped>
-@import "assets/style/main.scss";
-
-.container {
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 3rem;
-  @include res(tab-land) {
+<style lang="scss">
+.markets {
+  &-wrapper {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    grid-column-gap: 2rem;
-    width: 96rem;
-    margin-top: 5rem;
-    margin-left: auto;
-    margin-right: auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 4rem;
+    margin-bottom: 4rem;
   }
-}
-
-.Marketler {
-  @include res(tab-land) {
-    margin-top: 0rem;
-  }
-}
-
-.Slider {
-  @include res(tab-land) {
-    margin-top: 5rem;
-    width: 120rem;
-    margin-left: auto;
-    margin-right: auto;
+  &-title {
+    padding: 1rem 0;
+    font-size: 6rem;
+    color: $grey-color;
+    border-bottom: $border;
+    margin: 4rem 0;
   }
 }
 </style>
-

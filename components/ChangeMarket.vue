@@ -62,12 +62,14 @@
         </div>
 
         <div class="ChangeMarket__MarketBul__footer">
-          <nuxt-link
+          <button
+            :disabled="!(neighborhood.id && neighborhood.id > 0)"
             class="btn btn-green"
-            :to="{ name: 'marketler', query: { mid } }"
+            :to="`/marketler/${neighborhood.id}`"
+            @click="openMarkets"
           >
             MARKET ARA
-          </nuxt-link>
+          </button>
         </div>
       </div>
     </div>
@@ -103,12 +105,13 @@ export default {
     }
   },
   watch: {
-    $route() {
+    $route () {
       this.isOpenMarketBox = false
     },
     city (val) {
       this.$axios(`cities/${val.id}`).then((res) => {
-        this.districts = res.data.data
+        this.districts = res.data
+        console.log(res)
       })
       this.district = ''
       this.neighborhood = ''
@@ -116,21 +119,25 @@ export default {
     },
     district (val) {
       this.$axios(`districts/${val.id}`).then((res) => {
-        this.neighborhoods = res.data.data
+        this.neighborhoods = res.data
       })
       this.neighborhood = ''
     }
   },
   mounted () {
     this.$axios('cities').then((res) => {
-      this.cities = res.data.data
+      this.cities = res.data
     })
   },
   methods: {
-    closeChangeMarket() {
+    openMarkets () {
+      this.$router.push(`/marketler/${this.neighborhood.id}`)
+    },
+    closeChangeMarket () {
       this.isOpenMarketBox = false
     },
-    toggleMarketBox() {
+    toggleMarketBox () {
+      console.log('l;lds')
       this.isOpenMarketBox = !this.isOpenMarketBox
     }
   }

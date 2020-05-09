@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 // pages
 import Home from './pages/Home'
-import MarketInformation from './pages/MarketInformation.vue'
+import MarketInformation from './pages/MarketInformation'
+import Markets from '@/pages/Markets'
 
 Vue.use(Router)
 
@@ -14,6 +15,11 @@ export function createRouter () {
       {
         path: '/',
         component: Home
+      },
+      {
+        path: '/marketler/:id',
+        name: 'Markets',
+        component: Markets
       },
       {
         path: '/bilgilendirme',
