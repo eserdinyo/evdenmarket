@@ -9,10 +9,10 @@
   >
     <div
       class="auth-modal"
-      :style="isRegister ? 'height: 500px;' : 'height: 420px;'"
+      :style="isRegister ? 'height: 500px;' : 'height: 430px;'"
     >
       <img :src="loginBg" class="auth-modal-img" alt="">
-      <div class="auth-modal-form">
+      <form class="auth-modal-form" @submit.prevent="login">
         <div v-if="isRegister" class="form-title">
           KAYIT OL
         </div>
@@ -36,11 +36,14 @@
             </div>
             <the-mask
               v-model="phone"
+              v-validate.disable="'required|min:9'"
+              name="Telefon"
+              type="tel"
               class="form-input"
-              type="text"
               placeholder="Cep Telefonu"
               :mask="['0 (###) ### ## ##']"
             />
+            <span v-show="errors.has('Telefon')" class="input-error">{{ errors.first('Telefon') }}</span>
           </div>
         </div>
         <div class="form-group">
@@ -50,10 +53,13 @@
             </div>
             <input
               v-model="password"
+              v-validate.disable="'required|min:6|max:20'"
               class="form-input"
+              name="Şifre"
               type="password"
               placeholder="Şifrenizi Girin"
             >
+            <span v-show="errors.has('Şifre')" class="input-error">{{ errors.first('Şifre') }}</span>
           </div>
           <div v-if="isRegister" class="form-item ml-3">
             <div class="form-label">
@@ -71,7 +77,7 @@
           <button class="btn btn-green" @click="register">KAYIT OL</button>
         </div>
         <div v-if="isLogin" class="form-group mt-5">
-          <button class="btn btn-green" :disabled="isLoading" @click="login">
+          <button type="submit" class="btn btn-green" :disabled="isLoading">
             <span v-if="!isLoading">GİRİŞ YAP</span>
             <loading :is-loading="isLoading" />
           </button>
@@ -92,7 +98,7 @@
             >KAYIT OL</a>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </modal>
 </template>
@@ -141,21 +147,25 @@ export default {
       this.isRegister = false
     },
     login () {
-      this.isLoading = true
-      setTimeout(() => {
-        this.$store
-          .dispatch('user/login', {
-            phone: this.phone,
-            password: this.password
-          })
-          .then((res) => {
-            this.isLoading = false
-            this.$modal.hide('auth-modal')
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      }, 1000)
+      this.$validator.validateAll().then((res) => {
+        if (res) {
+          this.isLoading = true
+          setTimeout(() => {
+            this.$store
+              .dispatch('user/login', {
+                phone: this.phone,
+                password: this.password
+              })
+              .then((res) => {
+                this.isLoading = false
+                this.$modal.hide('auth-modal')
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+          }, 1000)
+        }
+      })
     },
     register () {
       this.$store
@@ -219,6 +229,7 @@ export default {
 
     &-item {
       width: 100%;
+      position: relative;
     }
 
     &-label {
@@ -232,7 +243,7 @@ export default {
     }
 
     &-input {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
     &-forget {
       display: flex;
@@ -250,6 +261,14 @@ export default {
         user-select: none;
       }
     }
+  }
+
+  .input-error {
+    color: $red-color;
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
   }
 }
 
