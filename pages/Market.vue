@@ -8,6 +8,11 @@
           <market-slider />
           <products-group :products="products" />
           <products-group :products="products" :is-last-order="true" />
+          <category-products
+            v-for="(cat, idx) in categoryProducts"
+            :key="idx"
+            :category-data="cat"
+          />
         </div>
       </div>
     </div>
@@ -19,6 +24,7 @@ import MarketNav from '@/components/MarketNav'
 import MarketSlider from '@/components/MarketSlider'
 import SearchBar from '@/components/SearchBar'
 import ProductsGroup from '@/components/ProductsGroup'
+import CategoryProducts from '@/components/CategoryProducts'
 
 export default {
   name: 'MarketDetail',
@@ -26,7 +32,8 @@ export default {
     MarketNav,
     MarketSlider,
     SearchBar,
-    ProductsGroup
+    ProductsGroup,
+    CategoryProducts
   },
   data () {
     return {
@@ -38,6 +45,119 @@ export default {
         imageUrl:
           'http://karabukunfirmalari.com/data/company/162/hMdLRP-qBz.jpg'
       },
+      categoryProducts: [
+        {
+          title: 'FİLM GECESİ',
+          image: require('../assets/images/movie-bg.jpg'),
+          products: [
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
+              name: 'Doritos Extreme Mısır Cips',
+              quantity: 2,
+              price: 5.75,
+              id: 2
+            }, {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08019131/08019131-2d55b9.jpg',
+              name: 'Pepsi Mango Aromalı Kola',
+              quantity: 2,
+              price: 2.75,
+              id: 4
+            },
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08089800/08089800-e3ed39.jpg',
+              name: 'Migros Kavrulmuş Fındık',
+              quantity: 2,
+              price: 14.75,
+              id: 5
+            },
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07010763/eti-crax-cubuk-kraker-150-gr-feaa93.jpg',
+              name: 'Eti Crax Çubuk Kraker 95 G',
+              quantity: 2,
+              price: 1.25,
+              id: 5
+            }
+          ]
+        },
+        {
+          title: 'PAZAR KAHVALTISI',
+          image: require('../assets/images/category-breakfast.jpg'),
+          products: [
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
+              name: 'Doritos Extreme Mısır Cips',
+              quantity: 2,
+              price: 5.75,
+              id: 2
+            }, {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08019131/08019131-2d55b9.jpg',
+              name: 'Pepsi Mango Aromalı Kola',
+              quantity: 2,
+              price: 2.75,
+              id: 4
+            },
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08089800/08089800-e3ed39.jpg',
+              name: 'Migros Kavrulmuş Fındık',
+              quantity: 2,
+              price: 14.75,
+              id: 5
+            },
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07010763/eti-crax-cubuk-kraker-150-gr-feaa93.jpg',
+              name: 'Eti Crax Çubuk Kraker 95 G',
+              quantity: 2,
+              price: 1.25,
+              id: 5
+            }
+          ]
+        },
+        {
+          title: 'SAĞLIKLI YAŞAM',
+          image: require('../assets/images/health.jpg'),
+          products: [
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07019728/eti-form-atistirmalik-zeytinli-28-g-5cd9c7.jpg',
+              name: 'Eti Form Atıştırmalık Zeytinli',
+              quantity: 2,
+              price: 1.75,
+              id: 2
+            }, {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/27270000/muz-yerli-kg-9d3d01.jpg',
+              name: 'Muz Yerli Kg',
+              quantity: 2,
+              price: 12.75,
+              id: 4
+            },
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/11015053/11015053-4fc8a1.jpg',
+              name: 'Pınar Süt Protein Kakaolu',
+              quantity: 2,
+              price: 3.50,
+              id: 9
+            },
+            {
+              image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07040173/07040173-025e62.jpg',
+              name: 'Züber Glutensiz Protein Barı',
+              quantity: 2,
+              price: 3.75,
+              id: 19
+            }
+          ]
+        }
+      ],
       products: [
         {
           image:
@@ -83,7 +203,7 @@ export default {
 
 <style lang="scss">
 .market-detail {
-  margin-bottom: 8rem;
+  margin-bottom: 14rem !important;
   &-top {
     display: grid;
     grid-template-columns: 20% 80%;

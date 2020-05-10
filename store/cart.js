@@ -47,30 +47,16 @@ export const mutations = {
 
 export const actions = {
   add ({ commit }, payload) {
-
-  },
-  addToCart ({ commit }, payload) {
-    const product = payload.product
-    const userid = payload.user.sub || payload.user.id
-
-    return new Promise((resolve, reject) => {
-      http
-        .post('/shopcart', {
-          changeType: product.changeType, // increase or decrease product count on cart
-          userid,
-          productid: product.id,
-          quantity: product.quantity,
-          price: product.price,
-          name: product.name,
-          image: product.image
-        })
-        .then((res) => {
-          resolve(res)
-        })
-        .catch((err) => {
-          reject(401)
-        })
+    const promise = this.$axios.$post('/cart', {
+      marketproduct_id: payload.marketproduct_id,
+      quantity: payload.quantity
     })
+
+    promise.then((res) => {
+      // commit('loggedIn', res.data)
+    })
+
+    return promise
   },
   deleteFromShopcart ({ commit }, payload) {
     const id = payload.product.id

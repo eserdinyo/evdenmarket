@@ -1,16 +1,19 @@
 export const state = () => ({
   data: '',
-  loggedIn: false
+  loggedIn: false,
+  token: ''
 })
 
 export const mutations = {
   init (state) {
     state.loggedIn = !!window.localStorage.getItem('user')
     state.data = JSON.parse(window.localStorage.getItem('user')) || ''
+    state.token = window.localStorage.getItem('token') || ''
   },
   loggedIn (state, payload) {
     state.loggedIn = true
     state.data = payload.user
+    state.token = payload.token
     window.localStorage.setItem('user', JSON.stringify(payload.user))
     window.localStorage.setItem('token', payload.token)
   },
@@ -19,6 +22,7 @@ export const mutations = {
     window.localStorage.removeItem('token')
     state.loggedIn = false
     state.data = ''
+    state.token = ''
   }
 }
 

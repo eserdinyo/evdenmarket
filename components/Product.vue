@@ -1,23 +1,31 @@
 <template>
-  <nuxt-link :to="`/urun/${slugUrl(product.name)}`" class="product">
-    <img class="product-img" :src="product.image" alt="">
-    <div class="product-name">{{ product.name }}</div>
-    <div class="product-price">{{ product.price.toFixed(2) }} TL</div>
-    <button
-      class="btn btn-empty"
-      @click.prevent="add"
-    >
-      <p>SEPETE EKLE</p>
-    </button>
+  <nuxt-link
+    :to="`/urun/${slugUrl(product.name)}`"
+    class="product"
+    :class="{ product_category: isCategory }"
+  >
+    <img class="product-img" :src="product.image" alt="" />
+    <div>
+      <div class="product-name">{{ product.name }}</div>
+      <div class="product-price">{{ product.price.toFixed(2) }} TL</div>
+      <button class="btn btn-empty" @click.prevent="add">
+        <p>SEPETE EKLE</p>
+      </button>
+    </div>
   </nuxt-link>
 </template>
 
 <script>
+
 export default {
   props: {
     product: {
       required: true,
       type: Object
+    },
+    isCategory: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -25,11 +33,11 @@ export default {
       if (this.isLoggedIn) {
         this.$store
           .dispatch('cart/add', {
-            product: this.product,
-            user: this.user
+            marketproduct_id: this.product.id,
+            quantity: 2
           })
           .then((res) => {
-            // sepete eklendi
+            this.alert('SEPETE EKLENDİ', 'Ürününüz sepetinize eklendi. Ödeme işlemi için sepetinize giderbilirsiniz', 'success')
           })
       } else {
         this.$modal.show('auth-modal')
@@ -73,10 +81,32 @@ export default {
     font-weight: 700;
     margin-top: 2rem;
     margin-bottom: 1rem;
+    text-align: center;
   }
 
   .btn-empty {
+    margin: 0 auto;
     margin-top: 2rem;
+  }
+
+  &_category {
+    padding: 1rem;
+    box-shadow: none;
+    margin: 1rem;
+    text-align: center;
+
+    .btn-empty {
+      font-size: 12px;
+      margin-top: 1rem;
+    }
+    .product-price {
+      margin-top: .5rem;
+    }
+    .icon {
+      fill: $primary-color;
+      height: auto;
+      width: 25px;
+    }
   }
 }
 </style>

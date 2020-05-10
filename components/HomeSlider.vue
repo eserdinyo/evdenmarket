@@ -1,22 +1,23 @@
 <template>
-  <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
-    <swiper-slide>
-      <img class="swiper_img" src="@/assets/images/slider/1.jpg">
-    </swiper-slide>
-    <swiper-slide>
-      <img class="swiper_img" src="@/assets/images/slider/2.jpg">
-    </swiper-slide>
-    <swiper-slide>
-      <img class="swiper_img" src="@/assets/images/slider/3.jpg">
-    </swiper-slide>
-    <div slot="pagination" class="swiper-pagination swiper-pagination-home" />
-  </swiper>
+  <div class="home-slider">
+    <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
+      <swiper-slide>
+        <img class="swiper_img" src="@/assets/images/slider/1.jpg" />
+      </swiper-slide>
+      <swiper-slide>
+        <img class="swiper_img" src="@/assets/images/slider/2.jpg" />
+      </swiper-slide>
+      <swiper-slide>
+        <img class="swiper_img" src="@/assets/images/slider/3.jpg" />
+      </swiper-slide>
+      <div slot="pagination" class="swiper-pagination swiper-pagination-home" />
+    </swiper>
+  </div>
 </template>
 
 <script>
-
 export default {
-  data () {
+  data() {
     return {
       swiperOptions: {
         loop: true,
@@ -31,17 +32,17 @@ export default {
         }
       }
     }
-  },
-  created () {}
+  }
 }
 </script>
 
 <style lang="scss">
-.swiper-container {
-  margin-top: 2rem;
-  height: 24rem;
+.home-slider {
+  .swiper-container {
+    margin-top: 2rem;
+    height: 24rem;
+  }
 }
-
 .swiper-wrapper {
   z-index: 0 !important;
 }
@@ -76,10 +77,11 @@ export default {
 }
 
 @include res(desktop) {
-  .swiper-container {
-    height: 40rem;
+  .home-slider {
+    .swiper-container {
+      height: 40rem;
+    }
   }
-
   .swiper_img {
     width: 100%;
     height: 40rem;

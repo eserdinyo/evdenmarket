@@ -1,6 +1,8 @@
 <template>
   <div>
-    <app-header />
+    <client-only>
+      <app-header />
+    </client-only>
     <nuxt />
     <auth-modal />
     <app-footer />
