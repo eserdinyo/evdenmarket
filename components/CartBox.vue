@@ -7,7 +7,6 @@
       <a
         v-if="true"
         class="btn_sepet"
-        @click="toggleCart"
       >Sepete Git</a>
     </div>
     <div class="Cart__bottom" :class="{ emptyCartBottom: itemCount == 0 }">
@@ -47,9 +46,9 @@ export default {
   methods: {
     deleteProduct (product) {
       this.$store
-        .dispatch('deleteFromShopcart', { product, user: this.loggedUser })
+        .dispatch('deleteFromShopcart', { product, user: this.user })
         .then((res) => {
-          this.$store.dispatch('getShopcart', this.loggedUser)
+          this.$store.dispatch('getShopcart', this.user)
         })
     },
     changeQuantity (product, changeType) {
@@ -60,11 +59,11 @@ export default {
         this.$store
           .dispatch('addToCart', {
             product,
-            user: this.loggedUser
+            user: this.user
           })
           .then((res) => {
             this.$store
-              .dispatch('getShopcart', this.loggedUser)
+              .dispatch('getShopcart', this.user)
               .then((res) => {})
           })
       } else {

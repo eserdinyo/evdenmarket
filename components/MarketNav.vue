@@ -33,6 +33,7 @@ export default {
 .market-nav {
   background-color: $grey-color;
   min-width: 210px;
+  height: 496px;
   margin-right: 2rem;
   border-bottom-left-radius: $radius;
   border-bottom-right-radius: $radius;
@@ -78,7 +79,7 @@ export default {
 
   &-submenu {
     position: absolute;
-    left: 200px;
+    left: 210px;
     top: 0;
     background-color: lighten($grey-color, 5%);
     min-width: 200px;
@@ -87,6 +88,7 @@ export default {
     padding: 2rem;
     border-top-right-radius: $radius;
     border-bottom-right-radius: $radius;
+    z-index: 9;
 
     &-link {
       margin: 1rem 0;

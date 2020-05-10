@@ -16,10 +16,10 @@ export default {
   components: {
     HomeSlider,
     HomeTutorial,
-    HomeMarkets
+    HomeMarkets,
   },
   computed: {
-    ...mapGetters(['isLoggedIn', 'loggedUser'])
+    ...mapGetters(['isLoggedIn'])
   },
   mounted () {
     /*  if (this.$route.query.register) {

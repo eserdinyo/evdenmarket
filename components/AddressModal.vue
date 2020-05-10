@@ -105,17 +105,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['openmodal', 'loggedUser', 'cities', 'towns', 'districts'])
+    ...mapGetters(['openmodal', 'cities', 'towns', 'districts'])
   },
   methods: {
     addAddress () {
       this.$store
         .dispatch('addAddress', {
           address: this.address,
-          user: this.loggedUser
+          user: this.user
         })
         .then((res) => {
-          this.$store.dispatch('getAddresses', this.loggedUser)
+          this.$store.dispatch('getAddresses', this.user)
 
           Swal({
             title: 'Adres Kaydedildi',

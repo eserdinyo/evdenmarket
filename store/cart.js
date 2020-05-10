@@ -40,16 +40,6 @@ export const getters = {
 }
 
 export const mutations = {
-  toggleCart (state, payload) {
-    if (payload == false) {
-      state.isCartOpen = false
-    } else {
-      state.isCartOpen = !state.isCartOpen
-    }
-  },
-  toggleCartFromProfil (state) {
-    state.isCartOpen = false
-  },
   setShopcart (state, shopcart) {
     state.shopcart = shopcart
   }

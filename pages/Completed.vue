@@ -25,16 +25,13 @@ export default {
   components: {
     iconSuccess
   },
-  computed: {
-    ...mapGetters(["loggedUser"])
-  },
   created() {
     this.$store
       .dispatch("deleteShopcartAfterOrder", {
-        user: this.loggedUser
+        user: this.user
       })
       .then(res => {
-        this.$store.dispatch("getShopcart", this.loggedUser);
+        this.$store.dispatch("getShopcart", this.user);
       });
   }
 };

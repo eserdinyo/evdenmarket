@@ -1,9 +1,14 @@
 <template>
   <div class="market-detail">
+    <search-bar />
     <div class="container">
       <div class="market-detail-top">
         <market-nav />
-        <market-slider />
+        <div class="market-detail-right">
+          <market-slider />
+          <products-group :products="products" />
+          <products-group :products="products" :is-last-order="true" />
+        </div>
       </div>
     </div>
   </div>
@@ -12,12 +17,16 @@
 <script>
 import MarketNav from '@/components/MarketNav'
 import MarketSlider from '@/components/MarketSlider'
+import SearchBar from '@/components/SearchBar'
+import ProductsGroup from '@/components/ProductsGroup'
 
 export default {
   name: 'MarketDetail',
   components: {
     MarketNav,
-    MarketSlider
+    MarketSlider,
+    SearchBar,
+    ProductsGroup
   },
   data () {
     return {
@@ -72,12 +81,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
 .market-detail {
   margin-bottom: 8rem;
   &-top {
-    display: flex;
+    display: grid;
+    grid-template-columns: 20% 80%;
   }
 }
 </style>

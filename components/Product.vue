@@ -1,122 +1,82 @@
-<template lang="pug">
-  nuxt-link.Discount__item(ref="product",:to="{ name: 'u-id', params: { id:productUrl(product)}, query: { p: product.id }}")
-    img.Discount__item--img(:src="product.image", alt='')
-    .Discount__item--name {{product.name}}
-    .Discount__item--price {{product.price.toFixed(2)}} TL
-    button.btn(@click.prevent="addCart(product)", :disabled ="isBtnDisabled") 
-      v-wait(for="btn") 
-        template(slot="waiting")
-          BtnLoader(v-if="product.id == id")
-          p(v-else) Sepete Ekle
-        p Sepete Ekle
+<template>
+  <nuxt-link :to="`/urun/${slugUrl(product.name)}`" class="product">
+    <img class="product-img" :src="product.image" alt="">
+    <div class="product-name">{{ product.name }}</div>
+    <div class="product-price">{{ product.price.toFixed(2) }} TL</div>
+    <button
+      class="btn btn-empty"
+      @click.prevent="add"
+    >
+      <p>SEPETE EKLE</p>
+    </button>
+  </nuxt-link>
 </template>
-<script>
-import BtnLoader from "./BtnLoader";
-import Swal from 'sweetalert2'
 
-import { mapGetters } from "vuex";
+<script>
 export default {
-  props: ["product"],
-  data() {
-    return {
-      id: "",
-      isBtnDisabled: false
-    };
-  },
-  computed: {
-    ...mapGetters(["isLoggedIn", "loggedUser"]),
-    productUrl() {
-      return product =>
-        `${this.turkishtoEnglish(
-          product.name.toLowerCase().replace(/\s+/g, "-")
-        )}`;
+  props: {
+    product: {
+      required: true,
+      type: Object
     }
-  },
-  components: {
-    BtnLoader
   },
   methods: {
-    addCart(product, changeType) {
-      this.id = product.id;
-
-      product.changeType = "inc";
+    add () {
       if (this.isLoggedIn) {
-        this.$wait.start("btn");
-        this.isBtnDisabled = true;
-
         this.$store
-          .dispatch("addToCart", {
-            product,
-            user: this.loggedUser
+          .dispatch('cart/add', {
+            product: this.product,
+            user: this.user
           })
-          .then(res => {
-            this.$wait.end("btn");
-            this.$store.dispatch("getShopcart", this.loggedUser).then(res => {
-              Swal({
-                title: "Sepete Eklendi",
-                icon: "success",
-                button: "Tamam"
-              });
-            });
-            this.id = 0;
-            this.isBtnDisabled = false;
-          });
+          .then((res) => {
+            // sepete eklendi
+          })
       } else {
-        this.$router.push({ name: "giris" });
+        this.$modal.show('auth-modal')
       }
-    },
-    turkishtoEnglish(str) {
-      return str
-        .replace(/\ğ+/g, "g")
-        .replace(/\ü+/g, "u")
-        .replace(/\ş+/g, "s")
-        .replace(/\ı+/g, "i")
-        .replace(/\ö+/g, "o")
-        .replace(/\ç+/g, "c");
-    }
-  },
-  created() {}
-};
-</script>
-
-<style lang="scss" scoped>
-@import "assets/style/main.scss";
-
-.Discount {
-  padding: 3rem 0;
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 3px;
-    padding: 1rem;
-    transition: 0.1s;
-    cursor: pointer;
-    border: 1px solid rgba(204, 204, 204, 0.2);
-
-    &:hover {
-      border: 1px solid rgba(204, 204, 204, 0.6);
-    }
-
-    &--img {
-      width: auto;
-      height: 8rem;
-    }
-
-    &--name {
-      margin-top: 1rem;
-      text-align: center;
-      margin-bottom: auto;
-      font-size: 1.4rem;
-    }
-
-    &--price {
-      font-weight: 700;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
     }
   }
 }
-</style>
+</script>
 
+<style lang="scss">
+.product {
+  border: $border;
+  margin-bottom: 3rem;
+  border-radius: $radius;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  transition: 0.1s;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 8px rgba(238, 238, 238, 0.776);
+
+  &:hover {
+    border-color: $primary-color;
+  }
+
+  &-img {
+    width: auto;
+    height: 8rem;
+  }
+  &-name {
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: auto;
+    font-size: 1.4rem;
+    height: 25px;
+  }
+
+  &-price {
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-empty {
+    margin-top: 2rem;
+  }
+}
+</style>

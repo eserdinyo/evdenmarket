@@ -1,86 +1,117 @@
-<template lang="pug">
-  .Searchbar
-    form.Searchbar__search--form
-      input.Searchbar__search--form-input(type='text', 
-        @keyup='searchProducts',
-        v-model='searchWord',
-        name='firstname',
-        @blur="closeResult",
-        placeholder="Markette Ara...", 
-        autocomplete="off")
-      button.Searchbar__search--form-btn(type='submit') Ara
-    .Searchbar__result(:class='{activeResult:activeResult}', v-if='searchbarProducts')
-      .Searchbar__result--item(v-for='product in searchbarProducts')
-        nuxt-link(:to="{ name: 'u-id', params: { id:productUrl(product)}, query: { p: product.id }}")  {{ product.name }}
-      .Searchbar__result--bottom
-        nuxt-link(:to="{ name: 'arama', query: { q: searchWord }}") Tum Sonuclari Goruntule
-
-
-      
+<template>
+  <div class="searchbar">
+    <div class="container">
+      <div class="searchbar-wrapper">
+        <div class="searchbar-title">
+          Tüm Kategoriler
+        </div>
+        <form class="searchbar__search--form">
+          <icon-search />
+          <input
+            v-model="searchWord"
+            class="searchbar__search--form-input"
+            type="text"
+            name="firstname"
+            placeholder="Markette ürün ara..."
+            autocomplete="off"
+            @keyup="searchProducts"
+            @blur="closeResult"
+          >
+          <button class="searchbar__search--form-btn" type="submit">Ara</button>
+        </form>
+      </div>
+      <div
+        v-if="searchbarProducts"
+        class="Searchbar__result"
+        :class="{ activeResult: activeResult }"
+      >
+        <div
+          v-for="product in searchbarProducts"
+          class="Searchbar__result--item"
+        >
+          <nuxt-link
+            :to="{
+              name: 'u-id',
+              params: { id: slugUrl(product.name) },
+              query: { p: product.id }
+            }"
+          >
+            {{ product.name }}
+          </nuxt-link>
+        </div>
+        <div class="Searchbar__result--bottom">
+          <nuxt-link
+            :to="{ name: 'arama', query: { q: searchWord } }"
+          >
+            Tum Sonuclari Goruntule
+          </nuxt-link>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { setTimeout } from "timers";
+import { setTimeout } from 'timers'
+import { mapGetters } from 'vuex'
+import { iconSearch } from '../components/icons'
 
 export default {
-  name: "SearchBar",
-  data() {
+  name: 'SearchBar',
+  components: {
+    iconSearch,
+  },
+  data () {
     return {
-      searchWord: "",
+      searchWord: '',
       activeResult: false
-    };
+    }
   },
   computed: {
-    ...mapGetters(["searchbarProducts"]),
-    productUrl() {
-      return product =>
-        `${this.turkishtoEnglish(
-          product.name.toLowerCase().replace(/\s+/g, "-")
-        )}`;
+    ...mapGetters(['searchbarProducts'])
+  },
+  watch: {
+    $route () {
+      this.activeResult = false
+      this.searchWord = ''
     }
   },
   methods: {
-    searchProducts() {
+    searchProducts () {
       if (this.searchWord.length >= 3) {
-        this.activeResult = true;
-        this.$store.dispatch("getProductsForSeachbar", this.searchWord);
+        this.activeResult = true
+        this.$store.dispatch('getProductsForSeachbar', this.searchWord)
       } else {
-        this.activeResult = false;
+        this.activeResult = false
       }
     },
-    turkishtoEnglish(str) {
-      return str
-        .replace(/\ğ+/g, "g")
-        .replace(/\ü+/g, "u")
-        .replace(/\ş+/g, "s")
-        .replace(/\ı+/g, "i")
-        .replace(/\ö+/g, "o")
-        .replace(/\ç+/g, "c");
-    },
-    closeResult() {
+    closeResult () {
       setTimeout(() => {
-        this.activeResult = false;
-      }, 100);
-    }
-  },
-  watch: {
-    $route() {
-      this.activeResult = false;
-      this.searchWord = "";
+        this.activeResult = false
+      }, 100)
     }
   }
-};
+}
 </script>
 
-
 <style lang="scss" scoped>
-@import "assets/style/main.scss";
-
-.Searchbar {
+.searchbar {
   position: relative;
-  &__search {
+  background-color: $grey-color;
+  padding: 1.2rem 0;
 
+  &-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &-title {
+    color: #fff;
+    padding: 0 3rem;
+    margin-right: 5.5rem;
+    min-width: 19rem;
+  }
+  &__search {
     @include res(tab) {
       margin-left: 1rem;
       margin-right: auto;
@@ -89,13 +120,24 @@ export default {
     &--form {
       display: flex;
       justify-content: center;
+      align-items: center;
+      width: 50%;
+
+      .icon {
+        fill: $primary-color;
+        height: 20px;
+        margin-right: -30px;
+        z-index: 1;
+        position: relative;
+      }
 
       &-input {
-        padding: 1rem 2rem;
-        border: 1px solid #ddd;
+        padding: 1.5rem 2rem;
+        padding-left: 4rem;
         border-right: none;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
+        border-radius: 0;
+        border-top-left-radius: $sm-radius;
+        border-bottom-left-radius: $sm-radius;
         font-size: 1.4rem;
         outline: none;
         width: 100%;
@@ -109,15 +151,6 @@ export default {
         &:focus {
           border: 1px solid $primary-color;
         }
-
-        @include res(tab) {
-          width: 20rem;
-          padding: 0.8rem 2rem;
-          font-size: 1.2rem;
-        }
-        @include res(tab-land) {
-          width: 25rem;
-        }
       }
 
       &-btn {
@@ -128,6 +161,8 @@ export default {
         border-bottom-right-radius: 5px;
         border-left: none;
         cursor: pointer;
+        min-width: 8rem;
+        align-self: stretch;
       }
     }
   }

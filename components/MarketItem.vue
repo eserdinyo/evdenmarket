@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`/market/${slugUrl}/${market.id}`">
+  <nuxt-link :to="`/market/${slugUrl(market.name)}/${market.id}`">
     <div class="Market">
       <div class="Market__top">
         <img class="Market__resim" :src="market.imageUrl">
@@ -24,16 +24,13 @@
 </template>
 
 <script>
-import slugify from 'slugify'
 import iconTime from '@/assets/icons/time'
-import iconMoto from '@/assets/icons/moto'
 import iconAdress from '@/assets/icons/address'
 import iconMoney from '@/assets/icons/money'
 
 export default {
   components: {
     iconTime,
-    iconMoto,
     iconAdress,
     iconMoney
   },
@@ -41,13 +38,6 @@ export default {
     market: {
       type: Object,
       required: true
-    }
-  },
-  computed: {
-    slugUrl () {
-      return slugify(this.market.name, {
-        lower: true
-      })
     }
   }
 }

@@ -93,21 +93,7 @@ export default {
       'loggedUser',
       'activeLogin',
       'activeRegister'
-    ]),
-    getName() {
-      if (this.loggedUser.given_name || this.loggedUser.name) {
-        if (this.loggedUser.given_name) {
-          return this.loggedUser.given_name
-        } else {
-          return this.loggedUser.name.split(' ')[0]
-        }
-      }
-    }
-  },
-  created() {
-    if (this.isLoggedIn) {
-      this.$store.dispatch('getShopcart', this.loggedUser)
-    }
+    ])
   },
   methods: {
     toggleNav() {

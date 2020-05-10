@@ -1,36 +1,35 @@
-<template lang="pug">
-    .List
-      Category
-      .container
-        Product(v-for="product in products",
-       :product="product",
-       :key="product.id")
-
-      
+<template>
+  <div class="List">
+    <div class="container">
+      <Product
+        v-for="product in products"
+        :key="product.id"
+        :product="product"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-import Category from "@/components/Category";
-import Product from "@/components/Product";
+import { mapGetters } from 'vuex'
+import Product from '@/components/Product'
 
-import { mapGetters } from "vuex";
 export default {
   components: {
-    Category,
     Product
   },
   computed: {
-    ...mapGetters(["products"])
+    ...mapGetters(['products'])
   },
-  created() {
-    const cid = this.$route.params.id;
-    this.$store.dispatch("getProductsWithCategory", cid);
+  created () {
+    const cid = this.$route.params.id
+    this.$store.dispatch('getProductsWithCategory', cid)
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "assets/style/main.scss";
+@import 'assets/style/main.scss';
 
 .container {
   max-width: 120rem;
