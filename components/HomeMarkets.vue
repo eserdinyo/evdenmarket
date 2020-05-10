@@ -90,7 +90,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     border-bottom: $border;
     background-size: cover;
     background-position: center;

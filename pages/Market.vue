@@ -1,7 +1,7 @@
 <template>
   <div class="market-detail">
     <search-bar />
-    <div class="container">
+    <div class="container relative">
       <div class="market-detail-top">
         <market-nav />
         <div class="market-detail-right">
@@ -35,7 +35,7 @@ export default {
     ProductsGroup,
     CategoryProducts
   },
-  data () {
+  data() {
     return {
       title: 'Marketler - Evdenmarket',
       market: {
@@ -52,14 +52,15 @@ export default {
           products: [
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
               name: 'Doritos Extreme Mısır Cips',
               quantity: 2,
               price: 5.75,
               id: 2
-            }, {
+            },
+            {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08019131/08019131-2d55b9.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08019131/08019131-2d55b9.jpg',
               name: 'Pepsi Mango Aromalı Kola',
               quantity: 2,
               price: 2.75,
@@ -67,7 +68,7 @@ export default {
             },
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08089800/08089800-e3ed39.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08089800/08089800-e3ed39.jpg',
               name: 'Migros Kavrulmuş Fındık',
               quantity: 2,
               price: 14.75,
@@ -75,7 +76,7 @@ export default {
             },
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07010763/eti-crax-cubuk-kraker-150-gr-feaa93.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07010763/eti-crax-cubuk-kraker-150-gr-feaa93.jpg',
               name: 'Eti Crax Çubuk Kraker 95 G',
               quantity: 2,
               price: 1.25,
@@ -89,14 +90,15 @@ export default {
           products: [
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
               name: 'Doritos Extreme Mısır Cips',
               quantity: 2,
               price: 5.75,
               id: 2
-            }, {
+            },
+            {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08019131/08019131-2d55b9.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08019131/08019131-2d55b9.jpg',
               name: 'Pepsi Mango Aromalı Kola',
               quantity: 2,
               price: 2.75,
@@ -104,7 +106,7 @@ export default {
             },
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08089800/08089800-e3ed39.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08089800/08089800-e3ed39.jpg',
               name: 'Migros Kavrulmuş Fındık',
               quantity: 2,
               price: 14.75,
@@ -112,7 +114,7 @@ export default {
             },
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07010763/eti-crax-cubuk-kraker-150-gr-feaa93.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07010763/eti-crax-cubuk-kraker-150-gr-feaa93.jpg',
               name: 'Eti Crax Çubuk Kraker 95 G',
               quantity: 2,
               price: 1.25,
@@ -126,14 +128,15 @@ export default {
           products: [
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07019728/eti-form-atistirmalik-zeytinli-28-g-5cd9c7.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07019728/eti-form-atistirmalik-zeytinli-28-g-5cd9c7.jpg',
               name: 'Eti Form Atıştırmalık Zeytinli',
               quantity: 2,
               price: 1.75,
               id: 2
-            }, {
+            },
+            {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/27270000/muz-yerli-kg-9d3d01.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/27270000/muz-yerli-kg-9d3d01.jpg',
               name: 'Muz Yerli Kg',
               quantity: 2,
               price: 12.75,
@@ -141,15 +144,15 @@ export default {
             },
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/11015053/11015053-4fc8a1.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/11015053/11015053-4fc8a1.jpg',
               name: 'Pınar Süt Protein Kakaolu',
               quantity: 2,
-              price: 3.50,
+              price: 3.5,
               id: 9
             },
             {
               image:
-            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07040173/07040173-025e62.jpg',
+                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07040173/07040173-025e62.jpg',
               name: 'Züber Glutensiz Protein Barı',
               quantity: 2,
               price: 3.75,
@@ -186,7 +189,7 @@ export default {
       ]
     }
   },
-  head () {
+  head() {
     return {
       title: this.title,
       meta: [
@@ -204,6 +207,9 @@ export default {
 <style lang="scss">
 .market-detail {
   margin-bottom: 14rem !important;
+  .relative {
+    position: relative;
+  }
   &-top {
     display: grid;
     grid-template-columns: 20% 80%;

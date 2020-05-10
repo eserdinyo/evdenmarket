@@ -3,7 +3,12 @@
     <div class="container">
       <div class="searchbar-wrapper">
         <div class="searchbar-title">
-          Tüm Kategoriler
+          <ham-menu
+            color="#fff"
+            :is-navbar-open="isNavbarOpen"
+            @click.native="openNav"
+          />
+          <span>Tüm Kategoriler</span>
         </div>
         <form class="searchbar__search--form">
           <icon-search />
@@ -40,9 +45,7 @@
           </nuxt-link>
         </div>
         <div class="Searchbar__result--bottom">
-          <nuxt-link
-            :to="{ name: 'arama', query: { q: searchWord } }"
-          >
+          <nuxt-link :to="{ name: 'arama', query: { q: searchWord } }">
             Tum Sonuclari Goruntule
           </nuxt-link>
         </div>
@@ -54,17 +57,20 @@
 <script>
 import { setTimeout } from 'timers'
 import { mapGetters } from 'vuex'
-import { iconSearch } from '../components/icons'
+import { iconSearch } from './icons'
+import HamMenu from './HamMenu'
 
 export default {
   name: 'SearchBar',
   components: {
     iconSearch,
+    HamMenu
   },
   data () {
     return {
       searchWord: '',
-      activeResult: false
+      activeResult: false,
+      isNavbarOpen: false
     }
   },
   computed: {
@@ -76,7 +82,14 @@ export default {
       this.searchWord = ''
     }
   },
+  beforeDestroy () {
+    this.$nuxt.$off('open-navbar')
+  },
   methods: {
+    openNav () {
+      this.$nuxt.$emit('open-navbar')
+      this.isNavbarOpen = !this.isNavbarOpen
+    },
     searchProducts () {
       if (this.searchWord.length >= 3) {
         this.activeResult = true
@@ -107,21 +120,20 @@ export default {
 
   &-title {
     color: #fff;
-    padding: 0 3rem;
-    margin-right: 5.5rem;
-    min-width: 19rem;
+    display: flex;
+    align-items: center;
+    margin-right: 3rem;
+
+    span {
+      margin-left: 2rem;
+      display: none;
+    }
   }
   &__search {
-    @include res(tab) {
-      margin-left: 1rem;
-      margin-right: auto;
-    }
-
     &--form {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50%;
 
       .icon {
         fill: $primary-color;
@@ -216,5 +228,24 @@ export default {
   .Searchbar__search--form-input:focus
   .Searchbar__result {
   background-color: red;
+}
+
+@include res(desktop) {
+  .searchbar {
+    &-title {
+      margin-right: 5rem;
+      min-width: 19rem;
+      padding: 0 1.5rem;
+      span {
+        display: block !important;
+      }
+    }
+
+    &__search {
+      &--form {
+        width: 50%;
+      }
+    }
+  }
 }
 </style>
