@@ -1,5 +1,5 @@
 <template>
-  <div class="market-slider"></div>
+  <div class="market-slider" />
 </template>
 
 <script>
