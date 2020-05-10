@@ -48,10 +48,6 @@ export default {
 <style lang="scss">
 @import "@/assets/style/main.scss";
 
-.Slider {
-  margin-top: 1rem;
-}
-
 .swal-button {
   background-color: $primary-color;
 }
