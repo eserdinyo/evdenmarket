@@ -9,7 +9,7 @@
       <div class="product-name">{{ product.name }}</div>
       <div class="product-price">{{ product.price.toFixed(2) }} TL</div>
       <button class="btn btn-empty" @click.prevent="add">
-        <p>SEPETE EKLE</p>
+        SEPETE EKLE
       </button>
     </div>
   </nuxt-link>
@@ -34,7 +34,7 @@ export default {
         this.$store
           .dispatch('cart/add', {
             marketproduct_id: this.product.id,
-            quantity: 2
+            quantity: 1
           })
           .then((res) => {
             this.alert('SEPETE EKLENDİ', 'Ürününüz sepetinize eklendi. Ödeme işlemi için sepetinize giderbilirsiniz', 'success')
@@ -55,7 +55,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
   transition: 0.1s;
   cursor: pointer;
   transition: all 0.2s;
@@ -74,7 +74,7 @@ export default {
     text-align: center;
     margin-bottom: auto;
     font-size: 1.4rem;
-    height: 25px;
+    height: 50px;
   }
 
   &-price {
@@ -106,6 +106,20 @@ export default {
       fill: $primary-color;
       height: auto;
       width: 25px;
+    }
+  }
+}
+
+@include res(desktop) {
+  .product {
+    padding: 2rem;
+
+    &_category {
+      padding: 1rem 2rem;
+    }
+
+    &-name {
+      height: 25px;
     }
   }
 }

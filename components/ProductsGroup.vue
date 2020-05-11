@@ -34,12 +34,13 @@ export default {
       swiperOptions: {
         loop: true,
         speed: 1000,
+        grabCursor: true,
         spaceBetween: 20,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
-        slidesPerView: this.$device.isMobile ? 1 : 4,
+        slidesPerView: this.$device.isMobile ? 2 : 4,
         autoplay: {
           delay: 3000,
           disableOnInteraction: false

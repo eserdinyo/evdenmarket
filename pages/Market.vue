@@ -128,22 +128,6 @@ export default {
           products: [
             {
               image:
-                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07019728/eti-form-atistirmalik-zeytinli-28-g-5cd9c7.jpg',
-              name: 'Eti Form Atıştırmalık Zeytinli',
-              quantity: 2,
-              price: 1.75,
-              id: 2
-            },
-            {
-              image:
-                'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/27270000/muz-yerli-kg-9d3d01.jpg',
-              name: 'Muz Yerli Kg',
-              quantity: 2,
-              price: 12.75,
-              id: 4
-            },
-            {
-              image:
                 'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/11015053/11015053-4fc8a1.jpg',
               name: 'Pınar Süt Protein Kakaolu',
               quantity: 2,
@@ -206,13 +190,22 @@ export default {
 
 <style lang="scss">
 .market-detail {
-  margin-bottom: 14rem !important;
+  margin-bottom: 4rem !important;
   .relative {
     position: relative;
   }
   &-top {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 100%;
+  }
+}
+
+@include res(desktop) {
+  .market-detail {
+    margin-bottom: 14rem !important;
+    &-top {
+      grid-template-columns: 20% 80%;
+    }
   }
 }
 </style>

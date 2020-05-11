@@ -30,6 +30,7 @@
     border: 1px solid $primary-color;
     border-radius: $radius * 2;
     transition: all .2s;
+    background-color: transparent;
 
     &:hover {
       background-color: $primary-color;

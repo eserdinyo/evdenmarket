@@ -23,14 +23,14 @@ export const mutations = {
 }
 
 export const actions = {
-  add ({ commit, }, payload) {
+  add ({ dispatch }, payload) {
     const promise = this.$axios.$post('cart', {
       marketproduct_id: payload.marketproduct_id,
       quantity: payload.quantity
     })
 
     promise.then((res) => {
-      // commit('loggedIn', res.data)
+      dispatch('fetch')
     })
 
     return promise

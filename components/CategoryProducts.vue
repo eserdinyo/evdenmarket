@@ -4,7 +4,7 @@
       <div class="category-products-title">
         {{ categoryData.title }}
       </div>
-      <img :src="categoryData.image" alt="">
+      <img :src="categoryData.image" alt="" />
     </div>
     <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
       <swiper-slide v-for="(n, idx) in 3" :key="idx">
@@ -17,7 +17,10 @@
           />
         </div>
       </swiper-slide>
-      <div slot="pagination" class="swiper-pagination swiper-pagination-category" />
+      <div
+        slot="pagination"
+        class="swiper-pagination swiper-pagination-category"
+      />
     </swiper>
   </div>
 </template>
@@ -34,14 +37,15 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       swiperOptions: {
         loop: true,
         autoplay: {
           delay: 3000,
-          disableOnInteraction: false
+          disableOnInteraction: true
         },
+        grabCursor: true,
         pagination: {
           el: '.swiper-pagination-category',
           dynamicBullets: false,
@@ -90,38 +94,41 @@ export default {
 <style lang="scss">
 .category-products {
   margin-bottom: 6rem !important;
-  &-title {
-    font-size: 2rem;
-    font-weight: 500;
-    color: #fff;
-    position: absolute;
-    left: 30px;
-    bottom: 25px;
-    font-weight: 600;
-  }
-
-  height: 48rem;
+  height: 50rem;
   margin: 2rem 0;
   box-shadow: $shadow;
-  border: $border;
   border-radius: $radius;
   background: #fff;
   transition: all 0.2s;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   overflow: hidden;
+
+  .swiper-pagination-category {
+    bottom: 0 !important;
+  }
+
+  &-title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #fff;
+    position: absolute;
+    left: 20px;
+    bottom: 8px;
+    font-weight: 600;
+  }
 
   &-left {
     position: relative;
     width: 100%;
     &:before {
-      content:'';
+      content: '';
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 80px;
-      background:rgba(0, 0, 0, 0.591);
+      height: 40px;
+      background: rgba(0, 0, 0, 0.591);
     }
     img {
       object-fit: cover;
@@ -133,6 +140,29 @@ export default {
   &-right {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@include res(desktop) {
+  .category-products {
+    grid-template-columns: 1fr 1fr;
+    height: 48rem;
+
+    &-title {
+      bottom: 25px;
+      font-size: 2rem;
+      left: 30px;
+    }
+
+    &-left {
+      &:before {
+        height: 80px;
+      }
+    }
+
+    .swiper-pagination-category {
+      bottom: 10px !important;
+    }
   }
 }
 </style>
