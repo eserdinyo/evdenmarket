@@ -131,7 +131,6 @@ export default {
       this.selectedAddressId = id;
       this.order.address = id;
       this.addressWarning = false;
-      console.log(id);
     },
     makeTimeActive(id, hour) {
       this.selectedTime = id;

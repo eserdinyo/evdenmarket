@@ -1,7 +1,7 @@
 <template>
   <div class="market-slider">
     <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
-      <swiper-slide v-for="n in 4">
+      <swiper-slide v-for="(n, idx) in 4" :key="idx">
         <div class="market-slider-img-wrapper">
           <img
             class="market-slider-img"

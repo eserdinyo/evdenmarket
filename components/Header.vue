@@ -97,7 +97,6 @@ export default {
   },
   methods: {
     toggleNav() {
-      console.log('dsds')
       this.isNavbarOpen = !this.isNavbarOpen
     },
     openAuthModal() {

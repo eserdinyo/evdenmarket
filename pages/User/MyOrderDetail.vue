@@ -57,7 +57,6 @@ export default {
 
     this.$store.dispatch("getOrders", { user: this.loggedUser }).then(res => {
       this.order = this.getOrder(orderid);
-      console.log(this.order);
     });
 
     this.$store.dispatch("getOrderDetails", { orderid, user: this.loggedUser });

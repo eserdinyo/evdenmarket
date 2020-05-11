@@ -111,7 +111,6 @@ export default {
     city (val) {
       this.$axios(`cities/${val.id}`).then((res) => {
         this.districts = res.data
-        console.log(res)
       })
       this.district = ''
       this.neighborhood = ''
@@ -137,7 +136,6 @@ export default {
       this.isOpenMarketBox = false
     },
     toggleMarketBox () {
-      console.log('l;lds')
       this.isOpenMarketBox = !this.isOpenMarketBox
     }
   }
