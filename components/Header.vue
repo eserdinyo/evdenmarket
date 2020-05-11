@@ -48,7 +48,7 @@
             <button v-if="isLoggedIn" class="btn btn-green btn-desktop-cart">
               <span>SEPETİM</span>
               <icon-shop-cart />
-              <div class="Header__amount" @click="goCart">2</div>
+              <div class="Header__amount" @click="goCart">{{ count }}</div>
             </button>
             <app-cart class="cart-box-active" />
           </div>
@@ -77,7 +77,7 @@ export default {
     ProfilMenu
   },
   mixins: [clickaway],
-  data() {
+  data () {
     return {
       isOpen: true,
       isClose: false,
@@ -86,35 +86,36 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'itemCount',
-      'totalPrice',
-      'isCartOpen',
-      'loggedUser',
-      'activeLogin',
-      'activeRegister'
-    ])
+    ...mapGetters({
+      count: 'cart/count'
+    })
+  },
+  created () {
+    this.init()
   },
   methods: {
-    toggleNav() {
+    toggleNav () {
       this.isNavbarOpen = !this.isNavbarOpen
     },
-    openAuthModal() {
+    openAuthModal () {
       this.$modal.show('auth-modal')
     },
-    closeProfil() {
+    closeProfil () {
       this.isProfilOpen = false
     },
-    goPath() {
+    goPath () {
       this.isLoggedIn
         ? this.$router.push({ name: 'hesabim' })
         : this.$router.push({ name: 'giris' })
     },
-    toggleProfil() {
+    toggleProfil () {
       this.isProfilOpen = !this.isProfilOpen
     },
-    goCart() {
+    goCart () {
       this.$router.push({ name: 'sepetim' })
+    },
+    init () {
+      this.$store.dispatch('cart/fetch')
     }
   }
 }

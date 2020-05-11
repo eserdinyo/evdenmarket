@@ -1,59 +1,45 @@
 import _ from 'lodash'
 
 export const state = () => ({
-  totalPrice: 0,
-  isCartOpen: false,
-  shopcart: [{
-    image: 'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07150087/nutella-go-52-gr-5e1f3e.jpg',
-    name: 'Nutella Go 52 G',
-    quantity: 2,
-    price: 5.75,
-    productid: 2
-  },
-  {
-    image: 'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05090023/05090023-f4ba19.jpg',
-    name: 'Dankek Lokmalık Hindistan Cevizli 160 G',
-    quantity: 3,
-    price: 3.75,
-    productid: 3
-  },
-  {
-    image: 'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/03118004/03118004-e54fa0.jpg',
-    name: 'Doğuş Tiryaki Çay 1000 G',
-    quantity: 1,
-    price: 25.75,
-    productid: 5
-  }]
+  data: []
 })
 
 export const getters = {
-  itemCount: state =>
-    state.shopcart
+  count: state =>
+    state.data
       .map(product => product.quantity)
       .reduce((sum, current) => sum + current, 0),
-  shopcart: state => _.uniqBy(state.shopcart, 'productid'),
-  isCartOpen: state => state.isCartOpen,
-  totalPrice: state =>
-    state.shopcart
-      .map(item => item.price * item.quantity)
+  items: state => _.uniqBy(state.data, 'id'),
+  amount: state =>
+    state.data
+      .map(item => 20 * item.quantity) // will be change
       .reduce((sum, current) => sum + current, 0)
 }
 
 export const mutations = {
-  setShopcart (state, shopcart) {
-    state.shopcart = shopcart
+  set (state, payload) {
+    state.data = payload
   }
 }
 
 export const actions = {
-  add ({ commit }, payload) {
-    const promise = this.$axios.$post('/cart', {
+  add ({ commit, }, payload) {
+    const promise = this.$axios.$post('cart', {
       marketproduct_id: payload.marketproduct_id,
       quantity: payload.quantity
     })
 
     promise.then((res) => {
       // commit('loggedIn', res.data)
+    })
+
+    return promise
+  },
+  fetch ({ commit }, payload) {
+    const promise = this.$axios('cart')
+
+    promise.then((res) => {
+      commit('set', res.data)
     })
 
     return promise

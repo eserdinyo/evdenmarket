@@ -1,19 +1,19 @@
 <template>
-  <div class="Cart" :class="{ emptyCart: itemCount == 0 }">
+  <div class="Cart" :class="{ emptyCart: count == 0 }">
     <div class="Cart__header">
       <p v-if="true" class="Cart__header--info">
-        Sepetinizede ({{ itemCount }}) ürün bulunmaktadır.
+        Sepetinizede ({{ count }}) ürün bulunmaktadır.
       </p>
       <a
         v-if="true"
         class="btn_sepet"
       >Sepete Git</a>
     </div>
-    <div class="Cart__bottom" :class="{ emptyCartBottom: itemCount == 0 }">
+    <div class="Cart__bottom" :class="{ emptyCartBottom: count == 0 }">
       <div v-if="false" class="Cart__empty">
         <p>Sepetiniz Boş</p>
       </div>
-      <div v-for="(product, idx) in shopcart" :key="idx" class="Cart__item">
+      <div v-for="(product, idx) in items" :key="idx" class="Cart__item">
         <img class="Cart__item--image" :src="product.image">
         <p class="Cart__item--name">{{ product.name }}</p>
         <div class="Cart__item--quantity">
@@ -39,8 +39,8 @@ import iconDelete from '@/assets/icons/delete'
 export default {
   computed: {
     ...mapGetters({
-      shopcart: 'cart/shopcart',
-      itemCount: 'cart/itemCount'
+      items: 'cart/items',
+      count: 'cart/count'
     })
   },
   methods: {

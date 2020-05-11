@@ -44,7 +44,7 @@ module.exports = {
   },
   env: {
     SITE_URL: process.env.SITE_URL,
-    BASE_URL: 'http://localhost:8081/api'
+    BASE_URL: 'http://evdenmarket.test/api/'
   },
   proxy: {
     '/api': {
@@ -71,7 +71,7 @@ module.exports = {
    ** Axios module configuration
    */
   axios: {
-    baseURL: 'http://127.0.0.1:8000/api'
+    baseURL: 'http://evdenmarket.test/api'
   },
   /*
    ** Build configuration
