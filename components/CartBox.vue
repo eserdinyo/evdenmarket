@@ -13,18 +13,18 @@
       <div v-if="false" class="Cart__empty">
         <p>Sepetiniz Boş</p>
       </div>
-      <div v-for="(product, idx) in items" :key="idx" class="Cart__item">
-        <img class="Cart__item--image" :src="product.image">
-        <p class="Cart__item--name">{{ product.name }}</p>
+      <div v-for="(item, idx) in items" :key="idx" class="Cart__item">
+        <img class="Cart__item--image" :src="item.market_product.product.image">
+        <p class="Cart__item--name">{{ item.market_product.product.name }}</p>
         <div class="Cart__item--quantity">
-          <button @click="changeQuantity(product, 'dec')">-</button>
-          <div class="Cart__item--quantity-title">{{ product.quantity }}</div>
-          <button @click="changeQuantity(product, 'inc')">+</button>
+          <button @click="changeQuantity(item, 'dec')">-</button>
+          <div class="Cart__item--quantity-title">{{ item.quantity }}</div>
+          <button @click="changeQuantity(item, 'inc')">+</button>
         </div>
         <p class="Cart__item--price">
-          {{ (product.price * product.quantity).toFixed(2) }} TL
+          {{ (item.market_product.price * item.quantity).toFixed(2) }} TL
         </p>
-        <a class="Cart__item--delete" @click="deleteProduct(product)">
+        <a class="Cart__item--delete" @click="deleteProduct(item)">
           <iconDelete />
         </a>
       </div>

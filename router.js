@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import MarketInformation from './pages/MarketInformation'
 import Markets from '@/pages/Markets'
 import Market from '@/pages/Market'
+import Category from '@/pages/Category'
 
 Vue.use(Router)
 
@@ -26,6 +27,11 @@ export function createRouter () {
         path: '/market/:name/:id',
         name: 'Market',
         component: Market
+      },
+      {
+        path: '/kategori/:id',
+        name: 'Kategori',
+        component: Category
       },
       {
         path: '/bilgilendirme',

@@ -50,7 +50,7 @@ export default {
 <style lang="scss">
 .product {
   border: $border;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   border-radius: $radius;
   display: flex;
   flex-direction: column;

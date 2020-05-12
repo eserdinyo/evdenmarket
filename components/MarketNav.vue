@@ -4,9 +4,9 @@
       <div class="market-nav-icon">
         <icon-fish />
       </div>
-      <div to="/" class="market-nav-link">
+      <nuxt-link to="/kategori/2" class="market-nav-link">
         Et, Balık, Tavuk
-      </div>
+      </nuxt-link>
       <div class="market-nav-right-icon">
         <icon-right-arrow />
       </div>
@@ -49,7 +49,7 @@ export default {
   position: absolute;
   top: 0;
   left: -400px;
-  width: 100%;
+  width: 70%;
   margin-right: 0 !important;
   z-index: 9;
   background-color: $grey-color;
@@ -83,6 +83,7 @@ export default {
 
   &-right-icon {
     margin-left: auto;
+    display: none;
     .icon {
       fill: #f9f9f9;
       height: 10px;
@@ -109,6 +110,7 @@ export default {
     border-top-right-radius: $radius;
     border-bottom-right-radius: $radius;
     z-index: 9;
+    opacity: 0;
 
     &-link {
       margin: 1rem 0;
@@ -127,9 +129,17 @@ export default {
 
 @include res(desktop) {
   .market-nav {
-    width: 210px;
+    width: 100%;
     margin-right: 2rem;
     position: static;
+
+    &-right-icon {
+      display: block;
+    }
+
+    &-submenu {
+      opacity: 1;
+    }
   }
 }
 </style>
