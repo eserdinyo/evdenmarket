@@ -129,7 +129,7 @@ export default {
 
 @include res(desktop) {
   .market-nav {
-    width: 100%;
+    width: 210px;
     margin-right: 2rem;
     position: static;
 
