@@ -4,10 +4,13 @@
       <p v-if="count > 0" class="Cart__header--info">
         Sepetinizede ({{ count }}) ürün bulunmaktadır.
       </p>
-      <a
+      <nuxt-link
         v-if="count > 0"
+        to="/sepetim"
         class="btn_sepet"
-      >Sepete Git</a>
+      >
+        Sepete Git
+      </nuxt-link>
     </div>
     <div class="Cart__bottom" :class="{ emptyCartBottom: count == 0 }">
       <div v-if="count == 0" class="Cart__empty">

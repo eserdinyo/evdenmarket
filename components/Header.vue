@@ -44,7 +44,7 @@
             <div v-if="$device.isMobile && isLoggedIn" class="iconMobil" @click="goCart">
               <icon-shop-cart />
             </div>
-            <div v-if="$device.isMobile" class="Header__amount" @click="goCart">2</div>
+            <div v-if="$device.isMobile" class="Header__amount" @click="goCart">3</div>
             <button v-if="isLoggedIn" class="btn btn-green btn-desktop-cart">
               <span>SEPETİM</span>
               <icon-shop-cart />
@@ -112,7 +112,7 @@ export default {
       this.isProfilOpen = !this.isProfilOpen
     },
     goCart () {
-      this.$router.push({ name: 'sepetim' })
+      this.$router.push('/sepetim')
     },
     init () {
       if (this.isLoggedIn) {

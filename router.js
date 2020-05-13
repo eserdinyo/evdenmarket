@@ -8,6 +8,9 @@ import Markets from '@/pages/Markets'
 import Market from '@/pages/Market'
 import Category from '@/pages/Category'
 
+// profil pages
+import Cart from './pages/profil/Cart'
+
 Vue.use(Router)
 
 export function createRouter () {
@@ -32,6 +35,11 @@ export function createRouter () {
         path: '/kategori/:id',
         name: 'Kategori',
         component: Category
+      },
+      {
+        path: '/sepetim',
+        name: 'Sepet',
+        component: Cart
       },
       {
         path: '/bilgilendirme',

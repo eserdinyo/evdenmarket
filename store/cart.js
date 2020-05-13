@@ -10,10 +10,10 @@ export const getters = {
       .map(product => product.quantity)
       .reduce((sum, current) => sum + current, 0),
   items: state => _.uniqBy(state.data, 'id'),
-  amount: state =>
+  total: state =>
     state.data
-      .map(item => 20 * item.quantity) // will be change
-      .reduce((sum, current) => sum + current, 0)
+      .map(item => item.market_product.price * item.quantity) // will be change
+      .reduce((sum, current) => sum + current, 0).toFixed(2)
 }
 
 export const mutations = {
