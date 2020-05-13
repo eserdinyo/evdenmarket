@@ -29,8 +29,6 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 24px;
-  height: 24px;
 }
 .lds-ring div {
   box-sizing: border-box;

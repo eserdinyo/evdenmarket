@@ -10,7 +10,7 @@
             Süt, Kahvaltılık
           </div>
           <div class="category-page-right">
-            <product v-for="(n, idx) in 20" :key="idx" :product="product" />
+            <product v-for="(product, idx) in products" :key="idx" :product="product" />
           </div>
         </div>
       </div>
@@ -34,14 +34,29 @@ export default {
   },
   data () {
     return {
-      product: {
-        image:
-          'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
-        name: 'Doritos Extreme Mısır Cips',
-        quantity: 2,
-        price: 5.75,
-        id: 2
-      },
+      products: [
+        {
+          image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
+          name: 'Doritos Extreme Mısır Cips',
+          price: 2.75,
+          marketproduct_id: 3
+        },
+        {
+          image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
+          name: 'Doritos Extreme Mısır Cips',
+          price: 3.75,
+          marketproduct_id: 4
+        },
+        {
+          image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
+          name: 'Doritos Extreme Mısır Cips',
+          price: 4.75,
+          marketproduct_id: 5
+        }
+      ],
       title: 'Süt, Kahvaltılık - Onur Market'
     }
   },
@@ -93,7 +108,7 @@ export default {
       padding: 2rem;
       grid-template-columns: repeat(4, 1fr);
     }
-     &-title {
+    &-title {
       margin: 2rem;
       margin-top: 3rem;
       font-size: 2.4rem;

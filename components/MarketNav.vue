@@ -1,12 +1,12 @@
 <template>
   <div class="market-nav" :class="{ activeNav: isNavOpen }">
-    <nuxt-link v-for="(n, idx) in 9" :key="idx" to="/" class="market-nav-item">
+    <nuxt-link v-for="(n, idx) in 9" :key="idx" to="/kategori/2" class="market-nav-item">
       <div class="market-nav-icon">
         <icon-fish />
       </div>
-      <nuxt-link to="/kategori/2" class="market-nav-link">
+      <div class="market-nav-link">
         Et, Balık, Tavuk
-      </nuxt-link>
+      </div>
       <div class="market-nav-right-icon">
         <icon-right-arrow />
       </div>
