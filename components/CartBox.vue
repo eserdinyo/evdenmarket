@@ -1,16 +1,16 @@
 <template>
   <div class="Cart" :class="{ emptyCart: count == 0 }">
     <div class="Cart__header">
-      <p v-if="true" class="Cart__header--info">
+      <p v-if="count > 0" class="Cart__header--info">
         Sepetinizede ({{ count }}) ürün bulunmaktadır.
       </p>
       <a
-        v-if="true"
+        v-if="count > 0"
         class="btn_sepet"
       >Sepete Git</a>
     </div>
     <div class="Cart__bottom" :class="{ emptyCartBottom: count == 0 }">
-      <div v-if="false" class="Cart__empty">
+      <div v-if="count == 0" class="Cart__empty">
         <p>Sepetiniz Boş</p>
       </div>
       <div v-for="(item, idx) in items" :key="idx" class="Cart__item">

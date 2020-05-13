@@ -115,7 +115,9 @@ export default {
       this.$router.push({ name: 'sepetim' })
     },
     init () {
-      this.$store.dispatch('cart/fetch')
+      if (this.isLoggedIn) {
+        this.$store.dispatch('cart/fetch')
+      }
     }
   }
 }

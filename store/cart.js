@@ -44,40 +44,23 @@ export const actions = {
 
     return promise
   },
-  deleteFromShopcart ({ commit }, payload) {
-    const id = payload.product.id
-    const userid = payload.user.sub || payload.user.id
-
-    return new Promise((resolve, reject) => {
-      http
-        .delete('/shopcart', {
-          data: { id, userid }
-        })
-        .then((res) => {
-          resolve(res)
-        })
-        .catch((err) => {
-          reject(err)
-        })
+  update ({ dispatch }, payload) {
+    const promise = this.$axios.$put(`cart/${payload.id}`, {
+      type: payload.type
     })
+    promise.then((res) => {
+      dispatch('fetch')
+    })
+
+    return promise
   },
-  getShopcart ({ commit }, user) {
-    const userid = user.sub || user.id
+  delete ({ dispatch }, payload) {
+    const promise = this.$axios.$delete(`cart/${payload.id}`)
 
-    return new Promise((resolve, reject) => {
-      http
-        .get('/shopcart', {
-          params: {
-            userid
-          }
-        })
-        .then((res) => {
-          commit('setShopcart', res.data)
-          resolve(res)
-        })
-        .catch((err) => {
-          reject(401)
-        })
+    promise.then((res) => {
+      dispatch('fetch')
     })
+
+    return promise
   }
 }

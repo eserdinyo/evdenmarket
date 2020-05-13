@@ -9,7 +9,7 @@
       <div class="product-name">{{ product.name }}</div>
       <div class="product-price">{{ product.price.toFixed(2) }} TL</div>
       <button
-        v-if="productQuantity == 0"
+        v-if="!cartProduct"
         class="btn btn-empty"
         :disabled="isLoading"
         @click.prevent="add"
@@ -18,11 +18,14 @@
         <loading :is-loading="isLoading" />
       </button>
       <div v-else class="product-counter">
-        <button>
+        <button v-if="cartProduct.quantity > 1" @click.prevent="updateQuantity('dec')">
           <icon-minus />
         </button>
-        <span>{{ productQuantity }}</span>
-        <button>
+        <button v-else class="remove" @click.prevent="remove">
+          <icon-trash />
+        </button>
+        <span>{{ cartProduct.quantity }}</span>
+        <button @click.prevent="updateQuantity('inc')">
           <icon-plus />
         </button>
       </div>
@@ -32,12 +35,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { iconMinus, iconPlus } from '@/components/icons'
+import { iconMinus, iconPlus, iconTrash } from '@/components/icons'
 
 export default {
   components: {
     iconMinus,
-    iconPlus
+    iconPlus,
+    iconTrash
   },
   props: {
     product: {
@@ -58,9 +62,9 @@ export default {
     ...mapGetters({
       items: 'cart/items'
     }),
-    productQuantity () {
+    cartProduct () {
       const product = this.items.find(item => item.marketproduct_id === this.product.marketproduct_id)
-      if (product) { return product.quantity } else { return 0 }
+      return product
     }
   },
   methods: {
@@ -80,10 +84,28 @@ export default {
               'success'
             )
             this.isLoading = false
+          }).catch(() => {
+            this.isLoading = false
+            this.alert(
+              'HATA',
+              'Sepete eklerken bir hata ile oluştu.',
+              'error'
+            )
           })
       } else {
         this.$modal.show('auth-modal')
       }
+    },
+    updateQuantity (type) {
+      this.$store.dispatch('cart/update', {
+        type,
+        id: this.cartProduct.id
+      })
+    },
+    remove (type) {
+      this.$store.dispatch('cart/delete', {
+        id: this.cartProduct.id
+      })
     }
   }
 }
@@ -130,7 +152,7 @@ export default {
     margin: 0 auto;
     margin-top: 2rem;
     width: 138px;
-    height: 34px;
+    height: 36px;
   }
 
   &_category {
@@ -158,10 +180,16 @@ export default {
     align-items: center;
     justify-content: space-between;
     border: 1px solid $primary-color;
-    padding: .5rem 2rem;
+    padding: 4px 2rem;
     border-radius: $radius * 2;
     transition: all .2s;
     margin-top: 2rem;
+
+    .remove {
+      .icon {
+        fill: $red-color;
+      }
+    }
 
     span {
       background-color: $primary-color;
@@ -175,6 +203,8 @@ export default {
       justify-content:center;
       align-items:center;
       cursor: pointer;
+      outline: 0;
+      background-color: transparent;
     }
 
     .btn-green {

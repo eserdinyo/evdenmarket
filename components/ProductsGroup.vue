@@ -43,7 +43,7 @@ export default {
         slidesPerView: this.$device.isMobile ? 2 : 4,
         autoplay: {
           delay: 3000,
-          disableOnInteraction: false
+          disableOnInteraction: true
         },
         pagination: {
           el: '.swiper-pagination',

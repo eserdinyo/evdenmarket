@@ -163,6 +163,7 @@ export default {
             })
             .then((res) => {
               this.isLoading = false
+              this.$store.dispatch('cart/fetch')
               this.$modal.hide('auth-modal')
             })
             .catch(() => {

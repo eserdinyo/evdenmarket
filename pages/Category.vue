@@ -36,6 +36,7 @@ export default {
     return {
       products: [
         {
+          id: 2,
           image:
             'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
           name: 'Doritos Extreme Mısır Cips',
@@ -43,6 +44,7 @@ export default {
           marketproduct_id: 3
         },
         {
+          id: 4,
           image:
             'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
           name: 'Doritos Extreme Mısır Cips',
@@ -50,6 +52,7 @@ export default {
           marketproduct_id: 4
         },
         {
+          id: 77,
           image:
             'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
           name: 'Doritos Extreme Mısır Cips',
