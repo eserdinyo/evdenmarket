@@ -20,7 +20,7 @@
         <div class="CartBox__item--left">
           <p class="CartBox__item--name">{{ item.marketproduct.product.name }}</p>
           <p class="CartBox__item--price">
-            {{ (item.marketproduct.price * item.quantity).toFixed(2) }} TL
+            {{ item.marketproduct.price }} ₺
           </p>
         </div>
         <product-counter :product="item" />

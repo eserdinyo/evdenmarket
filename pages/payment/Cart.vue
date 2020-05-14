@@ -23,7 +23,7 @@
                 {{ item.marketproduct.product.name }}
               </nuxt-link>
               <p class="Cart__item--price">
-                {{ (item.marketproduct.price * item.quantity).toFixed(2) }} ₺
+                {{ item.marketproduct.price }} ₺
               </p>
             </div>
             <product-counter :product="item" />
