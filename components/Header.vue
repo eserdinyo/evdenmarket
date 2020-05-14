@@ -41,10 +41,10 @@
             <profil-menu class="profil-card-active" />
           </button>
           <div class="Header__cart">
-            <div v-if="$device.isMobile && isLoggedIn" class="iconMobil" @click="goCart">
+            <div v-if="$device.isMobile" class="iconMobil" @click="goCart">
               <icon-shop-cart />
             </div>
-            <div v-if="$device.isMobile" class="Header__amount" @click="goCart">3</div>
+            <div v-if="$device.isMobile && isLoggedIn" class="Header__amount" @click="goCart">{{ count }}</div>
             <button v-if="isLoggedIn" class="btn btn-green btn-desktop-cart">
               <span>SEPETİM</span>
               <icon-shop-cart />
@@ -112,7 +112,11 @@ export default {
       this.isProfilOpen = !this.isProfilOpen
     },
     goCart () {
-      this.$router.push('/sepetim')
+      if (this.isLoggedIn) {
+        this.$router.push('/sepetim')
+      } else {
+        this.$modal.show('auth-modal')
+      }
     },
     init () {
       if (this.isLoggedIn) {
@@ -252,9 +256,10 @@ export default {
   }
   &__cart {
     position: relative;
-    margin-left: 0.5rem;
     z-index: 1;
     cursor: pointer;
+    padding-top: 5px;
+    padding-right: 5px;
 
     .icon {
       fill: $font-color;
@@ -264,8 +269,8 @@ export default {
   }
   &__amount {
     position: absolute;
-    right: -1rem;
-    top: -1rem;
+    right: -4px;
+    top: -4px;
     background: $primary-color;
     height: 2.2rem;
     width: 2.2rem;
@@ -486,6 +491,8 @@ export default {
 
     &__cart {
       position: relative;
+      padding: 0;
+      margin-left: 5px;
 
       &::after {
         content: '';

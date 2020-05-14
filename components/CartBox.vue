@@ -1,35 +1,29 @@
 <template>
-  <div class="Cart" :class="{ emptyCart: count == 0 }">
-    <div class="Cart__header">
-      <p v-if="count > 0" class="Cart__header--info">
+  <div class="CartBox" :class="{ emptyCart: count == 0 }">
+    <div class="CartBox__header">
+      <p v-if="count > 0" class="CartBox__header--info">
         Sepetinizede ({{ count }}) ürün bulunmaktadır.
       </p>
-      <nuxt-link
-        v-if="count > 0"
-        to="/sepetim"
-        class="btn_sepet"
-      >
+      <nuxt-link v-if="count > 0" to="/sepetim" class="btn_sepet">
         Sepete Git
       </nuxt-link>
     </div>
-    <div class="Cart__bottom" :class="{ emptyCartBottom: count == 0 }">
-      <div v-if="count == 0" class="Cart__empty">
+    <div class="CartBox__bottom" :class="{ emptyCartBottom: count == 0 }">
+      <div v-if="count == 0" class="CartBox__empty">
         <p>Sepetiniz Boş</p>
       </div>
-      <div v-for="(item, idx) in items" :key="idx" class="Cart__item">
-        <img class="Cart__item--image" :src="item.market_product.product.image">
-        <p class="Cart__item--name">{{ item.market_product.product.name }}</p>
-        <div class="Cart__item--quantity">
-          <button @click="changeQuantity(item, 'dec')">-</button>
-          <div class="Cart__item--quantity-title">{{ item.quantity }}</div>
-          <button @click="changeQuantity(item, 'inc')">+</button>
+      <div v-for="(item, idx) in items" :key="idx" class="CartBox__item">
+        <img
+          class="CartBox__item--image"
+          :src="item.marketproduct.product.image"
+        />
+        <div class="CartBox__item--left">
+          <p class="CartBox__item--name">{{ item.marketproduct.product.name }}</p>
+          <p class="CartBox__item--price">
+            {{ (item.marketproduct.price * item.quantity).toFixed(2) }} TL
+          </p>
         </div>
-        <p class="Cart__item--price">
-          {{ (item.market_product.price * item.quantity).toFixed(2) }} TL
-        </p>
-        <a class="Cart__item--delete" @click="deleteProduct(item)">
-          <iconDelete />
-        </a>
+        <product-counter :product="item" />
       </div>
     </div>
   </div>
@@ -38,8 +32,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import iconDelete from '@/assets/icons/delete'
+import ProductCounter from '@/components/ProductCounter'
 
 export default {
+  components: {
+    iconDelete,
+    ProductCounter
+  },
   computed: {
     ...mapGetters({
       items: 'cart/items',
@@ -47,14 +46,14 @@ export default {
     })
   },
   methods: {
-    deleteProduct (product) {
+    deleteProduct(product) {
       this.$store
         .dispatch('deleteFromShopcart', { product, user: this.user })
         .then((res) => {
           this.$store.dispatch('getShopcart', this.user)
         })
     },
-    changeQuantity (product, changeType) {
+    changeQuantity(product, changeType) {
       product.id = product.productid
       product.changeType = changeType
 
@@ -65,28 +64,23 @@ export default {
             user: this.user
           })
           .then((res) => {
-            this.$store
-              .dispatch('getShopcart', this.user)
-              .then((res) => {})
+            this.$store.dispatch('getShopcart', this.user).then((res) => {})
           })
       } else {
         this.$router.push('/login')
       }
     }
-  },
-  components: {
-    iconDelete
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.Cart {
+<style lang="scss">
+.CartBox {
   display: none;
 }
 
 @include res(desktop) {
-  .Cart {
+  .CartBox {
     user-select: none;
     display: none;
     position: absolute;
@@ -144,9 +138,14 @@ export default {
       align-items: center;
       padding: 1.5rem 1rem;
       margin-left: 10px;
+      padding-right: 2rem;
 
       &:not(:last-child) {
         border-bottom: $border;
+      }
+
+      &--left {
+        padding-left: 1rem;
       }
 
       &--image {
@@ -155,9 +154,8 @@ export default {
 
       &--name {
         font-size: 1.1rem;
-        margin-left: 1rem;
-        margin-right: 2rem;
         width: 20rem;
+        margin-bottom: 5px;
       }
       &--quantity {
         font-size: 1.3rem;
@@ -184,19 +182,12 @@ export default {
         }
       }
       &--price {
-        margin-right: 1rem;
         font-size: 1.3rem;
-        text-align: right;
         font-weight: 700;
-        width: 9rem;
+        color: $primary-color;
       }
     }
   }
-}
-
-.btn__icon--delete {
-  fill: #aaa;
-  cursor: pointer;
 }
 
 .btn_sepet {
@@ -224,16 +215,16 @@ export default {
 }
 
 //SCROLLBAR
-.Cart__bottom::-webkit-scrollbar-track {
+.CartBox__bottom::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
-.Cart__bottom::-webkit-scrollbar {
+.CartBox__bottom::-webkit-scrollbar {
   width: 8px;
   background-color: #fff;
 }
 
-.Cart__bottom::-webkit-scrollbar-thumb {
+.CartBox__bottom::-webkit-scrollbar-thumb {
   border-radius: 5px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: $primary-color;

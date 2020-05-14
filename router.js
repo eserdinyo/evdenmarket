@@ -2,14 +2,14 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // pages
-import Home from './pages/Home'
-import MarketInformation from './pages/MarketInformation'
+import Home from '@/pages/Home'
+import MarketInformation from '@/pages/MarketInformation'
 import Markets from '@/pages/Markets'
 import Market from '@/pages/Market'
 import Category from '@/pages/Category'
 
 // profil pages
-import Cart from './pages/profil/Cart'
+import Cart from '@/pages/payment/Cart'
 
 Vue.use(Router)
 

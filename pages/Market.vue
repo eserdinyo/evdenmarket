@@ -94,7 +94,8 @@ export default {
               name: 'Doritos Extreme Mısır Cips',
               quantity: 2,
               price: 5.75,
-              id: 2
+              id: 2,
+              marketproduct_id: 2
             },
             {
               image:
@@ -102,7 +103,8 @@ export default {
               name: 'Pepsi Mango Aromalı Kola',
               quantity: 2,
               price: 2.75,
-              id: 4
+              id: 4,
+              marketproduct_id: 9
             },
             {
               image:
@@ -110,7 +112,8 @@ export default {
               name: 'Migros Kavrulmuş Fındık',
               quantity: 2,
               price: 14.75,
-              id: 5
+              id: 5,
+              marketproduct_id: 12
             },
             {
               image:
@@ -118,7 +121,8 @@ export default {
               name: 'Eti Crax Çubuk Kraker 95 G',
               quantity: 2,
               price: 1.25,
-              id: 5
+              id: 5,
+              marketproduct_id: 20
             }
           ]
         },
@@ -132,7 +136,8 @@ export default {
               name: 'Pınar Süt Protein Kakaolu',
               quantity: 2,
               price: 3.5,
-              id: 9
+              id: 9,
+              marketproduct_id: 2
             },
             {
               image:
@@ -140,7 +145,8 @@ export default {
               name: 'Züber Glutensiz Protein Barı',
               quantity: 2,
               price: 3.75,
-              id: 19
+              id: 19,
+              marketproduct_id: 12
             }
           ]
         }
@@ -152,7 +158,8 @@ export default {
           name: 'Nutella Go 52 G',
           quantity: 2,
           price: 5.75,
-          id: 2
+          id: 2,
+          marketproduct_id: 20
         },
         {
           image:
@@ -160,7 +167,8 @@ export default {
           name: 'Dankek Lokmalık Hindistan Cevizli 160 G',
           quantity: 3,
           price: 3.75,
-          id: 3
+          id: 3,
+          marketproduct_id: 90
         },
         {
           image:
@@ -168,12 +176,13 @@ export default {
           name: 'Doğuş Tiryaki Çay 1000 G',
           quantity: 1,
           price: 25.75,
-          id: 5
+          id: 5,
+          marketproduct_id: 12
         }
       ]
     }
   },
-  head() {
+  head () {
     return {
       title: this.title,
       meta: [

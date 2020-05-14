@@ -84,12 +84,12 @@ export default {
     margin-bottom: 2rem;
     border: $border;
     border-color: transparent;
-    cursor: pointer;
     transition: all 0.2s;
+    cursor: default;
 
     &:hover {
       border-color: $primary-color;
-      border-radius: $sm-radius;
+      border-radius: $radius;
     }
   }
 

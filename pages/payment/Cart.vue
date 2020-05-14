@@ -1,7 +1,7 @@
 <template>
   <div class="Cart">
     <div class="container">
-      <div v-if="count != 0" class="Cart__top">
+      <div v-if="true" class="Cart__top">
         <p class="Cart__top--title">
           Sepetiniz<span class="Cart__top--item_count">({{ count }} ürün)</span>
         </p>
@@ -9,28 +9,24 @@
       <div v-if="count != 0" class="Cart__content">
         <div class="Cart__middle">
           <div v-for="(item, idx) in items" :key="idx" class="Cart__item">
-            <img
-              class="Cart__item--image"
-              :src="item.market_product.product.image"
-            />
+            <div class="Cart__item--image-wrapper">
+              <img
+                class="Cart__item--image"
+                :src="item.marketproduct.product.image"
+              >
+            </div>
             <div class="Cart__item--left">
               <nuxt-link
                 class="Cart__item--name"
-                :to="`/urun/${slugUrl(item.market_product.product.name)}`"
+                :to="`/urun/${slugUrl(item.marketproduct.product.name)}`"
               >
-                {{ item.market_product.product.name }}
+                {{ item.marketproduct.product.name }}
               </nuxt-link>
               <p class="Cart__item--price">
-                {{ (item.market_product.price * item.quantity).toFixed(2) }} ₺
+                {{ (item.marketproduct.price * item.quantity).toFixed(2) }} ₺
               </p>
             </div>
-            <div class="Cart__item--quantity">
-              <button @click="changeQuantity(item, 'dec')">-</button>
-              <div class="Cart__item--quantity-title">
-                {{ item.quantity }}
-              </div>
-              <button @click="changeQuantity(item, 'inc')">+</button>
-            </div>
+            <product-counter :product="item" />
           </div>
         </div>
         <div v-if="count != 0" class="Cart__bottom">
@@ -43,23 +39,25 @@
           </nuxt-link>
         </div>
       </div>
-      <transition name="slide" mode="out-in">
-        <div v-if="count == 0" class="Cart__empty">
-          <p class="Cart__empty--title">Sepetinizte ürün bulunmamaktadır.</p>
-          <nuxt-link class="Cart__bottom--btn" to="/">
-            Alışvere Devam Et
-          </nuxt-link>
-        </div>
-      </transition>
+      <div v-if="count == 0" class="Cart__empty">
+        <p class="Cart__empty--title">Sepetinizte ürün bulunmamaktadır.</p>
+        <nuxt-link class="btn btn-green" to="/">
+          Alışvere Devam Et
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import iconDelete from '@/assets/icons/delete'
+import ProductCounter from '@/components/ProductCounter'
 
 export default {
+  layout: 'cart-layout',
+  components: {
+    ProductCounter
+  },
   computed: {
     ...mapGetters({
       items: 'cart/items',
@@ -68,14 +66,14 @@ export default {
     })
   },
   methods: {
-    deleteProduct(product) {
+    deleteProduct (product) {
       this.$store
         .dispatch('deleteFromShopcart', { product, user: this.loggedUser })
         .then((res) => {
           this.$store.dispatch('getShopcart', this.loggedUser)
         })
     },
-    changeQuantity(product, changeType) {
+    changeQuantity (product, changeType) {
       product.id = product.productid
       product.changeType = changeType
 
@@ -89,7 +87,7 @@ export default {
         })
     }
   },
-  head() {
+  head () {
     return {
       title: 'Sepetim | Evdenmarket',
       meta: [
@@ -100,83 +98,17 @@ export default {
         }
       ]
     }
-  },
-  components: {
-    iconDelete
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .Cart {
+  margin-top: 4rem;
+
   &__content {
     padding-top: 1rem;
   }
-
-  &__item {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-
-    &:not(:last-child) {
-      border-bottom: $border;
-    }
-
-    &--left {
-      text-align: left;
-      padding-left: 1rem;
-    }
-
-    &--image {
-      width: 20%;
-      @include res(tab-land) {
-        width: 10%;
-      }
-    }
-
-    &--name {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
-    &--quantity {
-      font-size: 1.2rem;
-      margin-left: auto;
-      margin-right: 1rem;
-      display: flex;
-      align-items: center;
-      border: 1px solid $primary-color;
-      border-radius: 3px;
-      background-color: $primary-color;
-
-      &-title {
-        text-align: center;
-        background-color: #fff;
-        padding: 0.3rem 0.8rem;
-      }
-
-      button {
-        padding: 0.3rem 0.5rem;
-        background: none;
-        color: #fff;
-        cursor: pointer;
-        outline: none;
-      }
-    }
-    &--price {
-      font-size: 1.4rem;
-      color: $primary-color;
-      font-weight: bold;
-    }
-
-    &--delete {
-      margin-left: 2rem;
-    }
-  }
-}
-
-.Cart {
-  margin-top: 4rem;
 
   &__top {
     &--title {
@@ -255,30 +187,85 @@ export default {
     }
   }
 
-  &__content {
-    @include res(tab-land) {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
   &__empty {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 3rem;
+    padding: 0 3rem;
 
     &--title {
       margin-top: 5rem;
       text-align: center;
-      font-size: 2rem;
+      font-size: 1.4rem;
       margin-bottom: 2rem;
       color: $font-color;
     }
   }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+
+    &:not(:last-child) {
+      border-bottom: $border;
+    }
+
+    &--left {
+      text-align: left;
+      padding-left: 1rem;
+    }
+
+    &--image {
+      height: 7rem;
+      width: auto;
+      &-wrapper {
+        width: 7rem;
+        height: 7rem;
+        text-align: center;
+      }
+    }
+
+    &--name {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    &--quantity {
+      font-size: 1.2rem;
+      margin-left: auto;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      border: 1px solid $primary-color;
+      border-radius: 3px;
+      background-color: $primary-color;
+
+      &-title {
+        text-align: center;
+        background-color: #fff;
+        padding: 0.3rem 0.8rem;
+      }
+
+      button {
+        padding: 0.3rem 0.5rem;
+        background: none;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+      }
+    }
+    &--price {
+      font-size: 1.4rem;
+      color: $primary-color;
+      font-weight: bold;
+    }
+
+    &--delete {
+      margin-left: 2rem;
+    }
+  }
 }
 
-.btn__icon--delete {
-  fill: #aaa;
-  cursor: pointer;
-}
 </style>

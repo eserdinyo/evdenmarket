@@ -17,31 +17,18 @@
         <span v-if="!isLoading">SEPETE EKLE</span>
         <loading :is-loading="isLoading" />
       </button>
-      <div v-else class="product-counter">
-        <button v-if="cartProduct.quantity > 1" @click.prevent="updateQuantity('dec')">
-          <icon-minus />
-        </button>
-        <button v-else class="remove" @click.prevent="remove">
-          <icon-trash />
-        </button>
-        <span>{{ cartProduct.quantity }}</span>
-        <button @click.prevent="updateQuantity('inc')">
-          <icon-plus />
-        </button>
-      </div>
+      <product-counter v-else :product="cartProduct" />
     </div>
   </nuxt-link>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { iconMinus, iconPlus, iconTrash } from '@/components/icons'
+import ProductCounter from '@/components/ProductCounter'
 
 export default {
   components: {
-    iconMinus,
-    iconPlus,
-    iconTrash
+    ProductCounter
   },
   props: {
     product: {
@@ -71,18 +58,12 @@ export default {
     add () {
       if (this.isLoggedIn) {
         this.isLoading = true
-
         this.$store
           .dispatch('cart/add', {
             marketproduct_id: this.product.marketproduct_id,
             quantity: 1
           })
           .then((res) => {
-            this.alert(
-              'SEPETE EKLENDİ',
-              'Ürününüz sepetinize eklendi. Ödeme işlemi için sepetinize giderbilirsiniz',
-              'success'
-            )
             this.isLoading = false
           }).catch(() => {
             this.isLoading = false
@@ -95,17 +76,6 @@ export default {
       } else {
         this.$modal.show('auth-modal')
       }
-    },
-    updateQuantity (type) {
-      this.$store.dispatch('cart/update', {
-        type,
-        id: this.cartProduct.id
-      })
-    },
-    remove (type) {
-      this.$store.dispatch('cart/delete', {
-        id: this.cartProduct.id
-      })
     }
   }
 }
@@ -172,53 +142,6 @@ export default {
       fill: $primary-color;
       height: auto;
       width: 25px;
-    }
-  }
-
-  &-counter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid $primary-color;
-    padding: 4px 2rem;
-    border-radius: $radius * 2;
-    transition: all .2s;
-    margin-top: 2rem;
-
-    .remove {
-      .icon {
-        fill: $red-color;
-      }
-    }
-
-    span {
-      background-color: $primary-color;
-      color: #fff;
-      padding: 2px 1.5rem;
-      border-radius: $sm-radius
-    }
-
-    button {
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      cursor: pointer;
-      outline: 0;
-      background-color: transparent;
-    }
-
-    .btn-green {
-      height: auto;
-      background-color: transparent;
-    }
-    input {
-      background-color: $primary-color;
-      color: #fff;
-      font-size: 1.4rem;
-    }
-    .icon {
-      height: 18px;
-      fill: $primary-color;
     }
   }
 }

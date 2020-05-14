@@ -12,7 +12,7 @@ export const getters = {
   items: state => _.uniqBy(state.data, 'id'),
   total: state =>
     state.data
-      .map(item => item.market_product.price * item.quantity) // will be change
+      .map(item => item.marketproduct.price * item.quantity) // will be change
       .reduce((sum, current) => sum + current, 0).toFixed(2)
 }
 
