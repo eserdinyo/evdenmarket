@@ -102,9 +102,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .Cart {
-  margin-top: 4rem;
+  margin-top: 2rem;
 
   &__content {
     padding-top: 1rem;
@@ -114,8 +114,8 @@ export default {
     &--title {
       font-size: 1.8rem;
       font-weight: 500;
-      border-bottom: $border;
       padding-bottom: 1rem;
+      margin-bottom: 3rem;
     }
 
     &--item_count {
@@ -268,4 +268,52 @@ export default {
   }
 }
 
+@include res(desktop) {
+  .Cart {
+    margin-top: 4rem;
+    &__content {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__middle {
+      width: 60%;
+      border: $border-2;
+      border-radius: $sm-radius;
+    }
+    &__item {
+      padding: 1rem 2rem;
+
+      &--left {
+        padding-left: 2rem;
+      }
+    }
+    &__bottom {
+      position: static;
+      z-index: 0;
+      flex-direction: column;
+      box-shadow: none;
+      border: $border-2;
+      border-radius: $sm-radius;
+      height: 15rem;
+
+      &--sepet {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+
+        &-title {
+          font-size: 16px;
+          margin-bottom: 0;
+          font-weight: 500;
+        }
+      }
+
+      .btn-green {
+        font-size: 16px;
+        width: 28rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
 </style>

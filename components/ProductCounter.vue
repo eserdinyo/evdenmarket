@@ -54,7 +54,9 @@ export default {
   padding: 4px 2rem;
   border-radius: $radius * 2;
   transition: all 0.2s;
+  margin: 0 auto;
   margin-top: 2rem;
+  width: 138px;
 
   .remove {
     .icon {
@@ -96,8 +98,9 @@ export default {
 .CartBox, .Cart {
   .product-counter {
     padding: 2px 1rem;
-    margin-top: 0rem;
+    margin: 0;
     margin-left: auto;
+    width: auto;
 
     span {
       padding: 2px 8px;

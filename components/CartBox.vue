@@ -138,7 +138,6 @@ export default {
       align-items: center;
       padding: 1.5rem 1rem;
       margin-left: 10px;
-      padding-right: 2rem;
 
       &:not(:last-child) {
         border-bottom: $border;

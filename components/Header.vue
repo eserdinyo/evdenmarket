@@ -45,11 +45,11 @@
               <icon-shop-cart />
             </div>
             <div v-if="$device.isMobile && isLoggedIn" class="Header__amount" @click="goCart">{{ count }}</div>
-            <button v-if="isLoggedIn" class="btn btn-green btn-desktop-cart">
+            <nuxt-link v-if="isLoggedIn" class="btn btn-green btn-desktop-cart" to="/sepetim" tag="button">
               <span>SEPETİM</span>
               <icon-shop-cart />
               <div class="Header__amount" @click="goCart">{{ count }}</div>
-            </button>
+            </nuxt-link>
             <app-cart class="cart-box-active" />
           </div>
         </div>
