@@ -229,10 +229,10 @@
               Küçük
             </div>
             <div class="pricing-desc">
-              Ayda <span>20</span> siparişe kadar ücretiz.
+              Ayda <span>50</span> siparişe kadar ücretiz.
               Lorem ipsum dolor sit amet.
             </div>
-            <div class="pricing-price">Ücretsiz</span></div>
+            <div class="pricing-price">Ücretsiz</div>
           </div>
           <div class="pricing-item">
             <div class="pricing-icon">
@@ -245,7 +245,7 @@
               Ayda <span>300</span> sipariş hakkı vardır.
               Lorem ipsum dolor sit amet.
             </div>
-            <div class="pricing-price">99₺ <span>ay</span></div>
+            <div class="pricing-price">49₺ <span>ay</span></div>
           </div>
           <div class="pricing-item">
             <div class="pricing-icon">
@@ -258,7 +258,7 @@
               <span>Sınırsız</span> sipariş hakkı vardır.
               Lorem ipsum dolor sit amet.
             </div>
-            <div class="pricing-price">199₺ <span>ay</span></div>
+            <div class="pricing-price">99₺ <span>ay</span></div>
           </div>
         </div>
       </div>
