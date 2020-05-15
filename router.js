@@ -7,9 +7,9 @@ import MarketInformation from '@/pages/MarketInformation'
 import Markets from '@/pages/Markets'
 import Market from '@/pages/Market'
 import Category from '@/pages/Category'
-
-// profil pages
 import Cart from '@/pages/payment/Cart'
+import Payment from '@/pages/payment/Payment'
+
 
 Vue.use(Router)
 
@@ -40,6 +40,11 @@ export function createRouter () {
         path: '/sepetim',
         name: 'Sepet',
         component: Cart
+      },
+      {
+        path: '/odeme',
+        name: 'Ödeme',
+        component: Payment
       },
       {
         path: '/bilgilendirme',

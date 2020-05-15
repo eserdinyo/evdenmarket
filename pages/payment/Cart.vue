@@ -34,7 +34,7 @@
             <p class="Cart__bottom--sepet-title">Toplam</p>
             <p class="Cart__bottom--sepet-price">{{ total }} ₺</p>
           </div>
-          <nuxt-link class="btn btn-green" to="/siparis">
+          <nuxt-link class="btn btn-green" to="/odeme">
             Sepeti Onayla
           </nuxt-link>
         </div>
@@ -115,7 +115,7 @@ export default {
       font-size: 1.8rem;
       font-weight: 500;
       padding-bottom: 1rem;
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
     }
 
     &--item_count {
@@ -128,7 +128,7 @@ export default {
   &__bottom {
     box-shadow: 0 -4px 8px #00000029;
     border-top: $border;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -206,7 +206,8 @@ export default {
   &__item {
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 0;
+    padding-right: 1rem;
 
     &:not(:last-child) {
       border-bottom: $border;
