@@ -1,50 +1,46 @@
-<template lang="pug">
-    .container
-      .Onay  
-        iconSuccess.Onay__icon
-        p.Onay__title SİPARİŞİN ALINDI.
-
+<template>
+  <div class="container">
+    <div class="Completed">
+      <iconSuccess class="Completed__icon" />
+      <p class="Completed__title">SİPARİŞİN ALINDI.</p>
+    </div>
+  </div>
 </template>
 
 <script>
-import iconSuccess from "@/assets/icons/success";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
+import iconSuccess from '@/assets/icons/success'
+
 export default {
-  head() {
-    return {
-      title: "Sipariş Onaylandi - Evdenmarket",
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: "My custom description"
-        }
-      ]
-    };
-  },
   components: {
     iconSuccess
   },
-  created() {
+  created () {
     this.$store
-      .dispatch("deleteShopcartAfterOrder", {
+      .dispatch('deleteShopcartAfterOrder', {
         user: this.user
       })
-      .then(res => {
-        this.$store.dispatch("getShopcart", this.user);
-      });
+      .then((res) => {
+        this.$store.dispatch('getShopcart', this.user)
+      })
+  },
+  head () {
+    return {
+      title: 'Tamamlandı - Evdenmarket',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
+    }
   }
-};
+}
 </script>
 
-<style lang="scss" scoped>
-@import "@/assets/style/main.scss";
-
-.container {
-  margin: 0 15px;
-}
-
-.Onay {
+<style lang="scss">
+.Completed {
   margin-top: 5rem;
   display: flex;
   flex-direction: column;

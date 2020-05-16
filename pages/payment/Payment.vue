@@ -1,131 +1,147 @@
 <template>
   <div class="container">
-    <div class="Address">
-      <div class="Address__top">
-        <p class="Address__title">TESLİMAT ADRESİ</p>
-        <a
-          v-if="false"
-          class="btn Address__top--btn"
-          @click="openModal"
-        ><span class="Address__top--plus">+</span>
-          <p>Adres Ekle</p>
-        </a>
-      </div>
-      <p v-if="addressWarning" class="Address__warning">Bir adres seçin</p>
-      <div
-        class="Address__item--top"
-        :class="{ activeAddress: 1 == selectedAddress }"
-        @click="makeAddresActive(1)"
-      >
-        <div>
-          <p class="Address__name">Okul</p>
-          <p class="Address__detay">
-            Turgut Reis Mh. Feshane Sk. No:38 D:10 K:5 <br>
-            Sultanbeyli/İstanbul
-          </p>
-        </div>
-      </div>
-      <div
-        class="Address__item--top"
-        :class="{ activeAddress: 2 == selectedAddress }"
-        @click="makeAddresActive(2)"
-      >
-        <div>
-          <p class="Address__name">Ev</p>
-          <p class="Address__detay">
-            Turgut Reis Mh. Feshane Sk. No:38 D:10 K:5 <br>
-            Sultanbeyli/İstanbul
-          </p>
-        </div>
-      </div>
-      <div v-if="false" class="Address__empty">
-        <p class="Address__empty--title">Kayıtlı bir adresiniz yok.</p>
-      </div>
-    </div>
-    <div class="Delivery">
-      <p class="Delivery__title">TESLİMAT ZAMANI</p>
-      <p v-if="serviceWarning" class="Delivery__warning">Servis saati seçin</p>
-      <div class="Delivery__times">
-        <div
-          class="Delivery__times--time"
-          :class="{ activeTime: 1 == selectedTime }"
-          @click="makeTimeActive(1, '12:00 - 13:00')"
-        >
-          12:00 - 13:00
-        </div>
-        <div
-          class="Delivery__times--time"
-          :class="{ activeTime: 2 == selectedTime }"
-          @click="makeTimeActive(2, '13:00 - 14:00')"
-        >
-          13:00 - 14:00
-        </div>
-        <div
-          class="Delivery__times--time"
-          :class="{ activeTime: 3 == selectedTime }"
-          @click="makeTimeActive(3, '14:00 - 15:00')"
-        >
-          14:00 - 15:00
-        </div>
-        <div
-          class="Delivery__times--time"
-          :class="{ activeTime: 4 == selectedTime }"
-          @click="makeTimeActive(4, '15:00 - 16:00')"
-        >
-          15:00 - 16:00
-        </div>
-        <div
-          class="Delivery__times--time"
-          :class="{ activeTime: 5 == selectedTime }"
-          @click="makeTimeActive(5, '16:00 - 17:00')"
-        >
-          16:00 - 17:00
-        </div>
-        <div
-          class="Delivery__times--time"
-          :class="{ activeTime: 6 == selectedTime }"
-          @click="makeTimeActive(6, '17:00 - 18:00')"
-        >
-          17:00 - 18:00
-        </div>
-      </div>
-    </div>
-    <div class="Order__note">
-      <div class="Order__note--title">SİPARİŞ NOTU</div>
-      <textarea v-model="order.note" class="Order__note--note" rows="4" />
-    </div>
-    <div class="Payment">
-      <p class="Payment__title">ÖDEME ŞEKLİ</p>
-      <p v-if="paymentWarning" class="Payment__warning">Ödeme yöntemi seçin</p>
-      <div class="Payment__types">
-        <div class="Payment__bottom">
-          <div
-            class="Payment__types--item"
-            :class="{ activePayment: 2 == selectedPayment }"
-            @click="selectPaymentType(2)"
-          >
-            <div class="Payment__types--item-title">Nakit</div>
-            <icon-cash />
+    <div class="Payment-wrapper">
+      <div class="Payment-wrapper-top">
+        <div class="Address">
+          <div class="Address__top">
+            <div class="title-wrapper">
+              <p class="title">TESLİMAT ADRESİ</p>
+              <p v-if="addressWarning" class="warning">
+                Bir adres seçin !
+              </p>
+            </div>
+            <a
+              v-if="false"
+              class="btn Address__top--btn"
+              @click="openModal"
+            ><span class="Address__top--plus">+</span>
+              <p>Adres Ekle</p>
+            </a>
           </div>
           <div
-            class="Payment__types--item"
-            :class="{ activePayment: 3 == selectedPayment }"
-            @click="selectPaymentType(3)"
+            class="Address__item--top"
+            :class="{ activeAddress: 1 == selectedAddress }"
+            @click="makeAddresActive(1)"
           >
-            <div class="Payment__types--item-title">Kredi/Banka Kartı</div>
-            <icon-pos />
+            <div>
+              <p class="Address__name">Okul</p>
+              <p class="Address__detay">
+                Turgut Reis Mh. Feshane Sk. No:38 D:10 K:5 <br>
+                Sultanbeyli/İstanbul
+              </p>
+            </div>
+          </div>
+          <div
+            class="Address__item--top"
+            :class="{ activeAddress: 2 == selectedAddress }"
+            @click="makeAddresActive(2)"
+          >
+            <div>
+              <p class="Address__name">Ev</p>
+              <p class="Address__detay">
+                Turgut Reis Mh. Feshane Sk. No:38 D:10 K:5 <br>
+                Sultanbeyli/İstanbul
+              </p>
+            </div>
+          </div>
+          <div v-if="false" class="Address__empty">
+            <p class="Address__empty--title">Kayıtlı bir adresiniz yok.</p>
+          </div>
+        </div>
+        <div class="Delivery">
+          <div class="title-wrapper">
+            <p class="title">TESLİMAT ZAMANI</p>
+            <p v-if="serviceWarning" class="warning">
+              Servis saati seçin
+            </p>
+          </div>
+          <div class="Delivery__times">
+            <div
+              class="Delivery__times--time"
+              :class="{ activeTime: 1 == selectedTime }"
+              @click="makeTimeActive(1, '12:00 - 13:00')"
+            >
+              12:00 - 13:00
+            </div>
+            <div
+              class="Delivery__times--time"
+              :class="{ activeTime: 2 == selectedTime }"
+              @click="makeTimeActive(2, '13:00 - 14:00')"
+            >
+              13:00 - 14:00
+            </div>
+            <div
+              class="Delivery__times--time"
+              :class="{ activeTime: 3 == selectedTime }"
+              @click="makeTimeActive(3, '14:00 - 15:00')"
+            >
+              14:00 - 15:00
+            </div>
+            <div
+              class="Delivery__times--time"
+              :class="{ activeTime: 4 == selectedTime }"
+              @click="makeTimeActive(4, '15:00 - 16:00')"
+            >
+              15:00 - 16:00
+            </div>
+            <div
+              class="Delivery__times--time"
+              :class="{ activeTime: 5 == selectedTime }"
+              @click="makeTimeActive(5, '16:00 - 17:00')"
+            >
+              16:00 - 17:00
+            </div>
+            <div
+              class="Delivery__times--time"
+              :class="{ activeTime: 6 == selectedTime }"
+              @click="makeTimeActive(6, '17:00 - 18:00')"
+            >
+              17:00 - 18:00
+            </div>
+          </div>
+        </div>
+        <div class="Order__note">
+          <div class="title">SİPARİŞ NOTU</div>
+          <textarea v-model="order.note" class="Order__note--note" rows="4" />
+        </div>
+        <div class="Payment">
+          <div class="title-wrapper">
+            <p class="title">ÖDEME ŞEKLİ</p>
+            <p v-if="paymentWarning" class="warning">
+              Ödeme yöntemi seçin
+            </p>
+          </div>
+          <div class="Payment__types">
+            <div class="Payment__bottom">
+              <div
+                class="Payment__types--item"
+                :class="{ activePayment: 2 == selectedPayment }"
+                @click="selectPaymentType(2)"
+              >
+                <div class="Payment__types--item-title">Nakit</div>
+                <icon-cash />
+              </div>
+              <div
+                class="Payment__types--item"
+                :class="{ activePayment: 3 == selectedPayment }"
+                @click="selectPaymentType(3)"
+              >
+                <div class="Payment__types--item-title">Kredi/Banka Kartı</div>
+                <icon-pos />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="Order">
-      <div class="Order--total">
-        <p class="Order--total-title">Toplam</p>
-        <p class="Order--total-price">{{ total }} ₺</p>
+      <div class="Order">
+        <div class="Order--total">
+          <p class="Order--total-title">Toplam</p>
+          <p class="Order--total-price">{{ total }} ₺</p>
+        </div>
+        <button class="btn btn-green" @click="makeOrder">
+          <p>Ödeme Yap</p>
+        </button>
       </div>
-      <button class="btn btn-green" @click="makeOrder">
-        <p>Ödeme Yap</p>
-      </button>
     </div>
     <addressModal />
   </div>
@@ -213,30 +229,15 @@ export default {
         this.serviceWarning = true
       }
       if (this.order.address && this.order.payment && this.order.service) {
-        this.$wait.start('btn')
-        this.isBtnDisabled = true
-        this.$store
-          .dispatch('addOrder', {
-            order: this.order,
-            user: this.loggedUser
-          })
-          .then((res) => {
-            this.shopcart.forEach((product) => {
-              this.$store.dispatch('addOrderDetail', {
-                orderid: res.data.id,
-                product,
-                user: this.loggedUser
-              })
-            })
-            this.isBtnDisabled = false
-            this.$router.push('/onay')
-          })
+        setTimeout(() => {
+          this.$router.push('/onay')
+        }, 1000)
       }
     }
   },
   head () {
     return {
-      title: 'Sipariş Onay - Evdenmarket',
+      title: 'Ödeme - Evdenmarket',
       meta: [
         {
           hid: 'description',
@@ -258,7 +259,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin-top: 3rem;
-    margin-bottom: 1.5rem;
 
     &--plus {
       font-size: 2rem;
@@ -280,9 +280,6 @@ export default {
       color: $font-color;
       margin-top: 1rem;
     }
-  }
-  &__title {
-    font-size: 13px;
   }
 
   &__btn {
@@ -357,21 +354,10 @@ export default {
   &__detay {
     font-size: 1.3rem;
   }
-
-  &__warning {
-    color: $red-color;
-    margin-bottom: 0.5rem;
-  }
 }
 
 .Delivery {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-
-  &__title {
-    font-size: 14px;
-    margin-bottom: 1.5rem;
-  }
+  margin: 3rem 0;
 
   &__times {
     display: grid;
@@ -387,20 +373,10 @@ export default {
       font-size: 13px;
     }
   }
-
-  &__warning {
-    color: $red-color;
-    margin-bottom: 0.5rem;
-  }
 }
 
 .Payment {
   margin-bottom: 12rem;
-  &__title {
-    font-size: 14px;
-    margin-bottom: 1.5rem;
-    margin-top: 2rem;
-  }
 
   &__top {
     p {
@@ -428,28 +404,11 @@ export default {
       cursor: pointer;
       user-select: none;
 
-      &-1 {
-        cursor: not-allowed;
-      }
-      &-soon {
-        font-size: 1.2rem;
-        margin-left: 0.5rem;
-      }
-      &-icon {
-        width: 25px;
-        fill: $font-color;
-      }
-
       .icon {
         height: 24px;
         fill: $font-color;
       }
     }
-  }
-
-  &__warning {
-    color: $red-color;
-    margin-bottom: 0.5rem;
   }
 }
 
@@ -480,10 +439,7 @@ export default {
     font-size: 2rem;
     display: flex;
     flex-direction: column;
-    &-title {
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
+
     &-price {
       font-weight: 500;
       color: $primary-color;
@@ -493,10 +449,7 @@ export default {
   }
 
   &__note {
-    &--title {
-      font-size: 14px;
-      margin-bottom: 1.5rem;
-    }
+    margin-bottom: 3rem;
 
     &--note {
       border: $border-2;
@@ -508,6 +461,64 @@ export default {
       &:focus {
         border-color: $primary-color;
       }
+    }
+  }
+}
+
+.Payment-wrapper {
+  .warning {
+    color: $red-color;
+    font-size: 12px;
+    margin-left: 1rem;
+  }
+
+  .title {
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+
+    &-wrapper {
+      display: flex;
+      align-items: baseline;
+    }
+  }
+}
+
+@include res(desktop) {
+  .Order {
+    position: static;
+    box-shadow: none;
+    z-index: 0;
+    flex-direction: column;
+    border: $border-2;
+    border-radius: $sm-radius;
+    height: 15rem;
+    margin-top: 7rem;
+
+    &--total {
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+
+      &-title {
+        font-size: 16px;
+        margin-bottom: 0;
+        font-weight: 500;
+      }
+    }
+
+    .btn-green {
+      font-size: 16px;
+      width: 28rem;
+      font-weight: bold;
+    }
+  }
+
+  .Payment-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    &-top {
+      width: 60%;
     }
   }
 }

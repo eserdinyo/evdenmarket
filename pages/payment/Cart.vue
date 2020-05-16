@@ -3,7 +3,7 @@
     <div class="container">
       <div v-if="true" class="Cart__top">
         <p class="Cart__top--title">
-          Sepetiniz<span class="Cart__top--item_count">({{ count }} ürün)</span>
+          SEPETİNİZ<span class="Cart__top--item_count"> ({{ count }} ürün)</span>
         </p>
       </div>
       <div v-if="count != 0" class="Cart__content">
@@ -104,23 +104,16 @@ export default {
 
 <style lang="scss">
 .Cart {
-  margin-top: 2rem;
-
-  &__content {
-    padding-top: 1rem;
-  }
+  margin-top: 3rem;
 
   &__top {
     &--title {
-      font-size: 1.8rem;
-      font-weight: 500;
-      padding-bottom: 1rem;
-      margin-bottom: 1rem;
+      font-size: 13px;
+      margin-bottom: 1.5rem;
     }
 
     &--item_count {
       font-size: 1.2rem;
-      margin-left: 1rem;
       font-weight: 400;
     }
   }
@@ -162,27 +155,6 @@ export default {
         color: $primary-color;
         font-size: 2.2rem;
         font-weight: bold;
-      }
-    }
-
-    &--btn {
-      margin-top: 1rem;
-      background: $primary-color;
-      padding: 1rem 2rem;
-      color: #fff;
-      border-radius: 5px;
-      text-align: center;
-      font-size: 2rem;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        background-color: $primary-color-hover;
-      }
-      @include res(tab-land) {
-        font-size: 1.4rem;
-        padding: 0.5rem 1rem;
-        margin-top: auto;
       }
     }
   }
@@ -271,7 +243,6 @@ export default {
 
 @include res(desktop) {
   .Cart {
-    margin-top: 4rem;
     &__content {
       display: flex;
       justify-content: space-between;

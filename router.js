@@ -7,8 +7,11 @@ import MarketInformation from '@/pages/MarketInformation'
 import Markets from '@/pages/Markets'
 import Market from '@/pages/Market'
 import Category from '@/pages/Category'
+
+// cart
 import Cart from '@/pages/payment/Cart'
 import Payment from '@/pages/payment/Payment'
+import Completed from '@/pages/payment/Completed'
 
 
 Vue.use(Router)
@@ -45,6 +48,11 @@ export function createRouter () {
         path: '/odeme',
         name: 'Ödeme',
         component: Payment
+      },
+      {
+        path: '/onay',
+        name: 'Tamamlandı',
+        component: Completed
       },
       {
         path: '/bilgilendirme',
