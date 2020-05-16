@@ -13,6 +13,8 @@ import Cart from '@/pages/payment/Cart'
 import Payment from '@/pages/payment/Payment'
 import Completed from '@/pages/payment/Completed'
 
+// profil
+import Orders from '@/pages/profil/Orders'
 
 Vue.use(Router)
 
@@ -53,6 +55,11 @@ export function createRouter () {
         path: '/onay',
         name: 'Tamamlandı',
         component: Completed
+      },
+      {
+        path: '/siparislerim',
+        name: 'Siparişlerim',
+        component: Orders
       },
       {
         path: '/bilgilendirme',

@@ -42,7 +42,6 @@ import sidebar from "@/components/Sidebar";
 import { mapGetters } from "vuex";
 
 export default {
-  middleware: "auth",
   head() {
     return {
       title: "Adreslerim | Evdenmarket",
