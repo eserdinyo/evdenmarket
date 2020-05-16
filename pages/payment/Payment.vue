@@ -523,6 +523,7 @@ export default {
   .Payment-wrapper {
     display: flex;
     justify-content: space-between;
+    margin-top: 3rem;
 
     &-top {
       width: 60%;

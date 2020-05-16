@@ -243,6 +243,7 @@ export default {
 
 @include res(desktop) {
   .Cart {
+    margin-top: 6rem;
     &__content {
       display: flex;
       justify-content: space-between;
