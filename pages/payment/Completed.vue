@@ -1,39 +1,35 @@
 <template>
   <div class="container">
     <div class="Completed">
-      <iconSuccess class="Completed__icon" />
-      <p class="Completed__title">SİPARİŞİN ALINDI.</p>
+      <icon-confirm />
+      <p class="title">SİPARİŞİNİZ ALINDI</p>
+
+      <div class="result">
+        <div>
+          <p class="result-title">Sipariş Numarası</p>
+          <p>71189313812</p>
+        </div>
+        <div>
+          <p class="result-title">Toplam Tutar</p>
+          <p>76,80 ₺</p>
+        </div>
+      </div>
+      <nuxt-link class="link" to="/">Siparişlerim</nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import iconSuccess from '@/assets/icons/success'
+import { iconConfirm } from '@/components/icons'
 
 export default {
+  layout: 'cart-layout',
   components: {
-    iconSuccess
-  },
-  created () {
-    this.$store
-      .dispatch('deleteShopcartAfterOrder', {
-        user: this.user
-      })
-      .then((res) => {
-        this.$store.dispatch('getShopcart', this.user)
-      })
+    iconConfirm
   },
   head () {
     return {
-      title: 'Tamamlandı - Evdenmarket',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'My custom description'
-        }
-      ]
+      title: 'Tamamlandı - Evdenmarket'
     }
   }
 }
@@ -41,21 +37,60 @@ export default {
 
 <style lang="scss">
 .Completed {
-  margin-top: 5rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  &__icon {
-    fill: $primary-color-dark;
-    height: 100px;
+  .icon {
+    height: 24rem;
+    margin-top: 2rem;
   }
-  &__title {
-    font-size: 2rem;
-    color: $primary-color-dark;
+
+  .title {
+    font-size: 16px;
+    color: $primary-color;
     text-align: center;
-    text-transform: uppercase;
+    margin-top: 2rem;
+    font-weight: 500;
+  }
+
+  .link {
     margin-top: 1rem;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+
+  .result {
+    width: 100%;
+    padding: 2rem;
+    border: $border;
+    border-radius: $sm-radius;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+    font-weight: 600;
+
+    &-title {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}
+
+@include res(desktop) {
+  .Completed {
+    margin-top: 6rem;
+    .icon {
+      height: 35rem;
+    }
+
+    .result {
+      max-width: 50rem;
+      padding: 2rem 3rem;
+      margin-top: 3rem;
+    }
   }
 }
 </style>

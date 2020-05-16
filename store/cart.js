@@ -62,5 +62,11 @@ export const actions = {
     })
 
     return promise
+  },
+  order ({ dispatch }, payload) {
+    const promise = this.$axios.$post('order')
+
+    console.log('ordered: ', payload)
+    return promise
   }
 }

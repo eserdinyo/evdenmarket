@@ -161,7 +161,7 @@ export default {
     }
 
     .swiper-pagination-category {
-      bottom: 10px !important;
+      bottom: 3px !important;
     }
   }
 }

@@ -138,37 +138,28 @@
           <p class="Order--total-title">Toplam</p>
           <p class="Order--total-price">{{ total }} ₺</p>
         </div>
-        <button class="btn btn-green" @click="makeOrder">
-          <p>Ödeme Yap</p>
+        <button class="btn btn-green" :disabled="isLoading" @click="validate">
+          <span v-if="!isLoading">Ödeme Yap</span>
+          <loading :is-loading="isLoading" />
         </button>
       </div>
     </div>
-    <addressModal />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import addressModal from '@/components/AddressModal'
 import { iconCash, iconPos } from '@/components/icons'
 
 export default {
   layout: 'cart-layout',
-  filters: {
-    lowerCase: (val) => {
-      if (!val) {
-        return ''
-      }
-      return val.toLowerCase()
-    }
-  },
   components: {
-    addressModal,
     iconCash,
     iconPos
   },
   data () {
     return {
+      isLoading: false,
       addresses: [],
       isBtnDisabled: false,
       selectedAddress: '',
@@ -182,19 +173,16 @@ export default {
         service: '',
         payment: '',
         note: '',
-        address: ''
+        address: '',
+        items: []
       }
     }
   },
   computed: {
     ...mapGetters({
       items: 'cart/items',
-      count: 'cart/count',
       total: 'cart/total'
     })
-  },
-  created () {
-    this.$store.dispatch('getAddresses', this.loggedUser)
   },
   methods: {
     makeAddresActive (id) {
@@ -213,25 +201,44 @@ export default {
       this.paymentWarning = false
     },
     openModal () {
-      this.$store.commit('openModal', true)
-      document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+      console.log('open address modal')
     },
 
     makeOrder () {
-      this.order.total = this.totalPrice
+      this.order.total = this.total
+      this.order.items = this.items
+
+      this.isLoading = true
+      this.$store.dispatch('cart/order', { order: this.order }).then((res) => {
+        setTimeout(() => {
+          this.$store.dispatch('cart/fetch')
+          this.$router.push('/onay')
+        }, 1000)
+      }).catch(() => {
+        setTimeout(() => {
+          this.$store.dispatch('cart/fetch')
+          this.$router.push('/onay')
+        }, 1000)
+      })
+    },
+    validate () {
+      let isValid = true
+
       if (!this.order.address) {
         this.addressWarning = true
+        isValid = false
       }
       if (!this.order.payment) {
         this.paymentWarning = true
+        isValid = false
       }
       if (!this.order.service) {
         this.serviceWarning = true
+        isValid = false
       }
-      if (this.order.address && this.order.payment && this.order.service) {
-        setTimeout(() => {
-          this.$router.push('/onay')
-        }, 1000)
+
+      if (isValid) {
+        this.makeOrder()
       }
     }
   },

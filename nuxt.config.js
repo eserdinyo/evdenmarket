@@ -34,7 +34,7 @@ module.exports = {
     ]
   },
 
-  loading: { color: 'red' },
+  loading: { color: '#fff' },
   css: ['~/assets/style/main.scss'],
   styleResources: {
     scss: [

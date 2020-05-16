@@ -138,11 +138,6 @@ export default {
     .product-price {
       margin-top: 0.5rem;
     }
-    .icon {
-      fill: $primary-color;
-      height: auto;
-      width: 25px;
-    }
   }
 }
 
