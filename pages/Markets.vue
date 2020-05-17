@@ -1,11 +1,31 @@
 <template>
   <div class="markets">
     <div class="container">
-      <div class="markets-title">
-        Turgut Reis Mahallesi
+      <div v-if="false">
+        <div class="markets-title">
+          Turgut Reis Mahallesi
+        </div>
+        <div class="markets-wrapper">
+          <market-item v-for="(n, idx) in 10" :key="idx" :market="market" />
+        </div>
       </div>
-      <div class="markets-wrapper">
-        <market-item v-for="(n, idx) in 10" :key="idx" :market="market" />
+      <div v-else>
+        <div class="no-market">
+          <div class="desc">
+            <p>Mahallenizde market bulamadık.</p>
+            <p>Ama inanın bunun için çok çalışıyoruz.</p>
+            <p>
+              Bu süreci hızlandırmak için market önererebilisiniz.
+            </p>
+            <button
+              class="btn btn-green"
+              @click="$modal.show('suggest-market-modal')"
+            >
+              Market Öner
+            </button>
+          </div>
+          <div class="gif"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -15,6 +35,7 @@
 import MarketItem from '@/components/MarketItem'
 
 export default {
+  layout: 'cart-layout',
   components: {
     MarketItem
   },
@@ -24,8 +45,9 @@ export default {
       default: 1
     }
   },
-  data () {
+  data() {
     return {
+      layout: 'cart-layout',
       market: {
         id: 10,
         min_amount: 75,
@@ -36,11 +58,11 @@ export default {
     }
   },
   watch: {
-    $route () {
+    $route() {
       this.getMarkets()
     }
   },
-  head () {
+  head() {
     return {
       title: 'Marketler - Evdenmarket',
       meta: [
@@ -70,6 +92,33 @@ export default {
     border-bottom: $border;
     margin: 4rem 0;
   }
+
+  .no-market {
+    margin: 12rem 0;
+    text-align: center;
+
+    .desc {
+      line-height: 24px;
+    }
+
+    .btn-green {
+      margin: 0 auto;
+      margin-top: 2rem;
+      width: 20rem;
+      z-index: 9;
+      position: relative;
+    }
+
+    .gif {
+      display: none;
+      width: 400px;
+      height: 389px;
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+      background: url('../assets/images/404.gif');
+    }
+  }
 }
 
 @include res(desktop) {
@@ -80,6 +129,13 @@ export default {
     }
     &-title {
       font-size: 6rem;
+    }
+
+    .no-market {
+
+      .gif {
+        display: block;
+      }
     }
   }
 }
