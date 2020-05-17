@@ -10,12 +10,8 @@
     </div>
     <div class="Header">
       <div class="container">
-        <div
-          :class="{ active_ham: isNavbarOpen }"
-          class="ham-wrapper"
-          @click="toggleNav"
-        >
-          <div class="ham" />
+        <div class="profile-icon" @click="goAccount">
+          <icon-user />
         </div>
         <nuxt-link class="Header__link" to="/">
           <p>evdenmarket</p>
@@ -37,15 +33,27 @@
             @mouseenter="isProfilOpen = true"
             @mouseleave="isProfilOpen = false"
           >
-            <span>Muhammet ESER</span>
+            <span>{{ user.first_name }} {{ user.last_name }}</span>
+            <icon-arrow-bottom />
             <profil-menu class="profil-card-active" />
           </button>
           <div class="Header__cart">
             <div v-if="$device.isMobile" class="iconMobil" @click="goCart">
               <icon-shop-cart />
             </div>
-            <div v-if="$device.isMobile && isLoggedIn" class="Header__amount" @click="goCart">{{ count }}</div>
-            <nuxt-link v-if="isLoggedIn" class="btn btn-green btn-desktop-cart" to="/sepetim" tag="button">
+            <div
+              v-if="$device.isMobile && isLoggedIn"
+              class="Header__amount"
+              @click="goCart"
+            >
+              {{ count }}
+            </div>
+            <nuxt-link
+              v-if="isLoggedIn"
+              class="btn btn-green btn-desktop-cart"
+              to="/sepetim"
+              tag="button"
+            >
               <span>SEPETİM</span>
               <icon-shop-cart />
               <div class="Header__amount" @click="goCart">{{ count }}</div>
@@ -62,7 +70,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
-import { iconShopCart } from '../components/icons'
+import { iconShopCart, iconUser, iconArrowBottom } from '../components/icons'
 import AppCart from './CartBox'
 import ChangeMarket from './ChangeMarket'
 import ProfilMenu from './ProfilMenu'
@@ -74,7 +82,9 @@ export default {
     AppCart,
     ChangeMarket,
     iconShopCart,
-    ProfilMenu
+    ProfilMenu,
+    iconUser,
+    iconArrowBottom
   },
   mixins: [clickaway],
   data () {
@@ -94,22 +104,15 @@ export default {
     this.init()
   },
   methods: {
-    toggleNav () {
-      this.isNavbarOpen = !this.isNavbarOpen
-    },
     openAuthModal () {
       this.$modal.show('auth-modal')
     },
-    closeProfil () {
-      this.isProfilOpen = false
-    },
-    goPath () {
-      this.isLoggedIn
-        ? this.$router.push({ name: 'hesabim' })
-        : this.$router.push({ name: 'giris' })
-    },
-    toggleProfil () {
-      this.isProfilOpen = !this.isProfilOpen
+    goAccount () {
+      if (this.isLoggedIn) {
+        this.$router.push('/hesabim')
+      } else {
+        this.$modal.show('auth-modal')
+      }
     },
     goCart () {
       if (this.isLoggedIn) {
@@ -183,61 +186,18 @@ export default {
     height: 100vh;
   }
 
-  .ham-wrapper {
-    height: 40px;
-    width: 40px;
+  .profile-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-  }
-  .ham {
-    width: 20px;
-    height: 4px;
-    background-color: $primary-color;
-    border-radius: 2px;
-    position: relative;
-    transition: all 0.2s;
-  }
-
-  .ham:after,
-  .ham:before {
-    content: '';
-    height: 4px;
-    width: 30px;
-    border-radius: 2px;
-    background-color: $primary-color;
-    position: absolute;
-    left: 0;
-    transition: all 0.2s;
-  }
-
-  .ham:after {
-    top: -10px;
-  }
-
-  .ham:before {
-    top: 10px;
-  }
-
-  .active_ham {
-    .ham {
-      background: transparent;
-    }
-  }
-  .active_ham {
-    .ham:after {
-      transform: rotate(135deg);
-      top: 0;
+    padding-left: 5px;
+    padding-top: 3px;
+    .icon {
+      fill: $font-color;
+      height: 23px;
     }
   }
 
-  .active_ham {
-    .ham:before {
-      transform: rotate(45deg);
-      top: 0;
-    }
-  }
   &__price {
     color: #333;
     position: absolute;
@@ -445,6 +405,8 @@ export default {
   .desktop-profil {
     position: relative;
     padding-top: 0;
+    display: flex !important;
+    align-items: center;
 
     &::after {
       display: none;
@@ -454,8 +416,8 @@ export default {
       content: '';
       position: absolute;
       left: 0;
-      bottom: -10px;
-      height: 20px;
+      bottom: -15px;
+      height: 25px;
       width: 100%;
     }
 
@@ -464,9 +426,16 @@ export default {
         display: flex;
       }
     }
+
+    .icon {
+      height: 14px;
+      fill: $primary-color;
+      margin: 0 1rem;
+    }
   }
   .ham-wrapper,
-  .mobil-login-btn {
+  .mobil-login-btn,
+  .profile-icon {
     display: none !important;
   }
   .Header {

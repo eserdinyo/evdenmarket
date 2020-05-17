@@ -14,7 +14,7 @@
     </nuxt-link>
     <nuxt-link class="Profil-card--link" to="/">Çeklerim</nuxt-link>
     <nuxt-link class="Profil-card--link" to="/">Puanlarım</nuxt-link>
-    <a class="Profil-card--link" @click="$store.commit('user/logout')">Çıkış Yap</a>
+    <a class="Profil-card--link" @click="logout">Çıkış Yap</a>
   </div>
 </template>
 

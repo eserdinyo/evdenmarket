@@ -8,8 +8,8 @@ export default function ({ $axios, store }) {
 
   $axios.interceptors.response.use(response => response, (err) => {
     if (err.response.status === 401) {
-      store.commit('user/logout')
-      window.location.replace('/')
+      /*  store.commit('user/logout')
+      window.location.replace('/') */
     }
     return Promise.reject(err)
   })

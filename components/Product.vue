@@ -65,13 +65,9 @@ export default {
           })
           .then((res) => {
             this.isLoading = false
-          }).catch(() => {
+          }).catch((err) => {
             this.isLoading = false
-            this.alert(
-              'HATA',
-              'Sepete eklerken bir hata ile oluştu.',
-              'error'
-            )
+            this.alert('Hata', err.response.data.message, 'error')
           })
       } else {
         this.$modal.show('auth-modal')

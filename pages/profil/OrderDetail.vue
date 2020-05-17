@@ -1,98 +1,79 @@
-<template lang="pug">
-    .container
-        .Sidebar
-          p HESABIM
-          sidebar
-        .Detay
-          .Detay__title Siparis Detayi
-          .Detay__item(v-for="pr in orderDetails")
-            img.Detay__item--image(:src='pr.image')
-            .Detay__item--right
-              .Detay__item--right--name {{pr.name}} ({{pr.quantity}})
-              .Detay__item--right--price {{(pr.quantity * pr.price).toFixed(2)}} TL
-          .Detay__total Toplam: {{getTotal}} TL
+<template>
+  <div class="Order-detail">
+    <div class="container">
+      <div class="Sidebar">
+        <sidebar />
+      </div>
+      <div class="Order-detail">
+        <div class="Order-detail__title">Siparis Detayı</div>
+        <div v-for="(pr, idx) in orderDetails" :key="idx" class="Order-detail__item">
+          <img class="Order-detail__item--image" :src="pr.image">
+          <div class="Order-detail__item--right">
+            <div class="Order-detail__item--right--name">
+              {{ pr.name }} ({{ pr.quantity }} adet)
+            </div>
+            <div class="Order-detail__item--right--price">
+              {{ pr.price }} ₺
+            </div>
+          </div>
+        </div>
+        <div class="Order-detail__total">Toplam: 250 ₺</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import sidebar from "@/components/Sidebar";
-
-import { mapGetters } from "vuex";
+import sidebar from '@/components/Sidebar'
 
 export default {
-  head() {
-    return {
-      title: "Siparis Detay | Evdenmarket",
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: "My custom description"
-        }
-      ]
-    };
-  },
-  data() {
-    return {
-      order: ""
-    };
-  },
-  computed: {
-    ...mapGetters(["loggedUser", "orderDetails", "orders"]),
-    getTotal() {
-      if (this.order) {
-        return this.order.order_total.toFixed(2);
-      }
-    }
-  },
-  methods: {
-    getOrder(orderid) {
-      return this.orders.find(product => product.id == orderid);
-    }
-  },
+  layout: 'cart-layout',
   components: {
     sidebar
   },
-  created() {
-    const orderid = this.$route.params.id;
-
-    this.$store.dispatch("getOrders", { user: this.loggedUser }).then(res => {
-      this.order = this.getOrder(orderid);
-    });
-
-    this.$store.dispatch("getOrderDetails", { orderid, user: this.loggedUser });
-  }
-};
-</script>
-
-<style lang="scss" scoped>
-@import "@/assets/style/main.scss";
-
-.container {
-  margin: 0 15px;
-
-  @include res(tab-land) {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    max-width: 96rem;
-    margin: 0 auto;
-  }
-}
-
-.Sidebar {
-  display: none;
-  @include res(tab-land) {
-    display: unset;
-    margin-top: 4rem;
-
-    p {
-      color: $font-color;
-      margin-bottom: 2rem;
-      font-size: 1.4rem;
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
+  },
+  data () {
+    return {
+      orderDetails: [
+        {
+          image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/03118004/03118004-e54fa0.jpg',
+          name: 'Doğuş Tiryaki Çay 1000 G',
+          quantity: 2,
+          price: 25.75,
+          id: 5,
+          marketproduct_id: 12
+        },
+        {
+          image:
+            'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07150087/nutella-go-52-gr-5e1f3e.jpg',
+          name: 'Nutella Go 52 G',
+          quantity: 1,
+          price: 15.75,
+          id: 8,
+          marketproduct_id: 12
+        }
+      ]
+    }
+  },
+  created () {
+    console.log(this.id)
+  },
+  head () {
+    return {
+      title: 'Siparis Detay | Evdenmarket'
     }
   }
 }
+</script>
 
-.Detay {
+<style lang="scss">
+.Order-detail {
   margin-top: 2rem;
   &__title {
     font-size: 2.4rem;
@@ -122,10 +103,6 @@ export default {
     &--image {
       width: 20%;
       margin-right: 1rem;
-      @include res(tab-land) {
-        width: 10%;
-        margin-right: 2rem;
-      }
     }
   }
 
@@ -137,5 +114,3 @@ export default {
   }
 }
 </style>
-
-

@@ -11,7 +11,7 @@
             v-for="(order, idx) in orders"
             :key="idx"
             class="Orders__item"
-            to="/"
+            to="/siparis/12"
           >
             <div class="Orders__item--header">
               <div class="Orders__item--left">
@@ -48,9 +48,37 @@ export default {
     sidebar,
     iconRightArrow2
   },
-  data() {
+  data () {
     return {
       orders: [
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
         {
           day: '21-09-2019',
           total: 120
@@ -78,19 +106,19 @@ export default {
   },
 
   computed: {
-    day() {
-      return (date) => date.substring(8, 10).replace('0', '')
+    day () {
+      return date => date.substring(8, 10).replace('0', '')
     },
-    month() {
-      return (date) => parseInt(date.substring(5, 7).replace('0', ''))
+    month () {
+      return date => parseInt(date.substring(5, 7).replace('0', ''))
     }
   },
   methods: {
-    getMonth(number) {
+    getMonth (number) {
       return this.months[number - 1]
     }
   },
-  head() {
+  head () {
     return {
       title: 'Siparislerim | Evdenmarket'
     }
@@ -180,6 +208,7 @@ export default {
 
     .icon {
       height: 20px;
+      fill: $primary-color;
     }
   }
 }

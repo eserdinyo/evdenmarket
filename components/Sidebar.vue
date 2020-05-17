@@ -1,60 +1,79 @@
 <template>
   <div class="sidebar">
-    <div class="title">HESABIM</div>
-    <ul class="nav">
-      <li class="nav__item">
-        <nuxt-link class="nav__item--link" to="/siparislerim">
-          Siparislerim
-        </nuxt-link>
-      </li>
-      <li class="nav__item">
-        <nuxt-link class="nav__item--link" to="/adreslerim">
-          Adreslerim
-        </nuxt-link>
-      </li>
-      <li class="nav__item">
-        <a class="nav__item--link">Uyelik Bilgilerim</a>
-      </li>
-      <li class="nav__item"><a class="nav__item--link">Kampanyalarim</a></li>
-      <li class="nav__item"><a class="nav__item--link">Hediye Ceklerim</a></li>
-    </ul>
+    <div class="nav">
+      <nuxt-link class="item" to="/siparislerim">
+        <icon-past />
+        <span>Siparislerim</span>
+      </nuxt-link>
+      <nuxt-link class="item" to="/siparislerim">
+        <icon-location />
+        <span>Adreslerim</span>
+      </nuxt-link>
+      <nuxt-link class="item" to="/siparislerim">
+        <icon-settings />
+        <span>Kişisel Bilgilerim</span>
+      </nuxt-link>
+      <nuxt-link class="item" to="/siparislerim">
+        <icon-gift />
+        <span>Puanlarım</span>
+      </nuxt-link>
+      <nuxt-link class="item" to="/siparislerim">
+        <icon-phone />
+        <span>İletişim</span>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
-export default {}
+import { iconSettings, iconLocation, iconPhone, iconPast, iconGift } from '@/components/icons'
+export default {
+  components: {
+    iconSettings,
+    iconLocation,
+    iconPhone,
+    iconPast,
+    iconGift
+  }
+}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .sidebar {
+  position: sticky;
+  top: 5rem;
   .nav {
-    list-style: none;
-    margin-bottom: 0;
-    margin-top: 11px;
-    padding-left: 0;
+    margin-top: 4rem;
+    border: $border-2;
+    margin-right: 6rem;
+    overflow: hidden;
+      border-radius: $sm-radius;
 
-    &__item {
-      margin-top: 11px;
+    .item {
+      padding: 1rem;
+      display: block;
+      padding: 2rem;
+      font-weight: 500;
+      color: $font-color-gray;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      transition: all 0.1s;
 
-      &--link {
-        color: #484848;
-        font-size: 13px;
-        line-height: 18px;
-        text-decoration: none;
-        display: block;
-        cursor: pointer;
-        transition: all .2s;
+      &:hover {
+        background-color: #ebebeb64;
+      }
 
-        &:hover {
-          text-decoration: underline;
-        }
+      &:not(:last-child) {
+        border-bottom: $border-2;
+      }
+
+      .icon {
+        height: 20px;
+        fill: $font-color-gray;
+        margin-right: 1.2rem;
       }
     }
-  }
-
-  .title {
-    font-size: 14px;
-    color: $font-color;
   }
 }
 </style>

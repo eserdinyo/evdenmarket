@@ -15,6 +15,8 @@ import Completed from '@/pages/payment/Completed'
 
 // profil
 import Orders from '@/pages/profil/Orders'
+import OrderDetail from '@/pages/profil/OrderDetail'
+import Account from '@/pages/profil/Account'
 
 Vue.use(Router)
 
@@ -60,6 +62,17 @@ export function createRouter () {
         path: '/siparislerim',
         name: 'Siparişlerim',
         component: Orders
+      },
+      {
+        path: '/siparis/:id',
+        name: 'Sipariş Detayı',
+        component: OrderDetail,
+        props: true
+      },
+      {
+        path: '/hesabim',
+        name: 'Hesabım',
+        component: Account
       },
       {
         path: '/bilgilendirme',

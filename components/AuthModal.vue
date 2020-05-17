@@ -166,9 +166,9 @@ export default {
               this.$store.dispatch('cart/fetch')
               this.$modal.hide('auth-modal')
             })
-            .catch(() => {
+            .catch((err) => {
               this.isLoading = false
-              this.alert('Hatalı Giriş', 'Girdiğiniz telefon numarası veya şifre hatalı!', 'error')
+              this.alert('Hatalı Giriş', err.response.data.message, 'error')
             })
         }
       })

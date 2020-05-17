@@ -26,6 +26,10 @@ Vue.mixin({
         showCancelButton: false,
         confirmButtonText: 'TAMAM'
       })
+    },
+    logout () {
+      this.$store.commit('user/logout')
+      this.$router.push('/')
     }
   }
 })
