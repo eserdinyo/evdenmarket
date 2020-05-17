@@ -54,7 +54,7 @@
               BİZE KATILIN
             </div>
             <div class="footer-menu-list">
-              <a href="">Gizlilik</a>
+              <a href="javascript:;" @click="$modal.show('suggest-market-modal')">Market Öner</a>
               <a href="">KVKK</a>
               <a href="">İletişim</a>
               <a href="">Kullanım Sözleşmesi</a>

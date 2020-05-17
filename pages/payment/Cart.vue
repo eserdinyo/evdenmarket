@@ -247,6 +247,7 @@ export default {
     &__content {
       display: flex;
       justify-content: space-between;
+      align-items: flex-start;
     }
     &__middle {
       width: 60%;

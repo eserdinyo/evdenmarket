@@ -1,19 +1,25 @@
 <template>
-  <div class="Order-detail">
-    <div class="container">
+  <div class="container">
+    <div class="Order-wrapper">
       <div class="Sidebar">
         <sidebar />
       </div>
       <div class="Order-detail">
-        <div class="Order-detail__title">Siparis Detayı</div>
-        <div v-for="(pr, idx) in orderDetails" :key="idx" class="Order-detail__item">
-          <img class="Order-detail__item--image" :src="pr.image">
-          <div class="Order-detail__item--right">
-            <div class="Order-detail__item--right--name">
-              {{ pr.name }} ({{ pr.quantity }} adet)
-            </div>
-            <div class="Order-detail__item--right--price">
-              {{ pr.price }} ₺
+        <div class="title">SİPARİŞ DETAYI</div>
+        <div class="detail-wrapper">
+          <div
+            v-for="(pr, idx) in orderDetails"
+            :key="idx"
+            class="Order-detail__item"
+          >
+            <img class="Order-detail__item--image" :src="pr.image" />
+            <div class="Order-detail__item--right">
+              <div class="Order-detail__item--right--name">
+                {{ pr.name }} <span>({{ pr.quantity }} adet)</span>
+              </div>
+              <div class="Order-detail__item--right--price">
+                {{ pr.price }} ₺
+              </div>
             </div>
           </div>
         </div>
@@ -37,7 +43,7 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       orderDetails: [
         {
@@ -61,10 +67,7 @@ export default {
       ]
     }
   },
-  created () {
-    console.log(this.id)
-  },
-  head () {
+  head() {
     return {
       title: 'Siparis Detay | Evdenmarket'
     }
@@ -75,42 +78,66 @@ export default {
 <style lang="scss">
 .Order-detail {
   margin-top: 2rem;
-  &__title {
-    font-size: 2.4rem;
+  .title {
+    font-size: 14px;
+    margin: 2rem 0;
     color: $font-color;
-    margin-bottom: 2rem;
+  }
+
+  .detail-wrapper {
+    border: $border-2;
+    border-radius: $sm-radius;
   }
 
   &__item {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(221, 221, 221, 0.5);
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
+    padding: 1.5rem 2rem;
+
+    &:not(:last-child) {
+      border-bottom: $border-2;
+    }
 
     &--right {
       &--price {
         margin-top: 1rem;
-        font-weight: 600;
-        color: $primary-color-2;
+        font-weight: 500;
+        font-size: 13px;
+        color: $primary-color;
       }
 
       &--name {
-        font-size: 1.4rem;
+        font-size: 14px;
+
+        span {
+          font-size: 12px;
+        }
       }
     }
 
     &--image {
-      width: 20%;
-      margin-right: 1rem;
+      height: 7rem;
+      margin-right: 1.5rem;
     }
   }
 
   &__total {
-    color: $primary-color-2;
+    color: $primary-color;
     font-weight: 600;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     text-align: right;
+  }
+}
+
+@include res(desktop) {
+  .Order-wrapper {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    margin-top: 3rem;
+  }
+
+  .Order-detail {
+    margin-top: 3.5rem;
   }
 }
 </style>

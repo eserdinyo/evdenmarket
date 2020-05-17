@@ -62,6 +62,8 @@
           </div>
         </div>
         <change-market />
+        <auth-modal />
+        <suggest-market-modal />
       </div>
     </div>
   </div>
@@ -75,6 +77,8 @@ import AppCart from './CartBox'
 import ChangeMarket from './ChangeMarket'
 import ProfilMenu from './ProfilMenu'
 import 'swiper/css/swiper.min.css'
+import AuthModal from '@/components/modals/AuthModal'
+import SuggestMarketModal from '@/components/modals/SuggestMarketModal'
 
 export default {
   name: 'Header',
@@ -84,7 +88,9 @@ export default {
     iconShopCart,
     ProfilMenu,
     iconUser,
-    iconArrowBottom
+    iconArrowBottom,
+    AuthModal,
+    SuggestMarketModal
   },
   mixins: [clickaway],
   data () {
@@ -126,7 +132,10 @@ export default {
         this.$store.dispatch('cart/fetch')
       }
     }
-  }
+  },
+  created () {
+    this.$modal.show('suggest-market-modal')
+  },
 }
 </script>
 

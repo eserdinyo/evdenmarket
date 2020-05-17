@@ -54,6 +54,7 @@ export default {
 .Account {
   margin: 0 2rem;
   margin-bottom: 5rem;
+  max-width: 400px;
   .nav {
     margin-top: 4rem;
     border: $border-2;
@@ -96,6 +97,13 @@ export default {
         }
       }
     }
+  }
+}
+
+@include res(desktop) {
+  .Account {
+    margin: 0 auto;
+    margin-bottom: 8rem;
   }
 }
 </style>

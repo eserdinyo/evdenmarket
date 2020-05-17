@@ -124,7 +124,7 @@ export default {
       isRegister: false,
       isLogin: true,
       width: 700,
-      loginBg: require('../assets/images/login/1.jpg'),
+      loginBg: require('@/assets/images/login/1.jpg'),
       isLoading: false
     }
   },
@@ -136,7 +136,7 @@ export default {
   methods: {
     beforeOpen () {
       const randomNumber = Math.floor(Math.random() * 9) + 1
-      this.loginBg = require(`../assets/images/login/${randomNumber}.jpg`)
+      this.loginBg = require(`@/assets/images/login/${randomNumber}.jpg`)
     },
     beforeClose () {
       this.clear()

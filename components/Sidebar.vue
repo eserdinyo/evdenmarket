@@ -5,35 +5,47 @@
         <icon-past />
         <span>Siparislerim</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/siparislerim">
+      <nuxt-link class="item" to="/foo">
         <icon-location />
         <span>Adreslerim</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/siparislerim">
+      <nuxt-link class="item" to="/bar">
         <icon-settings />
         <span>Kişisel Bilgilerim</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/siparislerim">
+      <nuxt-link class="item" to="/baz">
         <icon-gift />
         <span>Puanlarım</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/siparislerim">
+      <nuxt-link class="item" to="/yoo">
         <icon-phone />
         <span>İletişim</span>
       </nuxt-link>
+      <div class="item" @click="logout">
+        <icon-logout />
+        <span>Çıkış</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { iconSettings, iconLocation, iconPhone, iconPast, iconGift } from '@/components/icons'
+import {
+  iconSettings,
+  iconLocation,
+  iconPhone,
+  iconPast,
+  iconGift,
+  iconLogout
+} from '@/components/icons'
 export default {
   components: {
     iconSettings,
     iconLocation,
     iconPhone,
     iconPast,
-    iconGift
+    iconGift,
+    iconLogout
   }
 }
 </script>
@@ -47,7 +59,7 @@ export default {
     border: $border-2;
     margin-right: 6rem;
     overflow: hidden;
-      border-radius: $sm-radius;
+    border-radius: $sm-radius;
 
     .item {
       padding: 1rem;
@@ -59,6 +71,7 @@ export default {
       align-items: center;
       font-size: 14px;
       transition: all 0.1s;
+      cursor: pointer;
 
       &:hover {
         background-color: #ebebeb64;
@@ -73,6 +86,30 @@ export default {
         fill: $font-color-gray;
         margin-right: 1.2rem;
       }
+
+      &:last-child {
+        background-color: $red-color;
+        color: #fff;
+
+        .icon {
+          height: 20px;
+          fill: #fff;
+          margin-right: 1.2rem;
+        }
+      }
+    }
+  }
+
+  .router-link-active {
+    position: relative;
+    &::after {
+      content: '';
+      background-color: $primary-color;
+      height: 100%;
+      width: 4px;
+      position: absolute;
+      left: 0;
+      top: 0;
     }
   }
 }
