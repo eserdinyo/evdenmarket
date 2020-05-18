@@ -17,6 +17,7 @@ import Completed from '@/pages/payment/Completed'
 import Orders from '@/pages/profil/Orders'
 import OrderDetail from '@/pages/profil/OrderDetail'
 import Account from '@/pages/profil/Account'
+import Settings from '@/pages/profil/Settings'
 
 Vue.use(Router)
 
@@ -73,6 +74,11 @@ export function createRouter () {
         path: '/hesabim',
         name: 'Hesabım',
         component: Account
+      },
+      {
+        path: '/ayarlarim',
+        name: 'Ayarlar',
+        component: Settings
       },
       {
         path: '/bilgilendirme',

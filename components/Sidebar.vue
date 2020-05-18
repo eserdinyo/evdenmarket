@@ -9,9 +9,9 @@
         <icon-location />
         <span>Adreslerim</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/bar">
+      <nuxt-link class="item" to="/ayarlar">
         <icon-settings />
-        <span>Kişisel Bilgilerim</span>
+        <span>Ayarlar</span>
       </nuxt-link>
       <nuxt-link class="item" to="/baz">
         <icon-gift />

@@ -83,6 +83,11 @@ export default {
       this.$axios('cities').then((res) => {
         this.cities = res.data
       })
+    },
+    beforeClose () {
+      this.city = ''
+      this.district = ''
+      this.market_name = ''
     }
   }
 }

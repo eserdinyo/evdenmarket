@@ -3,7 +3,7 @@
     <nuxt-link class="Profil-card--link" to="/siparislerim">
       Siparişlerim
     </nuxt-link>
-    <nuxt-link class="Profil-card--link" to="/">
+    <nuxt-link class="Profil-card--link" to="/ayarlarim">
       Üyelik Bilgilerim
     </nuxt-link>
     <nuxt-link class="Profil-card--link" to="/">

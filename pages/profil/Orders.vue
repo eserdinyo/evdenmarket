@@ -88,34 +88,6 @@ export default {
           total: 120
         }
       ],
-      months: [
-        'Ocak',
-        'Şubat',
-        'Mart',
-        'Nisan',
-        'Mayıs',
-        'Haziran',
-        'Temmuz',
-        'Ağustos',
-        'Eylül',
-        'Ekim',
-        'Kasım',
-        'Aralık'
-      ]
-    }
-  },
-
-  computed: {
-    day () {
-      return date => date.substring(8, 10).replace('0', '')
-    },
-    month () {
-      return date => parseInt(date.substring(5, 7).replace('0', ''))
-    }
-  },
-  methods: {
-    getMonth (number) {
-      return this.months[number - 1]
     }
   },
   head () {
