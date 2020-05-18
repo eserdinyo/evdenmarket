@@ -5,7 +5,7 @@
         <icon-past />
         <span>Siparislerim</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/siparislerim">
+      <nuxt-link class="item" to="/adreslerim">
         <icon-location />
         <span>Adreslerim</span>
       </nuxt-link>

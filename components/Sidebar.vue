@@ -13,9 +13,9 @@
         <icon-settings />
         <span>Ayarlar</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/baz">
+      <nuxt-link class="item" to="/adreslerim">
         <icon-gift />
-        <span>Puanlarım</span>
+        <span>Adreslerim</span>
       </nuxt-link>
       <nuxt-link class="item" to="/yoo">
         <icon-phone />

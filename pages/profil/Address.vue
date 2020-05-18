@@ -1,198 +1,157 @@
-<template lang='pug'>
-    .container
-        .Sidebar
-          p HESABIM
-          sidebar
-        .Address
-          .Address__top
-              p.Address__title Adreslerim
-              a.btn.Address__btn(@click='openModal')
-                span.Address__plus +
-                | Address Ekle
-          .Address__bottom
-            .Address__item(v-for='address in addresses')
-              .Address__item--top
-                .Address__name {{address.address_name}}
-                p.Address__detay {{address.neighName | lowerCase }} {{address.open_address | lowerCase}}
-                  br
-                  | {{address.address_desc | lowerCase}}
-                  br
-                  | {{address.townName}}/{{address.cityName}}
-                  br
-                  | {{ address.phone }}
-              .Address__item--bottom
-                a.Address__delete_btn 
-                  iconEdit.Address__delete_btn-icon
-                  p Düzenle
-                a.Address__delete_btn(@click="deleteAddress(address.id)")
-                  iconDelete.Address__delete_btn-icon--del
-                  p Sil
-        addressModal
-          
+<template>
+  <div class="container">
+    <div class="Address-wrapper">
+      <div class="Sidebar">
+        <sidebar />
+      </div>
+      <div class="Address">
+        <div class="Address__title">
+          <span>ADRESLERİM</span>
 
+          <div class="btn btn-green">
+            Ekle
+          </div>
+        </div>
+        <div class="Address__body">
+          <div v-for="(order, idx) in orders" :key="idx" class="Address__item">
+            <div class="Address__item--header">
+              <p>Turgut Reis Mah. Huzur Cd. Feshane Sk. No:38 D:10</p>
+              <p>Sultanbeyli/IST</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import Cleave from "cleave.js";
-import iconDelete from "@/assets/icons/delete";
-import iconEdit from "@/assets/icons/edit";
-import addressModal from "@/components/AddressModal";
-import sidebar from "@/components/Sidebar";
-
-import { mapGetters } from "vuex";
+import sidebar from '@/components/Sidebar'
 
 export default {
-  head() {
-    return {
-      title: "Adreslerim | Evdenmarket",
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: "My custom description"
-        }
-      ]
-    };
-  },
-  filters: {
-    lowerCase: val => {
-      if (!val) return "";
-      return val.toLowerCase();
-    }
-  },
-  computed: {
-    ...mapGetters(["loggedUser", "addresses"])
-  },
-  methods: {
-    openModal() {
-      this.$store.commit("openModal", true);
-      document.getElementsByTagName("body")[0].style.overflow = "hidden";
-    },
-    deleteAddress(id) {
-      this.$store
-        .dispatch("deleteAddress", { id, user: this.loggedUser })
-        .then(res => {
-          this.$store.dispatch("getAddresses", this.loggedUser);
-        });
-    }
-  },
+  layout: 'cart-layout',
   components: {
-    iconDelete,
-    iconEdit,
-    addressModal,
     sidebar
   },
-  created() {
-    this.$store.dispatch("getAddresses", this.loggedUser);
-  }
-};
-</script>
-
-<style lang='scss' scoped>
-@import "@/assets/style/main.scss";
-
-.container {
-  margin-left: 15px;
-  margin-right: 15px;
-
-  @include res(tab-land) {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    max-width: 96rem;
-    margin: 0 auto;
-  }
-}
-
-.Sidebar {
-  display: none;
-  @include res(tab-land) {
-    display: unset;
-    margin-top: 4rem;
-
-    p {
-      color: $font-color;
-      margin-bottom: 2rem;
-      font-size: 1.4rem;
+  data() {
+    return {
+      orders: [
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        },
+        {
+          day: '21-09-2019',
+          total: 120
+        }
+      ]
+    }
+  },
+  head() {
+    return {
+      title: 'Siparislerim | Evdenmarket'
     }
   }
+}
+</script>
+
+<style lang="scss">
+.Sidebar {
+  display: none;
 }
 
 .Address {
-  &__btn {
-    padding: 0 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &__delete_btn {
-    display: flex;
-    align-items: center;
-    margin-right: 1rem;
-    font-size: 1.4rem;
-
-    @include res(tab-land) {
-      font-size: 1.2rem;
-    }
-    cursor: pointer;
-    &-icon {
-      fill: $font-color-gray;
-      margin-bottom: 3px;
-      height: 13px;
-
-      &--del {
-        fill: $font-color-gray;
-        margin-bottom: 3px;
-        height: 12px;
-        margin-right: 0.5rem;
-      }
-    }
-  }
-  &__top {
+  &__title {
+    font-size: 14px;
+    margin-top: 2rem;
+    color: $font-color;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 3rem;
+
+    .btn-green {
+      height: 24px;
+      width: 100px;
+    }
   }
 
-  &__plus {
-    font-size: 2rem;
-    margin-right: 1rem;
-    font-weight: 700;
-  }
-
-  &__title {
-    font-size: 2.4rem;
-    color: $font-color;
-  }
-
-  &__bottom {
+  &__body {
     margin-top: 2rem;
   }
 
   &__item {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 1rem 2rem;
+    padding: 1rem;
+    border-radius: $sm-radius;
+    border: $border-2;
+    margin-bottom: 2rem;
+    display: block;
+    transition: all 0.1s;
 
-    &--bottom {
+    &--header {
+      font-size: 13px;
+      p {
+        &:not(:last-child) {
+          margin-bottom: 5px;
+        }
+      }
+
+      &-right {
+        margin-left: auto;
+
+        &-payment {
+          color: $font-color-gray;
+          font-size: 13px;
+        }
+      }
+    }
+
+    &--body {
+      margin-top: 1rem;
       display: flex;
-      margin-top: 2rem;
-    }
-
-    &:not(:last-child) {
-      margin-bottom: 2rem;
+      align-items: center;
+      justify-content: space-between;
     }
   }
+}
 
-  &__name {
-    margin-bottom: 1rem;
-    font-weight: 500;
-    color: $font-color;
+@include res(desktop) {
+  .Sidebar {
+    display: block;
+    margin-top: 2rem;
   }
 
-  &__detay {
-    font-size: 1.4rem;
-    color: #98a0a9;
+  .Address-wrapper {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    margin-top: 3rem;
   }
 }
 </style>

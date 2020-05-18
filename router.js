@@ -18,6 +18,7 @@ import Orders from '@/pages/profil/Orders'
 import OrderDetail from '@/pages/profil/OrderDetail'
 import Account from '@/pages/profil/Account'
 import Settings from '@/pages/profil/Settings'
+import Address from '@/pages/profil/Address'
 
 Vue.use(Router)
 
@@ -79,6 +80,11 @@ export function createRouter () {
         path: '/ayarlarim',
         name: 'Ayarlar',
         component: Settings
+      },
+      {
+        path: '/adreslerim',
+        name: 'Adreslerim',
+        component: Address
       },
       {
         path: '/bilgilendirme',
