@@ -33,8 +33,8 @@
             @mouseenter="isProfilOpen = true"
             @mouseleave="isProfilOpen = false"
           >
+            <icon-user />
             <span>{{ user.first_name }} {{ user.last_name }}</span>
-            <icon-arrow-bottom />
             <profil-menu class="profil-card-active" />
           </button>
           <div class="Header__cart">
@@ -72,7 +72,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { mixin as clickaway } from 'vue-clickaway'
-import { iconShopCart, iconUser, iconArrowBottom } from '../components/icons'
+import { iconShopCart, iconUser } from '../components/icons'
 import AppCart from './CartBox'
 import ChangeMarket from './ChangeMarket'
 import ProfilMenu from './ProfilMenu'
@@ -88,7 +88,6 @@ export default {
     iconShopCart,
     ProfilMenu,
     iconUser,
-    iconArrowBottom,
     AuthModal,
     SuggestMarketModal
   },
@@ -132,10 +131,7 @@ export default {
         this.$store.dispatch('cart/fetch')
       }
     }
-  },
-  created () {
-    this.$modal.show('suggest-market-modal')
-  },
+  }
 }
 </script>
 
@@ -416,6 +412,9 @@ export default {
     padding-top: 0;
     display: flex !important;
     align-items: center;
+    border: $border-2;
+    border-radius: $sm-radius;
+    padding: 0 1.5rem;
 
     &::after {
       display: none;
@@ -439,7 +438,7 @@ export default {
     .icon {
       height: 14px;
       fill: $primary-color;
-      margin: 0 1rem;
+      margin-right: 1rem;
     }
   }
   .ham-wrapper,
