@@ -209,17 +209,25 @@ export default {
       this.order.items = this.items
 
       this.isLoading = true
-      this.$store.dispatch('cart/order', { order: this.order }).then((res) => {
-        setTimeout(() => {
-          this.$store.dispatch('cart/fetch')
-          this.$router.push('/onay')
-        }, 1000)
-      }).catch(() => {
-        setTimeout(() => {
-          this.$store.dispatch('cart/fetch')
-          this.$router.push('/onay')
-        }, 1000)
-      })
+      this.$store
+        .dispatch('cart/order', {
+          address_id: 4,
+          service_id: 8,
+          payment_method: this.selectedPayment,
+          note: this.note
+        })
+        .then((res) => {
+          setTimeout(() => {
+            this.$store.dispatch('cart/fetch')
+            this.$router.push('/onay')
+          }, 1000)
+        })
+        .catch(() => {
+          setTimeout(() => {
+            this.$store.dispatch('cart/fetch')
+            this.$router.push('/onay')
+          }, 1000)
+        })
     },
     validate () {
       let isValid = true

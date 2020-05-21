@@ -27,7 +27,7 @@
                 <p class="market">
                   <span>Sipariş Tutarı: </span> {{ order.total }} ₺
                 </p>
-                <p class="market"><span>Sipariş No: </span> 3781743</p>
+                <p class="market"><span>Sipariş No: </span> {{ order.id }}</p>
               </div>
               <icon-right-arrow-2 />
             </div>
@@ -87,8 +87,13 @@ export default {
           day: '21-09-2019',
           total: 120
         }
-      ],
+      ]
     }
+  },
+  created () {
+    this.$axios('order').then((res) => {
+      this.orders = res.data.data
+    })
   },
   head () {
     return {

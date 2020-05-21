@@ -37,12 +37,7 @@ export default {
   components: {
     sidebar
   },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
+  props: ['id'],
   data() {
     return {
       orderDetails: [
@@ -66,6 +61,11 @@ export default {
         }
       ]
     }
+  },
+  created () {
+    this.$axios(`order/${this.id}`).then((res) => {
+      console.log(res)
+    })
   },
   head() {
     return {

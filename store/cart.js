@@ -64,9 +64,17 @@ export const actions = {
     return promise
   },
   order ({ dispatch }, payload) {
-    const promise = this.$axios.$post('order')
+    const promise = this.$axios.$post('order', {
+      address_id: payload.address_id,
+      service_id: payload.service_id,
+      payment_method: payload.payment_method,
+      note: payload.note
+    })
 
-    console.log('ordered: ', payload)
+    promise.then((res) => {
+      dispatch('fetch')
+    })
+
     return promise
   }
 }

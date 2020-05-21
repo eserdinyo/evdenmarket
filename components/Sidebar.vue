@@ -5,17 +5,17 @@
         <icon-past />
         <span>Siparislerim</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/foo">
+      <nuxt-link class="item" to="/adreslerim">
         <icon-location />
         <span>Adreslerim</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/ayarlar">
+      <nuxt-link class="item" to="/ayarlarim">
         <icon-settings />
         <span>Ayarlar</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/adreslerim">
+      <nuxt-link class="item" to="/puanlarim">
         <icon-gift />
-        <span>Adreslerim</span>
+        <span>Puanlarım</span>
       </nuxt-link>
       <nuxt-link class="item" to="/yoo">
         <icon-phone />

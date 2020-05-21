@@ -4,7 +4,6 @@
       <app-header />
     </client-only>
     <nuxt />
-    <auth-modal />
     <app-footer />
   </div>
 </template>

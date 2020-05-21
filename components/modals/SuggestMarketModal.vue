@@ -43,7 +43,10 @@
       <div class="form-item">
         <input v-model="market_name" class="form-input" placeholder="Market Adı Girin">
       </div>
-      <button class="btn btn-green">GÖNDER</button>
+      <button class="btn btn-green" @click="sendMarket">
+        <span v-if="!isLoading">GÖNDER</span>
+        <loading :is-loading="isLoading" />
+      </button>
     </div>
   </modal>
 </template>
@@ -57,6 +60,7 @@ export default {
   },
   data () {
     return {
+      isLoading: false,
       width: 300,
       cities: [],
       districts: [],
@@ -79,6 +83,16 @@ export default {
     }
   },
   methods: {
+    sendMarket () {
+      this.isLoading = true
+      setTimeout(() => {
+        this.isLoading = false
+        this.alert('Başarılı',
+          'Market tavsiyeni başarılı bir şekilde aldık. Önerdiğin marketi sitemize eklemek için çalışmalara başladık bile :)',
+          'success')
+        this.$modal.hide('suggest-market-modal')
+      }, 1000)
+    },
     beforeOpen () {
       this.$axios('cities').then((res) => {
         this.cities = res.data
