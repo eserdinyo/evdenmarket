@@ -134,14 +134,19 @@
         </div>
       </div>
       <div class="Order">
-        <div class="Order--total">
-          <p class="Order--total-title">Toplam</p>
-          <p class="Order--total-price">{{ total }} ₺</p>
+        <div class="Order-warning">
+          Bu markette minumum alışveriş tutarı 75 TL'dir.
         </div>
-        <button class="btn btn-green" :disabled="isLoading" @click="validate">
-          <span v-if="!isLoading">Ödeme Yap</span>
-          <loading :is-loading="isLoading" />
-        </button>
+        <div class="Order-body">
+          <div class="Order--total">
+            <p class="Order--total-title">Toplam</p>
+            <p class="Order--total-price">{{ total }} ₺</p>
+          </div>
+          <button class="btn btn-green" :disabled="isLoading" @click="validate">
+            <span v-if="!isLoading">Ödeme Yap</span>
+            <loading :is-loading="isLoading" />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -184,6 +189,11 @@ export default {
       total: 'cart/total'
     })
   },
+  created () {
+    this.$axios('order/create').then((res) => {
+      console.log(res.data)
+    })
+  },
   methods: {
     makeAddresActive (id) {
       this.selectedAddress = id
@@ -205,28 +215,24 @@ export default {
     },
 
     makeOrder () {
-      this.order.total = this.total
-      this.order.items = this.items
-
       this.isLoading = true
-      this.$store
-        .dispatch('cart/order', {
+
+      this.$axios
+        .$post('orders', {
           address_id: 4,
           service_id: 8,
           payment_method: this.selectedPayment,
           note: this.note
         })
-        .then((res) => {
+        .then(() => {
           setTimeout(() => {
             this.$store.dispatch('cart/fetch')
             this.$router.push('/onay')
           }, 1000)
         })
-        .catch(() => {
-          setTimeout(() => {
-            this.$store.dispatch('cart/fetch')
-            this.$router.push('/onay')
-          }, 1000)
+        .catch((err) => {
+          this.alert('Hata', err.response.data.message, 'error')
+          this.isLoading = false
         })
     },
     validate () {
@@ -428,10 +434,6 @@ export default {
 }
 
 .Order {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 -4px 8px #00000029;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -439,6 +441,18 @@ export default {
   z-index: 9;
   padding: 1.5rem 2rem;
   background-color: #fff;
+  box-shadow: 0 -4px 8px #00000029;
+
+  &-warning {
+    color: $red-color;
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+  &-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   .btn-green {
     font-size: 1.4rem;
@@ -503,11 +517,14 @@ export default {
     position: static;
     box-shadow: none;
     z-index: 0;
-    flex-direction: column;
+
     border: $border-2;
     border-radius: $sm-radius;
     height: 15rem;
     margin-top: 7rem;
+    &-body {
+      flex-direction: column;
+    }
 
     &--total {
       flex-direction: row;

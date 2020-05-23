@@ -13,9 +13,10 @@
           </div>
         </div>
         <div class="Address__body">
-          <div v-for="(order, idx) in orders" :key="idx" class="Address__item">
+          <div v-for="(adr, idx) in addresses" :key="idx" class="Address__item">
             <div class="Address__item--header">
-              <p>Turgut Reis Mah. Huzur Cd. Feshane Sk. No:38 D:10</p>
+              <b class="mb-2 d-block">{{ adr.title }}</b>
+              <p>{{ adr.location }}</p>
               <p>Sultanbeyli/IST</p>
             </div>
           </div>
@@ -33,49 +34,17 @@ export default {
   components: {
     sidebar
   },
-  data() {
+  data () {
     return {
-      orders: [
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        }
-      ]
+      addresses: []
     }
   },
-  head() {
+  created () {
+    this.$axios('addresses').then((res) => {
+      this.addresses = res.data
+    })
+  },
+  head () {
     return {
       title: 'Siparislerim | Evdenmarket'
     }
