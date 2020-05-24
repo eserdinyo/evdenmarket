@@ -4,14 +4,14 @@
       <div class="footer-top">
         <div class="footer-left">
           <div class="social">
-            <i class="fa fa-facebook"></i>
-            <i class="fa fa-twitter"></i>
-            <i class="fa fa-instagram"></i>
-            <i class="fa fa-youtube"></i>
+            <i class="fa fa-facebook" />
+            <i class="fa fa-twitter" />
+            <i class="fa fa-instagram" />
+            <i class="fa fa-youtube" />
           </div>
           <div class="apps">
-            <img src="../assets/images/app-store.png" alt="" />
-            <img src="../assets/images/google-play.png" alt="" />
+            <icon-appstore />
+            <icon-googleplay />
           </div>
         </div>
         <div class="footer-menu">
@@ -54,7 +54,10 @@
               BİZE KATILIN
             </div>
             <div class="footer-menu-list">
-              <a href="javascript:;" @click="$modal.show('suggest-market-modal')">Market Öner</a>
+              <a
+                href="javascript:;"
+                @click="$modal.show('suggest-market-modal')"
+              >Market Öner</a>
               <a href="">KVKK</a>
               <a href="">İletişim</a>
               <a href="">Kullanım Sözleşmesi</a>
@@ -70,7 +73,13 @@
 </template>
 
 <script>
-export default {}
+import { iconGoogleplay, iconAppstore } from '@/components/icons'
+export default {
+  components: {
+    iconGoogleplay,
+    iconAppstore
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -100,10 +109,10 @@ export default {}
       display: flex;
       flex-direction: column;
       margin-top: 2rem;
-      img {
-        width: 17rem;
-        height: 5rem;
-        margin: 1rem 0;
+      .icon {
+        &:first-child {
+          margin-bottom: 1rem;
+        }
       }
     }
   }

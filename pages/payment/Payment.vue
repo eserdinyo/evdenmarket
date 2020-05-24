@@ -19,27 +19,16 @@
             </a>
           </div>
           <div
+            v-for="adr in addresses"
+            :key="adr.id"
             class="Address__item--top"
-            :class="{ activeAddress: 1 == selectedAddress }"
-            @click="makeAddresActive(1)"
+            :class="{ activeAddress: adr.id == selectedAddress }"
+            @click="makeAddresActive(adr.id)"
           >
             <div>
-              <p class="Address__name">Okul</p>
+              <p class="Address__name">{{ adr.title }}</p>
               <p class="Address__detay">
-                Turgut Reis Mh. Feshane Sk. No:38 D:10 K:5 <br>
-                Sultanbeyli/İstanbul
-              </p>
-            </div>
-          </div>
-          <div
-            class="Address__item--top"
-            :class="{ activeAddress: 2 == selectedAddress }"
-            @click="makeAddresActive(2)"
-          >
-            <div>
-              <p class="Address__name">Ev</p>
-              <p class="Address__detay">
-                Turgut Reis Mh. Feshane Sk. No:38 D:10 K:5 <br>
+                {{ adr.location }} <br>
                 Sultanbeyli/İstanbul
               </p>
             </div>
@@ -57,52 +46,19 @@
           </div>
           <div class="Delivery__times">
             <div
+              v-for="service in services"
+              :key="service.id"
               class="Delivery__times--time"
-              :class="{ activeTime: 1 == selectedTime }"
-              @click="makeTimeActive(1, '12:00 - 13:00')"
+              :class="{ activeTime: service.id == selectedTime }"
+              @click="makeTimeActive(service.id)"
             >
-              12:00 - 13:00
-            </div>
-            <div
-              class="Delivery__times--time"
-              :class="{ activeTime: 2 == selectedTime }"
-              @click="makeTimeActive(2, '13:00 - 14:00')"
-            >
-              13:00 - 14:00
-            </div>
-            <div
-              class="Delivery__times--time"
-              :class="{ activeTime: 3 == selectedTime }"
-              @click="makeTimeActive(3, '14:00 - 15:00')"
-            >
-              14:00 - 15:00
-            </div>
-            <div
-              class="Delivery__times--time"
-              :class="{ activeTime: 4 == selectedTime }"
-              @click="makeTimeActive(4, '15:00 - 16:00')"
-            >
-              15:00 - 16:00
-            </div>
-            <div
-              class="Delivery__times--time"
-              :class="{ activeTime: 5 == selectedTime }"
-              @click="makeTimeActive(5, '16:00 - 17:00')"
-            >
-              16:00 - 17:00
-            </div>
-            <div
-              class="Delivery__times--time"
-              :class="{ activeTime: 6 == selectedTime }"
-              @click="makeTimeActive(6, '17:00 - 18:00')"
-            >
-              17:00 - 18:00
+              {{ service.time_start.substr(0, 5) }} - {{ service.time_finish.substr(0, 5) }}
             </div>
           </div>
         </div>
         <div class="Order__note">
           <div class="title">SİPARİŞ NOTU</div>
-          <textarea v-model="order.note" class="Order__note--note" rows="4" />
+          <textarea v-model="note" class="Order__note--note" rows="4" />
         </div>
         <div class="Payment">
           <div class="title-wrapper">
@@ -115,16 +71,16 @@
             <div class="Payment__bottom">
               <div
                 class="Payment__types--item"
-                :class="{ activePayment: 2 == selectedPayment }"
-                @click="selectPaymentType(2)"
+                :class="{ activePayment: 1 == selectedPayment }"
+                @click="selectPaymentType(1)"
               >
                 <div class="Payment__types--item-title">Nakit</div>
                 <icon-cash />
               </div>
               <div
                 class="Payment__types--item"
-                :class="{ activePayment: 3 == selectedPayment }"
-                @click="selectPaymentType(3)"
+                :class="{ activePayment: 2 == selectedPayment }"
+                @click="selectPaymentType(2)"
               >
                 <div class="Payment__types--item-title">Kredi/Banka Kartı</div>
                 <icon-pos />
@@ -135,7 +91,7 @@
       </div>
       <div class="Order">
         <div class="Order-warning">
-          Bu markette minumum alışveriş tutarı 75 TL'dir.
+          Bu markette minumum alışveriş tutarı {{ market.min_amount }} TL'dir.
         </div>
         <div class="Order-body">
           <div class="Order--total">
@@ -173,14 +129,9 @@ export default {
       paymentWarning: false,
       serviceWarning: false,
       addressWarning: false,
-      order: {
-        total: '',
-        service: '',
-        payment: '',
-        note: '',
-        address: '',
-        items: []
-      }
+      services: [],
+      note: '',
+      market: ''
     }
   },
   computed: {
@@ -191,23 +142,22 @@ export default {
   },
   created () {
     this.$axios('order/create').then((res) => {
-      console.log(res.data)
+      this.addresses = res.data.addresses
+      this.market = res.data.market
+      this.services = res.data.services
     })
   },
   methods: {
     makeAddresActive (id) {
       this.selectedAddress = id
-      this.order.address = id
       this.addressWarning = false
     },
-    makeTimeActive (id, hour) {
+    makeTimeActive (id) {
       this.selectedTime = id
-      this.order.service = hour
       this.serviceWarning = false
     },
     selectPaymentType (id) {
       this.selectedPayment = id
-      this.order.payment = 1
       this.paymentWarning = false
     },
     openModal () {
@@ -219,8 +169,8 @@ export default {
 
       this.$axios
         .$post('orders', {
-          address_id: 4,
-          service_id: 8,
+          address_id: this.selectedAddress,
+          service_id: this.selectedTime,
           payment_method: this.selectedPayment,
           note: this.note
         })
@@ -238,15 +188,15 @@ export default {
     validate () {
       let isValid = true
 
-      if (!this.order.address) {
+      if (!this.selectedAddress) {
         this.addressWarning = true
         isValid = false
       }
-      if (!this.order.payment) {
+      if (!this.selectedPayment) {
         this.paymentWarning = true
         isValid = false
       }
-      if (!this.order.service) {
+      if (!this.selectedTime) {
         this.serviceWarning = true
         isValid = false
       }
@@ -514,9 +464,10 @@ export default {
 
 @include res(desktop) {
   .Order {
-    position: static;
+    position: sticky;
     box-shadow: none;
     z-index: 0;
+    top: 100px;
 
     border: $border-2;
     border-radius: $sm-radius;

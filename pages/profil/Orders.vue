@@ -50,48 +50,11 @@ export default {
   },
   data () {
     return {
-      orders: [
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        },
-        {
-          day: '21-09-2019',
-          total: 120
-        }
-      ]
+      orders: []
     }
   },
   created () {
-    this.$axios('order').then((res) => {
+    this.$axios('orders').then((res) => {
       this.orders = res.data.data
     })
   },
