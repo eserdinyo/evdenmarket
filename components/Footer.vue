@@ -75,7 +75,7 @@ export default {}
 
 <style lang="scss" scoped>
 .footer {
-  background-color: #f9f9f9;
+  background-color: $grey-color;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
   &-top {
@@ -89,7 +89,7 @@ export default {}
       .fa {
         font-size: 2.8rem;
         margin: 0 1rem;
-        color: $grey-color;
+        color: #fff;
       }
     }
   }
@@ -116,7 +116,7 @@ export default {}
       font-weight: 600;
       margin-bottom: 2rem;
       font-size: 14px;
-      color: $grey-color;
+      color: #fff;
     }
 
     &-item {
@@ -128,7 +128,7 @@ export default {}
       a {
         font-size: 14px;
         margin-bottom: 1rem;
-        color: $grey-color;
+        color: #fff;
         display: block;
         transition: all 0.2s;
 
