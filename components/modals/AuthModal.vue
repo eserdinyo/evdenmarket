@@ -291,7 +291,7 @@ export default {
 }
 
 .v--modal-box {
-  border-radius: 8px !important;
+  border-radius: 4px !important;
 }
 
 .v--modal-overlay {

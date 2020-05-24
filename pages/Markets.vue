@@ -1,7 +1,7 @@
 <template>
   <div class="markets">
     <div class="container">
-      <div v-if="false">
+      <div v-if="true">
         <div class="markets-title">
           Turgut Reis Mahallesi
         </div>

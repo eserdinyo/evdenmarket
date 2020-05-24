@@ -65,28 +65,6 @@ export default {
       total: 'cart/total'
     })
   },
-  methods: {
-    deleteProduct (product) {
-      this.$store
-        .dispatch('deleteFromShopcart', { product, user: this.loggedUser })
-        .then((res) => {
-          this.$store.dispatch('getShopcart', this.loggedUser)
-        })
-    },
-    changeQuantity (product, changeType) {
-      product.id = product.productid
-      product.changeType = changeType
-
-      this.$store
-        .dispatch('addToCart', {
-          product,
-          user: this.loggedUser
-        })
-        .then((res) => {
-          this.$store.dispatch('getShopcart', this.loggedUser).then((res) => {})
-        })
-    }
-  },
   head () {
     return {
       title: 'Sepetim | Evdenmarket',

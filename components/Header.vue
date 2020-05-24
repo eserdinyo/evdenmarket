@@ -64,6 +64,7 @@
         <change-market />
         <auth-modal />
         <suggest-market-modal />
+        <address-modal />
       </div>
     </div>
   </div>
@@ -79,6 +80,7 @@ import ProfilMenu from './ProfilMenu'
 import 'swiper/css/swiper.min.css'
 import AuthModal from '@/components/modals/AuthModal'
 import SuggestMarketModal from '@/components/modals/SuggestMarketModal'
+import AddressModal from '@/components/modals/AddressModal'
 
 export default {
   name: 'Header',
@@ -89,7 +91,8 @@ export default {
     ProfilMenu,
     iconUser,
     AuthModal,
-    SuggestMarketModal
+    SuggestMarketModal,
+    AddressModal
   },
   mixins: [clickaway],
   data () {

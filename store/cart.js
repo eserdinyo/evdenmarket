@@ -6,9 +6,9 @@ export const state = () => ({
 
 export const getters = {
   count: state =>
-    state.data
+    state.data.length > 0 ? state.data
       .map(product => product.quantity)
-      .reduce((sum, current) => sum + current, 0),
+      .reduce((sum, current) => sum + current, 0) : 0,
   items: state => _.uniqBy(state.data, 'id'),
   total: state =>
     state.data

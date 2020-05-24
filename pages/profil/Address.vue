@@ -7,9 +7,9 @@
       <div class="Address">
         <div class="Address__title">
           <span>ADRESLERİM</span>
-
-          <div class="btn btn-green">
-            Ekle
+          <div class="btn btn-green" @click="$modal.show('address-modal')">
+            <icon-plus />
+            <span>EKLE</span>
           </div>
         </div>
         <div class="Address__body">
@@ -27,22 +27,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import sidebar from '@/components/Sidebar'
+import { iconPlus } from '@/components/icons'
 
 export default {
   layout: 'cart-layout',
   components: {
-    sidebar
+    sidebar,
+    iconPlus
   },
   data () {
-    return {
-      addresses: []
-    }
+    return {}
+  },
+  computed: {
+    ...mapState({
+      addresses: state => state.content.addresses
+    })
   },
   created () {
-    this.$axios('addresses').then((res) => {
-      this.addresses = res.data
-    })
+    this.$store.dispatch('content/fetchAddresses')
   },
   head () {
     return {
@@ -67,8 +71,16 @@ export default {
     align-items: center;
 
     .btn-green {
-      height: 24px;
-      width: 100px;
+      width: 80px;
+      padding: 0;
+      height: 30px;
+      font-weight: 600;
+
+      .icon {
+        height: 12px;
+        fill: #fff;
+        margin-right: 5px;
+      }
     }
   }
 
