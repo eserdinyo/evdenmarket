@@ -43,7 +43,7 @@
               >
             </div>
           </div>
-          <div class="btn btn-green">BİLGİLERİMİ KAYDET</div>
+          <div class="btn">BİLGİLERİMİ KAYDET</div>
         </div>
         <div class="Settings__title">ŞİFRE AYARLARIM</div>
         <div class="Settings__body">
@@ -73,7 +73,7 @@
               >
             </div>
           </div>
-          <div class="btn btn-green">ŞİFREMİ KAYDET</div>
+          <div class="btn">ŞİFREMİ KAYDET</div>
         </div>
       </div>
     </div>
@@ -156,7 +156,7 @@ export default {
     }
   }
 
-  .btn-green {
+  .btn {
     margin-bottom: 4rem;
   }
   .form {
@@ -196,7 +196,7 @@ export default {
       grid-template-columns: 1fr 1fr 1fr;
     }
 
-    .btn-green {
+    .btn {
       width: 24rem;
       margin-left: auto;
       margin-top: 2rem;

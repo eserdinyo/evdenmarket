@@ -4,7 +4,7 @@
       Siparişlerim
     </nuxt-link>
     <nuxt-link class="Profil-card--link" to="/ayarlarim">
-      Üyelik Bilgilerim
+      Ayarlarım
     </nuxt-link>
     <nuxt-link class="Profil-card--link" to="/">
       Kampanyalarım
