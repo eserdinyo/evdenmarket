@@ -27,10 +27,9 @@
           >
             <div>
               <p class="Address__name">{{ adr.title }}</p>
-              <p class="Address__detay">
-                {{ adr.location }} <br>
-                Sultanbeyli/İstanbul
-              </p>
+              <p class="Address__detay">{{ adr.address }}</p>
+              <p class="Address__detay">{{ adr.location }}</p>
+              <p class="Address__detay">{{ adr.direction }}</p>
             </div>
           </div>
           <div v-if="false" class="Address__empty">
@@ -90,7 +89,7 @@
         </div>
       </div>
       <div class="Order">
-        <div class="Order-warning">
+        <div v-show="total < parseFloat(market.min_amount)" class="Order-warning">
           Bu markette minumum alışveriş tutarı {{ market.min_amount }} TL'dir.
         </div>
         <div class="Order-body">
@@ -471,7 +470,6 @@ export default {
 
     border: $border-2;
     border-radius: $sm-radius;
-    height: 15rem;
     margin-top: 7rem;
     &-body {
       flex-direction: column;
@@ -493,6 +491,7 @@ export default {
       font-size: 16px;
       width: 28rem;
       font-weight: bold;
+      margin-top: 2rem;
     }
   }
 
@@ -500,6 +499,7 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-top: 3rem;
+    align-items: flex-start;
 
     &-top {
       width: 60%;

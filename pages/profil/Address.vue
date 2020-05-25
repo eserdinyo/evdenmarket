@@ -16,8 +16,9 @@
           <div v-for="(adr, idx) in addresses" :key="idx" class="Address__item">
             <div class="Address__item--header">
               <b class="mb-2 d-block">{{ adr.title }}</b>
+              <p>{{ adr.address }}</p>
               <p>{{ adr.location }}</p>
-              <p>Sultanbeyli/IST</p>
+              <p>{{ adr.direction }}</p>
             </div>
           </div>
         </div>

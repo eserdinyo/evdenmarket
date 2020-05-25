@@ -2,7 +2,7 @@
   <div class="home-slider">
     <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
       <swiper-slide>
-        <img class="swiper_img" src="@/assets/images/slider/1.jpg" />
+        <img class="swiper_img" src="@/assets/images/slider/4.jpg" />
       </swiper-slide>
       <swiper-slide>
         <img class="swiper_img" src="@/assets/images/slider/2.jpg" />

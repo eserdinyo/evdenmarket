@@ -15,7 +15,7 @@
           >
             <div class="Orders__item--header">
               <div class="Orders__item--left">
-                <p class="status">SİPARİŞİN TESLİM EDİLDİ</p>
+                <p class="status">{{ orderStatus(order.status) }}</p>
               </div>
               <div class="Orders__item--header-right">
                 <p class="date">{{ order.day }}</p>
@@ -57,6 +57,24 @@ export default {
     this.$axios('orders').then((res) => {
       this.orders = res.data.data
     })
+  },
+  methods: {
+    orderStatus (status) {
+      switch (status) {
+        case 1:
+          return 'SİPARİŞ ALINDI'
+        case 2:
+          return 'HAZIRLANIYOR'
+        case 3:
+          return 'DAĞITIMA ÇIKTI'
+        case 4:
+          return 'TAMAMLANDI'
+        case 5:
+          return 'İPTAL EDİLDİ'
+        default:
+          break
+      }
+    }
   },
   head () {
     return {

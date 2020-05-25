@@ -50,7 +50,7 @@
   }
   &--link {
     padding: 1.5rem 0;
-    transition: all .2s;
+    transition: all .1s;
     border-bottom: $border;
     color: #6c7a89;
 
