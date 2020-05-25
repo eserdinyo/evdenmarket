@@ -6,14 +6,10 @@
     <nuxt-link class="Profil-card--link" to="/ayarlarim">
       Ayarlarım
     </nuxt-link>
-    <nuxt-link class="Profil-card--link" to="/">
-      Kampanyalarım
-    </nuxt-link>
     <nuxt-link class="Profil-card--link" to="/adreslerim">
       Adreslerim
     </nuxt-link>
-    <nuxt-link class="Profil-card--link" to="/">Çeklerim</nuxt-link>
-    <nuxt-link class="Profil-card--link" to="/">Puanlarım</nuxt-link>
+    <nuxt-link class="Profil-card--link" to="/puanlarim">Puanlarım</nuxt-link>
     <a class="Profil-card--link" @click="logout">Çıkış Yap</a>
   </div>
 </template>

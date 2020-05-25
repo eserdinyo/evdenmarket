@@ -59,7 +59,7 @@
                 @click="$modal.show('suggest-market-modal')"
               >Market Öner</a>
               <a href="">KVKK</a>
-              <a href="">İletişim</a>
+              <nuxt-link to="/iletisim">İletişim</nuxt-link>
               <a href="">Kullanım Sözleşmesi</a>
             </div>
           </div>

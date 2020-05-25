@@ -17,7 +17,7 @@
         <icon-gift />
         <span>Puanlarım</span>
       </nuxt-link>
-      <nuxt-link class="item" to="/yoo">
+      <nuxt-link class="item" to="/iletisim">
         <icon-phone />
         <span>İletişim</span>
       </nuxt-link>

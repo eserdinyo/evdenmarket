@@ -28,16 +28,18 @@
           <div class="form-group">
             <div class="form-item">
               <div class="form-label">TELEFON</div>
-              <input
-                v-model="first_name"
+              <the-mask
+                v-model="phone"
+                type="tel"
                 class="form-input"
-                placeholder="Telefon Girin"
-              >
+                placeholder="Cep Telefonu"
+                :mask="['0 (###) ### ## ##']"
+              />
             </div>
             <div class="form-item">
               <div class="form-label">E-POSTA</div>
               <input
-                v-model="last_name"
+                v-model="email"
                 class="form-input"
                 placeholder="Eposta Girin"
               >
@@ -51,7 +53,7 @@
             <div class="form-item">
               <div class="form-label">ŞİFRENİZ</div>
               <input
-                v-model="first_name"
+                v-model="password"
                 class="form-input"
                 placeholder="Şifrenizi Girin"
               >
@@ -59,7 +61,7 @@
             <div class="form-item">
               <div class="form-label">YENİ ŞİFRENİZ</div>
               <input
-                v-model="last_name"
+                v-model="new_password"
                 class="form-input"
                 placeholder="Yeni Şifre Girin"
               >
@@ -67,7 +69,7 @@
             <div class="form-item">
               <div class="form-label">TEKRAR YENİ ŞİFRE</div>
               <input
-                v-model="first_name"
+                v-model="re_password"
                 class="form-input"
                 placeholder="Tekrar şifre Girin"
               >
@@ -81,16 +83,33 @@
 </template>
 
 <script>
+import { TheMask } from 'vue-the-mask'
 import sidebar from '@/components/Sidebar'
 
 export default {
   layout: 'cart-layout',
   components: {
-    sidebar
+    sidebar,
+    TheMask
   },
   data () {
     return {
+      userData: '',
+      first_name: '',
+      last_name: '',
+      phone: '',
+      email: '',
+      password: '',
+      new_password: '',
+      re_password: ''
     }
+  },
+  created () {
+    this.userData = { ...this.user }
+    this.first_name = this.userData.first_name
+    this.last_name = this.userData.last_name
+    this.phone = this.userData.phone
+    this.email = this.userData.email
   },
   head () {
     return {
