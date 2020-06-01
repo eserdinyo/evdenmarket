@@ -392,7 +392,7 @@ export default {
     transition: all 0.2s;
     margin-right: 1rem;
     padding-top: 3px;
-    background: transparerent;
+    background: transparent;
     position: relative;
 
     &::after {

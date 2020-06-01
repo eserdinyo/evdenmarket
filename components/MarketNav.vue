@@ -2,7 +2,7 @@
   <div class="market-nav" :class="{ activeNav: isNavOpen }">
     <nuxt-link v-for="(n, idx) in 9" :key="idx" to="/kategori/2" class="market-nav-item">
       <div class="market-nav-icon">
-        <icon-fish />
+        <img src="../assets/1.svg" class="icon" alt="" srcset="">
       </div>
       <div class="market-nav-link">
         Et, Balık, Tavuk
@@ -58,6 +58,10 @@ export default {
   box-shadow: $shadow;
   height: 496px;
   transition: all .5s;
+
+  .icon {
+    fill: #fff;
+  }
 
   &-item {
     display: flex;

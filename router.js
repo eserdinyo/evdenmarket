@@ -35,7 +35,8 @@ export function createRouter () {
       {
         path: '/marketler/:id',
         name: 'Markets',
-        component: Markets
+        component: Markets,
+        props: true
       },
       {
         path: '/market/:name/:id',

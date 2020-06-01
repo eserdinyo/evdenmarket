@@ -2,7 +2,7 @@
   <nuxt-link :to="`/market/${slugUrl(market.name)}/${market.id}`">
     <div class="Market">
       <div class="Market__top">
-        <img class="Market__resim" :src="market.imageUrl">
+        <img class="Market__resim" :src="market.image_url">
       </div>
       <div class="Market__bottom">
         <div class="Market__isim">{{ market.name }}</div>

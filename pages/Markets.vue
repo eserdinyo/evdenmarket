@@ -1,12 +1,16 @@
 <template>
   <div class="markets">
     <div class="container">
-      <div v-if="true">
+      <div v-if="markets.length > 0">
         <div class="markets-title">
-          Turgut Reis Mahallesi
+          {{ neighborhood.name }}
         </div>
         <div class="markets-wrapper">
-          <market-item v-for="(n, idx) in 10" :key="idx" :market="market" />
+          <market-item
+            v-for="(market, idx) in markets"
+            :key="idx"
+            :market="market"
+          />
         </div>
       </div>
       <div v-else>
@@ -24,7 +28,7 @@
               Market Öner
             </button>
           </div>
-          <div class="gif"></div>
+          <div class="gif" />
         </div>
       </div>
     </div>
@@ -39,30 +43,20 @@ export default {
   components: {
     MarketItem
   },
-  props: {
-    id: {
-      type: Number,
-      default: 1
-    }
-  },
-  data() {
-    return {
-      layout: 'cart-layout',
-      market: {
-        id: 10,
-        min_amount: 75,
-        name: 'Ulusoylar Market',
-        imageUrl:
-          'http://karabukunfirmalari.com/data/company/162/hMdLRP-qBz.jpg'
-      }
+  async asyncData ({ $axios, error, params }) {
+    try {
+      const { data } = await $axios(`/neighborhoods/${params.id}`)
+      return { markets: data.markets, neighborhood: data.neighborhood }
+    } catch (err) {
+      error({ statusCode: 404, message: 'Post not found' })
     }
   },
   watch: {
-    $route() {
-      this.getMarkets()
+    $route () {
+      // this.getMarkets()
     }
   },
-  head() {
+  head () {
     return {
       title: 'Marketler - Evdenmarket',
       meta: [
@@ -132,7 +126,6 @@ export default {
     }
 
     .no-market {
-
       .gif {
         display: block;
       }
