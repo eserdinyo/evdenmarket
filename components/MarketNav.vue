@@ -1,23 +1,28 @@
 <template>
   <div class="market-nav" :class="{ activeNav: isNavOpen }">
-    <nuxt-link v-for="(n, idx) in 9" :key="idx" to="/kategori/2" class="market-nav-item">
+    <nuxt-link
+      v-for="(category, idx) in categories"
+      :key="category.id"
+      to="/kategori/2"
+      class="market-nav-item"
+    >
       <div class="market-nav-icon">
-        <img src="../assets/1.svg" class="icon" alt="" srcset="">
+        <img :src="catImg(idx + 1)" class="icon" alt="" srcset="">
       </div>
       <div class="market-nav-link">
-        Et, Balık, Tavuk
+        {{ category.name }}
       </div>
       <div class="market-nav-right-icon">
         <icon-right-arrow />
       </div>
       <div class="market-nav-submenu">
         <nuxt-link
-          v-for="(m, index) in 4"
-          :key="index"
+          v-for="child in category.categories"
+          :key="child.id"
           to="/"
           class="market-nav-submenu-link"
         >
-          Kırmızı Et
+          {{ child.name }}
         </nuxt-link>
       </div>
     </nuxt-link>
@@ -25,21 +30,27 @@
 </template>
 
 <script>
-import { iconFish, iconRightArrow } from '@/components/icons'
+import { mapState } from 'vuex'
 export default {
-  components: {
-    iconFish,
-    iconRightArrow
-  },
   data () {
     return {
       isNavOpen: false
     }
   },
+  computed: {
+    ...mapState({
+      categories: state => state.content.categories
+    })
+  },
   created () {
     this.$nuxt.$on('open-navbar', () => {
       this.isNavOpen = !this.isNavOpen
     })
+  },
+  methods: {
+    catImg (id) {
+      return require('../assets/category/cat-icon-' + id + '.svg')
+    }
   }
 }
 </script>
@@ -49,15 +60,15 @@ export default {
   position: absolute;
   top: 0;
   left: -400px;
-  width: 70%;
+  width: 100%;
   margin-right: 0 !important;
   z-index: 9;
   background-color: $grey-color;
   border-bottom-left-radius: $radius;
   border-bottom-right-radius: $radius;
   box-shadow: $shadow;
-  height: 496px;
-  transition: all .5s;
+  height: auto;
+  transition: all 0.3s;
 
   .icon {
     fill: #fff;
@@ -67,8 +78,8 @@ export default {
     display: flex;
     align-items: center;
     color: #f9f9f9;
-    padding: 1rem 1.5rem;
-    font-size: 14px;
+    padding: 2rem;
+    font-size: 16px;
     position: relative;
     transition: all 0.2s;
 
@@ -97,8 +108,11 @@ export default {
   &-icon {
     margin-right: 1.2rem;
     .icon {
-      height: 30px;
       fill: #f9f9f9;
+    }
+
+    img {
+      height: 30px;
     }
   }
 
@@ -136,6 +150,18 @@ export default {
     width: 210px;
     margin-right: 2rem;
     position: static;
+    height: 426px;
+
+    &-icon {
+      img {
+        height: 26px;
+      }
+    }
+
+    &-item {
+      padding: 1rem 1.5rem;
+      font-size: 14px;
+    }
 
     &-right-icon {
       display: block;

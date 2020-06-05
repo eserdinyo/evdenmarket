@@ -110,6 +110,7 @@ export default {
   },
   created () {
     this.init()
+    this.$store.dispatch('content/fetchCategories')
   },
   methods: {
     openAuthModal () {

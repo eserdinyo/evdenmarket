@@ -70,6 +70,7 @@ module.exports = {
   /*
    ** Axios module configuration
    */
+  components: [{ path: '~/components', pattern: '**/*.vue' }],
   axios: {
     baseURL: 'http://evdenmarket.test/api'
   },
@@ -83,8 +84,9 @@ module.exports = {
     extend (config, ctx) { }
   },
   buildModules: [
-    '@nuxtjs/global-components',
-    '@nuxtjs/router'
+    '@nuxt/components',
+    '@nuxtjs/router',
+    '@nuxtjs/global-components'
   ],
   extendRoutes (routes, resolve) {
     routes.push({

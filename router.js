@@ -7,6 +7,7 @@ import MarketInformation from '@/pages/MarketInformation'
 import Markets from '@/pages/Markets'
 import Market from '@/pages/Market'
 import Category from '@/pages/Category'
+import ProductDetail from '@/pages/ProductDetail'
 
 // cart
 import Cart from '@/pages/payment/Cart'
@@ -42,6 +43,11 @@ export function createRouter () {
         path: '/market/:name/:id',
         name: 'Market',
         component: Market
+      },
+      {
+        path: '/urun/:name',
+        name: 'Product Detail',
+        component: ProductDetail
       },
       {
         path: '/kategori/:id',

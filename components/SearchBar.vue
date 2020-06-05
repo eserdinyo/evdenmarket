@@ -24,14 +24,17 @@
           >
           <button class="searchbar__search--form-btn" type="submit">Ara</button>
         </form>
+        <div class="searchbar-market-name">
+          ULUSOY MARKET
+        </div>
       </div>
       <div
-        v-if="searchbarProducts"
+        v-if="false"
         class="Searchbar__result"
         :class="{ activeResult: activeResult }"
       >
         <div
-          v-for="product in searchbarProducts"
+          v-for="product in 5"
           class="Searchbar__result--item"
         >
           <nuxt-link
@@ -73,9 +76,6 @@ export default {
       isNavbarOpen: false
     }
   },
-  computed: {
-    ...mapGetters(['searchbarProducts'])
-  },
   watch: {
     $route () {
       this.activeResult = false
@@ -112,6 +112,13 @@ export default {
   position: relative;
   background-color: $grey-color;
   padding: 1.2rem 0;
+
+  &-market-name {
+    color: #fff;
+    font-weight: bold;
+    margin: 0 auto;
+    font-size: 20px;
+  }
 
   &-wrapper {
     display: flex;

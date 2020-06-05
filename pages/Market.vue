@@ -35,7 +35,7 @@ export default {
     ProductsGroup,
     CategoryProducts
   },
-  data() {
+  data () {
     return {
       title: 'Marketler - Evdenmarket',
       market: {
