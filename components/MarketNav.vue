@@ -124,7 +124,7 @@ export default {
     min-width: 200px;
     display: none;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem 2rem;
     border-top-right-radius: $radius;
     border-bottom-right-radius: $radius;
     z-index: 9;

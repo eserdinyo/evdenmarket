@@ -1,48 +1,41 @@
 <template>
   <div class="Urun">
-    <v-wait for="detay">
-      <template slot="waiting">
-        <Loader />
-      </template>
-      <div class="container">
-        <div class="Urun__detay">
-          <div class="Urun__detay--img-box">
-            <img
-              class="Urun__detay--img"
-              :src="product.image"
-              :alt="product.name"
-            />
+    <div class="container">
+      <div class="Urun__detay">
+        <div class="Urun__detay--img-box">
+          <img
+            class="Urun__detay--img"
+            :src="product.image"
+            :alt="product.name"
+          />
+        </div>
+        <div class="Urun__detay--right">
+          <div>
+            <h1 class="Urun__detay--name">{{ product.name }}</h1>
           </div>
-          <div class="Urun__detay--right d-flex">
+          <div class="Urun__detay--bottom">
+            <div class="Urun__detay--price">{{ product.price }} TL</div>
             <div>
-              <h1 class="Urun__detay--name">{{ product.name }}</h1>
-              <div class="Urun__detay--price">
-                240 ₺
-              </div>
-              <div class="Urun__detay--barkod">Barkod: 4654185441132</div>
-            </div>
-            <div class="Urun__detay--bottom">
               <button
-                v-if="true"
-                class="btn btn-empty"
+                v-if="!cartProduct"
+                class="btn btn-green"
                 :disabled="isLoading"
-                @click.prevent="add"
+                @click="add"
               >
                 <span v-if="!isLoading">SEPETE EKLE</span>
                 <loading :is-loading="isLoading" />
               </button>
-              <product-counter v-else :product="product" />
+              <product-counter v-else :product="cartProduct" />
             </div>
           </div>
         </div>
       </div>
-    </v-wait>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Swal from 'sweetalert2'
 import Loader from '@/components/Loader'
 
 export default {
@@ -52,7 +45,6 @@ export default {
   },
   data() {
     return {
-      product: '',
       quantity: 1,
       title: 'Evdenmarket - Market Sana Gelsin',
       product: {
@@ -61,39 +53,40 @@ export default {
         name: 'Doritos Extreme Mısır Cips',
         quantity: 2,
         price: 5.75,
-        id: 2
+        id: 2,
+        marketproduct_id: 23
       }
     }
   },
+  computed: {
+    ...mapGetters({
+      items: 'cart/items'
+    }),
+    cartProduct() {
+      const product = this.items.find(
+        (item) => item.marketproduct_id === this.product.marketproduct_id
+      )
+      return product
+    }
+  },
   methods: {
-    makeGood(price) {
-      return parseFloat(price).toFixed(2)
-    },
-    decQuantity() {
-      if (this.quantity > 1) {
-        this.quantity--
-      }
-    },
-    addCart(product) {
-      product.changeType = 'new'
+    add() {
       if (this.isLoggedIn) {
-        product.quantity = this.quantity
+        this.isLoading = true
         this.$store
-          .dispatch('addToCart', {
-            product,
-            user: this.loggedUser
+          .dispatch('cart/add', {
+            marketproduct_id: this.product.marketproduct_id,
+            quantity: 1
           })
           .then((res) => {
-            this.$store.dispatch('getShopcart', this.loggedUser).then((res) => {
-              Swal({
-                title: 'Sepete Eklendi',
-                icon: 'success',
-                button: 'Tamam'
-              })
-            })
+            this.isLoading = false
+          })
+          .catch((err) => {
+            this.isLoading = false
+            this.alert('Hata', err.response.data.message, 'error')
           })
       } else {
-        this.$router.push('/giris')
+        this.$modal.show('auth-modal')
       }
     }
   },
@@ -112,38 +105,41 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import 'assets/style/main.scss';
-
-.container {
-  max-width: 96rem;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
+<style lang="scss">
 .Urun {
   margin-top: 1rem;
-
-  @include res(tab) {
-    margin-top: 10rem;
-  }
 
   &__detay {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 10rem;
 
-    @include res(tab) {
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: center;
-      margin-top: 5rem;
+    .product-counter {
+      margin-top: 0;
+      border-radius: 4px;
+      padding: 10px 2.4rem;
+      width: auto;
+
+      span {
+        margin: 0 1rem;
+      }
     }
+
     &--bottom {
+      box-shadow: 0 -4px 8px #00000029;
+      border-top: $border;
+      padding: 0 2rem;
+      height: 80px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      margin-top: 1rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9;
+      background-color: #fff;
     }
 
     &--quantity {
@@ -174,35 +170,22 @@ export default {
       }
     }
 
-    &--img {
-      border: 1px solid rgba($font-color, 0.1);
+    &--img-box {
+      border: $border-2;
+      border-radius: $sm-radius;
       margin-bottom: 2rem;
-      width: 100%;
       margin-top: 2rem;
-      box-shadow: 0 3px 6px #e5e5e570;
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+    }
 
-      @include res(tab) {
-        &-box {
-          width: 50%;
-
-          @include res(tab-land) {
-            width: 35%;
-          }
-        }
-
-        max-width: 100%;
-        border: 1px solid rgba($font-color, 0.1);
-        border-radius: 5px;
-        padding: 1rem 2rem;
-        margin: 0rem 3rem 0rem 0rem;
-      }
+    &--img {
+      height: 240px;
     }
 
     &--desc {
       margin-top: 2rem;
-      @include res(tab-land) {
-        margin-top: 10rem;
-      }
       &-title {
         background-color: $primary-color;
         color: #fff;
@@ -211,15 +194,6 @@ export default {
         font-weight: 400;
         border-radius: 3px;
         margin-bottom: 1rem;
-        @include res(tab-land) {
-          background-color: #fff;
-          color: $price-color;
-          text-align: left;
-          padding-bottom: 2rem;
-          position: relative;
-          border-bottom: 1px solid #d9d9d9;
-          border-radius: 0;
-        }
       }
 
       &-bottom {
@@ -234,34 +208,66 @@ export default {
       font-weight: 700;
       margin-top: 1rem;
       margin-right: auto;
-      @include res(tab-land) {
-        font-size: 1.4rem;
-      }
     }
 
     &--right {
       margin-right: auto;
-      @include res(tab) {
-        margin-left: 3rem;
-      }
     }
 
     &--name {
-      font-weight: 700;
+      font-weight: 500;
       color: $grey-color;
-      font-size: 1.8rem;
+      font-size: 16px;
     }
 
     &--price {
-      margin: 1rem auto 0 0;
       font-weight: 700;
       color: $primary-color;
       font-size: 2.4rem;
     }
+  }
+}
 
-    &--barkod {
-      color: #3f4a58;
-      font-size: 1.4rem;
+@include res(desktop) {
+  .Urun {
+    &__detay {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      margin-top: 7rem;
+      &--img-box {
+        width: 360px;
+        height: 320px;
+        img {
+          height: 100%;
+        }
+      }
+
+      &--right {
+        margin-bottom: auto;
+      }
+
+      &--price {
+        margin-bottom: 2rem;
+        font-size: 30px;
+      }
+
+      .btn {
+        width: 280px;
+      }
+
+      &--name {
+        margin-top: 3rem;
+        margin-bottom: 5rem;
+        font-size: 3rem;
+      }
+      &--bottom {
+        position: static;
+        box-shadow: none;
+        border-top: none;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+      }
     }
   }
 }

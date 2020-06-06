@@ -49,28 +49,26 @@ export default {
           id: 10,
           min_amount: 75,
           name: 'Ulusoy Market',
-          imageUrl:
-            'http://karabukunfirmalari.com/data/company/162/hMdLRP-qBz.jpg'
+          image_url:
+            'https://fastly.4sqi.net/img/general/600x600/6138847_zOWXzpaj9cGy1PvDyEXDfmQLK2wkKHpbTppXUAsoV74.jpg'
         },
         {
           id: 12,
           min_amount: 75,
           name: 'Onur Market',
-          imageUrl: 'http://kurumsal.onurmarket.com/media/magaza/bagcilar-1.jpg'
+          image_url: 'https://fastly.4sqi.net/img/general/600x600/6138847_zOWXzpaj9cGy1PvDyEXDfmQLK2wkKHpbTppXUAsoV74.jpg'
         },
         {
           id: 14,
           min_amount: 75,
           name: 'İndirim Market',
-          imageUrl:
-            'https://www.akdeniztoros.com.tr/satisnoktalari/wp-content/uploads/Ayanc%C4%B1k-%C4%B0ndirim-Market.jpg'
+          image_url: 'https://fastly.4sqi.net/img/general/600x600/6138847_zOWXzpaj9cGy1PvDyEXDfmQLK2wkKHpbTppXUAsoV74.jpg'
         },
         {
           id: 22,
           min_amount: 75,
           name: 'Migros Market',
-          imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Migros_t%C3%BCrk.jpg/1200px-Migros_t%C3%BCrk.jpg'
+          image_url: 'https://fastly.4sqi.net/img/general/600x600/6138847_zOWXzpaj9cGy1PvDyEXDfmQLK2wkKHpbTppXUAsoV74.jpg'
         }
       ]
     }
