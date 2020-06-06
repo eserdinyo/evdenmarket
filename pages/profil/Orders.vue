@@ -177,6 +177,10 @@ export default {
     margin-top: 2rem;
   }
 
+  .Orders {
+    margin-top: 3rem;
+  }
+
   .Orders-wrapper {
     display: grid;
     grid-template-columns: 25% 75%;

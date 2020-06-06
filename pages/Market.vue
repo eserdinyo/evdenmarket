@@ -1,9 +1,9 @@
 <template>
   <div class="market-detail">
-    <search-bar />
+    <search-bar :market="market" />
     <div class="container relative">
       <div class="market-detail-top">
-        <market-nav />
+        <market-nav :market="market" />
         <div class="market-detail-right">
           <market-slider />
           <products-group :products="products" />
@@ -34,6 +34,14 @@ export default {
     SearchBar,
     ProductsGroup,
     CategoryProducts
+  },
+  async asyncData ({ $axios, error, params }) {
+    try {
+      const { data } = await $axios(`markets/${params.id}`)
+      return { market: data }
+    } catch (err) {
+      error({ statusCode: 404, message: 'Post not found' })
+    }
   },
   data () {
     return {

@@ -50,8 +50,9 @@ export function createRouter () {
         component: ProductDetail
       },
       {
-        path: '/kategori/:id',
+        path: '/kategori/:name/:id/market/:marketId/:marketName',
         name: 'Kategori',
+        props: true,
         component: Category
       },
       {

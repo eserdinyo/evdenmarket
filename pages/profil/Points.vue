@@ -68,5 +68,9 @@ export default {
     grid-template-columns: 25% 75%;
     margin-top: 3rem;
   }
+
+  .Points {
+    margin-top: 3rem;
+  }
 }
 </style>

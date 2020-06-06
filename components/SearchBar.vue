@@ -25,7 +25,7 @@
           <button class="searchbar__search--form-btn" type="submit">Ara</button>
         </form>
         <div class="searchbar-market-name">
-          ULUSOY MARKET
+          {{ market.name.toUpperCase() }}
         </div>
       </div>
       <div
@@ -68,6 +68,12 @@ export default {
   components: {
     iconSearch,
     HamMenu
+  },
+  props: {
+    market: {
+      type: Object,
+      required: true
+    }
   },
   data () {
     return {

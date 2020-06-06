@@ -1,16 +1,20 @@
 <template>
   <div class="category-page">
-    <search-bar />
+    <search-bar :market="market" />
     <mobile-category />
     <div class="container relative">
       <div class="category-page-top">
-        <market-nav />
+        <market-nav :market="market" />
         <div>
           <div class="category-page-title">
-            Süt, Kahvaltılık
+            {{ category.name }}
           </div>
           <div class="category-page-right">
-            <product v-for="(product, idx) in products" :key="idx" :product="product" />
+            <product
+              v-for="(product, idx) in products"
+              :key="idx"
+              :product="product"
+            />
           </div>
         </div>
       </div>
@@ -25,12 +29,21 @@ import Product from '@/components/Product'
 import MobileCategory from '@/components/MobileCategory'
 
 export default {
-  name: 'MarketDetail',
   components: {
     MarketNav,
     SearchBar,
     Product,
     MobileCategory
+  },
+  async asyncData ({ $axios, error, params }) {
+    try {
+      const category = await $axios(`categories/${params.id}`)
+      const market = await $axios(`markets/${params.marketId}`)
+
+      return { category: category.data, market: market.data }
+    } catch (err) {
+      error({ statusCode: 404, message: 'Post not found' })
+    }
   },
   data () {
     return {

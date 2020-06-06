@@ -198,6 +198,10 @@ export default {
     margin-top: 2rem;
   }
 
+  .Settings {
+    margin-top: 3rem;
+  }
+
   .Settings-wrapper {
     display: grid;
     grid-template-columns: 25% 75%;

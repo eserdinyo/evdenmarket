@@ -3,7 +3,7 @@
     <nuxt-link
       v-for="(category, idx) in categories"
       :key="category.id"
-      to="/kategori/2"
+      :to="`/kategori/${category.slug}/${category.id}/market/${market.id}/${slugUrl(market.name)}`"
       class="market-nav-item"
     >
       <div class="market-nav-icon">
@@ -19,7 +19,7 @@
         <nuxt-link
           v-for="child in category.categories"
           :key="child.id"
-          to="/"
+          :to="`/kategori/${child.slug}/${child.id}/market/${market.id}/${slugUrl(market.name)}`"
           class="market-nav-submenu-link"
         >
           {{ child.name }}
@@ -32,6 +32,12 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  props: {
+    market: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
       isNavOpen: false

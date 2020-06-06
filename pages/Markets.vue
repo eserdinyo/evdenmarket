@@ -43,12 +43,12 @@ export default {
   components: {
     MarketItem
   },
-  async asyncData ({ $axios, error, params }) {
+  async asyncData ({ $axios, params }) {
     try {
       const { data } = await $axios(`/neighborhoods/${params.id}`)
       return { markets: data.markets, neighborhood: data.neighborhood }
     } catch (err) {
-      error({ statusCode: 404, message: 'Post not found' })
+      return { markets: [] }
     }
   },
   watch: {
