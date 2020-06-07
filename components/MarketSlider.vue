@@ -9,7 +9,7 @@
           >
         </div>
       </swiper-slide>
-      <div slot="pagination" class="swiper-pagination swiper-pagination-market" />
+      <div slot="pagination" class="swiper-pagination swiper-pagination-product" />
     </swiper>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
           disableOnInteraction: false
         },
         pagination: {
-          el: '.swiper-pagination-market',
+          el: '.swiper-pagination-product',
           dynamicBullets: false,
           clickable: true
         }

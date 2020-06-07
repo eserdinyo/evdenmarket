@@ -2,11 +2,10 @@
   <div class="Header__search">
     <div class="ChangeMarket">
       <div class="container">
-        <iconMarket />
         <div class="ChangeMarket__title" @click="toggleMarketBox">
           <p>Market Ara</p>
-          <iconArrowDown :class="{ transformArrow: isOpenMarketBox }" />
         </div>
+        <icon-arrow-bottom :class="{ transformArrow: isOpenMarketBox }" />
       </div>
       <div
         v-if="isOpenMarketBox"
@@ -79,17 +78,13 @@
 <script>
 import { mixin as clickaway } from 'vue-clickaway'
 import Multiselect from 'vue-multiselect'
-import iconMarket from '@/assets/icons/market'
-import iconArrowDown from '@/assets/icons/arrow_down'
 
 export default {
   components: {
-    iconMarket,
-    iconArrowDown,
     Multiselect
   },
   mixins: [clickaway],
-  data () {
+  data() {
     return {
       cities: [],
       districts: [],
@@ -105,10 +100,10 @@ export default {
     }
   },
   watch: {
-    $route () {
+    $route() {
       this.isOpenMarketBox = false
     },
-    city (val) {
+    city(val) {
       this.$axios(`cities/${val.id}`).then((res) => {
         this.districts = res.data
       })
@@ -116,26 +111,26 @@ export default {
       this.neighborhood = ''
       this.neighborhoods = []
     },
-    district (val) {
+    district(val) {
       this.$axios(`districts/${val.id}`).then((res) => {
         this.neighborhoods = res.data
       })
       this.neighborhood = ''
     }
   },
-  mounted () {
+  mounted() {
     this.$axios('cities').then((res) => {
       this.cities = res.data
     })
   },
   methods: {
-    openMarkets () {
+    openMarkets() {
       this.$router.push(`/marketler/${this.neighborhood.id}`)
     },
-    closeChangeMarket () {
+    closeChangeMarket() {
       this.isOpenMarketBox = false
     },
-    toggleMarketBox () {
+    toggleMarketBox() {
       this.isOpenMarketBox = !this.isOpenMarketBox
     }
   }
@@ -158,6 +153,11 @@ export default {
   color: $primary-color;
   border-radius: 5px;
   position: relative;
+
+  .icon {
+    fill: $primary-color;
+    height: 14px;
+  }
 
   .selectbox {
     margin-bottom: 1rem;

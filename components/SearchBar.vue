@@ -124,6 +124,7 @@ export default {
     font-weight: bold;
     margin: 0 auto;
     font-size: 20px;
+    display: none;
   }
 
   &-wrapper {
@@ -245,6 +246,9 @@ export default {
 
 @include res(desktop) {
   .searchbar {
+    &-market-name {
+      display: block;
+    }
     &-title {
       margin-right: 5rem;
       min-width: 19rem;

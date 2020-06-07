@@ -16,7 +16,7 @@ export default {
   components: {
     HomeSlider,
     HomeTutorial,
-    HomeMarkets,
+    HomeMarkets
   },
   computed: {
     ...mapGetters(['isLoggedIn'])
@@ -37,7 +37,8 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'Çevrendeki bütün marketleri görüp istediğin marketten online alışveriş yapabilirsin'
+          content:
+            'Çevrendeki bütün marketleri görüp istediğin marketten online alışveriş yapabilirsin'
         }
       ]
     }
@@ -46,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/style/main.scss";
+@import '@/assets/style/main.scss';
 
 .swal-button {
   background-color: $primary-color;

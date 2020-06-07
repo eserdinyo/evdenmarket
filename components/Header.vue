@@ -362,7 +362,6 @@ export default {
     span {
       font-weight: 600;
       margin-right: 10px;
-      padding-bottom: 2px;
     }
     .icon {
       fill: #fff;

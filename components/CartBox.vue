@@ -31,12 +31,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import iconDelete from '@/assets/icons/delete'
 import ProductCounter from '@/components/ProductCounter'
 
 export default {
   components: {
-    iconDelete,
     ProductCounter
   },
   computed: {

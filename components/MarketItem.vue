@@ -2,38 +2,24 @@
   <nuxt-link :to="`/market/${slugUrl(market.name)}/${market.id}`">
     <div class="Market">
       <div class="Market__top">
-        <img class="Market__resim" :src="market.image_url">
+        <img class="Market__resim" :src="market.image_url" />
       </div>
       <div class="Market__bottom">
         <div class="Market__isim">{{ market.name }}</div>
-        <div class="Market__min-paket">
-          <iconMoney /><span>Min Sipariş Tutarı: ₺{{ market.min_amount }}</span>
+        <div class="Market__spec">
+          <icon-cash /><span>Min Sipariş Tutarı: ₺{{ market.min_amount }}</span>
         </div>
-        <div class="Market__adres">
-          <iconAdress /><span>Şişli, Merkez Mahallesi</span>
+        <div class="Market__spec">
+          <icon-location /><span>Şişli, Merkez Mahallesi</span>
         </div>
-        <div class="Market__mesai__ort">
-          <div class="Market__mesai">
-            <iconTime />
-            <div class="Market__mesai--time">09:00 - 23:00</div>
-          </div>
-        </div>
+        <div class="Market__spec"><icon-time /> <span>09:00 - 23:00</span></div>
       </div>
     </div>
   </nuxt-link>
 </template>
 
 <script>
-import iconTime from '@/assets/icons/time'
-import iconAdress from '@/assets/icons/address'
-import iconMoney from '@/assets/icons/money'
-
 export default {
-  components: {
-    iconTime,
-    iconAdress,
-    iconMoney
-  },
   props: {
     market: {
       type: Object,
@@ -61,6 +47,19 @@ export default {
     height: 25rem;
     object-fit: cover;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+  }
+
+  &__spec {
+    margin-bottom: 5px;
+    .icon {
+      fill: $primary-color;
+      height: 13px;
+      margin-right: 10px;
+    }
+
+    span {
+      font-size: 13px;
+    }
   }
   &__bottom {
     padding: 1.5rem;
@@ -124,7 +123,6 @@ export default {
     fill: $primary-color;
     width: 12px;
     height: 12px;
-    margin-top: -1px;
   }
   &--moto {
     fill: $primary-color;
