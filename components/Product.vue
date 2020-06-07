@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    :to="`/urun/${slugUrl(product.name)}`"
+    :to="`/urun/${slugUrl(product.name)}/${product.id}`"
     class="product"
     :class="{ product_category: isCategory }"
   >
@@ -50,7 +50,9 @@ export default {
       items: 'cart/items'
     }),
     cartProduct () {
-      const product = this.items.find(item => item.marketproduct_id === this.product.marketproduct_id)
+      const product = this.items.find(
+        item => item.marketproduct_id === this.product.id
+      )
       return product
     }
   },
@@ -60,7 +62,7 @@ export default {
         this.isLoading = true
         this.$store
           .dispatch('cart/add', {
-            marketproduct_id: this.product.marketproduct_id,
+            marketproduct_id: this.product.id,
             quantity: 1
           })
           .then((res) => {

@@ -7,7 +7,7 @@
             class="Urun__detay--img"
             :src="product.image"
             :alt="product.name"
-          />
+          >
         </div>
         <div class="Urun__detay--right">
           <div>
@@ -36,46 +36,43 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Loader from '@/components/Loader'
 
 export default {
   layout: 'cart-layout',
-  components: {
-    Loader
+  async asyncData ({ $axios, params }) {
+    try {
+      const product = await $axios(`/market-products/${params.id}`)
+      return { product: product.data }
+    } catch (err) {
+      return { markets: [] }
+    }
   },
-  data() {
+  data () {
     return {
       quantity: 1,
-      title: 'Evdenmarket - Market Sana Gelsin',
-      product: {
-        image:
-          'https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05089453/05089453-3af53a.png',
-        name: 'Doritos Extreme Mısır Cips',
-        quantity: 2,
-        price: 5.75,
-        id: 2,
-        marketproduct_id: 23
-      }
+      isLoading: false,
+      title: 'Evdenmarket - Market Sana Gelsin'
     }
   },
   computed: {
     ...mapGetters({
       items: 'cart/items'
     }),
-    cartProduct() {
+    cartProduct () {
       const product = this.items.find(
-        (item) => item.marketproduct_id === this.product.marketproduct_id
+        item => item.marketproduct_id === this.product.id
       )
+      
       return product
     }
   },
   methods: {
-    add() {
+    add () {
       if (this.isLoggedIn) {
         this.isLoading = true
         this.$store
           .dispatch('cart/add', {
-            marketproduct_id: this.product.marketproduct_id,
+            marketproduct_id: this.product.id,
             quantity: 1
           })
           .then((res) => {
@@ -90,7 +87,7 @@ export default {
       }
     }
   },
-  head() {
+  head () {
     return {
       title: this.title,
       meta: [

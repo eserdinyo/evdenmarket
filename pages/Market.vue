@@ -6,8 +6,8 @@
         <market-nav :market="market" />
         <div class="market-detail-right">
           <market-slider />
-          <products-group :products="products" />
-          <products-group :products="products" :is-last-order="true" />
+          <products-group v-if="isLoggedIn" :products="products" :is-last-order="true" />
+          <products-group v-if="discountProducts.length > 0" :products="discountProducts" />
           <category-products
             v-for="(cat, idx) in categoryProducts"
             :key="idx"
@@ -37,8 +37,12 @@ export default {
   },
   async asyncData ({ $axios, error, params }) {
     try {
-      const { data } = await $axios(`markets/${params.id}`)
-      return { market: data }
+      const res = await $axios(`markets/${params.id}`)
+      console.log(res.data.discountProducts);
+      return {
+        market: res.data.market,
+        discountProducts: res.data.discountProducts
+      }
     } catch (err) {
       error({ statusCode: 404, message: 'Post not found' })
     }

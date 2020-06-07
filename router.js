@@ -45,7 +45,7 @@ export function createRouter () {
         component: Market
       },
       {
-        path: '/urun/:name',
+        path: '/urun/:name/:id',
         name: 'Product Detail',
         component: ProductDetail
       },

@@ -1,6 +1,6 @@
 <template>
   <div class="products-group">
-    <h1 v-if="isLastOrder" class="products-group-title">SON SİRAİŞLERİM</h1>
+    <h1 v-if="isLastOrder" class="products-group-title">SON SİRAŞLERİM</h1>
     <h1 v-else class="products-group-title">İNDİRİMDEKİ ÜRÜNLER</h1>
     <swiper ref="mySwiper" class="swiper-wrapper" :options="swiperOptions">
       <swiper-slide v-for="(product, idx) in products" :key="idx">
@@ -32,7 +32,6 @@ export default {
   data () {
     return {
       swiperOptions: {
-        loop: true,
         speed: 1000,
         grabCursor: true,
         spaceBetween: 20,
@@ -41,10 +40,6 @@ export default {
           prevEl: '.swiper-button-prev'
         },
         slidesPerView: this.$device.isMobile ? 2 : 4,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: true
-        },
         pagination: {
           el: '.swiper-pagination',
           dynamicBullets: false,
