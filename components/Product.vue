@@ -7,7 +7,7 @@
     <img class="product-img" :src="product.image" alt="">
     <div>
       <div class="product-name">{{ product.name }}</div>
-      <div class="product-price">{{ product.price.toFixed(2) }} TL</div>
+      <div class="product-price">{{ product.price }} TL</div>
       <button
         v-if="!cartProduct"
         class="btn btn-empty"

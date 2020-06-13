@@ -1,3 +1,5 @@
+
+
 module.exports = {
   generate: {
     fallback: true
@@ -72,7 +74,7 @@ module.exports = {
    */
   components: [{ path: '~/components', pattern: '**/*.vue' }],
   axios: {
-    baseURL: 'http://evdenmarket.test/api'
+    baseURL: process.env.NODE_ENV !== 'production' ? 'http://evdenmarket.test/api' : 'https://fierce-stream-64681.herokuapp.com/api'
   },
   /*
    ** Build configuration
