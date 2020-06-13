@@ -16,41 +16,39 @@
             v-model="searchWord"
             class="searchbar__search--form-input"
             type="text"
-            name="firstname"
             placeholder="Markette ürün ara..."
             autocomplete="off"
-            @keyup="searchProducts"
+            @keyup="handleSearch"
             @blur="closeResult"
           >
           <button class="searchbar__search--form-btn" type="submit">Ara</button>
+
+          <div
+            v-if="activeResult"
+            class="searchbar__result"
+            :class="{ activeResult: activeResult }"
+          >
+            <div v-if="!isLoading">
+              <div
+                v-for="(product, idx) in products"
+                :key="idx"
+                class="searchbar__result--item"
+              >
+                <nuxt-link :to="`/urun/${slugUrl(product.name)}/${product.id}`">
+                  {{ product.name }}
+                </nuxt-link>
+              </div>
+              <div class="searchbar__result--bottom">
+                <nuxt-link to="/">
+                  Tüm Sonuçları Görüntüle
+                </nuxt-link>
+              </div>
+            </div>
+            <green-loader :is-loading="isLoading" />
+          </div>
         </form>
         <div class="searchbar-market-name">
           {{ market.name.toUpperCase() }}
-        </div>
-      </div>
-      <div
-        v-if="false"
-        class="Searchbar__result"
-        :class="{ activeResult: activeResult }"
-      >
-        <div
-          v-for="product in 5"
-          class="Searchbar__result--item"
-        >
-          <nuxt-link
-            :to="{
-              name: 'u-id',
-              params: { id: slugUrl(product.name) },
-              query: { p: product.id }
-            }"
-          >
-            {{ product.name }}
-          </nuxt-link>
-        </div>
-        <div class="Searchbar__result--bottom">
-          <nuxt-link :to="{ name: 'arama', query: { q: searchWord } }">
-            Tum Sonuclari Goruntule
-          </nuxt-link>
         </div>
       </div>
     </div>
@@ -58,8 +56,6 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers'
-import { mapGetters } from 'vuex'
 import { iconSearch } from './icons'
 import HamMenu from './HamMenu'
 
@@ -79,7 +75,10 @@ export default {
     return {
       searchWord: '',
       activeResult: false,
-      isNavbarOpen: false
+      isNavbarOpen: false,
+      queryTimer: null,
+      products: [],
+      isLoading: true
     }
   },
   watch: {
@@ -96,13 +95,23 @@ export default {
       this.$nuxt.$emit('open-navbar')
       this.isNavbarOpen = !this.isNavbarOpen
     },
-    searchProducts () {
+    handleSearch () {
       if (this.searchWord.length >= 3) {
-        this.activeResult = true
-        this.$store.dispatch('getProductsForSeachbar', this.searchWord)
-      } else {
-        this.activeResult = false
+        clearTimeout(this.queryTimer)
+        this.isLoading = true
+        this.queryTimer = setTimeout(() => {
+          this.search(this.searchWord)
+        }, 300)
       }
+    },
+    search (word) {
+      this.$axios(`search?q=${word}&market_id=${this.market.id}`).then(
+        (res) => {
+          this.products = res.data
+          this.isLoading = false
+        }
+      )
+      this.activeResult = true
     },
     closeResult () {
       setTimeout(() => {
@@ -148,6 +157,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
 
       .icon {
         fill: $primary-color;
@@ -195,11 +205,12 @@ export default {
 
   &__result {
     position: absolute;
-    top: 110%;
-    width: 100%;
+    top: 103%;
+    left: -10px;
+    width: 101.5%;
     z-index: 99999999;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: $sm-radius;
     padding: 1rem 0;
     box-shadow: $shadow;
     color: $font-color;
@@ -208,6 +219,8 @@ export default {
     &--item {
       font-size: 1.3rem;
       cursor: pointer;
+      transition: all 0.1s;
+      padding: 0 1rem;
 
       a {
         display: inline-block;
@@ -221,15 +234,20 @@ export default {
       }
 
       &:hover {
-        background-color: rgba($primary-color, 0.2);
+        background-color: rgba($primary-color, 0.1);
       }
     }
 
     &--bottom {
-      border-top: 1px solid rgba(204, 204, 204, 0.589);
-      font-size: 1.2rem;
+      border-top: $border;
+      font-size: 12px;
       text-align: center;
-      padding-top: 1rem;
+      padding: 0.5rem;
+      padding-top: 1.5rem;
+
+      a:hover {
+        text-decoration: underline;
+      }
     }
   }
 
