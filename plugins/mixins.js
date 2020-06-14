@@ -9,6 +9,9 @@ Vue.mixin({
     },
     user () {
       return this.$store.state.user.data
+    },
+    defaultMarket () {
+      return this.$store.state.user.defaultMarket
     }
   },
   methods: {

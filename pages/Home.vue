@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import HomeSlider from '@/components/HomeSlider'
 import HomeTutorial from '@/components/HomeTutorial'
 import HomeMarkets from '@/components/HomeMarkets'
@@ -18,17 +17,13 @@ export default {
     HomeTutorial,
     HomeMarkets
   },
-  computed: {
-    ...mapGetters(['isLoggedIn'])
-  },
-  mounted () {
-    /*  if (this.$route.query.register) {
-      this.$store.dispatch("register", {
-        user: this.$auth.user,
-        provider: this.$auth.strategy.name
-      });
-      this.$router.push("/");
-    } */
+  created () {
+    // if there is default market go to there
+    if (process.browser) {
+      if (this.defaultMarket.name) {
+        this.$router.push(`/market/${this.slugUrl(this.defaultMarket.name)}/${this.defaultMarket.id}`)
+      }
+    }
   },
   head () {
     return {
@@ -47,8 +42,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/style/main.scss';
-
 .swal-button {
   background-color: $primary-color;
 }

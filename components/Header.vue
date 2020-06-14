@@ -13,9 +13,9 @@
         <div class="profile-icon" @click="goAccount">
           <icon-user />
         </div>
-        <nuxt-link class="Header__link" to="/">
+        <a class="Header__link" @click="goHome">
           <p>evdenmarket</p>
-        </nuxt-link>
+        </a>
         <div class="Header__login">
           <div v-if="false" class="mobil-login-btn" @click="openAuthModal">
             <i class="icon fa fa-sign-in" />
@@ -25,6 +25,7 @@
             class="desktop-login"
             @click="openAuthModal"
           >
+            <icon-login />
             <span>GİRİŞ YAP</span>
           </button>
           <button
@@ -113,6 +114,10 @@ export default {
     this.$store.dispatch('content/fetchCategories')
   },
   methods: {
+    goHome () {
+      this.$store.commit('user/clearDefaultMarket')
+      this.$router.push('/')
+    },
     openAuthModal () {
       this.$modal.show('auth-modal')
     },
@@ -261,6 +266,7 @@ export default {
     color: $primary-color;
     font-family: 'Righteous', cursive;
     user-select: none;
+    cursor: pointer;
   }
 
   &__logo {
@@ -410,6 +416,20 @@ export default {
     }
   }
 
+  .desktop-login {
+    border: $border-2;
+    padding: 1rem 1.5rem;
+    border-radius: $sm-radius;
+    display: flex !important;
+    align-items: center;
+    margin-right: 0;
+
+    .icon {
+      height: 16px;
+      fill: $primary-color;
+      margin-right: 1rem;
+    }
+  }
   .desktop-profil {
     position: relative;
     padding-top: 0;

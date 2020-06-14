@@ -1,10 +1,10 @@
 <template>
   <div class="category-page">
-    <search-bar :market="market" />
+    <search-bar :market="market.market" />
     <mobile-category />
     <div class="container relative">
       <div class="category-page-top">
-        <market-nav :market="market" />
+        <market-nav :market="market.market" />
         <div>
           <div class="category-page-title">
             {{ category.name }}

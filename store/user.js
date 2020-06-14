@@ -1,7 +1,8 @@
 export const state = () => ({
   data: '',
   loggedIn: false,
-  token: ''
+  token: '',
+  defaultMarket: {}
 })
 
 export const mutations = {
@@ -9,6 +10,8 @@ export const mutations = {
     state.loggedIn = !!window.localStorage.getItem('user')
     state.data = JSON.parse(window.localStorage.getItem('user')) || ''
     state.token = window.localStorage.getItem('token') || ''
+    state.defaultMarket =
+      JSON.parse(window.localStorage.getItem('default-market')) || ''
   },
   loggedIn (state, payload) {
     state.loggedIn = true
@@ -23,6 +26,14 @@ export const mutations = {
     state.loggedIn = false
     state.data = ''
     state.token = ''
+  },
+  setDefaultMarket (state, payload) {
+    state.defaultMarket = payload
+    window.localStorage.setItem('default-market', JSON.stringify(payload))
+  },
+  clearDefaultMarket (state, payload) {
+    state.defaultMarket = {}
+    window.localStorage.removeItem('default-market')
   }
 }
 

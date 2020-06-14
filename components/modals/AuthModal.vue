@@ -22,12 +22,24 @@
         <div v-if="isRegister" class="form-group">
           <div class="form-item mr-2">
             <div class="form-label">ADINIZ</div>
-            <input v-model="first_name" name="first_name" v-validate.disable="'required|min:9'" class="form-input" placeholder="Adınızı Girin">
-            <span v-show="errors.has('Telefon')" class="input-error">{{ errors.first('Telefon') }}</span>
+            <input
+              v-model="first_name"
+              v-validate.disable="'required|min:9'"
+              name="first_name"
+              class="form-input"
+              placeholder="Adınızı Girin"
+            >
+            <span v-show="errors.has('Telefon')" class="input-error">{{
+              errors.first('Telefon')
+            }}</span>
           </div>
           <div class="form-item ml-2">
             <div class="form-label">SOYADINIZ</div>
-            <input v-model="last_name" class="form-input" placeholder="Soyadınızı Girin">
+            <input
+              v-model="last_name"
+              class="form-input"
+              placeholder="Soyadınızı Girin"
+            >
           </div>
         </div>
         <div class="form-group">
@@ -44,7 +56,9 @@
               placeholder="Cep Telefonu"
               :mask="['0 (###) ### ## ##']"
             />
-            <span v-show="errors.has('Telefon')" class="input-error">{{ errors.first('Telefon') }}</span>
+            <span v-show="errors.has('Telefon')" class="input-error">{{
+              errors.first('Telefon')
+            }}</span>
           </div>
         </div>
         <div class="form-group">
@@ -60,7 +74,9 @@
               type="password"
               placeholder="Şifrenizi Girin"
             >
-            <span v-show="errors.has('Şifre')" class="input-error">{{ errors.first('Şifre') }}</span>
+            <span v-show="errors.has('Şifre')" class="input-error">{{
+              errors.first('Şifre')
+            }}</span>
           </div>
           <div v-if="isRegister" class="form-item ml-3">
             <div class="form-label">
@@ -92,12 +108,12 @@
             <a class="form-forget-link" href="">ŞİFREMİ UNUTTUM</a>
             <a
               v-if="isRegister"
-              class="form-forget-link"
+              class="form-register-link"
               @click="openLogin"
             >GİRİŞ YAP</a>
             <a
               v-if="isLogin"
-              class="form-forget-link"
+              class="form-register-link"
               @click="openRegister"
             >KAYIT OL</a>
           </div>
@@ -187,7 +203,11 @@ export default {
           this.$modal.hide('auth-modal')
         })
         .catch(() => {
-          this.alert('Hatalı Giriş', 'Daha önce kayıtlı biligler ile giriş yapmaya çalışıyorsunuz!', 'error')
+          this.alert(
+            'Hatalı Giriş',
+            'Daha önce kayıtlı biligler ile giriş yapmaya çalışıyorsunuz!',
+            'error'
+          )
         })
     },
     clear () {
@@ -254,6 +274,7 @@ export default {
     }
     &-forget {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       border-top: $border;
       margin-top: 3rem;
@@ -263,10 +284,18 @@ export default {
         font-size: 10px;
         color: $font-color-gray;
         text-align: center;
-        border-bottom: 1px solid $primary-color;
         cursor: pointer;
         user-select: none;
       }
+    }
+
+    &-register-link {
+      background-color: $primary-color;
+      color: #fff;
+      font-size: 12px;
+      padding: 3px 12px;
+      border-radius: $sm-radius;
+      cursor: pointer;
     }
   }
 

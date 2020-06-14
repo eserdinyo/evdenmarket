@@ -37,10 +37,9 @@ export default {
     ProductsGroup,
     CategoryProducts
   },
-  async asyncData ({ $axios, error, params }) {
+  async asyncData ({ $axios, error, params, store }) {
     try {
       const res = await $axios(`markets/${params.id}`)
-
       return {
         market: res.data.market,
         discountProducts: res.data.discountProducts
@@ -51,7 +50,6 @@ export default {
   },
   data () {
     return {
-      title: 'Marketler - Evdenmarket',
       market: {
         id: 10,
         min_amount: 75,
@@ -196,9 +194,14 @@ export default {
       ]
     }
   },
+  mounted () {
+    if (process.browser) {
+      this.$store.commit('user/setDefaultMarket', this.market)
+    }
+  },
   head () {
     return {
-      title: this.title,
+      title: `${this.market.name} - Market sana gelsin`,
       meta: [
         {
           hid: 'description',

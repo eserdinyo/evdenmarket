@@ -38,7 +38,8 @@
                   {{ product.name }}
                 </nuxt-link>
               </div>
-              <div class="searchbar__result--bottom">
+              <p v-if="products.length == 0" class="searchbar__result--bottom"> Ürün bulunamadı </p>
+              <div v-if="products.length > 0" class="searchbar__result--bottom">
                 <nuxt-link to="/">
                   Tüm Sonuçları Görüntüle
                 </nuxt-link>
@@ -48,7 +49,9 @@
           </div>
         </form>
         <div class="searchbar-market-name">
-          {{ market.name.toUpperCase() }}
+          <nuxt-link :to="`/market/${slugUrl(market.name)}/${market.id}`">
+            {{ market.name.toUpperCase() }}
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -134,6 +137,7 @@ export default {
     margin: 0 auto;
     font-size: 20px;
     display: none;
+    border-bottom: 1px solid #fff;
   }
 
   &-wrapper {
