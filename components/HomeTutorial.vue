@@ -79,13 +79,13 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem 1.1rem;
+    padding: 1.5rem;
     text-align: center;
     margin-bottom: 2rem;
     border: $border;
-    border-color: transparent;
     transition: all 0.2s;
     cursor: default;
+    border-radius: $radius;
 
     &:hover {
       border-color: $primary-color;

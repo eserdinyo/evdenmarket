@@ -424,6 +424,10 @@ export default {
     align-items: center;
     margin-right: 0;
 
+    &:hover {
+      border-color: $primary-color;
+    }
+
     .icon {
       height: 16px;
       fill: $primary-color;
@@ -453,6 +457,7 @@ export default {
     }
 
     &:hover {
+      border-color: $primary-color;
       .profil-card-active {
         display: flex;
       }
